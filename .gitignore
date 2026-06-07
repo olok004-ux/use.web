@@ -1,0 +1,7 @@
+.claude/
+.codex_zip_check/
+.codex_zip_0606_check/
+*.tmp
+*.bak
+html lang=kohead.html
+extract_docs.py
