@@ -30804,7 +30804,27 @@ body:has(#p-noti-brand[style*="display: flex"]) .main-content {
 
 /* ── 홈 리뉴얼 (Figma 943:9285) ── */
 #p-home {
+  overflow-x: hidden;
   overflow-y: auto;
+}
+
+.hm2-main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32);
+  padding-bottom: var(--spacing-32);
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.hm2-cpn-con {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  width: 100%;
 }
 
 .hm2-bg-gradient {
@@ -30818,10 +30838,10 @@ body:has(#p-noti-brand[style*="display: flex"]) .main-content {
   z-index: 0;
 }
 
-.hm2-header {
-  position: relative;
-  z-index: 1;
-  padding: calc(env(safe-area-inset-top, 0px) + var(--spacing-16) + 48px) var(--spacing-20) 0;
+.hm2-header-con {
+  box-sizing: border-box;
+  padding: calc(env(safe-area-inset-top, 0px) + var(--spacing-16) + var(--spacing-8)) var(--spacing-20) 0;
+  width: 100%;
 }
 
 .hm2-header-bar {
@@ -30829,6 +30849,7 @@ body:has(#p-noti-brand[style*="display: flex"]) .main-content {
   align-items: center;
   justify-content: space-between;
   height: 32px;
+  padding: 0 var(--spacing-8);
 }
 
 .hm2-logo {
@@ -30885,16 +30906,19 @@ body:has(#p-noti-brand[style*="display: flex"]) .main-content {
 
 /* ── 유저 요약 카드 (Figma 1011:2475) ── */
 .hm2-user-card {
-  margin: 0 var(--spacing-20);
-  background: linear-gradient(to bottom, var(--color-blue-100) 0%, white 100%);
+  background: linear-gradient(to bottom, var(--color-blue-200) 0%, white 100%);
+  box-sizing: border-box;
   box-shadow: var(--shadow-s);
   border-radius: var(--radius-lg);
   padding: var(--spacing-16);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-16);
+  margin: 0 auto;
+  max-width: calc(100% - var(--spacing-20) - var(--spacing-20));
   position: relative;
   overflow: hidden;
+  width: 356px;
 }
 
 .hm2-user-top {
@@ -30952,14 +30976,18 @@ body:has(#p-noti-brand[style*="display: flex"]) .main-content {
 .hm2-user-stats {
   display: flex;
   align-items: center;
-  gap: var(--spacing-16);
+  justify-content: center;
+  gap: var(--spacing-32);
   padding: 0 var(--spacing-20);
 }
 
 .hm2-stat {
+  align-items: center;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-8);
+  text-align: center;
+  width: 100px;
 }
 
 .hm2-stat[data-action] {
@@ -30970,7 +30998,7 @@ body:has(#p-noti-brand[style*="display: flex"]) .main-content {
 .hm2-stat-label {
   font-size: var(--font-size-caption);
   font-weight: var(--font-weight-semi-bold);
-  color: var(--color-gray-300);
+  color: var(--color-gray-400);
 }
 
 .hm2-stat-value {
@@ -30988,7 +31016,9 @@ body:has(#p-noti-brand[style*="display: flex"]) .main-content {
 
 /* ── 검색바 ── */
 .hm2-search-wrap {
-  padding: 0 var(--spacing-20);
+  box-sizing: border-box;
+  padding: var(--spacing-12) var(--spacing-20) 0;
+  width: 100%;
 }
 
 .hm2-search-bar {
@@ -30996,10 +31026,11 @@ body:has(#p-noti-brand[style*="display: flex"]) .main-content {
   align-items: center;
   justify-content: space-between;
   height: 49px;
-  background: white;
-  border: 1px solid var(--color-gray-100);
+  background: var(--color-gray-50);
+  border: 2px solid var(--color-blue-200);
   border-radius: var(--radius-full);
-  padding: 0 var(--spacing-16) 0 24px;
+  padding: 0 var(--spacing-16) 0 var(--spacing-24);
+  box-shadow: var(--shadow-s);
   cursor: pointer;
 }
 
@@ -31014,6 +31045,7 @@ body:has(#p-noti-brand[style*="display: flex"]) .main-content {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-16);
+  width: 100%;
 }
 
 .hm2-section-head {
@@ -31211,16 +31243,88 @@ body:has(#p-noti-brand[style*="display: flex"]) .main-content {
 
 /* 내 쿠폰 섹션 */
 .hm2-mycpn-section {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-16);
+  max-width: 362px;
+  position: relative;
+  width: calc(100% - var(--spacing-20) - var(--spacing-20));
+}
+
+.hm2-mycpn-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hm2-sort-btn {
+  align-items: center;
+  background: white;
+  border: 2px solid var(--color-blue-500);
+  border-radius: var(--radius-full);
+  color: var(--color-gray-700);
+  cursor: pointer;
+  display: flex;
+  font-family: var(--font);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semi-bold);
+  gap: var(--spacing-8);
+  min-height: 40px;
+  padding: var(--spacing-8) var(--spacing-16);
+}
+
+.hm2-sort-dropdown {
+  background: var(--color-gray-50);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-m);
+  box-sizing: border-box;
+  padding: var(--spacing-16) var(--spacing-20);
+  position: absolute;
+  right: var(--spacing-20);
+  top: 52px;
+  width: 174px;
+  z-index: 30;
+}
+
+.hm2-sort-item {
+  align-items: center;
+  color: var(--color-gray-500);
+  cursor: pointer;
+  display: flex;
+  font-family: var(--font);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  gap: var(--spacing-8);
+  min-height: 34px;
+}
+
+.hm2-sort-item::before {
+  color: transparent;
+  content: "✓";
+  flex: 0 0 16px;
+  font-size: var(--font-size-body);
+  line-height: 1;
+}
+
+.hm2-sort-item--selected {
+  color: var(--color-gray-500);
+}
+
+.hm2-sort-item--selected::before {
+  color: var(--color-blue-500);
+}
+
+.hm2-sort-divider {
+  background: var(--color-gray-100);
+  height: 1px;
+  margin: var(--spacing-6) 0;
 }
 
 /* 필터 칩 */
 .hm2-chips {
   display: flex;
   gap: var(--spacing-8);
-  padding: 0 var(--spacing-20);
   overflow-x: auto;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
@@ -31252,7 +31356,6 @@ body:has(#p-noti-brand[style*="display: flex"]) .main-content {
 
 /* 쿠폰 목록 */
 .hm2-cpn-list {
-  padding: 0 var(--spacing-20);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-8);
