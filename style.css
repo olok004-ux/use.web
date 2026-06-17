@@ -6007,480 +6007,6 @@ body:has(#p-connect-success[style*="display:block"]) .main-content {
   color:var(--gray-400); cursor:pointer; text-decoration:underline;
 }
 
-/* ── 즐겨찾기 페이지 ── */
-.wsh-sort-wrap { position:relative; display:inline-flex; flex-direction:column; align-items:flex-end; }
-.wsh-sort-btn { display:flex; align-items:center; gap:5px; padding:5px 12px; border-radius:20px; background:var(--gray-100); border:none; font-size:var(--font-size-caption); font-weight:var(--font-weight-bold); color:var(--gray-700); cursor:pointer; font-family:var(--font); transition:background .15s; }
-.wsh-sort-btn:hover { background:var(--gray-200); }
-.wsh-sort-btn svg { width:12px; height:12px; flex-shrink:0; transition:transform .2s; }
-.wsh-sort-wrap.open .wsh-sort-btn svg { transform:rotate(180deg); }
-.wsh-sort-wrap .nmap-sort-menu { display:none; position:absolute; top:calc(100% + 6px); right:0; z-index:200; min-width:120px; background:white; border-radius:12px; box-shadow:0 4px 16px rgba(18,18,18,0.12); padding:6px; flex-direction:column; gap:2px; }
-.wsh-sort-wrap.open .nmap-sort-menu { display:flex; }
-
-#p-wishlist:has(.wsh-sort-wrap.open) {
-  z-index: auto !important;
-}
-#p-wishlist .wsh-sort-wrap.open::after {
-  content: none !important;
-  display: none !important;
-}
-/* ── wsh 카테고리 칩 (Figma 519:8731) ── */
-.wsh-cat-chip {
-  padding: var(--spacing-10) var(--spacing-20);
-  border-radius: var(--radius-full);
-  font-size: var(--font-size-caption);
-  font-weight: var(--font-weight-semi-bold);
-  color: var(--color-gray-700);
-  background: var(--color-gray-50);
-  border: 1px solid var(--color-blue-200);
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all .15s;
-  flex-shrink: 0;
-  font-family: var(--font);
-}
-.wsh-cat-chip.on {
-  background: var(--color-blue-500);
-  color: var(--color-gray-50);
-  border-color: var(--color-blue-500);
-  box-shadow: var(--shadow-l);
-}
-/* ── wsh 세그먼트 탭바 (Figma 1014-24621 세그먼트 바ver3) ── */
-.wsh-tab-bar {
-  display: flex;
-  align-items: stretch;
-  background: var(--color-gray-100);
-  border-radius: var(--radius-md);
-  margin: var(--spacing-12) var(--spacing-16) 0;
-  flex-shrink: 0;
-  height: 52px;
-  overflow: hidden;
-  position: relative;
-}
-.wsh-tab {
-  flex: 1 0 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-16);
-  text-align: center;
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-extra-bold);
-  color: var(--color-gray-500);
-  cursor: pointer;
-  font-family: var(--font);
-  background: transparent;
-  border: none;
-  transition: color .15s;
-  white-space: nowrap;
-}
-.wsh-tab.on {
-  background: white;
-  color: var(--color-gray-500);
-  border-radius: var(--radius-md);
-  border: 3px solid var(--color-gray-100);
-}
-/* ── 브랜드 셀 (Figma 1014-24621: py-16 px-8 rounded-16) ── */
-.wsh-brand-cell {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-6);
-  cursor: pointer;
-  padding: var(--spacing-16) var(--spacing-6);
-  border-radius: var(--radius-lg);
-  justify-content: center;
-}
-/* 브랜드 원 (81px, 흰 배경 + shadow-s) */
-.wsh-brand-circle {
-  width: 81px;
-  height: 81px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: var(--shadow-s);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--font-size-headline-md);
-  font-weight: var(--font-weight-heavy);
-  flex-shrink: 0;
-}
-.wsh-brand-lbl {
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-gray-700);
-  text-align: center;
-  font-family: var(--font);
-  line-height: normal;
-}
-/* 하트 (Figma: grid overlay ml-70.37%, 우상단) */
-.wsh-brand-heart {
-  position: absolute;
-  top: var(--spacing-16);
-  right: var(--spacing-4);
-  width: 20px;
-  height: 20px;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  color: var(--color-red-400);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 5;
-}
-/* 편집 모드: 하트 숨기고 del-btn 표시 */
-.wsh-edit-mode .wsh-brand-heart { display: none; }
-
-/* ── 쿠폰 탭 카드 (가로형_2 — Figma 11:1421) ── */
-.wsh-cpn-card {
-  background: white;
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-l);
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  cursor: pointer;
-  position: relative;
-  transition: background .18s, box-shadow .18s, opacity .18s, transform .18s;
-}
-.wsh-cpn-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.wsh-cpn-brand-lbl {
-  font-size:var(--font-size-caption);
-  font-weight:var(--font-weight-medium);
-  color: var(--gray-900);
-  font-family: var(--font);
-}
-.wsh-cpn-heart {
-  display: flex;
-  align-items: center;
-  color: var(--color-gray-700);
-  line-height: 1;
-}
-.wsh-cpn-body {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  min-height: 72px;
-}
-.wsh-cpn-logo-wrap {
-  position: relative;
-  flex-shrink: 0;
-  width: 96px;
-  height: 72px;
-}
-.wsh-cpn-logo-circle {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: var(--gray-300);
-  margin-top: 8px;
-}
-.wsh-cpn-badge {
-  position: absolute;
-  top: 0;
-  left: 28px;
-  background: var(--primary-lt);
-  padding: 4px 8px;
-  border-radius: 16px;
-  font-size:var(--font-size-caption);
-  font-weight:var(--font-weight-semi-bold);
-  color: var(--gray-900);
-  white-space: nowrap;
-  font-family: var(--font);
-}
-.wsh-cpn-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 0;
-}
-.wsh-cpn-title {
-  font-size:var(--font-size-body);
-  font-weight:var(--font-weight-bold);
-  color: var(--gray-900);
-  font-family: var(--font);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.wsh-cpn-cond {
-  font-size:var(--font-size-caption);
-  font-weight:var(--font-weight-medium);
-  color: var(--gray-700);
-  font-family: var(--font);
-}
-.wsh-cpn-date {
-  font-size:var(--font-size-caption);
-  font-weight:var(--font-weight-medium);
-  color: var(--gray-500);
-  font-family: var(--font);
-}
-/* 쿠폰 탭 정렬 바 */
-.wsh-cpn-sort-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 16px 12px;
-  background: white;
-  flex-shrink: 0;
-}
-.wsh-cpn-sort-lbl {
-  font-size:var(--font-size-body);
-  font-weight:var(--font-weight-bold);
-  color: var(--gray-900);
-  font-family: var(--font);
-}
-.wsh-cpn-sort-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--gray-200);
-  border: none;
-  border-radius: 16px;
-  padding: 8px 16px;
-  font-size:var(--font-size-body);
-  font-weight:var(--font-weight-bold);
-  color: var(--gray-700);
-  cursor: pointer;
-  font-family: var(--font);
-  transition: background .15s;
-}
-.wsh-cpn-sort-btn svg { width:14px; height:14px; flex-shrink:0; transition:transform .2s; }
-.wsh-sort-wrap.open .wsh-cpn-sort-btn svg { transform: rotate(180deg); }
-#wshCpnList.wsh-edit-mode {
-  background: var(--primary);
-  border-radius: 0;
-  padding-top: 12px !important;
-}
-.wsh-cpn-del-btn {
-  display: none;
-  position: absolute;
-  top: -8px;
-  left: -8px;
-  width: 24px;
-  height: 24px;
-  border-radius: var(--radius-full);
-  background: var(--red-400);
-  color: var(--color-on-primary);
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-heavy);
-  border: 2.5px solid var(--color-on-primary);
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  line-height: 0.9;
-  box-shadow: var(--shadow-m);
-  padding: 0;
-  transition: transform 0.12s, background .12s;
-  font-family: var(--font);
-}
-#wshCpnList.wsh-edit-mode .wsh-cpn-del-btn { display: flex; }
-.wsh-cpn-del-btn:active { transform: scale(0.82); }
-.wsh-cpn-card.wsh-mark-delete {
-  background: var(--gray-100);
-  box-shadow: none;
-  animation: wshWiggle 0.46s ease-in-out infinite;
-}
-.wsh-cpn-card.wsh-mark-delete .wsh-cpn-card-header,
-.wsh-cpn-card.wsh-mark-delete .wsh-cpn-body {
-  opacity: 0.45;
-}
-.wsh-cpn-card.wsh-mark-delete .wsh-cpn-del-btn {
-  background: var(--gray-500);
-  transform: rotate(45deg);
-}
-.wsh-cpn-card.wsh-mark-delete .wsh-cpn-del-btn:active { transform: rotate(45deg) scale(0.82); }
-
-/* ── 즐겨찾기 편집 모드 (iOS 홈화면 스타일) ── */
-@keyframes wshWiggle {
-  0%,100% { transform: rotate(-0.7deg) translateY(0); }
-  50%     { transform: rotate( 0.7deg) translateY(-0.5px); }
-}
-#wshBrandGrid.wsh-edit-mode {
-  background: rgba(16,65,167,0.84);
-  border-radius: 0;
-}
-.wsh-edit-mode .wsh-brand-lbl { color: white; }
-.wsh-del-btn {
-  display: none;
-  position: absolute;
-  top: 8px; left: 8px;
-  width: 22px; height: 22px;
-  border-radius: 50%;
-  background: var(--red-400);
-  color: white;
-  font-size:var(--font-size-body);
-  font-weight:var(--font-weight-heavy);
-  border: 2.5px solid white;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  line-height: 0.9;
-  box-shadow: 0 1px 5px rgba(18,18,18,0.35);
-  padding: 0;
-  transition: transform 0.12s;
-  font-family: var(--font);
-}
-.wsh-edit-mode .wsh-del-btn   { display: flex; }
-.wsh-del-btn:active            { transform: scale(0.82); }
-.wsh-brand-cell.wsh-mark-delete .wsh-brand-circle {
-  background: var(--gray-300) !important;
-  box-shadow: none;
-  opacity: 0.55;
-}
-.wsh-brand-cell.wsh-mark-delete {
-  animation: wshWiggle 0.46s ease-in-out infinite;
-}
-.wsh-brand-cell.wsh-mark-delete .wsh-brand-lbl  { opacity: 0.45; }
-.wsh-brand-cell.wsh-mark-delete .wsh-del-btn    {
-  background: var(--gray-500);
-  transform: rotate(45deg);
-}
-.wsh-brand-cell.wsh-mark-delete .wsh-del-btn:active { transform: rotate(45deg) scale(0.82); }
-
-/* ===== 즐겨찾기 포인트 탭 ===== */
-.wsh-pt-sort-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-10) var(--spacing-16);
-  background: white;
-}
-.wsh-pt-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-16);
-  padding: var(--spacing-4) var(--spacing-16) var(--spacing-32);
-}
-/* 소멸 임박 카드 */
-.wsh-pt-card {
-  position: relative;
-  height: 127px;
-  overflow: visible;
-  flex-shrink: 0;
-}
-.wsh-pt-card-inner {
-  position: absolute;
-  inset: 0;
-  border-radius: 20px;
-  overflow: hidden;
-}
-.wsh-pt-card-inner.urgent {
-  background: var(--color-blue-50);
-  border: 2px solid var(--color-blue-500);
-}
-.wsh-pt-card-inner.normal {
-  background: white;
-}
-.wsh-pt-card-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 330px;
-  height: 96px;
-  display: flex;
-  gap: var(--spacing-16);
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-.wsh-pt-card-inner.urgent .wsh-pt-card-content {
-  align-items: flex-end;
-}
-.wsh-pt-logo {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  border: 2px solid white;
-  background: var(--color-gray-100);
-  flex-shrink: 0;
-  margin-top: var(--spacing-4);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.wsh-pt-card-inner.urgent .wsh-pt-logo { margin-top: var(--spacing-4); }
-.wsh-pt-card-inner.normal  .wsh-pt-logo { margin-top: 0; }
-.wsh-pt-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-6);
-  height: 100%;
-  justify-content: center;
-  min-width: 0;
-  padding-bottom: var(--spacing-4);
-}
-.wsh-pt-info-head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  height: 15px;
-}
-.wsh-pt-brand {
-  font-size: var(--font-size-caption);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-gray-700);
-  font-family: var(--font);
-  white-space: nowrap;
-}
-.wsh-pt-heart {
-  display: flex;
-  align-items: center;
-  line-height: 1;
-  flex-shrink: 0;
-}
-.wsh-pt-amount {
-  font-size: var(--font-size-headline-lg);
-  font-weight: var(--font-weight-heavy);
-  color: var(--color-gray-700);
-  font-family: var(--font);
-  line-height: 1;
-}
-.wsh-pt-expiry {
-  font-size: var(--font-size-caption);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-gray-700);
-  font-family: var(--font);
-}
-/* D-XX 뱃지 (outlined) */
-.wsh-pt-dday {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 72px;
-  padding: var(--spacing-10);
-  border-radius: 0 var(--radius-lg) var(--radius-lg) var(--radius-lg);
-  background: var(--color-red-50);
-  border: 1.5px solid var(--color-red-400);
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-extra-bold);
-  color: var(--color-red-400);
-  font-family: var(--font);
-  text-align: center;
-  z-index: 2;
-}
-/* 카드 사이 구분선 */
-.wsh-pt-divider {
-  height: 0;
-  border: none;
-  border-top: 1.5px dashed var(--color-gray-100);
-  margin: 0;
-  flex-shrink: 0;
-}
-
 /* connect 공통 레이아웃 */
 .connect-body { max-width:860px; margin:0 auto; }
 .connect-body .page-nav { position:relative; }
@@ -20892,472 +20418,6 @@ body:has(#p-connect-success[style*="display:block"]) .main-content {
 .fail-demo-link {
   display:block; text-align:center; margin-top:32px; font-size:var(--font-size-caption);
   color:var(--gray-400); cursor:pointer; text-decoration:underline;
-}
-
-/* ── 즐겨찾기 페이지 ── */
-.wsh-sort-wrap { position:relative; display:inline-flex; flex-direction:column; align-items:flex-end; }
-.wsh-sort-btn { display:flex; align-items:center; gap:5px; padding:5px 12px; border-radius:20px; background:var(--gray-100); border:none; font-size:var(--font-size-caption); font-weight:var(--font-weight-bold); color:var(--gray-700); cursor:pointer; font-family:var(--font); transition:background .15s; }
-.wsh-sort-btn:hover { background:var(--gray-200); }
-.wsh-sort-btn svg { width:12px; height:12px; flex-shrink:0; transition:transform .2s; }
-.wsh-sort-wrap.open .wsh-sort-btn svg { transform:rotate(180deg); }
-.wsh-sort-wrap .nmap-sort-menu { display:none; position:absolute; top:calc(100% + 6px); right:0; z-index:200; min-width:120px; background:white; border-radius:12px; box-shadow:0 4px 16px rgba(18,18,18,0.12); padding:6px; flex-direction:column; gap:2px; }
-.wsh-sort-wrap.open .nmap-sort-menu { display:flex; }
-/* ── wsh 카테고리 칩 (Figma 519:8731) ── */
-.wsh-cat-chip {
-  padding: var(--spacing-10) var(--spacing-20);
-  border-radius: var(--radius-full);
-  font-size: var(--font-size-caption);
-  font-weight: var(--font-weight-semi-bold);
-  color: var(--color-gray-700);
-  background: var(--color-gray-50);
-  border: 1px solid var(--color-blue-200);
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all .15s;
-  flex-shrink: 0;
-  font-family: var(--font);
-}
-.wsh-cat-chip.on {
-  background: var(--color-blue-500);
-  color: var(--color-gray-50);
-  border-color: var(--color-blue-500);
-  box-shadow: var(--shadow-l);
-}
-/* ── wsh 세그먼트 탭바 (Figma 1014-24621 세그먼트 바ver3) ── */
-.wsh-tab-bar {
-  display: flex;
-  align-items: stretch;
-  background: var(--color-gray-100);
-  border-radius: var(--radius-md);
-  margin: var(--spacing-12) var(--spacing-16) 0;
-  flex-shrink: 0;
-  height: 52px;
-  overflow: hidden;
-  position: relative;
-}
-.wsh-tab {
-  flex: 1 0 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-16);
-  text-align: center;
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-extra-bold);
-  color: var(--color-gray-500);
-  cursor: pointer;
-  font-family: var(--font);
-  background: transparent;
-  border: none;
-  transition: color .15s;
-  white-space: nowrap;
-}
-.wsh-tab.on {
-  background: white;
-  color: var(--color-gray-500);
-  border-radius: var(--radius-md);
-  border: 3px solid var(--color-gray-100);
-}
-/* ── 브랜드 셀 (Figma 1014-24621: py-16 px-8 rounded-16) ── */
-.wsh-brand-cell {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-6);
-  cursor: pointer;
-  padding: var(--spacing-16) var(--spacing-6);
-  border-radius: var(--radius-lg);
-  justify-content: center;
-}
-/* 브랜드 원 (81px, 흰 배경 + shadow-s) */
-.wsh-brand-circle {
-  width: 81px;
-  height: 81px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: var(--shadow-s);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--font-size-headline-md);
-  font-weight: var(--font-weight-heavy);
-  flex-shrink: 0;
-}
-.wsh-brand-lbl {
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-gray-700);
-  text-align: center;
-  font-family: var(--font);
-  line-height: normal;
-}
-/* 하트 (Figma: grid overlay ml-70.37%, 우상단) */
-.wsh-brand-heart {
-  position: absolute;
-  top: var(--spacing-16);
-  right: var(--spacing-4);
-  width: 20px;
-  height: 20px;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  color: var(--color-red-400);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 5;
-}
-/* 편집 모드: 하트 숨기고 del-btn 표시 */
-.wsh-edit-mode .wsh-brand-heart { display: none; }
-
-/* ── 쿠폰 탭 카드 (가로형_2 — Figma 11:1421) ── */
-.wsh-cpn-card {
-  background: white;
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-l);
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  cursor: pointer;
-  position: relative;
-  transition: background .18s, box-shadow .18s, opacity .18s, transform .18s;
-}
-.wsh-cpn-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.wsh-cpn-brand-lbl {
-  font-size:var(--font-size-caption);
-  font-weight:var(--font-weight-medium);
-  color: var(--gray-900);
-  font-family: var(--font);
-}
-.wsh-cpn-heart {
-  display: flex;
-  align-items: center;
-  color: var(--color-gray-700);
-  line-height: 1;
-}
-.wsh-cpn-body {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  min-height: 72px;
-}
-.wsh-cpn-logo-wrap {
-  position: relative;
-  flex-shrink: 0;
-  width: 96px;
-  height: 72px;
-}
-.wsh-cpn-logo-circle {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: var(--gray-300);
-  margin-top: 8px;
-}
-.wsh-cpn-badge {
-  position: absolute;
-  top: 0;
-  left: 28px;
-  background: var(--primary-lt);
-  padding: 4px 8px;
-  border-radius: 16px;
-  font-size:var(--font-size-caption);
-  font-weight:var(--font-weight-semi-bold);
-  color: var(--gray-900);
-  white-space: nowrap;
-  font-family: var(--font);
-}
-.wsh-cpn-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 0;
-}
-.wsh-cpn-title {
-  font-size:var(--font-size-body);
-  font-weight:var(--font-weight-bold);
-  color: var(--gray-900);
-  font-family: var(--font);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.wsh-cpn-cond {
-  font-size:var(--font-size-caption);
-  font-weight:var(--font-weight-medium);
-  color: var(--gray-700);
-  font-family: var(--font);
-}
-.wsh-cpn-date {
-  font-size:var(--font-size-caption);
-  font-weight:var(--font-weight-medium);
-  color: var(--gray-500);
-  font-family: var(--font);
-}
-/* 쿠폰 탭 정렬 바 */
-.wsh-cpn-sort-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 16px 12px;
-  background: white;
-  flex-shrink: 0;
-}
-.wsh-cpn-sort-lbl {
-  font-size:var(--font-size-body);
-  font-weight:var(--font-weight-bold);
-  color: var(--gray-900);
-  font-family: var(--font);
-}
-.wsh-cpn-sort-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--gray-200);
-  border: none;
-  border-radius: 16px;
-  padding: 8px 16px;
-  font-size:var(--font-size-body);
-  font-weight:var(--font-weight-bold);
-  color: var(--gray-700);
-  cursor: pointer;
-  font-family: var(--font);
-  transition: background .15s;
-}
-.wsh-cpn-sort-btn svg { width:14px; height:14px; flex-shrink:0; transition:transform .2s; }
-.wsh-sort-wrap.open .wsh-cpn-sort-btn svg { transform: rotate(180deg); }
-#wshCpnList.wsh-edit-mode {
-  background: var(--primary);
-  border-radius: 0;
-  padding-top: 12px !important;
-}
-.wsh-cpn-del-btn {
-  display: none;
-  position: absolute;
-  top: -8px;
-  left: -8px;
-  width: 24px;
-  height: 24px;
-  border-radius: var(--radius-full);
-  background: var(--red-400);
-  color: var(--color-on-primary);
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-heavy);
-  border: 2.5px solid var(--color-on-primary);
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  line-height: 0.9;
-  box-shadow: var(--shadow-m);
-  padding: 0;
-  transition: transform 0.12s, background .12s;
-  font-family: var(--font);
-}
-#wshCpnList.wsh-edit-mode .wsh-cpn-del-btn { display: flex; }
-.wsh-cpn-del-btn:active { transform: scale(0.82); }
-.wsh-cpn-card.wsh-mark-delete {
-  background: var(--gray-100);
-  box-shadow: none;
-  animation: wshWiggle 0.46s ease-in-out infinite;
-}
-.wsh-cpn-card.wsh-mark-delete .wsh-cpn-card-header,
-.wsh-cpn-card.wsh-mark-delete .wsh-cpn-body {
-  opacity: 0.45;
-}
-.wsh-cpn-card.wsh-mark-delete .wsh-cpn-del-btn {
-  background: var(--gray-500);
-  transform: rotate(45deg);
-}
-.wsh-cpn-card.wsh-mark-delete .wsh-cpn-del-btn:active { transform: rotate(45deg) scale(0.82); }
-
-/* ── 즐겨찾기 편집 모드 (iOS 홈화면 스타일) ── */
-@keyframes wshWiggle {
-  0%,100% { transform: rotate(-0.7deg) translateY(0); }
-  50%     { transform: rotate( 0.7deg) translateY(-0.5px); }
-}
-#wshBrandGrid.wsh-edit-mode {
-  background: rgba(16,65,167,0.84);
-  border-radius: 0;
-}
-.wsh-edit-mode .wsh-brand-lbl { color: white; }
-.wsh-del-btn {
-  display: none;
-  position: absolute;
-  top: 8px; left: 8px;
-  width: 22px; height: 22px;
-  border-radius: 50%;
-  background: var(--red-400);
-  color: white;
-  font-size:var(--font-size-body);
-  font-weight:var(--font-weight-heavy);
-  border: 2.5px solid white;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  line-height: 0.9;
-  box-shadow: 0 1px 5px rgba(18,18,18,0.35);
-  padding: 0;
-  transition: transform 0.12s;
-  font-family: var(--font);
-}
-.wsh-edit-mode .wsh-del-btn   { display: flex; }
-.wsh-del-btn:active            { transform: scale(0.82); }
-.wsh-brand-cell.wsh-mark-delete .wsh-brand-circle {
-  background: var(--gray-300) !important;
-  box-shadow: none;
-  opacity: 0.55;
-}
-.wsh-brand-cell.wsh-mark-delete {
-  animation: wshWiggle 0.46s ease-in-out infinite;
-}
-.wsh-brand-cell.wsh-mark-delete .wsh-brand-lbl  { opacity: 0.45; }
-.wsh-brand-cell.wsh-mark-delete .wsh-del-btn    {
-  background: var(--gray-500);
-  transform: rotate(45deg);
-}
-.wsh-brand-cell.wsh-mark-delete .wsh-del-btn:active { transform: rotate(45deg) scale(0.82); }
-
-/* ===== 즐겨찾기 포인트 탭 ===== */
-.wsh-pt-sort-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-10) var(--spacing-16);
-  background: white;
-}
-.wsh-pt-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-16);
-  padding: var(--spacing-4) var(--spacing-16) var(--spacing-32);
-}
-/* 소멸 임박 카드 */
-.wsh-pt-card {
-  position: relative;
-  height: 127px;
-  overflow: visible;
-  flex-shrink: 0;
-}
-.wsh-pt-card-inner {
-  position: absolute;
-  inset: 0;
-  border-radius: 20px;
-  overflow: hidden;
-}
-.wsh-pt-card-inner.urgent {
-  background: var(--color-blue-50);
-  border: 2px solid var(--color-blue-500);
-}
-.wsh-pt-card-inner.normal {
-  background: white;
-}
-.wsh-pt-card-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 330px;
-  height: 96px;
-  display: flex;
-  gap: var(--spacing-16);
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-.wsh-pt-card-inner.urgent .wsh-pt-card-content {
-  align-items: flex-end;
-}
-.wsh-pt-logo {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  border: 2px solid white;
-  background: var(--color-gray-100);
-  flex-shrink: 0;
-  margin-top: var(--spacing-4);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.wsh-pt-card-inner.urgent .wsh-pt-logo { margin-top: var(--spacing-4); }
-.wsh-pt-card-inner.normal  .wsh-pt-logo { margin-top: 0; }
-.wsh-pt-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-6);
-  height: 100%;
-  justify-content: center;
-  min-width: 0;
-  padding-bottom: var(--spacing-4);
-}
-.wsh-pt-info-head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  height: 15px;
-}
-.wsh-pt-brand {
-  font-size: var(--font-size-caption);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-gray-700);
-  font-family: var(--font);
-  white-space: nowrap;
-}
-.wsh-pt-heart {
-  display: flex;
-  align-items: center;
-  line-height: 1;
-  flex-shrink: 0;
-}
-.wsh-pt-amount {
-  font-size: var(--font-size-headline-lg);
-  font-weight: var(--font-weight-heavy);
-  color: var(--color-gray-700);
-  font-family: var(--font);
-  line-height: 1;
-}
-.wsh-pt-expiry {
-  font-size: var(--font-size-caption);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-gray-700);
-  font-family: var(--font);
-}
-/* D-XX 뱃지 (outlined) */
-.wsh-pt-dday {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 72px;
-  padding: var(--spacing-10);
-  border-radius: 0 var(--radius-lg) var(--radius-lg) var(--radius-lg);
-  background: var(--color-red-50);
-  border: 1.5px solid var(--color-red-400);
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-extra-bold);
-  color: var(--color-red-400);
-  font-family: var(--font);
-  text-align: center;
-  z-index: 2;
-}
-/* 카드 사이 구분선 */
-.wsh-pt-divider {
-  height: 0;
-  border: none;
-  border-top: 1.5px dashed var(--color-gray-100);
-  margin: 0;
-  flex-shrink: 0;
 }
 
 /* connect 공통 레이아웃 */
@@ -37506,4 +36566,1413 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
   width: 100% !important;
   text-align: right !important;
   margin: 0 !important;
+}
+
+/* Canonical Wishlist (0605 import) */
+
+/* ── 즐겨찾기 페이지 ── */
+.wsh-sort-wrap {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.wsh-sort-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  background: var(--gray-100);
+  border: none;
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-bold);
+  color: var(--gray-700);
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background .15s;
+}
+
+.wsh-sort-btn:hover {
+  background: var(--gray-200);
+}
+
+.wsh-sort-btn svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  transition: transform .2s;
+}
+
+.wsh-sort-wrap.open .wsh-sort-btn svg {
+  transform: rotate(180deg);
+}
+
+.wsh-sort-wrap .nmap-sort-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 200;
+  min-width: 120px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(18, 18, 18, 0.12);
+  padding: 6px;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wsh-sort-wrap.open .nmap-sort-menu {
+  display: flex;
+}
+
+/* ── wsh 카테고리 칩 (Figma 519:8731) ── */
+.wsh-cat-chip {
+  padding: var(--spacing-10) var(--spacing-20);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-semi-bold);
+  color: var(--color-gray-700);
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-blue-200);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all .15s;
+  flex-shrink: 0;
+  font-family: var(--font);
+}
+
+.wsh-cat-chip.on {
+  background: var(--color-blue-500);
+  color: var(--color-gray-50);
+  border-color: var(--color-blue-500);
+  box-shadow: var(--shadow-l);
+}
+
+/* ── wsh 세그먼트 탭바 (Figma 1014-24621 세그먼트 바ver3) ── */
+.wsh-tab-bar {
+  display: flex;
+  align-items: stretch;
+  background: var(--color-gray-100);
+  border-radius: var(--radius-md);
+  margin: var(--spacing-12) var(--spacing-16) 0;
+  flex-shrink: 0;
+  height: 52px;
+  overflow: hidden;
+  position: relative;
+}
+
+.wsh-tab {
+  flex: 1 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-16);
+  text-align: center;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-extra-bold);
+  color: var(--color-gray-500);
+  cursor: pointer;
+  font-family: var(--font);
+  background: transparent;
+  border: none;
+  transition: color .15s;
+  white-space: nowrap;
+}
+
+.wsh-tab.on {
+  background: white;
+  color: var(--color-gray-500);
+  border-radius: var(--radius-md);
+  border: 3px solid var(--color-gray-100);
+}
+
+/* ── 브랜드 셀 (Figma 1014-24621: py-16 px-8 rounded-16) ── */
+.wsh-brand-cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-6);
+  cursor: pointer;
+  padding: var(--spacing-16) var(--spacing-6);
+  border-radius: var(--radius-lg);
+  justify-content: center;
+}
+
+/* 브랜드 원 (81px, 흰 배경 + shadow-s) */
+.wsh-brand-circle {
+  width: 81px;
+  height: 81px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: var(--shadow-s);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-headline-md);
+  font-weight: var(--font-weight-heavy);
+  flex-shrink: 0;
+}
+
+.wsh-brand-lbl {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-700);
+  text-align: center;
+  font-family: var(--font);
+  line-height: normal;
+}
+
+/* 하트 (Figma: grid overlay ml-70.37%, 우상단) */
+.wsh-brand-heart {
+  position: absolute;
+  top: var(--spacing-16);
+  right: var(--spacing-4);
+  width: 20px;
+  height: 20px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-red-400);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+/* 편집 모드: 하트 숨기고 del-btn 표시 */
+.wsh-edit-mode .wsh-brand-heart {
+  display: none;
+}
+
+/* ── 쿠폰 탭 카드 (가로형_2 — Figma 11:1421) ── */
+.wsh-cpn-card {
+  background: white;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-l);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  cursor: pointer;
+  position: relative;
+  transition: background .18s, box-shadow .18s, opacity .18s, transform .18s;
+}
+
+.wsh-cpn-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wsh-cpn-brand-lbl {
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
+  color: var(--gray-900);
+  font-family: var(--font);
+}
+
+.wsh-cpn-heart {
+  display: flex;
+  align-items: center;
+  color: var(--color-gray-700);
+  line-height: 1;
+}
+
+.wsh-cpn-body {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  min-height: 72px;
+}
+
+.wsh-cpn-logo-wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 96px;
+  height: 72px;
+}
+
+.wsh-cpn-logo-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--gray-300);
+  margin-top: 8px;
+}
+
+.wsh-cpn-badge {
+  position: absolute;
+  top: 0;
+  left: 28px;
+  background: var(--primary-lt);
+  padding: 4px 8px;
+  border-radius: 16px;
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-semi-bold);
+  color: var(--gray-900);
+  white-space: nowrap;
+  font-family: var(--font);
+}
+
+.wsh-cpn-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.wsh-cpn-title {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--gray-900);
+  font-family: var(--font);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wsh-cpn-cond {
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
+  color: var(--gray-700);
+  font-family: var(--font);
+}
+
+.wsh-cpn-date {
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
+  color: var(--gray-500);
+  font-family: var(--font);
+}
+
+/* 쿠폰 탭 정렬 바 */
+.wsh-cpn-sort-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px 12px;
+  background: white;
+  flex-shrink: 0;
+}
+
+.wsh-cpn-sort-lbl {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--gray-900);
+  font-family: var(--font);
+}
+
+.wsh-cpn-sort-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gray-200);
+  border: none;
+  border-radius: 16px;
+  padding: 8px 16px;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--gray-700);
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background .15s;
+}
+
+.wsh-cpn-sort-btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  transition: transform .2s;
+}
+
+.wsh-sort-wrap.open .wsh-cpn-sort-btn svg {
+  transform: rotate(180deg);
+}
+
+#wshCpnList.wsh-edit-mode {
+  background: var(--primary);
+  border-radius: 0;
+  padding-top: 12px !important;
+}
+
+.wsh-cpn-del-btn {
+  display: none;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background: var(--red-400);
+  color: var(--color-on-primary);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-heavy);
+  border: 2.5px solid var(--color-on-primary);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  line-height: 0.9;
+  box-shadow: var(--shadow-m);
+  padding: 0;
+  transition: transform 0.12s, background .12s;
+  font-family: var(--font);
+}
+
+#wshCpnList.wsh-edit-mode .wsh-cpn-del-btn {
+  display: flex;
+}
+
+.wsh-cpn-del-btn:active {
+  transform: scale(0.82);
+}
+
+.wsh-cpn-card.wsh-mark-delete {
+  background: var(--gray-100);
+  box-shadow: none;
+  animation: wshWiggle 0.46s ease-in-out infinite;
+}
+
+.wsh-cpn-card.wsh-mark-delete .wsh-cpn-card-header,
+.wsh-cpn-card.wsh-mark-delete .wsh-cpn-body {
+  opacity: 0.45;
+}
+
+.wsh-cpn-card.wsh-mark-delete .wsh-cpn-del-btn {
+  background: var(--gray-500);
+  transform: rotate(45deg);
+}
+
+.wsh-cpn-card.wsh-mark-delete .wsh-cpn-del-btn:active {
+  transform: rotate(45deg) scale(0.82);
+}
+
+/* ── 즐겨찾기 편집 모드 (iOS 홈화면 스타일) ── */
+@keyframes wshWiggle {
+
+  0%,
+  100% {
+    transform: rotate(-0.7deg) translateY(0);
+  }
+
+  50% {
+    transform: rotate(0.7deg) translateY(-0.5px);
+  }
+}
+
+#wshBrandGrid.wsh-edit-mode {
+  background: rgba(16, 65, 167, 0.84);
+  border-radius: 0;
+}
+
+.wsh-edit-mode .wsh-brand-lbl {
+  color: white;
+}
+
+.wsh-del-btn {
+  display: none;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--red-400);
+  color: white;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-heavy);
+  border: 2.5px solid white;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  line-height: 0.9;
+  box-shadow: 0 1px 5px rgba(18, 18, 18, 0.35);
+  padding: 0;
+  transition: transform 0.12s;
+  font-family: var(--font);
+}
+
+.wsh-edit-mode .wsh-del-btn {
+  display: flex;
+}
+
+.wsh-del-btn:active {
+  transform: scale(0.82);
+}
+
+.wsh-brand-cell.wsh-mark-delete .wsh-brand-circle {
+  background: var(--gray-300) !important;
+  box-shadow: none;
+  opacity: 0.55;
+}
+
+.wsh-brand-cell.wsh-mark-delete {
+  animation: wshWiggle 0.46s ease-in-out infinite;
+}
+
+.wsh-brand-cell.wsh-mark-delete .wsh-brand-lbl {
+  opacity: 0.45;
+}
+
+.wsh-brand-cell.wsh-mark-delete .wsh-del-btn {
+  background: var(--gray-500);
+  transform: rotate(45deg);
+}
+
+.wsh-brand-cell.wsh-mark-delete .wsh-del-btn:active {
+  transform: rotate(45deg) scale(0.82);
+}
+
+/* ===== 즐겨찾기 포인트 탭 ===== */
+.wsh-pt-sort-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-10) var(--spacing-16);
+  background: white;
+}
+
+.wsh-pt-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  padding: var(--spacing-4) var(--spacing-16) var(--spacing-32);
+}
+
+/* 소멸 임박 카드 */
+.wsh-pt-card {
+  position: relative;
+  height: 127px;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.wsh-pt-card-inner {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.wsh-pt-card-inner.urgent {
+  background: var(--color-blue-50);
+  border: 2px solid var(--color-blue-500);
+}
+
+.wsh-pt-card-inner.normal {
+  background: white;
+}
+
+.wsh-pt-card-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 330px;
+  height: 96px;
+  display: flex;
+  gap: var(--spacing-16);
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.wsh-pt-card-inner.urgent .wsh-pt-card-content {
+  align-items: flex-end;
+}
+
+.wsh-pt-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: var(--color-gray-100);
+  flex-shrink: 0;
+  margin-top: var(--spacing-4);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wsh-pt-card-inner.urgent .wsh-pt-logo {
+  margin-top: var(--spacing-4);
+}
+
+.wsh-pt-card-inner.normal .wsh-pt-logo {
+  margin-top: 0;
+}
+
+.wsh-pt-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  height: 100%;
+  justify-content: center;
+  min-width: 0;
+  padding-bottom: var(--spacing-4);
+}
+
+.wsh-pt-info-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 15px;
+}
+
+.wsh-pt-brand {
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-700);
+  font-family: var(--font);
+  white-space: nowrap;
+}
+
+.wsh-pt-heart {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.wsh-pt-amount {
+  font-size: var(--font-size-headline-lg);
+  font-weight: var(--font-weight-heavy);
+  color: var(--color-gray-700);
+  font-family: var(--font);
+  line-height: 1;
+}
+
+.wsh-pt-expiry {
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-700);
+  font-family: var(--font);
+}
+
+/* D-XX 뱃지 (outlined) */
+.wsh-pt-dday {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 72px;
+  padding: var(--spacing-10);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) var(--radius-lg);
+  background: var(--color-red-50);
+  border: 1.5px solid var(--color-red-400);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-extra-bold);
+  color: var(--color-red-400);
+  font-family: var(--font);
+  text-align: center;
+  z-index: 2;
+}
+
+/* 카드 사이 구분선 */
+.wsh-pt-divider {
+  height: 0;
+  border: none;
+  border-top: 1.5px dashed var(--color-gray-100);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   PATCH: WISHLIST COUPON CARD (Figma 1150-46431 / 1150-46432)
+   작성자: Antigravity
+   날짜: 0603
+   ============================================================ */
+
+/* ── 일반 쿠폰 카드 스타일 (Figma 1150-46431) ── */
+#p-wishlist .wsh-cpn-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-gray-100);
+  box-shadow: var(--shadow-s);
+  padding: var(--spacing-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-10);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+#p-wishlist .wsh-cpn-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-m);
+  border-color: var(--color-blue-200);
+}
+
+#p-wishlist .wsh-cpn-card:active {
+  transform: scale(0.98);
+}
+
+#p-wishlist .wsh-cpn-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#p-wishlist .wsh-cpn-brand-lbl {
+  font-family: var(--font);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-500);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+#p-wishlist .wsh-cpn-heart {
+  color: var(--color-red-400);
+  font-size: 20px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+#p-wishlist .wsh-cpn-heart:active {
+  transform: scale(0.85);
+}
+
+#p-wishlist .wsh-cpn-heart svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--color-red-400);
+  stroke: var(--color-red-400);
+}
+
+#p-wishlist .wsh-cpn-body {
+  display: flex;
+  gap: var(--spacing-16);
+  align-items: center;
+  min-height: 72px;
+  width: 100%;
+}
+
+#p-wishlist .wsh-cpn-logo-wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 80px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+}
+
+#p-wishlist .wsh-cpn-logo-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  font-family: var(--font);
+  font-size: var(--font-size-headline-md);
+  font-weight: var(--font-weight-heavy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-top: 8px;
+  box-shadow: var(--shadow-s);
+}
+
+#p-wishlist .wsh-cpn-badge {
+  position: absolute;
+  top: 0;
+  left: 28px;
+  background: var(--color-blue-200);
+  color: var(--color-gray-700);
+  padding: var(--spacing-4) var(--spacing-10);
+  border-radius: var(--radius-full);
+  font-family: var(--font);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-semi-bold);
+  white-space: nowrap;
+  line-height: 1;
+  box-shadow: var(--shadow-s);
+  z-index: 1;
+}
+
+#p-wishlist .wsh-cpn-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  min-width: 0;
+  text-align: left;
+}
+
+#p-wishlist .wsh-cpn-title {
+  font-family: var(--font);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-700);
+  white-space: normal;
+  line-height: 1.35;
+  word-break: keep-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin: 0;
+}
+
+#p-wishlist .wsh-cpn-cond {
+  font-family: var(--font);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-500);
+  line-height: 1.4;
+  margin: 0;
+}
+
+#p-wishlist .wsh-cpn-date,
+#p-wishlist .wsh-cpn-exp {
+  font-family: var(--font);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-gray-400);
+  line-height: 1.4;
+  margin: 0;
+}
+
+#p-wishlist .wsh-cpn-exp span {
+  color: var(--color-blue-500);
+  font-weight: var(--font-weight-bold);
+}
+
+/* ── 마감임박 디데이 쿠폰: 티켓 스타일 (Figma 1150-46432) ── */
+#p-wishlist .wsh-cpn-card.urgent {
+  height: 127px;
+  overflow: visible;
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(to right, var(--color-blue-50) 0%, white 60%) padding-box,
+    linear-gradient(135deg, var(--color-red-400) 0%, var(--color-blue-200) 100%) border-box;
+  box-shadow: var(--shadow-m);
+  position: relative;
+  padding: var(--spacing-16);
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  box-sizing: border-box;
+}
+
+#p-wishlist .wsh-cpn-card.urgent .wsh-cpn-card-header {
+  position: absolute;
+  top: var(--spacing-16);
+  left: 96px;
+  right: var(--spacing-16);
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#p-wishlist .wsh-cpn-card.urgent .wsh-cpn-body {
+  position: absolute;
+  top: 40px;
+  left: var(--spacing-16);
+  right: var(--spacing-16);
+  height: 72px;
+  display: flex;
+  gap: var(--spacing-16);
+  align-items: center;
+}
+
+#p-wishlist .wsh-cpn-card.urgent .wsh-cpn-logo-circle {
+  margin-top: 0;
+}
+
+#p-wishlist .wsh-cpn-card.urgent .wsh-cpn-exp span,
+#p-wishlist .wsh-cpn-card.urgent .wsh-cpn-date span {
+  position: absolute;
+  top: -1.5px;
+  left: -1.5px;
+  width: 72px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-red-400);
+  color: white !important;
+  font-family: var(--font);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-extra-bold);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) var(--radius-lg);
+  z-index: 10;
+  box-shadow: var(--shadow-s);
+}
+
+
+
+#p-wishlist .wsh-cpn-card.urgent .wsh-cpn-del-btn {
+  background: var(--color-red-400);
+  border-color: var(--color-on-primary);
+  color: var(--color-on-primary);
+}
+
+/* ============================================================
+   PATCH: 마감임박 알림 카드 레이아웃 및 피그마 위계 반영 (Figma 1247-15832)
+   작성자: Antigravity
+   날짜: 0605
+   ============================================================ */
+
+/* 1. 마감임박 알림 탭 (np-deadline) 및 카드 목록 컨테이너 */
+
+/* ============================================================
+   PATCH: Horizontal Coupon Card Styles – Figma 1150-46279
+   작성자: Antigravity
+   날짜: 2026-06-05
+   ============================================================ */
+
+/* 1. 전체 가로형 쿠폰 카드 (128px 고정) */
+.wsh-cpn-card {
+  position: relative;
+  width: 100%;
+  height: 128px;
+  background: white;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-s);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding: var(--spacing-12) var(--spacing-16);
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  margin-bottom: var(--spacing-8);
+}
+
+/* 위시리스트의 쿠폰 탭 목록 내의 카드 배경 및 보더 */
+#wshCpnList .wsh-cpn-card {
+  background: var(--color-gray-50);
+  border: 1.5px solid var(--color-blue-100);
+  margin-bottom: var(--spacing-12);
+}
+
+/* 2. 헤더 (브랜드명 및 하트) - 좌측 76px 고정 */
+.wsh-cpn-card-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  width: 76px;
+  min-width: 76px;
+  max-width: 76px;
+  height: 100%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.wsh-cpn-brand-lbl {
+  font-family: var(--font);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-700);
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.wsh-cpn-heart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-20);
+  height: var(--spacing-20);
+  color: var(--color-gray-300);
+  line-height: 1;
+}
+
+.wsh-cpn-heart svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* 3. 본문 (로고 및 정보) */
+.wsh-cpn-body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  flex: 1;
+  height: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.wsh-cpn-logo-wrap {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wsh-cpn-logo-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: var(--shadow-s);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-headline-sm);
+  font-weight: var(--font-weight-heavy);
+  color: white;
+  font-family: var(--font);
+  flex-shrink: 0;
+  overflow: hidden;
+  margin: 0 !important;
+}
+
+/* 채널 배지 (우상단 오버랩) */
+.wsh-cpn-badge {
+  position: absolute;
+  top: -6px;
+  left: 24px;
+  z-index: 2;
+  background: var(--color-blue-100);
+  color: var(--color-blue-700);
+  padding: var(--spacing-2) var(--spacing-6);
+  border-radius: var(--radius-full);
+  font-family: var(--font);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
+  line-height: 1.25;
+}
+
+/* D-DAY 배지 색상 */
+.wsh-cpn-card[data-id="starbucks"] .wsh-cpn-badge {
+  background: var(--color-red-400);
+  color: white;
+}
+
+/* D-1 배지 색상 */
+.wsh-cpn-card[data-id="emart"] .wsh-cpn-badge {
+  background: var(--color-amber-400);
+  color: white;
+}
+
+/* 4. 정보 영역 (좌측 정렬) */
+.wsh-cpn-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+  min-width: 0;
+  box-sizing: border-box;
+  margin: 0 !important;
+  margin-left: var(--spacing-24) !important; /* 공간 확보하여 배지 오버랩 방지 */
+}
+
+.wsh-cpn-title {
+  font-family: var(--font);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-700);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-align: left;
+}
+
+.wsh-cpn-cond,
+.wsh-cpn-date {
+  font-family: var(--font);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-gray-500);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-align: left;
+}
+
+/* 5. 삭제 버튼 및 정렬 순서 */
+.wsh-cpn-del-btn {
+  background: none;
+  border: none;
+  color: var(--color-gray-500);
+  font-size: var(--font-size-body);
+  cursor: pointer;
+}
+
+.wsh-cpn-card.d-day { order: 1; }
+.wsh-cpn-card.d-1   { order: 2; }
+.wsh-cpn-card.normal { order: 3; }
+
+/* ============================================================
+   PATCH: Wishlist Brand Detail Layout (Figma 11:1379 / 11:1336)
+   작성자: Antigravity
+   날짜: 0605
+   ============================================================ */
+#p-wishlist:has(#wshBrandDetail:not([style*="display: none"])) .wsh-tab-bar {
+  display: none !important;
+}
+
+#wshDetailPointSection[style*="display: none"] + #wshDetailPointTitle,
+#wshDetailPointSection[style*="display:none"] + #wshDetailPointTitle {
+  display: none !important;
+}
+
+#wshDetailCouponSection[style*="display: none"] + #wshDetailCouponTitle,
+#wshDetailCouponSection[style*="display:none"] + #wshDetailCouponTitle {
+  display: none !important;
+}
+
+/* ============================================================
+   PATCH: Wishlist Sort Dropdown to Bottom Sheet (Figma 1345-17028)
+   작성자: Antigravity
+   날짜: 0605
+   ============================================================ */
+
+/* 0. 정렬 메뉴 오픈 시 페이지 자체의 쌓임 맥락을 하단 탭바 위로 끌어올림 */
+#p-wishlist:has(.wsh-sort-wrap.open) {
+  position: relative !important;
+  z-index: 2100 !important;
+}
+
+/* 1. 어두운 백드롭 페이드인 */
+#p-wishlist .wsh-sort-wrap.open::after {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+  z-index: 2100 !important;
+  pointer-events: auto !important;
+  animation: wshFadeIn 0.25s ease forwards !important;
+}
+
+@keyframes wshFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* 2. 바텀 시트 레이아웃 및 슬라이드업 애니메이션 */
+#p-wishlist .wsh-sort-wrap .nmap-sort-menu {
+  display: none !important;
+}
+
+#p-wishlist .wsh-sort-wrap.open .nmap-sort-menu {
+  display: flex !important;
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: auto !important;
+  z-index: 2200 !important;
+  width: 100% !important;
+  background: white !important;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0 !important;
+  box-shadow: 0px -3px 13px -3px rgba(18, 18, 18, 0.20) !important;
+  padding: var(--spacing-12) var(--spacing-20) calc(var(--spacing-32) + env(safe-area-inset-bottom, 0px)) !important;
+  box-sizing: border-box !important;
+  flex-direction: column !important;
+  gap: var(--spacing-6) !important;
+  transform: translateY(100%) !important;
+  animation: wshSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+@keyframes wshSlideUp {
+  0% { transform: translateY(100%); }
+  100% { transform: translateY(0); }
+}
+
+/* 바텀 시트 풀 핸들 */
+#p-wishlist .wsh-sort-wrap.open .nmap-sort-menu::before {
+  content: "" !important;
+  display: block !important;
+  width: 36px !important;
+  height: 5px !important;
+  background: var(--color-gray-200) !important;
+  border-radius: var(--radius-full) !important;
+  margin: 0 auto var(--spacing-20) !important;
+  flex-shrink: 0 !important;
+  order: -2 !important; /* 항상 최상단에 위치 */
+}
+
+/* 정렬 기준 타이틀 */
+#p-wishlist .wsh-sort-wrap.open .nmap-sort-menu::after {
+  content: "정렬 기준" !important;
+  display: block !important;
+  font-size: var(--font-size-body) !important;
+  font-weight: var(--font-weight-bold) !important;
+  color: var(--color-gray-700) !important;
+  margin-bottom: var(--spacing-10) !important;
+  order: -1 !important; /* 풀 핸들 아래, 아이템 위에 위치 */
+  text-align: left !important;
+  padding-left: var(--spacing-4) !important;
+}
+
+/* 3. 메뉴 아이템 스타일 */
+#p-wishlist .nmap-sort-item {
+  width: 100% !important;
+  height: 52px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  background: none !important;
+  border: none !important;
+  padding: 0 var(--spacing-16) !important;
+  box-sizing: border-box !important;
+  font-family: var(--font) !important;
+  font-size: var(--font-size-body) !important;
+  font-weight: var(--font-weight-medium) !important;
+  color: var(--color-gray-500) !important;
+  border-radius: var(--radius-lg) !important;
+  cursor: pointer !important;
+  transition: background 0.15s, color 0.15s !important;
+  text-align: left !important;
+}
+
+#p-wishlist .nmap-sort-item:hover,
+#p-wishlist .nmap-sort-item:active {
+  background: var(--color-gray-50) !important;
+}
+
+/* 활성화된 아이템 체크마크 및 파란색 볼드 처리 */
+#p-wishlist .nmap-sort-item.active {
+  font-weight: var(--font-weight-bold) !important;
+  color: var(--color-blue-500) !important;
+  background: var(--color-blue-50) !important;
+}
+
+#p-wishlist .nmap-sort-item.active::after {
+  content: "" !important;
+  display: inline-block !important;
+  width: 18px !important;
+  height: 18px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23126dfb' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E") !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  flex-shrink: 0 !important;
+}
+
+/* Wishlist sort dropdown: keep menu local, no full-screen backdrop */
+#p-wishlist:has(.wsh-sort-wrap.open) {
+  z-index: auto !important;
+}
+#p-wishlist .wsh-sort-wrap.open::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Wishlist card alignment fix */
+#p-wishlist #wshCpnList,
+#p-wishlist #wshDetailCoupons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: var(--spacing-14) !important;
+}
+
+#p-wishlist #wshCpnList .wsh-cpn-card,
+#p-wishlist #wshDetailCoupons .wsh-cpn-card {
+  width: 100% !important;
+  min-height: 138px !important;
+  height: auto !important;
+  padding: var(--spacing-20) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  gap: var(--spacing-14) !important;
+  overflow: visible !important;
+  align-items: stretch !important;
+}
+
+#p-wishlist #wshCpnList .wsh-cpn-card-header,
+#p-wishlist #wshDetailCoupons .wsh-cpn-card-header {
+  position: relative !important;
+  inset: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  min-height: 24px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  z-index: 3 !important;
+}
+
+#p-wishlist #wshCpnList .wsh-cpn-brand-lbl,
+#p-wishlist #wshDetailCoupons .wsh-cpn-brand-lbl {
+  display: block !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  text-align: left !important;
+}
+
+#p-wishlist #wshCpnList .wsh-cpn-heart,
+#p-wishlist #wshDetailCoupons .wsh-cpn-heart {
+  position: static !important;
+  flex: 0 0 auto !important;
+  margin-left: var(--spacing-12) !important;
+}
+
+#p-wishlist #wshCpnList .wsh-cpn-body,
+#p-wishlist #wshDetailCoupons .wsh-cpn-body {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: 86px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: var(--spacing-18) !important;
+  width: 100% !important;
+  min-height: 72px !important;
+  margin: 0 !important;
+}
+
+#p-wishlist #wshCpnList .wsh-cpn-logo-wrap,
+#p-wishlist #wshDetailCoupons .wsh-cpn-logo-wrap {
+  position: relative !important;
+  width: 86px !important;
+  height: 72px !important;
+  flex: 0 0 86px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#p-wishlist #wshCpnList .wsh-cpn-logo-circle,
+#p-wishlist #wshDetailCoupons .wsh-cpn-logo-circle {
+  width: 64px !important;
+  height: 64px !important;
+  margin: 0 !important;
+}
+
+#p-wishlist #wshCpnList .wsh-cpn-badge,
+#p-wishlist #wshDetailCoupons .wsh-cpn-badge {
+  position: absolute !important;
+  top: -2px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 2 !important;
+  white-space: nowrap !important;
+  margin: 0 !important;
+  line-height: 1 !important;
+}
+
+#p-wishlist #wshCpnList .wsh-cpn-info,
+#p-wishlist #wshDetailCoupons .wsh-cpn-info {
+  min-width: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  gap: var(--spacing-6) !important;
+  text-align: left !important;
+}
+
+#p-wishlist #wshCpnList .wsh-cpn-title,
+#p-wishlist #wshDetailCoupons .wsh-cpn-title,
+#p-wishlist #wshCpnList .wsh-cpn-cond,
+#p-wishlist #wshDetailCoupons .wsh-cpn-cond,
+#p-wishlist #wshCpnList .wsh-cpn-date,
+#p-wishlist #wshDetailCoupons .wsh-cpn-date {
+  position: static !important;
+  width: 100% !important;
+  margin: 0 !important;
+  text-align: left !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+#p-wishlist .wsh-pt-card {
+  position: relative !important;
+  width: 100% !important;
+  min-height: 132px !important;
+  cursor: pointer !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+#p-wishlist .wsh-pt-card-inner {
+  position: relative !important;
+  width: 100% !important;
+  min-height: 120px !important;
+  border-radius: var(--radius-xl) !important;
+  overflow: visible !important;
+}
+
+#p-wishlist .wsh-pt-card-content {
+  display: grid !important;
+  grid-template-columns: 86px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: var(--spacing-18) !important;
+  width: 100% !important;
+  min-height: 104px !important;
+}
+
+#p-wishlist .wsh-pt-logo {
+  position: relative !important;
+  width: 68px !important;
+  height: 68px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#p-wishlist .wsh-pt-info {
+  min-width: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  gap: var(--spacing-6) !important;
+}
+
+#p-wishlist .wsh-pt-info-head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  gap: var(--spacing-12) !important;
+}
+
+#p-wishlist .wsh-pt-brand,
+#p-wishlist .wsh-pt-amount,
+#p-wishlist .wsh-pt-expiry {
+  margin: 0 !important;
+  text-align: left !important;
+}
+
+#p-wishlist .wsh-pt-heart {
+  flex: 0 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#p-wishlist .wsh-sort-wrap .nmap-sort-menu {
+  display: none !important;
+}
+
+#wshSortOverlay.ph-sort-sheet-overlay.open,
+#wshSortSheet.ph-sort-dd-panel.open {
+  z-index: 2600 !important;
 }

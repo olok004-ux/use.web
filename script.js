@@ -5870,7 +5870,57 @@ const WSH_POINTS = [
   { id:'lpoint',     name:'엘포인트 (L.POINT)',amount:'5,400p',  exp:'2027-05-15', dnum:350, urgent:false, logo:'' },
 ];
 
+const WSH_SORT_STATE = {
+  coupon: '\uB9C8\uAC10\uC784\uBC15\uC21C',
+  point: '\uB9C8\uAC10\uC784\uBC15\uC21C'
+};
+
+const WSH_SORT_LABELS = {
+  deadline: '\uB9C8\uAC10\uC784\uBC15\uC21C',
+  discount: '\uCD5C\uB300\uD560\uC778\uC21C',
+  popular: '\uC778\uAE30\uC21C',
+  name: '\uC774\uB984\uC21C',
+  distance: '\uAC70\uB9AC\uC21C',
+  pointHigh: '\uD3EC\uC778\uD2B8 \uB192\uC740\uC21C',
+  alpha: '\uAC00\uB098\uB2E4\uC21C'
+};
+
+function wshSortCouponEntries(entries) {
+  const sort = WSH_SORT_STATE.coupon;
+  const parseDiscount = text => {
+    const raw = String(text || '');
+    const nums = [...raw.matchAll(/(\d[\d,]*)/g)].map(m => parseInt(m[1].replace(/,/g, ''), 10) || 0);
+    return nums.length ? Math.max(...nums) : 0;
+  };
+  const byDate = (a, b) => (a.c.exp || '9999-12-31').localeCompare(b.c.exp || '9999-12-31');
+  const byName = (a, b) => (a.b.name + a.c.title).localeCompare(b.b.name + b.c.title, 'ko');
+
+  return [...entries].sort((a, b) => {
+    if (sort === WSH_SORT_LABELS.discount) return parseDiscount(b.c.title) - parseDiscount(a.c.title) || byDate(a, b);
+    if (sort === WSH_SORT_LABELS.name) return byName(a, b);
+    if (sort === WSH_SORT_LABELS.deadline) return byDate(a, b);
+    return 0;
+  });
+}
+
+function wshSortPoints(points) {
+  const sort = WSH_SORT_STATE.point;
+  const amountNum = p => parseInt(String(p.amount || '').replace(/[^\d]/g, ''), 10) || 0;
+  return [...points].sort((a, b) => {
+    if (sort === WSH_SORT_LABELS.pointHigh) return amountNum(b) - amountNum(a);
+    if (sort === WSH_SORT_LABELS.alpha) return String(a.name || '').localeCompare(String(b.name || ''), 'ko');
+    return (a.exp || '9999-12-31').localeCompare(b.exp || '9999-12-31');
+  });
+}
+
 function wshPtCard(p) {
+  const detailId = {
+    happypoint: 'PT-004',
+    baemin: 'PT-009',
+    cjone: 'PT-003',
+    naverpay: 'PT-001',
+    lpoint: 'PT-002'
+  }[p.id] || p.id;
   const heartSvg = `<svg width="16" height="17" viewBox="0 0 24 24" fill="var(--color-red-400)" stroke="var(--color-red-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
   const logoHtml = p.logo
     ? `<img src="${p.logo}" alt="" style="width:100%;height:100%;object-fit:contain;display:block;border-radius:inherit">`
@@ -5879,7 +5929,7 @@ function wshPtCard(p) {
     ? `<div class="wsh-pt-dday">D-${p.dnum}</div>`
     : '';
   return `
-    <div class="wsh-pt-card">
+    <div class="wsh-pt-card" role="button" tabindex="0" onclick="showPointsDetail('${detailId}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPointsDetail('${detailId}')}">
       <div class="wsh-pt-card-inner ${p.urgent ? 'urgent' : 'normal'}">
         <div class="wsh-pt-card-content">
           <div class="wsh-pt-logo">${logoHtml}</div>
@@ -5900,8 +5950,9 @@ function wshPtCard(p) {
 function wshRenderPoints() {
   const list = document.getElementById('wshPtList');
   if (!list) return;
-  const urgents = WSH_POINTS.filter(p => p.urgent);
-  const normals  = WSH_POINTS.filter(p => !p.urgent);
+  const sorted = wshSortPoints(WSH_POINTS);
+  const urgents = sorted.filter(p => p.urgent);
+  const normals  = sorted.filter(p => !p.urgent);
   let html = '';
   urgents.forEach(p => { html += wshPtCard(p); });
   normals.forEach((p, i) => {
@@ -5944,17 +5995,102 @@ const WSH_BRANDS = {
 };
 function toggleWshSort(id, e) {
   e.stopPropagation();
-  const wrap = document.getElementById(id);
-  const isOpen = wrap.classList.contains('open');
-  document.querySelectorAll('.wsh-sort-wrap').forEach(w => w.classList.remove('open'));
-  if (!isOpen) wrap.classList.add('open');
+  const config = {
+    wshCpnSortWrap: {
+      labelId: 'wshCpnSortLabel',
+      options: ['마감임박순', '최대할인순', '인기순', '이름순', '거리순']
+    },
+    wshPtSortWrap: {
+      labelId: 'wshPtSortLabel',
+      options: ['마감임박순', '포인트 높은순', '가나다순']
+    }
+  }[id];
+  if (!config) return;
+  ensureWshSortSheet();
+  openWshSortSheet(id, config);
 }
 function selectWshSort(wrapId, labelId, label, el) {
-  document.getElementById(labelId).textContent = label;
+  const labelEl = document.getElementById(labelId);
+  if (labelEl) labelEl.textContent = label;
   document.querySelectorAll('#' + wrapId + ' .nmap-sort-item').forEach(i => i.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById(wrapId).classList.remove('open');
+  if (el) el.classList.add('active');
+  document.getElementById(wrapId)?.classList.remove('open');
 }
+
+function ensureWshSortSheet() {
+  if (document.getElementById('wshSortSheet')) return;
+  document.body.insertAdjacentHTML('beforeend', `
+    <div class="ph-sort-sheet-overlay" id="wshSortOverlay" onclick="closeWshSortSheet()" aria-hidden="true"></div>
+    <div class="ph-sort-dd-panel" id="wshSortSheet" role="dialog" aria-modal="true" aria-label="정렬 기준 변경">
+      <div class="ph-sort-dd-items" id="wshSortItems"></div>
+    </div>
+  `);
+}
+
+function openWshSortSheet(wrapId, config) {
+  const sheet = document.getElementById('wshSortSheet');
+  const overlay = document.getElementById('wshSortOverlay');
+  const items = document.getElementById('wshSortItems');
+  if (!sheet || !overlay || !items) return;
+
+  const current = (document.getElementById(config.labelId)?.textContent || config.options[0]).trim();
+  sheet.dataset.wrapId = wrapId;
+  sheet.dataset.labelId = config.labelId;
+  items.innerHTML = config.options.map(name => `
+    <button class="ph-sort-dd-item ${name === current ? 'sel' : ''}" type="button" onclick="selectWshSortSheet(this)">
+      <span class="ph-sort-dd-check">${name === current ? '✓' : ''}</span>
+      <span class="ph-sort-dd-name">${name}</span>
+    </button>
+  `).join('');
+
+  document.querySelectorAll('.ph-sort-dd-panel').forEach(p => p.classList.remove('open'));
+  document.querySelectorAll('.ph-sort-sheet-overlay').forEach(o => o.classList.remove('open'));
+  document.querySelectorAll('.wsh-sort-wrap').forEach(w => w.classList.remove('open'));
+  sheet.classList.add('open');
+  overlay.classList.add('open');
+}
+
+function selectWshSortSheet(el) {
+  const sheet = document.getElementById('wshSortSheet');
+  if (!sheet) return;
+  const wrapId = sheet.dataset.wrapId;
+  const labelId = sheet.dataset.labelId;
+  const name = el.querySelector('.ph-sort-dd-name')?.textContent || '';
+  if (!wrapId || !labelId || !name) return;
+
+  sheet.querySelectorAll('.ph-sort-dd-item').forEach(item => {
+    item.classList.remove('sel');
+    const chk = item.querySelector('.ph-sort-dd-check');
+    if (chk) chk.textContent = '';
+  });
+  el.classList.add('sel');
+  const activeChk = el.querySelector('.ph-sort-dd-check');
+  if (activeChk) activeChk.textContent = '✓';
+
+  const labelEl = document.getElementById(labelId);
+  if (labelEl) labelEl.textContent = name;
+  if (wrapId === 'wshCpnSortWrap') {
+    WSH_SORT_STATE.coupon = name;
+    wshRenderCouponList();
+  } else if (wrapId === 'wshPtSortWrap') {
+    WSH_SORT_STATE.point = name;
+    wshRenderPoints();
+  }
+  closeWshSortSheet();
+}
+
+function closeWshSortSheet() {
+  document.getElementById('wshSortSheet')?.classList.remove('open');
+  document.getElementById('wshSortOverlay')?.classList.remove('open');
+}
+
+document.addEventListener('click', function handleWishlistCouponDetail(e) {
+  const card = e.target.closest('#p-wishlist .wsh-cpn-card[data-action="go-detail"]');
+  if (!card || e.target.closest('button, .wsh-cpn-heart, .wsh-cpn-del-btn')) return;
+  const id = card.dataset.id;
+  if (id && ACT['go-detail']) ACT['go-detail']({ target: card, currentTarget: card });
+});
+
 function wshCpnCard(b, c) {
   const dateLabel = c.exp ? c.exp + ' 까지' : '';
   const channelLabel = c.ch || '온라인';
@@ -6135,11 +6271,11 @@ function wshCpnCardItem(b, c) {
 function wshRenderCouponList() {
   const list = document.getElementById('wshCpnList');
   if (!list) return;
-  const cards = [];
+  const entries = [];
   Object.values(WSH_BRANDS).forEach(b => {
-    b.coupons.forEach(c => cards.push(wshCpnCardItem(b, c)));
+    b.coupons.forEach(c => entries.push({ b, c }));
   });
-  list.innerHTML = cards.join('');
+  list.innerHTML = wshSortCouponEntries(entries).map(({ b, c }) => wshCpnCardItem(b, c)).join('');
   if (_wshCouponEditMode) {
     list.classList.add('wsh-edit-mode');
   }
