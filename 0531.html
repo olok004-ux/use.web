@@ -1,4 +1,4 @@
-﻿<html lang="ko"><head>
+<html lang="ko"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>USE — 쿠폰 자동추천 서비스</title>
@@ -20,8 +20,6 @@
 <!-- ────────────────────────────────────────
   공통 온보딩 스타일
 ──────────────────────────────────────── -->
-
-
 <!-- ==================== MAIN ==================== -->
 <div class="screen" id="s-main" style="display: none;">
   <div class="main-screen">
@@ -32,17 +30,11 @@
       <!-- 제목 -->
       <h1 class="main-hero-title">안녕하세요 :)<br>USE입니다.</h1>
 
-      <!-- 탭 -->
-      <div class="main-tabs">
-        <button class="main-tab on" id="tab-login" onclick="switchMainTab('login')">로그인</button>
-        <button class="main-tab" id="tab-signup" onclick="switchMainTab('signup')">회원가입</button>
-      </div>
-
-      <!-- 로그인 패널 -->
+      <!-- 로그인 폼 -->
       <div id="main-login-panel" class="main-form" style="display: flex;">
-        <div class="main-field"><input type="tel" placeholder="휴대폰 번호 입력"></div>
-        <div class="main-field"><input type="password" placeholder="비밀번호 입력"></div>
-        <button class="main-login-btn" onclick="S.isConnected=true;localStorage.setItem('useHasVisited','1');go('home');">로그인</button>
+        <div class="main-field"><input type="text" placeholder="아이디를 입력해 주세요"></div>
+        <div class="main-field"><input type="password" placeholder="비밀번호를 입력해 주세요"></div>
+        <button class="main-login-btn" onclick="S.isConnected=true;localStorage.setItem('useHasVisited','1');go('home');setTimeout(showNotiSetupPopup,300);">로그인</button>
         <div class="main-divider">간편 로그인</div>
         <div class="main-social-row">
           <button class="main-social-btn main-social-kakao" onclick="S.isConnected=true;localStorage.setItem('useHasVisited','1');go('home');" title="카카오 로그인">
@@ -58,28 +50,7 @@
             <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path></svg>
           </button>
         </div>
-      </div>
-
-      <!-- 회원가입 패널 -->
-      <div id="main-signup-panel" class="main-form" style="display: none;">
-        <p class="main-signup-desc">휴대폰 번호로 간편하게 가입하세요!</p>
-        <div class="main-field"><input type="tel" placeholder="휴대폰 번호 입력"></div>
-        <button class="main-login-btn" onclick="go('terms-new')">회원가입 하기</button>
-        <div class="main-divider">간편 가입</div>
-        <div class="main-social-row">
-          <button class="main-social-btn main-social-kakao" onclick="go('signup-kakao')" title="카카오 회원가입">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="#3A1D00"><path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.6 5.08 4.04 6.54L5 21l4.56-2.4c.79.17 1.6.26 2.44.26 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"></path></svg>
-          </button>
-          <button class="main-social-btn main-social-naver" onclick="goSocialSignup('네이버 회원가입')" title="네이버 회원가입">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"></path></svg>
-          </button>
-          <button class="main-social-btn main-social-toss" onclick="goSocialSignup('토스 회원가입')" title="토스 회원가입">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"></path></svg>
-          </button>
-          <button class="main-social-btn main-social-google" onclick="goSocialSignup('구글 회원가입')" title="구글 회원가입">
-            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path></svg>
-          </button>
-        </div>
+        <button class="main-signup-link-btn" onclick="go('main-signup')">회원가입 하러 가기</button>
       </div>
 
     </div><!-- /.main-content -->
@@ -101,6 +72,40 @@
 <div class="screen" id="s-signup-select" style="display: none;"></div>
 
 <!-- ==================== 서비스 이용 동의 (Figma 25:6840) ==================== -->
+<div class="screen" id="s-main-signup" style="display: none;">
+  <div class="terms-wrap" style="background:#fff;">
+    <!-- 뒤로가기 -->
+    <button class="terms-back" onclick="go('main')" aria-label="뒤로가기">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </button>
+    <!-- 타이틀 -->
+    <h1 class="main-hero-title" style="color:var(--color-blue-500);font-size:32px;">안녕하세요 :)<br>USE입니다.</h1>
+    <!-- 폼 -->
+    <div class="main-form" style="display:flex;margin-top:32px;">
+      <p style="font-family:var(--font);font-size:16px;font-weight:600;color:var(--color-gray-400);text-align:center;margin:0 0 12px;">휴대폰번호로 간편하게 가입해 보세요!</p>
+      <div class="main-field">
+        <input type="tel" placeholder="휴대폰번호를 입력해 주세요">
+      </div>
+      <button class="main-login-btn" style="background:var(--color-blue-500);color:#fff;font-size:20px;" onclick="go('terms-new')">회원가입 하기</button>
+      <div class="main-divider" style="color:var(--color-gray-400);">간편 가입</div>
+      <div class="main-social-row">
+        <button class="main-social-btn main-social-kakao" onclick="goSocialFlow()" title="카카오 회원가입">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#3A1D00"><path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.7 1.6 5.08 4.04 6.54L5 21l4.56-2.4c.79.17 1.6.26 2.44.26 5.523 0 10-3.477 10-7.8S17.523 3 12 3z"></path></svg>
+        </button>
+        <button class="main-social-btn main-social-naver" onclick="goSocialFlow()" title="네이버 회원가입">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"></path></svg>
+        </button>
+        <button class="main-social-btn main-social-toss" onclick="goSocialFlow()" title="토스 회원가입">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"></path></svg>
+        </button>
+        <button class="main-social-btn main-social-google" onclick="goSocialFlow()" title="구글 회원가입">
+          <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="screen" id="s-terms-new" style="display: none;">
   <div class="terms-wrap">
 
@@ -172,25 +177,70 @@
 
 <!-- ==================== 본인인증 ==================== -->
 <!-- ==================== 간편회원가입 목록 ==================== -->
-<!-- ==================== 카카오톡 회원가입 ==================== -->
-<div class="screen" id="s-signup-kakao" style="display: none;">
-  <div class="ob2-wrap">
-    <button class="ob2-back" onclick="go('signup-easy')" aria-label="뒤로가기"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
-    <div class="ob2-title">카카오톡 회원가입</div>
-    <div class="ob2-field"><input type="text" placeholder="아이디 입력"></div>
-    <div class="ob2-field"><input type="password" placeholder="비밀번호 입력"></div>
-    <button class="ob2-btn" onclick="showNotiSetupPopup()">다음</button>
+<!-- ==================== 카카오 회원가입 로딩 (Figma 1089:15003) ==================== -->
+
+<!-- ==================== 간편 회원가입 로딩 (1089:15003) ==================== -->
+<div class="screen" id="s-social-flow-loading" style="display:none;">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;background:white;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:32px;">
+      <!-- 스피닝 오빗 -->
+      <div style="position:relative;width:78px;height:78px;">
+        <div style="position:absolute;inset:8px;border-radius:50%;background:#9EC3FF;"></div>
+        <div style="position:absolute;inset:10px;border-radius:50%;background:#126dfb;"></div>
+        <div style="position:absolute;top:4px;right:0;width:14px;height:14px;border-radius:50%;background:#9EC3FF;animation:socialOrbitSpin 1.2s linear infinite;transform-origin:-25px 0;"></div>
+      </div>
+      <p style="font-family:var(--font);font-size:28px;font-weight:800;color:#071b44;text-align:center;letter-spacing:0.03em;line-height:1.25;margin:0;">회원가입을<br>진행하고 있어요</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 간편 회원가입 완료 (1089:15012) ==================== -->
+<div class="screen" id="s-social-flow-complete" style="display:none;">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;background:white;position:relative;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:32px;">
+      <!-- 완료 아이콘 -->
+      <div style="position:relative;width:78px;height:78px;">
+        <div style="position:absolute;inset:8px;border-radius:50%;border:3px solid #9EC3FF;background:white;"></div>
+        <div style="position:absolute;inset:12px;border-radius:50%;background:#126dfb;"></div>
+        <div style="position:absolute;top:4px;right:0;width:14px;height:14px;border-radius:50%;background:#9EC3FF;"></div>
+      </div>
+      <p style="font-family:var(--font);font-size:28px;font-weight:800;color:#071b44;text-align:center;letter-spacing:0.03em;line-height:1.25;margin:0;">회원가입이<br>완료되었어요!</p>
+    </div>
+    <!-- 시작하기 버튼 -->
+    <div style="position:absolute;bottom:23px;left:15px;right:15px;">
+      <button onclick="S.isConnected=true;localStorage.setItem('useHasVisited','1');go('home');setTimeout(showNotiSetupPopup,300);" style="width:100%;height:60px;background:#126dfb;border:none;border-radius:16px;font-family:var(--font);font-size:16px;font-weight:800;color:white;cursor:pointer;">시작하기</button>
+    </div>
   </div>
 </div>
 
 <!-- ==================== 소셜 회원가입 (네이버/토스/구글 공용, 제목만 다름) ==================== -->
-<div class="screen" id="s-signup-social" style="display: none;">
-  <div class="ob2-wrap">
-    <button class="ob2-back" onclick="go('signup-easy')" aria-label="뒤로가기"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
-    <div class="ob2-title" id="socialSignupTitle">소셜 회원가입</div>
-    <div class="ob2-field"><input type="text" placeholder="아이디 입력"></div>
-    <div class="ob2-field"><input type="password" placeholder="비밀번호 입력"></div>
-    <button class="ob2-btn" onclick="showNotiSetupPopup()">다음</button>
+<div class="screen" id="s-signup-social-loading" style="display: none;">
+  <div class="kakao-signup-wrap kakao-signup-loading">
+    <div class="kakao-signup-center">
+      <div class="kakao-orbit-wrap" aria-hidden="true">
+        <div class="kakao-orbit spinning"></div>
+        <div class="kakao-orbit-ring"></div>
+      </div>
+      <h1 class="kakao-signup-title">회원가입을<br>진행하고 있어요</h1>
+    </div>
+    <div class="kakao-signup-bottom">
+      <button class="kakao-signup-btn loading" type="button" disabled aria-disabled="true">시작하기</button>
+    </div>
+  </div>
+</div>
+
+<div class="screen" id="s-signup-social-complete" style="display: none;">
+  <div class="kakao-signup-wrap kakao-signup-complete">
+    <div class="kakao-signup-top">
+      <button class="kakao-signup-back" onclick="socialSignupBack()" aria-label="뒤로가기"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+    </div>
+    <div class="kakao-signup-center">
+      <div class="kakao-orbit complete" aria-hidden="true"></div>
+      <h1 class="kakao-signup-title">회원가입이 완료되었어요!</h1>
+    </div>
+    <div class="kakao-signup-bottom">
+      <button class="kakao-signup-btn primary" onclick="finishSocialSignupFlow()">시작하기</button>
+    </div>
   </div>
 </div>
 <div class="screen" id="s-phone" style="display: none;">
@@ -831,151 +881,125 @@
 <div class="screen" id="s-signup-id" style="display: none;">
   <div class="terms-wrap">
 
-    <button class="terms-back" data-action="go-back" aria-label="뒤로가기">
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-    </button>
+    <!-- 상단 뒤로가기 (72px 헤더 영역) -->
+    <div class="si-topbar">
+      <button class="terms-back" data-action="go-back" aria-label="뒤로가기">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </button>
+    </div>
 
-    <header class="si-head">
-      <div>
-        <h1 class="terms-title">기본 정보</h1>
-        <p class="si-sub">필수 정보를 입력해 주세요.</p>
-      </div>
-    </header>
+    <!-- 타이틀 -->
+    <div class="si-title-area">
+      <h1 class="si-page-title">기본 정보</h1>
+    </div>
 
     <!-- 폼 영역 -->
     <div class="su-content">
 
-      <!-- 블록 1: 아이디 / 비밀번호 -->
-      <div class="su-block">
-        <!-- 아이디 -->
-        <div>
-          <p class="su-label">아이디</p>
-          <div class="su-row">
-            <label class="su-field">
-              <span class="si-field-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M20 21a8 8 0 0 0-16 0" stroke="currentColor" stroke-width="2"></path><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"></circle></svg>
-              </span>
-              <input id="suId" type="text" placeholder="아이디를 입력하세요">
-            </label>
-            <button class="su-action-btn" onclick="suCheckId()">중복확인</button>
-          </div>
-        </div>
-        <!-- 비밀번호 -->
-        <div>
-          <p class="su-label">비밀번호</p>
-          <label class="su-field">
-            <span class="si-field-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
-            </span>
-            <input id="signupPw" type="password" placeholder="비밀번호" oninput="siToggleClear(this)">
-            <button class="si-clear" type="button" onclick="siClear('signupPw',this)" aria-label="지우기"><svg viewBox="0 0 10 10" fill="none"><path d="M2 2l6 6M8 2l-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
-            <button class="si-eye" type="button" onclick="togglePw('signupPw',this)" aria-label="비밀번호 보기">
-              <svg class="si-eye-off" viewBox="0 0 24 24" fill="none"><path d="M3 3l18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M10.6 10.6A2 2 0 0 0 13.4 13.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M7.5 7.7C5.5 8.9 4 10.8 3 12c2.4 3.1 5.4 5 9 5 1.4 0 2.7-.3 3.9-.9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10 5.2c.6-.1 1.3-.2 2-.2 3.6 0 6.6 1.9 9 5-.5.7-1.2 1.5-2 2.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-              <svg class="si-eye-on" viewBox="0 0 24 24" fill="none"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"></circle></svg>
-            </button>
-          </label>
-          <label class="su-field" style="margin-top:10px">
-            <span class="si-field-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
-            </span>
-            <input id="signupPwConfirm" type="password" placeholder="비밀번호 확인" oninput="siToggleClear(this)">
-            <button class="si-clear" type="button" onclick="siClear('signupPwConfirm',this)" aria-label="지우기"><svg viewBox="0 0 10 10" fill="none"><path d="M2 2l6 6M8 2l-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
-            <button class="si-eye" type="button" onclick="togglePw('signupPwConfirm',this)" aria-label="비밀번호 보기">
-              <svg class="si-eye-off" viewBox="0 0 24 24" fill="none"><path d="M3 3l18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M10.6 10.6A2 2 0 0 0 13.4 13.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M7.5 7.7C5.5 8.9 4 10.8 3 12c2.4 3.1 5.4 5 9 5 1.4 0 2.7-.3 3.9-.9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10 5.2c.6-.1 1.3-.2 2-.2 3.6 0 6.6 1.9 9 5-.5.7-1.2 1.5-2 2.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-              <svg class="si-eye-on" viewBox="0 0 24 24" fill="none"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"></circle></svg>
-            </button>
-          </label>
-        </div>
-      </div>
-
-      <!-- 구분선 -->
-      <div class="terms-divider"></div>
-
-      <!-- 블록 2: 이름 / 생년월일 / 이메일 -->
-      <div class="su-block">
-        <!-- 이름 -->
-        <div>
-          <p class="su-label">이름</p>
-          <label class="su-field">
-            <span class="si-field-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M20 21a8 8 0 0 0-16 0" stroke="currentColor" stroke-width="2"></path><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"></circle></svg>
-            </span>
-            <input type="text" placeholder="이름">
-          </label>
-        </div>
-        <!-- 생년월일 -->
-        <div>
-          <p class="su-label">생년월일</p>
-          <div class="su-bdate-row">
-            <label class="su-field yr si-select-field">
-              <span class="si-field-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="15" rx="2" stroke="currentColor" stroke-width="2"></rect><path d="M8 3v4M16 3v4M4 10h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
-              </span>
-              <select id="suBirthY" aria-label="년">
-                <option value="">년</option>
-                <option>2006</option><option>2005</option><option>2004</option><option>2003</option><option>2002</option><option>2001</option><option>2000</option><option>1999</option><option>1998</option><option>1997</option><option>1996</option><option>1995</option><option>1994</option><option>1993</option><option>1992</option><option>1991</option><option>1990</option>
-              </select>
-            </label>
-            <label class="su-field md si-select-field">
-              <select id="suBirthM" aria-label="월"><option value="">월</option><option>01</option><option>02</option><option>03</option><option>04</option><option>05</option><option>06</option><option>07</option><option>08</option><option>09</option><option>10</option><option>11</option><option>12</option></select>
-            </label>
-            <label class="su-field md si-select-field">
-              <select id="suBirthD" aria-label="일"><option value="">일</option><option>01</option><option>02</option><option>03</option><option>04</option><option>05</option><option>06</option><option>07</option><option>08</option><option>09</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option></select>
-            </label>
-          </div>
-        </div>
-        <!-- 이메일 -->
-        <div>
-          <p class="su-label">이메일</p>
-          <div class="su-email-row">
-            <label class="su-field">
-              <span class="si-field-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"></rect><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path></svg>
-              </span>
-              <input type="text" placeholder="이메일 입력">
-            </label>
-            <span class="su-email-at">@</span>
-            <label class="su-domain-field si-select-field">
-              <select>
-                <option value="">선택</option>
-                <option value="gmail.com">gmail.com</option>
-                <option value="naver.com">naver.com</option>
-                <option value="kakao.com">kakao.com</option>
-                <option value="daum.net">daum.net</option>
-                <option value="nate.com">nate.com</option>
-                <option value="direct">직접입력</option>
-              </select>
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <!-- 구분선 -->
-      <div class="terms-divider"></div>
-
-      <!-- 블록 3: 휴대폰 인증 -->
-      <div class="su-block">
-        <p class="su-label">휴대폰 번호</p>
+      <!-- 아이디 -->
+      <div class="su-field-group">
+        <p class="su-label">아이디</p>
         <div class="su-row">
-          <label class="su-field">
-            <span class="si-field-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-            </span>
-            <input id="suPhone" type="tel" placeholder="010-0000-0000">
+          <label class="su-field" style="flex:1;">
+            <input id="suId" type="text" placeholder="아이디를 입력해 주세요" oninput="toggleBtnColor('suCheckBtn', this.value);checkSuComplete()">
           </label>
-          <button class="su-action-btn" id="suSendBtn" onclick="suSendOtp()">인증요청</button>
+          <button class="su-action-btn" id="suCheckBtn" style="background:#98a2b3;" onclick="suCheckId()">중복확인</button>
         </div>
-        <div class="su-row" id="suOtpRow" style="margin-top:10px;display:none">
-          <label class="su-field">
-            <span class="si-field-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
-            </span>
-            <input id="suOtp" type="text" inputmode="numeric" maxlength="6" placeholder="인증번호 입력">
+      </div>
+
+      <!-- 비밀번호 -->
+      <div class="su-field-group">
+        <p class="su-label">
+          비밀번호
+          <span class="su-label-hint">영문과 숫자를 포함한 8자 이상으로 만들어 주세요.</span>
+        </p>
+        <label class="su-field">
+          <input id="signupPw" type="password" placeholder="비밀번호" oninput="siToggleClear(this);checkSuComplete()">
+          <button class="si-clear" type="button" onclick="siClear('signupPw',this)" aria-label="지우기"><svg viewBox="0 0 10 10" fill="none"><path d="M2 2l6 6M8 2l-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></button>
+          <button class="si-eye" type="button" onclick="togglePw('signupPw',this)" aria-label="비밀번호 보기">
+            <svg class="si-eye-off" viewBox="0 0 24 24" fill="none"><path d="M3 3l18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M10.6 10.6A2 2 0 0 0 13.4 13.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M7.5 7.7C5.5 8.9 4 10.8 3 12c2.4 3.1 5.4 5 9 5 1.4 0 2.7-.3 3.9-.9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10 5.2c.6-.1 1.3-.2 2-.2 3.6 0 6.6 1.9 9 5-.5.7-1.2 1.5-2 2.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <svg class="si-eye-on" viewBox="0 0 24 24" fill="none"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"></circle></svg>
+          </button>
+        </label>
+        <label class="su-field">
+          <input id="signupPwConfirm" type="password" placeholder="비밀번호 확인" oninput="siToggleClear(this);checkSuComplete()">
+          <button class="si-clear" type="button" onclick="siClear('signupPwConfirm',this)" aria-label="지우기"><svg viewBox="0 0 10 10" fill="none"><path d="M2 2l6 6M8 2l-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></button>
+          <button class="si-eye" type="button" onclick="togglePw('signupPwConfirm',this)" aria-label="비밀번호 보기">
+            <svg class="si-eye-off" viewBox="0 0 24 24" fill="none"><path d="M3 3l18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M10.6 10.6A2 2 0 0 0 13.4 13.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M7.5 7.7C5.5 8.9 4 10.8 3 12c2.4 3.1 5.4 5 9 5 1.4 0 2.7-.3 3.9-.9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10 5.2c.6-.1 1.3-.2 2-.2 3.6 0 6.6 1.9 9 5-.5.7-1.2 1.5-2 2.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <svg class="si-eye-on" viewBox="0 0 24 24" fill="none"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"></circle></svg>
+          </button>
+        </label>
+      </div>
+
+      <!-- 구분선 -->
+      <div class="terms-divider"></div>
+
+      <!-- 이름 -->
+      <div class="su-field-group">
+        <p class="su-label">이름</p>
+        <label class="su-field">
+          <input id="suName" type="text" placeholder="이름" oninput="checkSuComplete()">
+        </label>
+      </div>
+
+      <!-- 생년월일 -->
+      <div class="su-field-group">
+        <p class="su-label">생년월일</p>
+        <div class="su-bdate-row">
+          <label class="su-field yr">
+            <input id="suBirthY" type="text" inputmode="numeric" maxlength="4" placeholder="년" aria-label="년" oninput="checkSuComplete()">
           </label>
-          <button class="su-action-btn" id="suVerifyBtn" onclick="suVerifyOtp()">확인</button>
+          <label class="su-field md">
+            <input id="suBirthM" type="text" inputmode="numeric" maxlength="2" placeholder="월" aria-label="월" oninput="checkSuComplete()">
+          </label>
+          <label class="su-field md">
+            <input id="suBirthD" type="text" inputmode="numeric" maxlength="2" placeholder="일" aria-label="일" oninput="checkSuComplete()">
+          </label>
         </div>
-        <div class="su-timer-row" id="suTimerRow" style="display:none">
-          <span class="su-timer" id="suTimer">55초</span>
+      </div>
+
+      <!-- 이메일 -->
+      <div class="su-field-group">
+        <p class="su-label">이메일</p>
+        <div class="su-email-row">
+          <label class="su-field">
+            <input id="suEmail" type="text" placeholder="이메일" oninput="checkSuComplete()">
+          </label>
+          <span class="su-email-at">@</span>
+          <label class="su-domain-field si-select-field">
+            <select id="suEmailDomain" onchange="checkSuComplete()">
+              <option value="">선택</option>
+              <option value="gmail.com">gmail.com</option>
+              <option value="naver.com">naver.com</option>
+              <option value="kakao.com">kakao.com</option>
+              <option value="daum.net">daum.net</option>
+              <option value="nate.com">nate.com</option>
+              <option value="direct">직접입력</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <!-- 구분선 -->
+      <div class="terms-divider"></div>
+
+      <!-- 휴대폰번호 -->
+      <div class="su-field-group">
+        <p class="su-label">휴대폰번호</p>
+        <div class="su-row">
+          <label class="su-field" style="flex:1;">
+            <input id="suPhone" type="tel" placeholder="010-0000-0000" oninput="checkSuComplete()">
+          </label>
+          <button class="su-action-btn" id="suSendBtn" style="background:#98a2b3;" onclick="suSendOtp()">인증요청</button>
+        </div>
+        <div class="su-row" id="suOtpRow" style="display:none;">
+          <label class="su-field" style="flex:1;">
+            <input id="suOtp" type="text" inputmode="numeric" maxlength="6" placeholder="인증번호 입력" oninput="toggleBtnColor('suVerifyBtn', this.value);checkSuComplete()">
+          </label>
+          <button class="su-action-btn" id="suVerifyBtn" style="background:#98a2b3;" onclick="suVerifyOtp()">확인</button>
+        </div>
+        <div class="su-timer-row" id="suTimerRow" style="display:none;">
+          <span class="su-timer" id="suTimer">3분 59초</span>
           <button class="su-resend" onclick="suSendOtp()">인증번호 재발송</button>
         </div>
       </div>
@@ -983,16 +1007,32 @@
     </div><!-- /.su-content -->
 
     <!-- 하단 고정 버튼 -->
-    <button class="terms-next-btn" onclick="suComplete()">완료</button>
-    <div class="si-safe-note">
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-2.8 8.4-7 10-4.2-1.6-7-5.6-7-10V6l7-3z" fill="currentColor"></path><path d="M9.5 12l1.8 1.8 3.8-4.2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      입력하신 정보는 안전하게 보호됩니다.
+    <div style="padding:32px 24px;background:#ffffff;">
+      <button class="terms-next-btn" id="suCompleteBtn" style="background:#98a2b3;cursor:not-allowed;" onclick="suComplete()">완료</button>
     </div>
 
   </div><!-- /.terms-wrap -->
+</div><!-- ==================== MORE CONNECT ==================== -->
+<!-- ==================== EXPIRE SOON (이번 주 만료 예정 쿠폰 전체보기) ==================== -->
+<div class="screen" id="s-expire-soon" style="display:none;">
+  <div class="xp-wrap">
+
+    <!-- 상단 헤더 (72px) -->
+        <div class="xp-header">
+      <button class="xp-back" onclick="go('home')" aria-label="Back">
+        <svg viewBox="0 0 24 24" fill="none" width="24" height="24"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <span class="xp-title">&#51060;&#48264; &#51452; &#47564;&#47308; &#50696;&#51221; &#53216;&#54256;</span>
+      <div class="xp-header-spacer"></div>
+    </div>
+
+    <!-- 스크롤 콘텐츠 -->
+    <div class="xp-content" style="padding:0;">
+      <object class="xp-expire-svg" type="image/svg+xml" data="assets/coupons/expire-soon.svg" aria-label="Expire soon coupon list"></object>
+    </div><!-- /.xp-content -->
+  </div><!-- /.xp-wrap -->
 </div>
 
-<!-- ==================== MORE CONNECT ==================== -->
 <div class="screen" id="s-more-connect" style="display: none;">
   <div class="ob-page">
     <div class="ob-card wide" style="text-align:center">
@@ -1073,6 +1113,8 @@
 </div>
 
 <!-- ==================== SVC CONNECT (Figma 556:3690 — 서비스 연동 안내) ==================== -->
+
+<!-- ==================== SVC INTRO (Figma 556:3697 — 자동 연동 로딩) ==================== -->
 <div class="screen" id="s-svc-connect" style="display: none;">
   <div class="terms-wrap">
     <!-- 백버튼 -->
@@ -1082,57 +1124,20 @@
       </svg>
     </button>
     <!-- 본문 -->
-    <div class="ci-body">
-      <!-- 일러스트: 블루 링 + 블루 원 (78px) -->
-      <div class="ci-illust">
-        <svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="39" cy="39" r="36" stroke="var(--color-blue-300)" stroke-width="5" fill="none"/>
-          <circle cx="39" cy="39" r="27" fill="var(--primary)"/>
-          <circle cx="63" cy="57" r="8" fill="var(--color-blue-700)" stroke="white" stroke-width="2"/>
-          <path d="M59.8 57l2.2 2.2 3.5-3.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
+    <div class="ci-body" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:16px 8px;">
       <!-- 타이틀 -->
-      <h1 class="ci-title">
-        <span class="ci-title-highlight">서비스 연동</span>을 통해<br>내 쿠폰 정보를 불러와 주세요.
+      <h1 style="font-family:var(--font);font-size:28px;font-weight:800;color:#071b44;text-align:center;letter-spacing:0.03em;line-height:1.3;margin:0;">
+        <span style="color:#126dfb;">서비스 연동</span>을 통해<br>내 혜택 정보를 불러와 주세요.
       </h1>
+      <!-- 일러스트 -->
+      <div style="width:100%;display:flex;justify-content:center;">
+        <img src="https://www.figma.com/api/mcp/asset/9a1c4aeb-90e4-4a47-a61c-4e9ea9e9da20" alt="서비스 연동 일러스트" style="width:220px;height:auto;object-fit:contain;">
+      </div>
     </div>
     <!-- 하단 버튼 -->
     <div class="ci-footer">
-      <button class="ci-btn-outline" onclick="go('coupon-home')">다음에 하기</button>
-      <button class="ci-btn-fill" onclick="go('svc-intro')">연동하고 시작하기</button>
-    </div>
-  </div>
-</div>
-
-<!-- ==================== SVC INTRO (Figma 556:3697 — 자동 연동 로딩) ==================== -->
-<div class="screen" id="s-svc-intro" style="display: none;">
-  <div class="terms-wrap">
-    <!-- 백버튼 -->
-    <button class="ci-back" onclick="go('svc-connect')" aria-label="뒤로가기">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-    <!-- 본문 -->
-    <div class="ci-body">
-      <!-- 일러스트: 블루 링 + 블루 원 (78px) -->
-      <div class="ci-illust">
-        <svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="39" cy="39" r="36" stroke="var(--color-blue-300)" stroke-width="5" fill="none"/>
-          <circle cx="39" cy="39" r="27" fill="var(--primary)"/>
-          <circle cx="63" cy="57" r="8" fill="var(--color-blue-700)" stroke="white" stroke-width="2"/>
-          <path d="M59.8 57l2.2 2.2 3.5-3.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <!-- 타이틀 -->
-      <h1 class="ci-title">
-        <span class="ci-title-highlight">숨어 있는 쿠폰과 포인트</span>를<br>찾는 중이에요.
-      </h1>
-    </div>
-    <!-- 하단 로딩 버튼 (탭하면 다음 단계로) -->
-    <div class="ci-footer">
-      <button class="ci-btn-loading" disabled>자동 연동 중</button>
+      <button class="ci-btn-outline" onclick="go('home');setTimeout(showNotiSetupPopup,300);">다음에 하기</button>
+      <button class="ci-btn-fill" onclick="go('svc-loading2')">연동하고 시작하기</button>
     </div>
   </div>
 </div>
@@ -1140,42 +1145,50 @@
 <!-- ==================== SVC LOADING 2 (Figma 556:3703 — 연동 로딩 스텝) ==================== -->
 <div class="screen" id="s-svc-loading2" style="display: none;">
   <div class="terms-wrap">
-    <!-- 백버튼 -->
-    <button class="ci-back" onclick="go('svc-intro')" aria-label="뒤로가기">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-    <!-- 본문: 타이틀 + 스텝퍼 -->
-    <div style="display:flex;flex-direction:column;align-items:center;padding:32px 8px;gap:32px;flex:1;justify-content:flex-start;padding-top:68px;">
+    <!-- 본문: 타이틀 + 스텝퍼 + 혜택 요약 -->
+    <div style="display:flex;flex-direction:column;align-items:center;padding:32px 8px;padding-top:92px;gap:32px;flex:1;overflow-y:auto;">
       <!-- 타이틀 -->
-      <h1 class="ci-title" style="text-align:center;width:100%;">
-        <span class="ci-title-highlight">숨어 있는 쿠폰과 포인트</span>를<br>찾는 중이에요.
+      <h1 style="font-family:var(--font);font-size:28px;font-weight:800;color:#071b44;text-align:center;letter-spacing:0.03em;line-height:1.3;margin:0;width:100%;">
+        숨어 있는 쿠폰과 포인트를<br>찾는 중이에요.
       </h1>
-      <!-- 스텝퍼 -->
-      <div class="ci-stepper" style="width:100%;max-width:340px;">
-        <!-- Step 1: 쿠폰 집계 (완료) -->
+      <!-- 스텝퍼: 3단계 모두 파란색 -->
+      <div class="ci-stepper" style="width:100%;max-width:360px;">
         <div class="ci-step">
           <div class="ci-step-circle">1</div>
           <span class="ci-step-label">쿠폰 집계</span>
         </div>
         <div class="ci-step-line"></div>
-        <!-- Step 2: 포인트 집계 (진행 중) -->
         <div class="ci-step">
           <div class="ci-step-circle loading">2</div>
           <span class="ci-step-label">포인트 집계</span>
         </div>
         <div class="ci-step-line"></div>
-        <!-- Step 3: 완료 (대기) -->
         <div class="ci-step">
-          <div class="ci-step-circle inactive">3</div>
-          <span class="ci-step-label inactive">완료</span>
+          <div class="ci-step-circle loading">3</div>
+          <span class="ci-step-label">완료</span>
         </div>
       </div>
-    </div>
-    <!-- 하단 로딩 버튼 -->
-    <div class="ci-footer">
-      <button class="ci-btn-loading" disabled>자동 연동 중</button>
+      <!-- 혜택 요약 (카드 없이 plain) -->
+      <div style="width:100%;display:flex;flex-direction:column;gap:16px;padding:16px;box-sizing:border-box;">
+        <p style="font-family:var(--font);font-size:20px;font-weight:700;color:#000;margin:0;">혜택 요약 정보</p>
+        <hr style="border:none;border-top:1px solid #dce3ec;margin:0;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-family:var(--font);font-size:16px;font-weight:500;color:#071b44;">총 쿠폰 수량</span>
+          <span style="font-family:var(--font);font-size:16px;font-weight:500;color:#071b44;">56개</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-family:var(--font);font-size:16px;font-weight:500;color:#071b44;">총 포인트 수량</span>
+          <span style="font-family:var(--font);font-size:16px;font-weight:500;color:#071b44;">25,900p</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-family:var(--font);font-size:16px;font-weight:500;color:#f44336;">만료 임박 쿠폰</span>
+          <span class="svc-spinner"></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-family:var(--font);font-size:16px;font-weight:500;color:#f44336;">만료 임박 포인트</span>
+          <span class="svc-spinner"></span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1191,8 +1204,8 @@
     </button>
     <!-- 본문 -->
     <div style="display:flex;flex-direction:column;align-items:center;padding:32px 8px;gap:32px;flex:1;padding-top:92px;">
-      <!-- 타이틀: 전체 파란색 -->
-      <h1 style="font-family:var(--font);font-size:var(--font-size-headline-lg);font-weight:var(--font-weight-extra-bold);color:var(--primary);text-align:center;letter-spacing:0.03em;line-height:1.3;margin:0;">
+      <!-- 타이틀 -->
+      <h1 style="font-family:var(--font);font-size:28px;font-weight:800;color:#071b44;text-align:center;letter-spacing:0.03em;line-height:1.3;margin:0;">
         서비스 연동이<br>완료되었습니다!
       </h1>
       <!-- 스텝퍼 (전체 완료: 모두 active) -->
@@ -1240,6 +1253,298 @@
     </div>
   </div>
 </div>
+
+<!-- ==================== 알림 팝업 + 4단계 위자드 (알림팝업.html) ==================== -->
+  <!-- ── 알림 팝업 오버레이 ── -->
+  <div id="notiPopup" style="display:none">
+    <div class="popup-card">
+      <div class="popup-close-row">
+        <button class="popup-close-btn" onclick="closePopup()">✕</button>
+      </div>
+      <div class="popup-body">
+        <div class="popup-title">원하는 할인율에 알맞은<br>혜택을 제공해 드려요!</div>
+        <div class="popup-bell">
+          <img src="알림팝업 로고.svg" alt="알림">
+        </div>
+        <div class="popup-desc">알림 설정을 하고<br>원하는 혜택 알림을 받아보세요</div>
+      </div>
+      <div class="popup-btns">
+        <button class="popup-btn-secondary" onclick="closePopup()">지금 안할래요</button>
+        <button class="popup-btn-primary" onclick="openWizard()">알림 설정하기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 4단계 위자드 ── -->
+  <div id="notiWizard">
+    <div id="wizSteps">
+
+      <!-- STEP 1: 카테고리 -->
+      <div class="wiz-step on" id="wiz-step1">
+        <div class="wiz-fixed-head">
+        <div class="wiz-count">1/4</div>
+        <div class="wiz-bar"><div class="wiz-bar-fill" style="width:25%"></div></div>
+        <div class="wiz-title">원하는 카테고리를<br>선택해 주세요.</div>
+        <div style="display:flex;justify-content:flex-end;margin-bottom:12px;">
+          <button class="wiz-sel-all-btn" onclick="catSelectAll(this)">전체선택</button>
+        </div>
+        </div>
+        <div class="wiz-scroll-body">
+        <div class="wiz-cat-grid">
+          <div class="wiz-cat sel" onclick="toggleCat(this)">
+            <div class="wiz-cat-circle" style="background:#e8f0ff;">
+              <svg viewBox="0 0 40 40" fill="none" style="width:28px;height:28px;"><path d="M8 18h24l-2 12H10L8 18z" fill="#4a90e2"/><path d="M15 18v-4a5 5 0 0 1 10 0v4" stroke="#4a90e2" stroke-width="2.5" stroke-linecap="round"/><circle cx="28" cy="14" r="5" fill="#2ecc71"/><path d="M25 14h6M28 11v6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <span class="wiz-cat-label">마트</span>
+          </div>
+          <div class="wiz-cat" onclick="toggleCat(this)">
+            <div class="wiz-cat-circle" style="background:#f5f5f5;">
+              <svg viewBox="0 0 40 40" fill="none" style="width:28px;height:28px;"><rect x="8" y="16" width="24" height="16" rx="2" fill="#aab"/><path d="M8 20h24" stroke="white" stroke-width="1.5"/><rect x="14" y="24" width="6" height="8" rx="1" fill="white"/></svg>
+            </div>
+            <span class="wiz-cat-label">편의점</span>
+          </div>
+          <div class="wiz-cat" onclick="toggleCat(this)">
+            <div class="wiz-cat-circle" style="background:#fff3e0;">
+              <svg viewBox="0 0 40 40" fill="none" style="width:28px;height:28px;"><path d="M11 14h14v10a7 7 0 0 1-14 0V14z" fill="#e8a87c"/><path d="M25 18h2a4 4 0 0 1 0 8h-2" stroke="#c8845a" stroke-width="2.5"/></svg>
+            </div>
+            <span class="wiz-cat-label">카페</span>
+          </div>
+          <div class="wiz-cat" onclick="toggleCat(this)">
+            <div class="wiz-cat-circle" style="background:#f5f5f5;">
+              <svg viewBox="0 0 40 40" fill="none" style="width:28px;height:28px;"><rect x="4" y="18" width="22" height="12" rx="2" fill="#888"/><path d="M26 22h6l4 6H26V22z" fill="#999"/><circle cx="10" cy="32" r="3" fill="#555"/><circle cx="28" cy="32" r="3" fill="#555"/></svg>
+            </div>
+            <span class="wiz-cat-label">배달</span>
+          </div>
+          <div class="wiz-cat sel" onclick="toggleCat(this)">
+            <div class="wiz-cat-circle" style="background:#e8f0ff;">
+              <svg viewBox="0 0 40 40" fill="none" style="width:28px;height:28px;"><rect x="10" y="10" width="8" height="20" rx="4" fill="#4a90e2"/><rect x="22" y="10" width="8" height="20" rx="4" fill="#4a90e2"/><rect x="16" y="24" width="8" height="6" rx="1" fill="#4a90e2"/></svg>
+            </div>
+            <span class="wiz-cat-label">푸드</span>
+          </div>
+          <div class="wiz-cat sel" onclick="toggleCat(this)">
+            <div class="wiz-cat-circle" style="background:#e8f0ff;">
+              <svg viewBox="0 0 40 40" fill="none" style="width:28px;height:28px;"><path d="M14 10h12l4 6-4 2v12H14V18l-4-2 4-6z" fill="#4a90e2"/><circle cx="20" cy="12" r="3" fill="white"/></svg>
+            </div>
+            <span class="wiz-cat-label">패션</span>
+          </div>
+          <div class="wiz-cat sel" onclick="toggleCat(this)">
+            <div class="wiz-cat-circle" style="background:#fce4ec;">
+              <svg viewBox="0 0 40 40" fill="none" style="width:28px;height:28px;"><rect x="14" y="10" width="12" height="20" rx="4" fill="#e57399"/><path d="M20 10v-4" stroke="#e57399" stroke-width="2.5" stroke-linecap="round"/><circle cx="30" cy="11" r="2" fill="#ffe066"/></svg>
+            </div>
+            <span class="wiz-cat-label">뷰티</span>
+          </div>
+          <div class="wiz-cat" onclick="toggleCat(this)">
+            <div class="wiz-cat-circle" style="background:#f5f5f5;">
+              <svg viewBox="0 0 40 40" fill="none" style="width:28px;height:28px;"><rect x="6" y="12" width="28" height="18" rx="3" fill="#bbb"/><rect x="8" y="14" width="24" height="14" rx="2" fill="#ddd"/><circle cx="20" cy="21" r="4" fill="#aaa"/></svg>
+            </div>
+            <span class="wiz-cat-label">문화</span>
+          </div>
+          <div class="wiz-cat" onclick="toggleCat(this)">
+            <div class="wiz-cat-circle" style="background:#f5f5f5;">
+              <svg viewBox="0 0 40 40" fill="none" style="width:28px;height:28px;"><path d="M8 24L20 10l12 6-10 6 4 8-8-2Z" fill="#aab"/></svg>
+            </div>
+            <span class="wiz-cat-label">여행</span>
+          </div>
+        </div>
+        </div>
+        <div class="wiz-actions">
+          <button class="wiz-prev-btn" onclick="closeWizard()">취소</button>
+          <button class="wiz-next-btn" onclick="wizGo(2)">다음</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: 브랜드 -->
+      <div class="wiz-step" id="wiz-step2">
+        <div class="wiz-fixed-head">
+        <div class="wiz-count">2/4</div>
+        <div class="wiz-bar"><div class="wiz-bar-fill" style="width:50%"></div></div>
+        <div class="wiz-title">원하는 브랜드를<br>선택해 주세요.</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+          <div style="flex:1;border:1px solid #dce3ec;border-radius:24px;display:flex;align-items:center;padding:10px 16px;gap:8px;">
+            <svg viewBox="0 0 24 24" fill="none" style="width:18px;height:18px;flex-shrink:0;"><circle cx="11" cy="11" r="7" stroke="#98a2b3" stroke-width="2"/><path d="m20 20-3.8-3.8" stroke="#98a2b3" stroke-width="2" stroke-linecap="round"/></svg>
+            <input type="text" placeholder="브랜드를 입력해 주세요" style="border:none;outline:none;font-size:.9rem;color:#1d2939;background:transparent;width:100%;font-family:'SUIT',sans-serif;">
+          </div>
+          <button class="wiz-sel-all-btn">전체선택</button>
+        </div>
+        </div>
+        <div class="wiz-scroll-body">
+        <!-- 인기 -->
+        <div style="margin-bottom:16px;">
+          <p style="font-size:.85rem;font-weight:700;color:#000;margin:0 0 10px;">요즘 많이 찾아보는 브랜드에요 :)</p>
+          <div class="wiz-featured-scroll">
+            <div class="wiz-brand wiz-brand-featured" onclick="toggleBrand(this)">
+              <div class="wiz-brand-card"><div class="wiz-brand-logo"><img src="BHC logo.svg" alt="BHC" onerror="this.style.display='none';this.parentNode.innerHTML='<b style=font-size:11px>BHC</b>'"></div></div>
+              <span class="wiz-brand-name">BHC</span>
+            </div>
+            <div class="wiz-brand wiz-brand-featured" onclick="toggleBrand(this)">
+              <div class="wiz-brand-card"><div class="wiz-brand-logo"><span style="font-size:9px;font-weight:700;color:#2d8a4e">올리브영</span></div></div>
+              <span class="wiz-brand-name">올리브영</span>
+            </div>
+            <div class="wiz-brand wiz-brand-featured" onclick="toggleBrand(this)">
+              <div class="wiz-brand-card"><div class="wiz-brand-logo"><img src="UNIQLO.svg" alt="유니클로" onerror="this.style.display='none';this.parentNode.innerHTML='<b style=color:#e40521>UNIQLO</b>'"></div></div>
+              <span class="wiz-brand-name">유니클로</span>
+            </div>
+          </div>
+        </div>
+        <!-- 마트 -->
+        <div style="margin-bottom:16px;">
+          <hr style="border:none;border-top:1px solid #dce3ec;margin:0 0 10px;">
+          <p style="font-size:.85rem;font-weight:700;color:#071b44;margin:0 0 10px;">마트</p>
+          <div class="wiz-brand-scroll">
+            <div class="wiz-brand" onclick="toggleBrand(this)">
+              <div class="wiz-brand-card"><div class="wiz-brand-logo"><img src="신세계.svg" alt="이마트" onerror="this.style.display='none';this.parentNode.innerHTML='<b style=color:#e31837>emart</b>'"></div></div>
+              <span class="wiz-brand-name">이마트</span>
+            </div>
+            <div class="wiz-brand" onclick="toggleBrand(this)">
+              <div class="wiz-brand-card"><div class="wiz-brand-logo"><span style="font-size:9px;font-weight:700">홈플러스</span></div></div>
+              <span class="wiz-brand-name">홈플러스</span>
+            </div>
+          </div>
+        </div>
+        <!-- 푸드 -->
+        <div style="margin-bottom:16px;">
+          <hr style="border:none;border-top:1px solid #dce3ec;margin:0 0 10px;">
+          <p style="font-size:.85rem;font-weight:700;color:#071b44;margin:0 0 10px;">푸드</p>
+          <div class="wiz-brand-scroll">
+            <div class="wiz-brand" onclick="toggleBrand(this)">
+              <div class="wiz-brand-card"><div class="wiz-brand-logo"><img src="도미노피자 logo.svg" alt="도미노피자" onerror="this.style.display='none';this.parentNode.innerHTML='🍕'"></div></div>
+              <span class="wiz-brand-name">도미노피자</span>
+            </div>
+            <div class="wiz-brand" onclick="toggleBrand(this)">
+              <div class="wiz-brand-card"><div class="wiz-brand-logo" style="background:#e50012;"><img src="BBQ logo.svg" alt="BBQ" onerror="this.style.display='none';this.parentNode.innerHTML='<b style=color:white>BBQ</b>'"></div></div>
+              <span class="wiz-brand-name">BBQ</span>
+            </div>
+            <div class="wiz-brand" onclick="toggleBrand(this)">
+              <div class="wiz-brand-card"><div class="wiz-brand-logo"><img src="BHC logo.svg" alt="BHC" onerror="this.style.display='none';this.parentNode.innerHTML='<b>BHC</b>'"></div></div>
+              <span class="wiz-brand-name">BHC</span>
+            </div>
+          </div>
+        </div>
+        <!-- 패션 -->
+        <div style="margin-bottom:16px;">
+          <hr style="border:none;border-top:1px solid #dce3ec;margin:0 0 10px;">
+          <p style="font-size:.85rem;font-weight:700;color:#071b44;margin:0 0 10px;">패션</p>
+          <div class="wiz-brand-scroll">
+            <div class="wiz-brand" onclick="toggleBrand(this)">
+              <div class="wiz-brand-card"><div class="wiz-brand-logo"><img src="무신사.svg" alt="무신사" onerror="this.style.display='none';this.parentNode.innerHTML='<b>무신사</b>'"></div></div>
+              <span class="wiz-brand-name">무신사</span>
+            </div>
+            <div class="wiz-brand" onclick="toggleBrand(this)">
+              <div class="wiz-brand-card"><div class="wiz-brand-logo" style="background:#ed1d24;"><img src="UNIQLO.svg" alt="유니클로" onerror="this.style.display='none';this.parentNode.innerHTML='<b style=color:white>UNIQLO</b>'"></div></div>
+              <span class="wiz-brand-name">유니클로</span>
+            </div>
+            <div class="wiz-brand" onclick="toggleBrand(this)">
+              <div class="wiz-brand-card"><div class="wiz-brand-logo"><img src="Zara.svg" alt="자라" onerror="this.style.display='none';this.parentNode.innerHTML='<b>ZARA</b>'"></div></div>
+              <span class="wiz-brand-name">자라</span>
+            </div>
+          </div>
+        </div>
+        <!-- 뷰티 -->
+        <div style="margin-bottom:16px;">
+          <hr style="border:none;border-top:1px solid #dce3ec;margin:0 0 10px;">
+          <p style="font-size:.85rem;font-weight:700;color:#071b44;margin:0 0 10px;">뷰티</p>
+          <div class="wiz-brand-scroll">
+            <div class="wiz-brand" onclick="toggleBrand(this)">
+              <div class="wiz-brand-card"><div class="wiz-brand-logo"><span style="font-size:9px;font-weight:700;color:#2d8a4e">올리브영</span></div></div>
+              <span class="wiz-brand-name">올리브영</span>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="wiz-actions">
+          <button class="wiz-prev-btn" onclick="wizGo(1)">이전</button>
+          <button class="wiz-next-btn" onclick="wizGo(3)">다음</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: 할인율 -->
+      <div class="wiz-step" id="wiz-step3">
+        <div class="wiz-count">3/4</div>
+        <div class="wiz-bar"><div class="wiz-bar-fill" style="width:75%"></div></div>
+        <div class="wiz-title">알림 받기 원하는<br>할인율 설정해 주세요.</div>
+        <div class="wiz-slider-wrap">
+          <div class="wiz-slider-display">
+            <span class="wiz-slider-val" id="sliderVal">70</span>
+            <span class="wiz-slider-pct">%</span>
+          </div>
+          <p class="wiz-slider-caption">이상 혜택부터 알림을 받을래요!</p>
+          <input type="range" min="0" max="100" step="10" value="70" style="height:500px;"
+            oninput="document.getElementById('sliderVal').textContent=this.value">
+        </div>
+        <div class="wiz-actions">
+          <button class="wiz-prev-btn" onclick="wizGo(2)">이전</button>
+          <button class="wiz-next-btn" onclick="wizGo(4)">다음</button>
+        </div>
+      </div>
+
+      <!-- STEP 4: 알림 채널 -->
+      <div class="wiz-step" id="wiz-step4">
+        <!-- 헤더: 4/4 + 진행바 -->
+        <div style="display:flex;flex-direction:column;gap:4px;padding:32px 0 16px;">
+          <p style="font-family:var(--font);font-size:16px;font-weight:500;color:#1041a7;margin:0;">4/4</p>
+          <div class="wiz-bar"><div class="wiz-bar-fill" style="width:100%"></div></div>
+        </div>
+        <!-- 타이틀 -->
+        <div style="padding:0 0 8px;font-family:var(--font);font-size:32px;font-weight:700;color:#071b44;line-height:1.2;">
+          원하는 알림 설정을<br>선택해 주세요.
+        </div>
+        <!-- 알림 항목 리스트 -->
+        <div style="display:flex;flex-direction:column;padding:8px 0;">
+          <!-- 구분선 -->
+          <div style="height:1px;background:#c2d9ff;margin:0;"></div>
+          <!-- 카카오톡 -->
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:27px 20px;gap:10px;position:relative;">
+            <div style="display:flex;align-items:center;gap:16px;">
+              <div style="width:70px;height:70px;border-radius:50%;background:#fbe300;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;">
+                <svg width="40" height="40" viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="22" rx="18" ry="15" fill="#3A1D00"/><path d="M24 8C14.06 8 6 14.27 6 22c0 4.86 2.88 9.13 7.27 11.77L12 36l4.8-2.53c.71.1 1.44.15 2.2.15 0 0-.01 0 0 0 9.94 0 18-6.27 18-14S33.94 8 24 8z" fill="#FBE300"/><path d="M24 10C14.95 10 7.6 15.59 7.6 22.4c0 4.34 2.8 8.14 7.06 10.44L13.5 36l4.36-2.3c.69.09 1.4.14 2.14.14 9.05 0 16.4-5.59 16.4-12.4S33.05 10 24 10z" fill="#FBE300"/><path d="M17 22c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm7 0c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm7 0c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2z" fill="#3A1D00"/></svg>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:4px;">
+                <span style="font-family:var(--font);font-size:24px;font-weight:800;color:#071b44;letter-spacing:0.03em;">카카오톡</span>
+                <span style="font-family:var(--font);font-size:16px;font-weight:500;color:#98a2b3;">카카오톡을 통해 알림을 받아요</span>
+              </div>
+            </div>
+            <label class="wiz-toggle"><input type="checkbox" checked><span class="wiz-toggle-track"><span class="wiz-toggle-thumb"></span></span></label>
+          </div>
+          <div style="height:1px;background:#c2d9ff;margin:0;"></div>
+          <!-- 문자 SNS -->
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:27px 20px;gap:10px;position:relative;">
+            <div style="display:flex;align-items:center;gap:16px;">
+              <div style="width:70px;height:70px;border-radius:50%;background:#e7f0ff;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;">
+                <svg width="44" height="44" viewBox="0 0 48 48" fill="none"><rect x="4" y="10" width="40" height="30" rx="5" fill="#126dfb"/><rect x="4" y="10" width="40" height="30" rx="5" fill="#e7f0ff"/><rect x="6" y="12" width="36" height="26" rx="4" fill="#126dfb"/><path d="M10 22h18M10 28h12" stroke="white" stroke-width="2.5" stroke-linecap="round"/><rect x="28" y="20" width="12" height="12" rx="2" fill="#e7f0ff"/><path d="M30 24h8M30 28h5" stroke="#126dfb" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:4px;">
+                <span style="font-family:var(--font);font-size:24px;font-weight:800;color:#071b44;letter-spacing:0.03em;">문자 SNS</span>
+                <span style="font-family:var(--font);font-size:16px;font-weight:500;color:#98a2b3;">문자를 통해 알림을 받아요</span>
+              </div>
+            </div>
+            <label class="wiz-toggle"><input type="checkbox" checked><span class="wiz-toggle-track"><span class="wiz-toggle-thumb"></span></span></label>
+          </div>
+          <div style="height:1px;background:#c2d9ff;margin:0;"></div>
+          <!-- GPS 기반 -->
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:27px 20px;gap:10px;position:relative;">
+            <div style="display:flex;align-items:center;gap:16px;">
+              <div style="width:70px;height:70px;border-radius:50%;background:#e3f2fd;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;">
+                <svg width="44" height="44" viewBox="0 0 48 48" fill="none"><path d="M24 6C16.27 6 10 12.27 10 20c0 10.5 14 28 14 28s14-17.5 14-28c0-7.73-6.27-14-14-14z" fill="#126dfb"/><circle cx="24" cy="20" r="5" fill="white"/></svg>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:4px;">
+                <span style="font-family:var(--font);font-size:24px;font-weight:800;color:#071b44;letter-spacing:0.03em;">GPS 기반</span>
+                <span style="font-family:var(--font);font-size:16px;font-weight:500;color:#98a2b3;">위치 기반 알림을 받아요</span>
+              </div>
+            </div>
+            <label class="wiz-toggle"><input type="checkbox" checked><span class="wiz-toggle-track"><span class="wiz-toggle-thumb"></span></span></label>
+          </div>
+          <div style="height:1px;background:#c2d9ff;margin:0;"></div>
+        </div>
+        <!-- 안내 텍스트 -->
+        <p style="font-family:var(--font);font-size:16px;font-weight:600;color:#98a2b3;text-align:center;margin:16px 0;line-height:1.6;">설정한 내용은 언제든 변경할 수 있어요.<br>필요한 알림만 편리하게 받아보세요.</p>
+        <!-- 완료 버튼 -->
+        <div class="wiz-actions" style="margin-top:auto;">
+          <button class="wiz-next-btn" style="flex:1;" onclick="wizFinish()">완료</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
 <!-- ==================== COMPLETE INFO ==================== -->
 <div class="screen" id="s-complete-info" style="display: none;">
@@ -1607,29 +1912,35 @@
       <!-- ── HOME (리뉴얼) ── -->
       <div id="p-home" class="app-page fade-in" style="background:white; padding:0; min-height:100%; display:block; position:relative; overflow-y:auto;">
 
-        <!-- 그라디언트 배경 -->
+        <!-- 그라디언트 배경 (피그마 1180:8909) -->
         <div class="hm2-bg-gradient"></div>
 
-        <!-- 헤더 -->
-        <div class="hm2-header">
-          <div class="hm2-header-bar">
-            <span class="hm2-logo">USE</span>
-            <div class="hm2-bell-wrap">
-              <button class="hm2-bell-btn" aria-label="알림" onclick="showAppPage('noti-page');updateSidebar('noti-page');">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-              </button>
-              <span class="hm2-bell-badge">3</span>
+        <!-- 메인 플렉스 컬럼 -->
+        <div class="hm2-main">
+
+          <!-- ── 헤더 (USE 로고 + 알림 벨) ── -->
+          <div class="hm2-header-con">
+            <div class="hm2-header-bar">
+              <span class="hm2-logo">USE</span>
+              <div class="hm2-bell-wrap">
+                <button class="hm2-bell-btn" aria-label="알림" onclick="showAppPage('noti-page');updateSidebar('noti-page');">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                </button>
+                <span class="hm2-bell-badge">3</span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- 본문 -->
-        <div class="hm2-body">
-
-          <!-- 유저 요약 카드 (Figma 1011:2475) -->
+          <!-- ── 유저 카드 (피그마 1180:8919) ── -->
           <div class="hm2-user-card">
             <div class="hm2-user-top">
-              <div class="hm2-user-avatar" id="hmUserAvatar">김</div>
+              <div class="hm2-user-avatar" id="hmUserAvatar">
+                <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+                  <circle cx="38" cy="38" r="38" fill="#C2D9FF"/>
+                  <circle cx="38" cy="30" r="13" fill="#6FA6FF"/>
+                  <ellipse cx="38" cy="60" rx="20" ry="14" fill="#6FA6FF"/>
+                </svg>
+              </div>
               <div class="hm2-user-text">
                 <p class="hm2-greeting">안녕하세요 <span class="hm2-name">김미경</span>님</p>
                 <p class="hm2-subtitle">놓치기 쉬운 쿠폰을 한 번에 확인하세요</p>
@@ -1637,71 +1948,114 @@
             </div>
             <hr class="hm2-user-divider">
             <div class="hm2-user-stats">
-              <div class="hm2-stat">
+              <div class="hm2-stat" data-action="nav-benefits-points">
                 <span class="hm2-stat-label">보유 포인트</span>
-                <span class="hm2-stat-value" id="hmStatPoints">0 P</span>
+                <span class="hm2-stat-value" id="hmStatPoints">28,000 P</span>
               </div>
               <div class="hm2-stat-divider"></div>
               <div class="hm2-stat" data-action="nav-benefits-coupons">
                 <span class="hm2-stat-label">보유 쿠폰</span>
-                <span class="hm2-stat-value" id="hmStatCoupons">0장</span>
+                <span class="hm2-stat-value" id="hmStatCoupons">50 장</span>
               </div>
             </div>
           </div>
 
-          <!-- 검색바 -->
-          <div class="hm2-search-wrap">
-            <div class="hm2-search-bar" onclick="openHomeSearchSheet()">
-              <span class="hm2-search-placeholder">찾으시는 브랜드나 쿠폰을 입력하세요</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            </div>
-          </div>
+          <!-- ── 쿠폰 리스트 컨테이너 ── -->
+          <div class="hm2-cpn-con">
 
-          <!-- ── 이번 주 만료 예정 쿠폰 섹션 ── -->
-          <div class="hm2-section">
-            <div class="hm2-section-head">
-              <span class="hm2-section-title">이번 주 만료 예정 쿠폰</span>
-              <span class="hm2-section-more">전체보기</span>
+            <!-- 검색바 -->
+            <div class="hm2-search-wrap">
+              <div class="hm2-search-bar" onclick="openHomeSearchSheet()">
+                <span class="hm2-search-placeholder">찾으시는 브랜드나 쿠폰을 입력하세요</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#98A2B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              </div>
             </div>
-            <div class="hm2-carousel" id="hm2Carousel">
-              <!-- renderHomeCarousel()이 DOMContentLoaded 시 채움 -->
+
+            <!-- 이번 주 만료 예정 쿠폰 -->
+            <div class="hm2-section">
+              <div class="hm2-section-head">
+                <span class="hm2-section-title">이번 주 만료 예정 쿠폰</span>
+                <div class="hm2-section-more-wrap" onclick="go('expire-soon')" style="cursor:pointer;">
+                  <span class="hm2-section-more">전체보기</span>
+                  <svg width="5" height="10" viewBox="0 0 5 10" fill="none" style="transform:rotate(180deg)"><path d="M4.5 9L0.5 5L4.5 1" stroke="#475467" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+              <div class="hm2-carousel" id="hm2Carousel">
+                <!-- 이마트 -->
+                <div class="hm2-ticket" data-cat="offline" onclick="ACT['go-detail']&&ACT['go-detail']({target:this})" data-action="go-detail" data-id="emart">
+                  <object class="hm2-ticket-svg" type="image/svg+xml" data="assets/coupons/coupon-emart.svg" aria-label="Emart coupon"></object>
+                </div>
+                <!-- 배달의민족 -->
+                <div class="hm2-ticket" data-cat="online" onclick="ACT['go-detail']&&ACT['go-detail']({target:this})" data-action="go-detail" data-id="baemin">
+                  <object class="hm2-ticket-svg" type="image/svg+xml" data="assets/coupons/coupon-baemin.svg" aria-label="Baemin coupon"></object>
+                </div>
+                <!-- 스타벅스 -->
+                <div class="hm2-ticket" data-cat="both" onclick="ACT['go-detail']&&ACT['go-detail']({target:this})" data-action="go-detail" data-id="starbucks">
+                  <object class="hm2-ticket-svg" type="image/svg+xml" data="assets/coupons/coupon-starbucks.svg" aria-label="Starbucks coupon"></object>
+                </div>
+                <!-- 올리브영 -->
+                <div class="hm2-ticket" data-cat="both" onclick="ACT['go-detail']&&ACT['go-detail']({target:this})" data-action="go-detail" data-id="oliveyoung">
+                  <object class="hm2-ticket-svg" type="image/svg+xml" data="assets/coupons/coupon-oliveyoung.svg" aria-label="Olive Young coupon"></object>
+                </div>
+              </div>
+              <div class="hm2-dots" id="hm2Dots">
+                <span class="hm2-dot active"></span>
+                <span class="hm2-dot"></span>
+                <span class="hm2-dot"></span>
+                <span class="hm2-dot"></span>
+              </div>
             </div>
-            <!-- 페이지 인디케이터 -->
-            <div class="hm2-dots" id="hm2Dots">
-              <span class="hm2-dot active"></span>
-              <span class="hm2-dot"></span>
-              <span class="hm2-dot"></span>
-              <span class="hm2-dot"></span>
-            </div>
-          </div>
+
+          </div><!-- /hm2-cpn-con -->
 
           <!-- ── 내 쿠폰 섹션 ── -->
           <div class="hm2-mycpn-section">
-            <div class="hm2-section-head" style="padding-top:0">
+            <div class="hm2-mycpn-header">
               <span class="hm2-section-title">내 쿠폰 <span class="hm2-cpn-count">(12)</span></span>
+              <div class="hm2-sort-btn" id="hmSortBtn" onclick="toggleHmSort()">
+                <span id="hmSortLabel">마감임박순</span>
+                <svg width="10" height="5" viewBox="0 0 10 5" fill="none"><path d="M1 1L5 4.5L9 1" stroke="#1D2939" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
             </div>
-            <!-- 필터 칩 -->
+            <!-- 정렬 드롭다운 -->
+            <div class="hm2-sort-dropdown" id="hmSortDropdown" style="display:none">
+              <div class="hm2-sort-item hm2-sort-item--selected" onclick="selectHmSort('마감임박순', this)">
+                마감임박순
+              </div>
+              <div class="hm2-sort-divider"></div>
+              <div class="hm2-sort-item" onclick="selectHmSort('최신순', this)">최신순</div>
+              <div class="hm2-sort-divider"></div>
+              <div class="hm2-sort-item" onclick="selectHmSort('최대할인순', this)">최대할인순</div>
+              <div class="hm2-sort-divider"></div>
+              <div class="hm2-sort-item" onclick="selectHmSort('인기순', this)">인기순</div>
+            </div>
+            <!-- 카테고리 탭 -->
             <div class="hm2-chips">
               <button class="hm2-chip active" data-cat="all" onclick="filterHmCpn('all',this);hm2ChipSelect(this)">전체</button>
               <button class="hm2-chip" data-cat="online" onclick="filterHmCpn('online',this);hm2ChipSelect(this)">온라인</button>
               <button class="hm2-chip" data-cat="offline" onclick="filterHmCpn('offline',this);hm2ChipSelect(this)">오프라인</button>
-              <button class="hm2-chip" data-cat="all" onclick="filterHmCpn('all',this);hm2ChipSelect(this)">마감임박순</button>
             </div>
-            <!-- 쿠폰 카드 목록 -->
+            <!-- 쿠폰 목록 -->
             <div class="hm2-cpn-list" id="hmH4List">
-              <!-- renderHomeList()이 DOMContentLoaded 시 채움 -->
+<div class="hm-h4-card" data-cat="offline" data-action="go-detail" data-id="emart" onclick="ACT['go-detail']&&ACT['go-detail']({target:this})" style="display:flex;flex-direction:column;"><div class="hm-h4-head"><span class="hm-badge-unused">미사용</span><button class="hm-h4-fav" onclick="event.stopPropagation()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div><div class="hm-h4-body"><div class="hm-h4-img">🛒</div><div class="hm-h4-info"><div class="hm-h4-brand">이마트</div><div class="hm-h4-title">e머니 5천점 적립 쿠폰</div><div class="hm-h4-date">2026.05.01 ~ 2026.08.31</div></div></div><hr class="hm-h4-sep"><button class="hm-h4-save" onclick="event.stopPropagation()">저장하기</button></div>
+<div class="hm-h4-card" data-cat="offline" data-action="go-detail" data-id="gs25" onclick="ACT['go-detail']&&ACT['go-detail']({target:this})" style="display:flex;flex-direction:column;"><div class="hm-h4-head"><span class="hm-badge-unused">미사용</span><button class="hm-h4-fav" onclick="event.stopPropagation()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div><div class="hm-h4-body"><div class="hm-h4-img">🏪</div><div class="hm-h4-info"><div class="hm-h4-brand">GS25</div><div class="hm-h4-title">연세우유 크림빵 500원 할인</div><div class="hm-h4-date">2026.05.01 ~ 2026.11.30</div></div></div><hr class="hm-h4-sep"><button class="hm-h4-save" onclick="event.stopPropagation()">저장하기</button></div>
+<div class="hm-h4-card" data-cat="offline" data-action="go-detail" data-id="homeplus" onclick="ACT['go-detail']&&ACT['go-detail']({target:this})" style="display:flex;flex-direction:column;"><div class="hm-h4-head"><span class="hm-badge-unused">미사용</span><button class="hm-h4-fav" onclick="event.stopPropagation()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div><div class="hm-h4-body"><div class="hm-h4-img">🏬</div><div class="hm-h4-info"><div class="hm-h4-brand">홈플러스</div><div class="hm-h4-title">모바일 금액상품권 1만원권</div><div class="hm-h4-date">2026.05.01 ~ 2027.05.19</div></div></div><hr class="hm-h4-sep"><button class="hm-h4-save" onclick="event.stopPropagation()">저장하기</button></div>
+<div class="hm-h4-card" data-cat="online" data-action="go-detail" data-id="baemin" onclick="ACT['go-detail']&&ACT['go-detail']({target:this})" style="display:none;"><div class="hm-h4-head"><span class="hm-badge-unused">미사용</span><button class="hm-h4-fav" onclick="event.stopPropagation()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div><div class="hm-h4-body"><div class="hm-h4-img">🛵</div><div class="hm-h4-info"><div class="hm-h4-brand">배달의민족</div><div class="hm-h4-title">가게배달 중복 15% 쿠폰</div><div class="hm-h4-date">2026.05.01 ~ 2026.06.30</div></div></div><hr class="hm-h4-sep"><button class="hm-h4-save" onclick="event.stopPropagation()">저장하기</button></div>
+<div class="hm-h4-card" data-cat="online" data-action="go-detail" data-id="yogiyo" onclick="ACT['go-detail']&&ACT['go-detail']({target:this})" style="display:none;"><div class="hm-h4-head"><span class="hm-badge-unused">미사용</span><button class="hm-h4-fav" onclick="event.stopPropagation()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div><div class="hm-h4-body"><div class="hm-h4-img">🍔</div><div class="hm-h4-info"><div class="hm-h4-brand">요기요</div><div class="hm-h4-title">배달 전용 무료배송 티켓</div><div class="hm-h4-date">2026.05.01 ~ 2026.08.31</div></div></div><hr class="hm-h4-sep"><button class="hm-h4-save" onclick="event.stopPropagation()">저장하기</button></div>
+<div class="hm-h4-card" data-cat="both" data-action="go-detail" data-id="starbucks" onclick="ACT['go-detail']&&ACT['go-detail']({target:this})" style="display:flex;flex-direction:column;"><div class="hm-h4-head"><span class="hm-badge-unused">미사용</span><button class="hm-h4-fav" onclick="event.stopPropagation()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div><div class="hm-h4-body"><div class="hm-h4-img">☕</div><div class="hm-h4-info"><div class="hm-h4-brand">스타벅스</div><div class="hm-h4-title">아메리카노 교환권</div><div class="hm-h4-date">2026.05.01 ~ 2026.06.30</div></div></div><hr class="hm-h4-sep"><button class="hm-h4-save" onclick="event.stopPropagation()">저장하기</button></div>
+<div class="hm-h4-card" data-cat="both" data-action="go-detail" data-id="oliveyoung" onclick="ACT['go-detail']&&ACT['go-detail']({target:this})" style="display:flex;flex-direction:column;"><div class="hm-h4-head"><span class="hm-badge-unused">미사용</span><button class="hm-h4-fav" onclick="event.stopPropagation()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div><div class="hm-h4-body"><div class="hm-h4-img">💄</div><div class="hm-h4-info"><div class="hm-h4-brand">올리브영</div><div class="hm-h4-title">기프트카드 5만원 충전권</div><div class="hm-h4-date">2026.05.01 ~ 2026.09.30</div></div></div><hr class="hm-h4-sep"><button class="hm-h4-save" onclick="event.stopPropagation()">저장하기</button></div>
               <div id="hmNoResult" style="display:none;padding:40px 0;text-align:center;color:var(--color-gray-400)">
-                <div style="font-size:var(--font-size-body);font-weight:var(--font-weight-bold);color:var(--color-gray-500);margin-bottom:6px">검색 결과가 없습니다</div>
+                <div style="font-size:16px;font-weight:700;color:#98A2B3;margin-bottom:6px">검색 결과가 없습니다</div>
               </div>
             </div>
-            <!-- 더보기 버튼 -->
+            <!-- 더보기 -->
             <button class="hm2-more-btn" id="hmMoreBtn" onclick="hm2ShowMore()">
               더보기
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
           </div>
 
-        </div><!-- /hm2-body -->
+        </div><!-- /hm2-main -->
       </div>
 
       <!-- ── DOWNLOAD PAGE ── -->
@@ -2173,7 +2527,10 @@
             <div class="ph-sort-control">
               <span class="ph-sort-label">정렬</span>
               <div class="ph-sort-wrap">
-                <button class="ph-sort-btn" id="phSortBtn" onclick="togglePhSort('phSortBtn','phSortDd','phSortOverlay')">마감임박순 ▾</button>
+                <button class="ph-sort-btn" id="phSortBtn" onclick="togglePhSort('phSortBtn','phSortDd','phSortOverlay')">
+                  <span class="ph-sort-btn-label">마감임박순</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
 
 
 
@@ -2645,261 +3002,337 @@
 
       <!-- ── MYPAGE ── -->
       <!-- ==================== WISHLIST ==================== -->
-        <div id="p-wishlist" class="app-page fade-in"
-          style="padding: 0px; background: white; display: none; flex-direction: column; overflow: hidden;">
+      <div id="p-wishlist" class="app-page fade-in" style="padding: 0px; background: white; display: none; flex-direction: column; overflow: hidden;">
 
-          <!-- 헤더 -->
-          <div class="use-top-nav">
-            <button class="use-top-nav-back"
-              onclick="if(document.getElementById('wshBrandDetail').style.display!='none'){wshShowBrandGrid();}else{goBack();}"
-              aria-label="뒤로가기"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                  stroke-linejoin="round"></path>
-              </svg></button>
-            <span id="wshHeaderTitle" class="use-top-nav-title">즐겨찾기</span>
-            <div class="use-top-nav-spacer"></div>
-          </div>
+        <!-- 헤더 -->
+        <div class="use-top-nav">
+          <button class="use-top-nav-back" onclick="if(document.getElementById('wshBrandDetail').style.display!='none'){wshShowBrandGrid();}else{goBack();}" aria-label="뒤로가기"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+          <span id="wshHeaderTitle" class="use-top-nav-title">즐겨찾기</span>
+          <div class="use-top-nav-spacer"></div>
+        </div>
 
-          <!-- 탭 (세그먼트 컨트롤) — Figma 세그먼트 바ver3 -->
-          <div class="wsh-tab-bar">
-            <div class="wsh-tab" id="wshTabBrand" onclick="wshShowTab('brand')">브랜드</div>
-            <div class="wsh-tab on" id="wshTabCoupon" onclick="wshShowTab('coupon')">쿠폰</div>
-            <div class="wsh-tab" id="wshTabPoints" onclick="wshShowTab('points')">포인트</div>
-          </div>
+        <!-- 탭 (세그먼트 컨트롤) — Figma 세그먼트 바ver3 -->
+        <div class="wsh-tab-bar">
+          <div class="wsh-tab" id="wshTabBrand" onclick="wshShowTab('brand')">브랜드</div>
+          <div class="wsh-tab on" id="wshTabCoupon" onclick="wshShowTab('coupon')">쿠폰</div>
+          <div class="wsh-tab" id="wshTabPoints" onclick="wshShowTab('points')">포인트</div>
+        </div>
 
-          <!-- 카테고리 칩 -->
-          <div id="wshChipBar"
-            style="display:flex;gap:8px;overflow-x:auto;padding:var(--spacing-12) var(--spacing-16) var(--spacing-14);background:white;scrollbar-width:none;flex-shrink:0">
-            <div class="wsh-cat-chip on" onclick="wshSelectCategory('전체', this)">전체</div>
-            <div class="wsh-cat-chip" onclick="wshSelectCategory('배달', this)">배달</div>
-            <div class="wsh-cat-chip" onclick="wshSelectCategory('뷰티', this)">뷰티</div>
-            <div class="wsh-cat-chip" onclick="wshSelectCategory('마트', this)">마트</div>
-            <div class="wsh-cat-chip" onclick="wshSelectCategory('카페', this)">카페</div>
-            <div class="wsh-cat-chip" onclick="wshSelectCategory('편의점', this)">편의점</div>
-          </div>
+        <!-- 카테고리 칩 -->
+        <div id="wshChipBar" style="display:flex;gap:8px;overflow-x:auto;padding:var(--spacing-12) var(--spacing-16) var(--spacing-14);background:white;scrollbar-width:none;flex-shrink:0">
+          <div class="wsh-cat-chip on" onclick="document.querySelectorAll('#p-wishlist .wsh-cat-chip').forEach(c=&gt;c.classList.remove('on'));this.classList.add('on')">전체</div>
+          <div class="wsh-cat-chip" onclick="document.querySelectorAll('#p-wishlist .wsh-cat-chip').forEach(c=&gt;c.classList.remove('on'));this.classList.add('on')">배달</div>
+          <div class="wsh-cat-chip" onclick="document.querySelectorAll('#p-wishlist .wsh-cat-chip').forEach(c=&gt;c.classList.remove('on'));this.classList.add('on')">뷰티</div>
+          <div class="wsh-cat-chip" onclick="document.querySelectorAll('#p-wishlist .wsh-cat-chip').forEach(c=&gt;c.classList.remove('on'));this.classList.add('on')">마트</div>
+          <div class="wsh-cat-chip" onclick="document.querySelectorAll('#p-wishlist .wsh-cat-chip').forEach(c=&gt;c.classList.remove('on'));this.classList.add('on')">카페</div>
+          <div class="wsh-cat-chip" onclick="document.querySelectorAll('#p-wishlist .wsh-cat-chip').forEach(c=&gt;c.classList.remove('on'));this.classList.add('on')">편의점</div>
+        </div>
 
-          <!-- 스크롤 영역 -->
-          <div id="wshScrollArea" style="flex:1;overflow-y:auto">
+        <!-- 스크롤 영역 -->
+        <div id="wshScrollArea" style="flex:1;overflow-y:auto">
 
-            <!-- ===== 브랜드 섹션 ===== -->
-            <div id="wshBrandSection" style="display: none;">
+          <!-- ===== 브랜드 섹션 ===== -->
+          <div id="wshBrandSection" style="display: none;">
 
-              <!-- 편집|삭제 바 -->
-              <div id="wshGridBar"
-                style="display:flex;align-items:center;justify-content:flex-end;padding:var(--spacing-10) var(--spacing-16);background:white">
-                <button id="wshEditBtn" onclick="wshToggleEditMode()"
-                  style="background:none;border:none;font-size:var(--font-size-body);font-weight:var(--font-weight-bold);color:var(--color-gray-500);cursor:pointer;padding:0;font-family:var(--font)">편집
-                  ㅣ 삭제</button>
+            <!-- 편집|삭제 바 -->
+            <div id="wshGridBar" style="display:flex;align-items:center;justify-content:flex-end;padding:var(--spacing-10) var(--spacing-16);background:white">
+              <button id="wshEditBtn" onclick="wshToggleEditMode()" style="background:none;border:none;font-size:var(--font-size-body);font-weight:var(--font-weight-bold);color:var(--color-gray-500);cursor:pointer;padding:0;font-family:var(--font)">편집 ㅣ 삭제</button>
+            </div>
+
+            <!-- 브랜드 그리드 — 흰 원 + 하트 오버레이 -->
+            <div id="wshBrandGrid" style="display:grid;grid-template-columns:repeat(3,1fr);column-gap:var(--spacing-12);row-gap:var(--spacing-14);padding:0 var(--spacing-16) var(--spacing-32)">
+              <div onclick="wshOpenBrand('starbucks')" class="wsh-brand-cell">
+                <button class="wsh-brand-heart" onclick="event.stopPropagation()" aria-label="스타벅스 찜">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-red-400)" stroke="var(--color-red-400)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <button class="wsh-del-btn" onclick="wshMarkDelete(this,event)" aria-label="스타벅스 삭제">−</button>
+                <div class="wsh-brand-circle" style="color:var(--color-gray-600)"><span>스</span></div>
+                <span class="wsh-brand-lbl">스타벅스</span>
+              </div>
+              <div onclick="wshOpenBrand('emart')" class="wsh-brand-cell">
+                <button class="wsh-brand-heart" onclick="event.stopPropagation()" aria-label="이마트 찜">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-red-400)" stroke="var(--color-red-400)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <button class="wsh-del-btn" onclick="wshMarkDelete(this,event)" aria-label="이마트 삭제">−</button>
+                <div class="wsh-brand-circle" style="color:var(--color-gray-600)"><span>이</span></div>
+                <span class="wsh-brand-lbl">이마트</span>
+              </div>
+              <div onclick="wshOpenBrand('lottemart')" class="wsh-brand-cell">
+                <button class="wsh-brand-heart" onclick="event.stopPropagation()" aria-label="롯데마트 찜">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-red-400)" stroke="var(--color-red-400)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <button class="wsh-del-btn" onclick="wshMarkDelete(this,event)" aria-label="롯데마트 삭제">−</button>
+                <div class="wsh-brand-circle" style="color:var(--color-gray-600)"><span>롯</span></div>
+                <span class="wsh-brand-lbl">롯데마트</span>
+              </div>
+              <div onclick="wshOpenBrand('baemin')" class="wsh-brand-cell">
+                <button class="wsh-brand-heart" onclick="event.stopPropagation()" aria-label="배달의민족 찜">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-red-400)" stroke="var(--color-red-400)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <button class="wsh-del-btn" onclick="wshMarkDelete(this,event)" aria-label="배달의민족 삭제">−</button>
+                <div class="wsh-brand-circle" style="color:var(--color-gray-600)"><span>배</span></div>
+                <span class="wsh-brand-lbl">배달의민족</span>
+              </div>
+              <div onclick="wshOpenBrand('gs25')" class="wsh-brand-cell">
+                <button class="wsh-brand-heart" onclick="event.stopPropagation()" aria-label="GS25 찜">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-red-400)" stroke="var(--color-red-400)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <button class="wsh-del-btn" onclick="wshMarkDelete(this,event)" aria-label="GS25 삭제">−</button>
+                <div class="wsh-brand-circle" style="color:var(--color-gray-600)"><span>G</span></div>
+                <span class="wsh-brand-lbl">GS25</span>
+              </div>
+              <div onclick="wshOpenBrand('oliveyoung')" class="wsh-brand-cell">
+                <button class="wsh-brand-heart" onclick="event.stopPropagation()" aria-label="올리브영 찜">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-red-400)" stroke="var(--color-red-400)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <button class="wsh-del-btn" onclick="wshMarkDelete(this,event)" aria-label="올리브영 삭제">−</button>
+                <div class="wsh-brand-circle" style="color:var(--color-gray-600)"><span>올</span></div>
+                <span class="wsh-brand-lbl">올리브영</span>
+              </div>
+            </div>
+
+            <!-- 브랜드 상세 (hidden) — Figma 11:1379 / 11:1336 -->
+            <div id="wshBrandDetail" style="display:none;background:white">
+
+              <!-- 브랜드 히어로 -->
+              <div style="display:flex;flex-direction:column;align-items:center;gap:var(--spacing-16);padding:var(--spacing-32) var(--spacing-20) var(--spacing-16);background:white">
+                <div id="wshDetailCircle" style="width:96px;height:96px;border-radius:50%;background:white;box-shadow:var(--shadow-m);display:flex;align-items:center;justify-content:center;font-size:var(--font-size-display-sm);font-weight:var(--font-weight-heavy);font-family:var(--font);color:var(--color-gray-700)">이</div>
+                <button onclick="event.stopPropagation()" style="display:flex;align-items:center;gap:var(--spacing-6);padding:var(--spacing-10) var(--spacing-20);border-radius:var(--radius-full);background:var(--color-blue-500);color:white;font-size:var(--font-size-body);font-weight:var(--font-weight-extra-bold);border:none;cursor:pointer;font-family:var(--font)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                  웹사이트 방문
+                </button>
               </div>
 
-              <!-- 브랜드 그리드 — 흰 원 + 하트 오버레이 -->
-              <div id="wshBrandGrid"
-                style="display:grid;grid-template-columns:repeat(3,1fr);column-gap:var(--spacing-12);row-gap:var(--spacing-14);padding:0 var(--spacing-16) var(--spacing-32)">
-                <div onclick="wshOpenBrand('starbucks')" class="wsh-brand-cell">
-                  <button class="wsh-brand-heart" onclick="event.stopPropagation()" aria-label="스타벅스 찜">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-red-400)"
-                      stroke="var(--color-red-400)" stroke-width="2">
-                      <path
-                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                    </svg>
-                  </button>
-                  <button class="wsh-del-btn" onclick="wshMarkDelete(this,event)" aria-label="스타벅스 삭제">−</button>
-                  <div class="wsh-brand-circle" style="color:var(--color-gray-600)"><span>스</span></div>
-                  <span class="wsh-brand-lbl">스타벅스</span>
+              <!-- 포인트 섹션 (hasPoint 브랜드만 표시) -->
+              <div id="wshDetailPointSection" style="display:none;flex-direction:column;gap:var(--spacing-16);padding-bottom:var(--spacing-16)">
+                <div style="padding:var(--spacing-10) var(--spacing-16)">
+                  <p style="font-size:var(--font-size-headline-sm);font-weight:var(--font-weight-extra-bold);color:var(--color-gray-700);font-family:var(--font)">포인트</p>
                 </div>
-                <div onclick="wshOpenBrand('emart')" class="wsh-brand-cell">
-                  <button class="wsh-brand-heart" onclick="event.stopPropagation()" aria-label="이마트 찜">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-red-400)"
-                      stroke="var(--color-red-400)" stroke-width="2">
-                      <path
-                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                    </svg>
-                  </button>
-                  <button class="wsh-del-btn" onclick="wshMarkDelete(this,event)" aria-label="이마트 삭제">−</button>
-                  <div class="wsh-brand-circle" style="color:var(--color-gray-600)"><span>이</span></div>
-                  <span class="wsh-brand-lbl">이마트</span>
-                </div>
-                <div onclick="wshOpenBrand('lottemart')" class="wsh-brand-cell">
-                  <button class="wsh-brand-heart" onclick="event.stopPropagation()" aria-label="롯데마트 찜">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-red-400)"
-                      stroke="var(--color-red-400)" stroke-width="2">
-                      <path
-                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                    </svg>
-                  </button>
-                  <button class="wsh-del-btn" onclick="wshMarkDelete(this,event)" aria-label="롯데마트 삭제">−</button>
-                  <div class="wsh-brand-circle" style="color:var(--color-gray-600)"><span>롯</span></div>
-                  <span class="wsh-brand-lbl">롯데마트</span>
-                </div>
-                <div onclick="wshOpenBrand('baemin')" class="wsh-brand-cell">
-                  <button class="wsh-brand-heart" onclick="event.stopPropagation()" aria-label="배달의민족 찜">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-red-400)"
-                      stroke="var(--color-red-400)" stroke-width="2">
-                      <path
-                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                    </svg>
-                  </button>
-                  <button class="wsh-del-btn" onclick="wshMarkDelete(this,event)" aria-label="배달의민족 삭제">−</button>
-                  <div class="wsh-brand-circle" style="color:var(--color-gray-600)"><span>배</span></div>
-                  <span class="wsh-brand-lbl">배달의민족</span>
-                </div>
-                <div onclick="wshOpenBrand('gs25')" class="wsh-brand-cell">
-                  <button class="wsh-brand-heart" onclick="event.stopPropagation()" aria-label="GS25 찜">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-red-400)"
-                      stroke="var(--color-red-400)" stroke-width="2">
-                      <path
-                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                    </svg>
-                  </button>
-                  <button class="wsh-del-btn" onclick="wshMarkDelete(this,event)" aria-label="GS25 삭제">−</button>
-                  <div class="wsh-brand-circle" style="color:var(--color-gray-600)"><span>G</span></div>
-                  <span class="wsh-brand-lbl">GS25</span>
-                </div>
-                <div onclick="wshOpenBrand('oliveyoung')" class="wsh-brand-cell">
-                  <button class="wsh-brand-heart" onclick="event.stopPropagation()" aria-label="올리브영 찜">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-red-400)"
-                      stroke="var(--color-red-400)" stroke-width="2">
-                      <path
-                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                    </svg>
-                  </button>
-                  <button class="wsh-del-btn" onclick="wshMarkDelete(this,event)" aria-label="올리브영 삭제">−</button>
-                  <div class="wsh-brand-circle" style="color:var(--color-gray-600)"><span>올</span></div>
-                  <span class="wsh-brand-lbl">올리브영</span>
-                </div>
-              </div>
-
-              <!-- 브랜드 상세 (hidden) — Figma 11:1379 / 11:1336 -->
-              <div id="wshBrandDetail" style="display: none; flex-direction: column; height: 100%; max-height: 100%; background: white; width: 100%; border-radius: var(--radius-xl); overflow: hidden; box-sizing: border-box;">
-
-                <!-- 브랜드 히어로 -->
-                <div
-                  style="flex-shrink: 0; z-index: 10; display: flex; flex-direction: column; align-items: center; gap: var(--spacing-16); padding: var(--spacing-32) var(--spacing-20) var(--spacing-16); background: white; border-radius: 0 0 var(--radius-xl) var(--radius-xl); box-shadow: 0 2px 10px rgba(0,0,0,0.02);">
-                  <div id="wshDetailCircle"
-                    style="width: 96px; height: 96px; border-radius: 50%; background: white; box-shadow: var(--shadow-m); display: flex; align-items: center; justify-content: center; font-size: var(--font-size-display-sm); font-weight: var(--font-weight-heavy); font-family: var(--font); color: var(--color-gray-700);">
-                    이</div>
-                  <button onclick="event.stopPropagation(); wshVisitWebsite();"
-                    style="display: flex; align-items: center; gap: var(--spacing-6); padding: var(--spacing-10) var(--spacing-20); border-radius: var(--radius-full); background: var(--color-blue-500); color: white; font-size: var(--font-size-body); font-weight: var(--font-weight-extra-bold); border: none; cursor: pointer; font-family: var(--font); box-shadow: 0 2px 8px rgba(0,102,255,0.2); transition: background 0.2s ease;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                      stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-                      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-                    </svg>
-                    웹사이트 방문
-                  </button>
-                </div>
-
-                <div style="flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: var(--spacing-20); display: flex; flex-direction: column; gap: var(--spacing-20); box-sizing: border-box;">
-
-                  <!-- 2. 바코드부분 (hasPoint 브랜드만 표시) -->
-                  <div id="wshDetailPointSection" class="wsh-point-accordion" onclick="toggleWshPointAccordion(this)"
-                    style="display: none; flex-direction: column; align-items: center; background: white; border-radius: var(--radius-xl); padding: var(--spacing-20); box-shadow: var(--shadow-s); order: 2; margin-top: calc(-1 * var(--spacing-8)); cursor: pointer; transition: all 0.3s ease;">
-                    
-                    <!-- 1. 접힌 상태 (축소형 뷰) -->
-                    <div class="wsh-point-collapsed" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
-                      <div style="width: 100%; max-width: 240px; height: 60px; border-radius: var(--radius-sm); overflow: hidden; background: repeating-linear-gradient(90deg, var(--color-gray-700) 0px, var(--color-gray-700) 2px, white 2px, white 5px, var(--color-gray-700) 5px, var(--color-gray-700) 6px, white 6px, white 9px);"></div>
-                      <p style="font-size: var(--font-size-caption); color: var(--color-gray-300); font-family: var(--font); letter-spacing: 0.5px; font-weight: var(--font-weight-medium); margin: var(--spacing-8) 0 0 0;">
-                        1234 567 890102214 312 43
-                      </p>
-                    </div>
-
-                    <!-- 2. 펼쳐진 상태 (확장형 뷰) -->
-                    <div class="wsh-point-expanded" style="width: 100%; flex-direction: column; justify-content: flex-start; align-items: center; gap: 24px; padding-top: 4px;">
-                      <!-- 상단 파란색 데코 라인 -->
-                      <div style="width: 40px; height: 3px; background: var(--color-blue-500); border-radius: 2px;"></div>
-                      
-                      <div id="wshPtAccBrand" style="color: var(--color-gray-800); font-size: 16px; font-family: var(--font); font-weight: 700;">스타벅스</div>
-                      <div id="wshPtAccAmount" style="color: var(--color-blue-500); font-size: 28px; font-family: var(--font); font-weight: 900;">4,150p</div>
-                      
-                      <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-                        <div style="width: 261px; height: 83px; border-radius: var(--radius-sm); background: repeating-linear-gradient(90deg, #111 0px, #111 2px, white 2px, white 5px, #111 5px, #111 7px, white 7px, white 9px);"></div>
-                        <div style="color: var(--color-gray-400); font-size: 12px; font-family: var(--font); font-weight: 600; letter-spacing: 2px;">
-                          1234   567  890102214    312         43
-                        </div>
-                        <div style="color: var(--color-gray-400); font-size: 12px; font-family: var(--font); font-weight: 500;">
-                          바코드를 스캔해주세요
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- 3. 공통 하단 셰브론 -->
-                    <div class="wsh-barcode-chevron" style="display: flex; justify-content: center; width: 100%; margin-top: var(--spacing-16); transition: transform 0.3s ease;">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-400)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                      </svg>
-                    </div>
+                <!-- 바코드 카드 -->
+                <div style="margin:0 var(--spacing-16);background:white;border-radius:20px;box-shadow:var(--shadow-m);display:flex;flex-direction:column;align-items:center;gap:var(--spacing-12);padding:var(--spacing-32) var(--spacing-20) var(--spacing-4)">
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:var(--spacing-4)">
+                    <div style="width:261px;height:83px;border-radius:var(--radius-sm);overflow:hidden;background:repeating-linear-gradient(90deg,var(--color-gray-700) 0px,var(--color-gray-700) 2px,white 2px,white 5px,var(--color-gray-700) 5px,var(--color-gray-700) 6px,white 6px,white 10px,var(--color-gray-700) 10px,var(--color-gray-700) 12px,white 12px,white 15px,var(--color-gray-700) 15px,var(--color-gray-700) 16px,white 16px,white 19px)"></div>
+                    <p style="font-size:var(--font-size-caption);color:var(--color-gray-300);font-family:var(--font);letter-spacing:1px">1234  567  890102214  312  43</p>
                   </div>
-
-                  <!-- 1. 포인트 글자부분 -->
-                  <div id="wshDetailPointTitle"
-                    style="font-size: var(--font-size-body); font-weight: var(--font-weight-bold); color: var(--color-gray-700); font-family: var(--font); padding-left: var(--spacing-4); order: 1;">
-                    포인트</div>
-
-                  <!-- 4. 쿠폰리스트부분 -->
-                  <div id="wshDetailCouponSection"
-                    style="display: none; flex-direction: column; gap: var(--spacing-12); width: 100%; order: 4; margin-top: calc(-1 * var(--spacing-8));">
-                    <div id="wshDetailCoupons" style="display: flex; flex-direction: column; gap: var(--spacing-12); width: 100%;"></div>
+                  <div style="display:flex;justify-content:center;padding-bottom:var(--spacing-10)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-300)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                   </div>
-
-                  <!-- 3. 쿠폰 글자부분 -->
-                  <div id="wshDetailCouponTitle"
-                    style="font-size: var(--font-size-body); font-weight: var(--font-weight-bold); color: var(--color-gray-700); font-family: var(--font); padding-left: var(--spacing-4); order: 3;">
-                    쿠폰</div>
-
                 </div>
-
-                <div style="height: var(--spacing-32);"></div>
-
               </div>
 
-            </div><!-- /wshBrandSection -->
+              <!-- 쿠폰 섹션 -->
+              <div id="wshDetailCouponSection" style="display:none;flex-direction:column">
+                <div style="padding:var(--spacing-10) var(--spacing-16)">
+                  <p style="font-size:var(--font-size-headline-sm);font-weight:var(--font-weight-extra-bold);color:var(--color-gray-700);font-family:var(--font)">쿠폰</p>
+                </div>
+                <div id="wshDetailCoupons" style="display:flex;flex-direction:column;background:white"></div>
+              </div>
 
-            <!-- ===== 쿠폰 섹션 ===== -->
-            <div id="wshCouponSection" style="display: block; background: white;">
+              <div style="height:var(--spacing-32);background:white"></div>
 
-              <!-- 정렬 바 (Figma 11:1421) -->
-              <div class="wsh-cpn-sort-bar" style="display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-12) var(--spacing-16); background: white; flex-shrink: 0;">
+            </div>
+
+          </div><!-- /wshBrandSection -->
+
+          <!-- ===== 쿠폰 섹션 ===== -->
+          <div id="wshCouponSection" style="display: block; background: white;">
+
+            <!-- 정렬 바 (Figma 11:1421) -->
+            <div class="wsh-cpn-sort-bar">
+              <div style="display:flex;align-items:center;gap:12px">
+                <span class="wsh-cpn-sort-lbl">정렬</span>
                 <div class="wsh-sort-wrap" id="wshCpnSortWrap">
-                  <button class="wsh-cpn-sort-btn" onclick="toggleWshSort('wshCpnSortWrap',event)" style="width: 100%; height: 100%; padding: var(--spacing-8) var(--spacing-20); background: white; border-radius: var(--radius-full); border: none; outline: 1px var(--color-gray-200) solid; outline-offset: -1px; justify-content: center; align-items: center; gap: var(--spacing-8); display: inline-flex; cursor: pointer;">
-                    <span id="wshCpnSortLabel" style="color: var(--color-gray-700); font-size: var(--font-size-body); font-family: var(--font); font-weight: var(--font-weight-bold); word-wrap: break-word">마감임박순</span>
-                    <svg width="12" height="7" viewBox="0 0 12 7" fill="none" style="flex-shrink: 0; transition: transform 0.2s;">
-                      <path d="M10.75 0.75L5.75 5.75L0.75 0.75" stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
+                  <button class="wsh-cpn-sort-btn" onclick="toggleWshSort('wshCpnSortWrap',event)">
+                    <span id="wshCpnSortLabel">마감임박순</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                   </button>
                   <div class="nmap-sort-menu">
-                    <button class="nmap-sort-item active"
-                      onclick="selectWshSort('wshCpnSortWrap','wshCpnSortLabel','마감임박순',this)">마감임박순</button>
-                    <button class="nmap-sort-item"
-                      onclick="selectWshSort('wshCpnSortWrap','wshCpnSortLabel','최대할인순',this)">최대할인순</button>
-                    <button class="nmap-sort-item"
-                      onclick="selectWshSort('wshCpnSortWrap','wshCpnSortLabel','인기순',this)">인기순</button>
-                    <button class="nmap-sort-item"
-                      onclick="selectWshSort('wshCpnSortWrap','wshCpnSortLabel','거리순',this)">거리순</button>
+                    <button class="nmap-sort-item active" onclick="selectWshSort('wshCpnSortWrap','wshCpnSortLabel','마감임박순',this)">마감임박순</button>
+                    <button class="nmap-sort-item" onclick="selectWshSort('wshCpnSortWrap','wshCpnSortLabel','최대할인순',this)">최대할인순</button>
+                    <button class="nmap-sort-item" onclick="selectWshSort('wshCpnSortWrap','wshCpnSortLabel','인기순',this)">인기순</button>
+                    <button class="nmap-sort-item" onclick="selectWshSort('wshCpnSortWrap','wshCpnSortLabel','거리순',this)">거리순</button>
                   </div>
                 </div>
-                <button id="wshCpnEditBtn" onclick="wshToggleCouponEditMode()"
-                  style="background:none;border:none;font-size:var(--font-size-label);font-weight:var(--font-weight-bold);color:var(--color-gray-700);cursor:pointer;padding:0;font-family:var(--font)">편집
-                  | 삭제</button>
               </div>
+              <button id="wshCpnEditBtn" onclick="wshToggleCouponEditMode()" style="background:none;border:none;font-size:var(--font-size-body);font-weight:var(--font-weight-bold);color:var(--gray-700);cursor:pointer;padding:0;font-family:var(--font)">편집 | 삭제</button>
+            </div>
 
-              <!-- 쿠폰 카드 목록 (JS로 동적 렌더링) -->
-              <div id="wshCpnList" style="display:flex;flex-direction:column;gap:12px;padding:4px 16px 32px">
-                <!-- renderWishlist()이 DOMContentLoaded 시 채움 -->
-              </div>
+            <!-- 쿠폰 카드 목록 (JS로 동적 렌더링) -->
+            <div id="wshCpnList" style="display:flex;flex-direction:column;gap:12px;padding:4px 16px 32px"><!-- renderWishlist()이 DOMContentLoaded 시 채움 --><div class="wsh-cpn-card" data-action="go-detail" data-id="starbucks" style="display:none">
+    <div class="wsh-cpn-card-header">
+      <span class="wsh-cpn-brand-lbl">스타벅스</span>
+      <span class="wsh-cpn-heart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+    </div>
+    <div class="wsh-cpn-body">
+      <div class="wsh-cpn-logo-wrap">
+        <div class="wsh-cpn-logo-circle"></div>
+        <div class="wsh-cpn-badge">오프라인</div>
+      </div>
+      <div class="wsh-cpn-info">
+        <p class="wsh-cpn-title">아메리카노 교환권</p>
+        <p class="wsh-cpn-cond">조건 없음</p>
+        <p class="wsh-cpn-date">2026.05.01 ~ 2026.06.30</p>
+      </div>
+    </div>
+  </div><div class="wsh-cpn-card" data-action="go-detail" data-id="starbucks">
+    <div class="wsh-cpn-card-header">
+      <span class="wsh-cpn-brand-lbl">스타벅스</span>
+      <span class="wsh-cpn-heart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+    </div>
+    <div class="wsh-cpn-body">
+      <div class="wsh-cpn-logo-wrap">
+        <div class="wsh-cpn-logo-circle"></div>
+        <div class="wsh-cpn-badge">오프라인</div>
+      </div>
+      <div class="wsh-cpn-info">
+        <p class="wsh-cpn-title">조각케이크+커피 세트권</p>
+        <p class="wsh-cpn-cond">케이크+음료 세트 구매 시</p>
+        <p class="wsh-cpn-date">2026.05.01 ~ 2027.05.19</p>
+      </div>
+    </div>
+  </div><div class="wsh-cpn-card" data-action="go-detail" data-id="emart">
+    <div class="wsh-cpn-card-header">
+      <span class="wsh-cpn-brand-lbl">이마트</span>
+      <span class="wsh-cpn-heart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+    </div>
+    <div class="wsh-cpn-body">
+      <div class="wsh-cpn-logo-wrap">
+        <div class="wsh-cpn-logo-circle"></div>
+        <div class="wsh-cpn-badge">오프라인</div>
+      </div>
+      <div class="wsh-cpn-info">
+        <p class="wsh-cpn-title">e머니 5천점 적립 쿠폰</p>
+        <p class="wsh-cpn-cond">7만원 이상 결제 및 포인트 적립 시</p>
+        <p class="wsh-cpn-date">2026.05.01 ~ 2026.08.31</p>
+      </div>
+    </div>
+  </div><div class="wsh-cpn-card" data-action="go-detail" data-id="emart">
+    <div class="wsh-cpn-card-header">
+      <span class="wsh-cpn-brand-lbl">이마트</span>
+      <span class="wsh-cpn-heart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+    </div>
+    <div class="wsh-cpn-body">
+      <div class="wsh-cpn-logo-wrap">
+        <div class="wsh-cpn-logo-circle"></div>
+        <div class="wsh-cpn-badge">온라인</div>
+      </div>
+      <div class="wsh-cpn-info">
+        <p class="wsh-cpn-title">마트 직송 8천원 할인쿠폰</p>
+        <p class="wsh-cpn-cond">8만원 이상 주문 시 사용 가능</p>
+        <p class="wsh-cpn-date">2026.05.01 ~ 2026.07.31</p>
+      </div>
+    </div>
+  </div><div class="wsh-cpn-card" data-action="go-detail" data-id="baemin">
+    <div class="wsh-cpn-card-header">
+      <span class="wsh-cpn-brand-lbl">배달의민족</span>
+      <span class="wsh-cpn-heart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+    </div>
+    <div class="wsh-cpn-body">
+      <div class="wsh-cpn-logo-wrap">
+        <div class="wsh-cpn-logo-circle"></div>
+        <div class="wsh-cpn-badge">온라인</div>
+      </div>
+      <div class="wsh-cpn-info">
+        <p class="wsh-cpn-title">가게배달 중복 15% 쿠폰</p>
+        <p class="wsh-cpn-cond">마크 부착 매장 주문 시</p>
+        <p class="wsh-cpn-date">2026.05.01 ~ 2026.06.30</p>
+      </div>
+    </div>
+  </div><div class="wsh-cpn-card" data-action="go-detail" data-id="baemin">
+    <div class="wsh-cpn-card-header">
+      <span class="wsh-cpn-brand-lbl">배달의민족</span>
+      <span class="wsh-cpn-heart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+    </div>
+    <div class="wsh-cpn-body">
+      <div class="wsh-cpn-logo-wrap">
+        <div class="wsh-cpn-logo-circle"></div>
+        <div class="wsh-cpn-badge">온라인</div>
+      </div>
+      <div class="wsh-cpn-info">
+        <p class="wsh-cpn-title">사이드메뉴 무료증정 쿠폰</p>
+        <p class="wsh-cpn-cond">지정 사이드메뉴 무료 제공</p>
+        <p class="wsh-cpn-date">2026.05.01 ~ 2027.05.19</p>
+      </div>
+    </div>
+  </div><div class="wsh-cpn-card" data-action="go-detail" data-id="homeplus">
+    <div class="wsh-cpn-card-header">
+      <span class="wsh-cpn-brand-lbl">홈플러스</span>
+      <span class="wsh-cpn-heart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+    </div>
+    <div class="wsh-cpn-body">
+      <div class="wsh-cpn-logo-wrap">
+        <div class="wsh-cpn-logo-circle"></div>
+        <div class="wsh-cpn-badge">오프라인</div>
+      </div>
+      <div class="wsh-cpn-info">
+        <p class="wsh-cpn-title">모바일 금액상품권 1만원권</p>
+        <p class="wsh-cpn-cond">서비스 품목(담배/택배 등) 제외</p>
+        <p class="wsh-cpn-date">2026.05.01 ~ 2027.05.19</p>
+      </div>
+    </div>
+  </div><div class="wsh-cpn-card" data-action="go-detail" data-id="gs25">
+    <div class="wsh-cpn-card-header">
+      <span class="wsh-cpn-brand-lbl">GS25</span>
+      <span class="wsh-cpn-heart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+    </div>
+    <div class="wsh-cpn-body">
+      <div class="wsh-cpn-logo-wrap">
+        <div class="wsh-cpn-logo-circle"></div>
+        <div class="wsh-cpn-badge">오프라인</div>
+      </div>
+      <div class="wsh-cpn-info">
+        <p class="wsh-cpn-title">연세우유 크림빵 500원 할인</p>
+        <p class="wsh-cpn-cond">연세우유 디저트 시리즈 전체</p>
+        <p class="wsh-cpn-date">2026.05.01 ~ 2026.11.30</p>
+      </div>
+    </div>
+  </div><div class="wsh-cpn-card" data-action="go-detail" data-id="gs25">
+    <div class="wsh-cpn-card-header">
+      <span class="wsh-cpn-brand-lbl">GS25</span>
+      <span class="wsh-cpn-heart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+    </div>
+    <div class="wsh-cpn-body">
+      <div class="wsh-cpn-logo-wrap">
+        <div class="wsh-cpn-logo-circle"></div>
+        <div class="wsh-cpn-badge">오프라인</div>
+      </div>
+      <div class="wsh-cpn-info">
+        <p class="wsh-cpn-title">e머니 5천점 적립</p>
+        <p class="wsh-cpn-cond">5만원 이상 구매 시</p>
+        <p class="wsh-cpn-date">2026.05.01 ~ 2026.08.31</p>
+      </div>
+    </div>
+  </div><div class="wsh-cpn-card" data-action="go-detail" data-id="oliveyoung">
+    <div class="wsh-cpn-card-header">
+      <span class="wsh-cpn-brand-lbl">올리브영</span>
+      <span class="wsh-cpn-heart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+    </div>
+    <div class="wsh-cpn-body">
+      <div class="wsh-cpn-logo-wrap">
+        <div class="wsh-cpn-logo-circle"></div>
+        <div class="wsh-cpn-badge">온오프라인</div>
+      </div>
+      <div class="wsh-cpn-info">
+        <p class="wsh-cpn-title">기프트카드 5만원 충전권</p>
+        <p class="wsh-cpn-cond">조건 없음</p>
+        <p class="wsh-cpn-date">2026.05.01 ~ 2026.09.30</p>
+      </div>
+    </div>
+  </div></div>
 
-            </div><!-- /wshCouponSection -->
+          </div><!-- /wshCouponSection -->
 
-            <!-- ===== 포인트 섹션 ===== -->
-            <div id="wshPointSection" style="display:none;background:white">
+          <!-- ===== 포인트 섹션 ===== -->
+          <div id="wshPointSection" style="display:none;background:white">
 
-              <!-- 정렬 + 편집|삭제 바 -->
-              <div class="wsh-pt-sort-bar" style="display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-12) var(--spacing-16); background: white; flex-shrink: 0;">
+            <!-- 정렬 + 편집|삭제 바 -->
+            <div class="wsh-pt-sort-bar">
+              <div style="display:flex;align-items:center;gap:var(--spacing-12)">
+                <span style="font-size:var(--font-size-body);font-weight:var(--font-weight-bold);color:var(--color-gray-700);font-family:var(--font)">정렬</span>
                 <div class="wsh-sort-wrap" id="wshPtSortWrap">
-                  <button class="wsh-cpn-sort-btn" onclick="toggleWshSort('wshPtSortWrap',event)" style="width: 100%; height: 100%; padding: var(--spacing-8) var(--spacing-20); background: white; border-radius: var(--radius-full); border: none; outline: 1px var(--color-gray-200) solid; outline-offset: -1px; justify-content: center; align-items: center; gap: var(--spacing-8); display: inline-flex; cursor: pointer;">
-                    <span id="wshPtSortLabel" style="color: var(--color-gray-700); font-size: var(--font-size-body); font-family: var(--font); font-weight: var(--font-weight-bold); word-wrap: break-word">마감임박순</span>
-                    <svg width="12" height="7" viewBox="0 0 12 7" fill="none" style="flex-shrink: 0; transition: transform 0.2s;">
-                      <path d="M10.75 0.75L5.75 5.75L0.75 0.75" stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
+                  <button class="wsh-cpn-sort-btn" onclick="toggleWshSort('wshPtSortWrap',event)">
+                    <span id="wshPtSortLabel">마감임박순</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                   </button>
                   <div class="nmap-sort-menu">
                     <button class="nmap-sort-item active" onclick="selectWshSort('wshPtSortWrap','wshPtSortLabel','마감임박순',this)">마감임박순</button>
@@ -2907,18 +3340,19 @@
                     <button class="nmap-sort-item" onclick="selectWshSort('wshPtSortWrap','wshPtSortLabel','가나다순',this)">가나다순</button>
                   </div>
                 </div>
-                <button style="background:none;border:none;font-size:var(--font-size-label);font-weight:var(--font-weight-bold);color:var(--color-gray-700);cursor:pointer;padding:0;font-family:var(--font)">편집 | 삭제</button>
               </div>
+              <button style="background:none;border:none;font-size:var(--font-size-body);font-weight:var(--font-weight-bold);color:var(--color-gray-500);cursor:pointer;padding:0;font-family:var(--font)">편집 ㅣ 삭제</button>
+            </div>
 
-              <!-- 포인트 카드 목록 (JS로 동적 렌더링) -->
-              <div id="wshPtList" class="wsh-pt-list"></div>
+            <!-- 포인트 카드 목록 (JS로 동적 렌더링) -->
+            <div id="wshPtList" class="wsh-pt-list"></div>
 
-            </div><!-- /wshPointSection -->
+          </div><!-- /wshPointSection -->
 
-          </div><!-- /스크롤 -->
-        </div>
+        </div><!-- /스크롤 -->
+      </div>
 
-        <div id="p-mypage" class="app-page fade-in" style="display: none;">
+            <div id="p-mypage" class="app-page fade-in" style="display: none;">
         <div class="mypage-figma-main">
           <div class="mf-frame">
             <!-- 상단 고정바 (Figma 797-10005) -->
@@ -4754,42 +5188,32 @@
         </div><!-- /p-noti-page -->
 
       <!-- ── 브랜드 알림 상세 페이지 ── -->
-    <div id="p-noti-brand" class="app-page noti-brand-detail"
-      style="padding: 0px; background: white; flex-direction: column; overflow: hidden; display: none;">
-      <header class="nb-page-head">
-        <div class="nb-topline">
-          <div class="nb-logo">USE</div>
-          <button class="nb-bell" type="button" aria-label="알림">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round"></path>
-              <path d="M13.73 21a2 2 0 0 1-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round"></path>
-            </svg>
-          </button>
-        </div>
-        <div class="nb-titlebar">
-          <button class="nb-back" type="button" onclick="showAppPage('noti-page');updateSidebar('');" aria-label="뒤로가기">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round"></path>
-            </svg>
-          </button>
-          <div class="nb-header-title" id="nbHeaderTitle">브랜드 알림</div>
-          <span class="nb-titlebar-spacer"></span>
-        </div>
-      </header>
-      <div class="nb-scroll" id="nbScrollArea">
-        <div class="nb-brand-hero">
-          <div class="nb-brand-circle np-brand-logo" id="nbBrandCircle"></div>
-          <div class="nb-brand-copy" style="display: none;">
-            <div class="nb-brand-name" id="nbBrandName">브랜드</div>
-            <div class="nb-brand-sub" id="nbBrandSub">날짜별로 모아둔 알림을 확인하세요</div>
+      <div id="p-noti-brand" class="app-page noti-brand-detail" style="padding: 0px; background: white; flex-direction: column; overflow: hidden; display: none;">
+        <header class="nb-page-head">
+          <div class="nb-topline">
+            <div class="nb-logo">USE</div>
+            <button class="nb-bell" type="button" aria-label="알림">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M13.73 21a2 2 0 0 1-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </button>
           </div>
+          <div class="nb-titlebar">
+            <button class="nb-back" type="button" onclick="showAppPage('noti-page');updateSidebar('');" aria-label="뒤로가기">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </button>
+            <div class="nb-header-title" id="nbHeaderTitle">브랜드 알림</div>
+          </div>
+        </header>
+        <div class="nb-scroll" id="nbScrollArea">
+          <div class="nb-brand-hero">
+            <div class="nb-brand-circle np-brand-logo" id="nbBrandCircle"></div>
+            <div class="nb-brand-copy">
+              <div class="nb-brand-name" id="nbBrandName">브랜드</div>
+              <div class="nb-brand-sub" id="nbBrandSub">날짜별로 모아둔 알림을 확인하세요</div>
+            </div>
+          </div>
+          <div class="nb-groups" id="nbCouponGroups"></div>
         </div>
-        <div class="nb-groups" id="nbCouponGroups"></div>
       </div>
-    </div>
     
 
     <!-- ── 바코드 즉시사용 팝업 (전역) ── -->
@@ -5284,24 +5708,6 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<!-- 알림설정 팝업 -->
-<div id="notiPopup" class="noti-popup-overlay" style="display:none">
-  <div class="noti-popup-card">
-    <div class="noti-popup-icon">🔔</div>
-    <div class="noti-popup-title">맞춤 혜택 알림을<br>받아보시겠어요?</div>
-    <div class="noti-popup-benefits">
-      <div class="noti-popup-benefit-row"><span class="noti-popup-check">✓</span> 내 주변 할인 소식 실시간 알림</div>
-      <div class="noti-popup-benefit-row"><span class="noti-popup-check">✓</span> 쿠폰 만료 전 미리 알려드려요</div>
-      <div class="noti-popup-benefit-row"><span class="noti-popup-check">✓</span> 자주 가는 브랜드 신규 혜택</div>
-    </div>
-    <div class="noti-popup-btns">
-      <button class="btn-primary" style="font-size:var(--font-size-body)" onclick="closeNotiPopup('on')">알림 켜기</button>
-      <button class="btn-ghost" style="font-size:var(--font-size-body)" onclick="closeNotiPopup('later')">나중에 설정하기</button>
-    </div>
-  </div>
-</div>
-
-
 <!-- ══════════════════════════════════════
      음성 검색 UI (Figma 526:3900)
 ══════════════════════════════════════ -->
@@ -5375,19 +5781,4 @@
 
 
 
-
-    <!-- 하단 정렬 바텀시트 모달 (디자인 토큰 적용) -->
-    <div id="wshSortBottomSheet" class="wsh-bottom-sheet-overlay" onclick="closeWshSortBottomSheet()" style="display: none; position: fixed; inset: 0; background: rgba(18, 18, 18, 0.4); z-index: 10000; align-items: flex-end; justify-content: center; box-sizing: border-box;">
-      <div id="wshSortBottomSheetContent" class="wsh-bottom-sheet-content" onclick="event.stopPropagation()" style="width: 100%; max-width: 100%; background: var(--color-gray-50); box-shadow: var(--shadow-m); border-radius: var(--radius-lg) var(--radius-lg) 0 0; padding: var(--spacing-32) var(--spacing-16); display: flex; flex-direction: column; gap: var(--spacing-20); align-items: stretch; box-sizing: border-box; transform: translateY(100%); transition: transform 0.25s ease-out;">
-        <div id="wshSortBottomSheetOptions" style="display: flex; flex-direction: column; gap: var(--spacing-2); width: 100%;">
-          <div class="wsh-sort-option-item" data-group="coupon point" data-value="마감임박순" onclick="selectBottomSheetSort('마감임박순')" style="display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-14) 0; cursor: pointer; width: 100%;"><div class="wsh-sort-option-text" style="color: var(--color-gray-500); font-size: var(--font-size-body); font-family: var(--font); font-weight: var(--font-weight-bold); word-wrap: break-word">마감임박순</div><div class="wsh-sort-check-icon" style="width: 26px; height: 20px; display: none; align-items: center; justify-content: center;"><svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 4.07692L5.52516 9.96766C5.92544 10.4887 6.71092 10.4887 7.11121 9.96766L14 1" stroke="var(--color-blue-500)" stroke-width="2" stroke-linecap="round"/></svg></div></div>
-          <div class="wsh-sort-option-item" data-group="coupon" data-value="최대할인순" onclick="selectBottomSheetSort('최대할인순')" style="display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-14) 0; cursor: pointer; width: 100%;"><div class="wsh-sort-option-text" style="color: var(--color-gray-500); font-size: var(--font-size-body); font-family: var(--font); font-weight: var(--font-weight-bold); word-wrap: break-word">최대할인순</div><div class="wsh-sort-check-icon" style="width: 26px; height: 20px; display: none; align-items: center; justify-content: center;"><svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 4.07692L5.52516 9.96766C5.92544 10.4887 6.71092 10.4887 7.11121 9.96766L14 1" stroke="var(--color-blue-500)" stroke-width="2" stroke-linecap="round"/></svg></div></div>
-          <div class="wsh-sort-option-item" data-group="coupon" data-value="인기순" onclick="selectBottomSheetSort('인기순')" style="display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-14) 0; cursor: pointer; width: 100%;"><div class="wsh-sort-option-text" style="color: var(--color-gray-500); font-size: var(--font-size-body); font-family: var(--font); font-weight: var(--font-weight-bold); word-wrap: break-word">인기순</div><div class="wsh-sort-check-icon" style="width: 26px; height: 20px; display: none; align-items: center; justify-content: center;"><svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 4.07692L5.52516 9.96766C5.92544 10.4887 6.71092 10.4887 7.11121 9.96766L14 1" stroke="var(--color-blue-500)" stroke-width="2" stroke-linecap="round"/></svg></div></div>
-          <div class="wsh-sort-option-item" data-group="coupon" data-value="거리순" onclick="selectBottomSheetSort('거리순')" style="display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-14) 0; cursor: pointer; width: 100%;"><div class="wsh-sort-option-text" style="color: var(--color-gray-500); font-size: var(--font-size-body); font-family: var(--font); font-weight: var(--font-weight-bold); word-wrap: break-word">거리순</div><div class="wsh-sort-check-icon" style="width: 26px; height: 20px; display: none; align-items: center; justify-content: center;"><svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 4.07692L5.52516 9.96766C5.92544 10.4887 6.71092 10.4887 7.11121 9.96766L14 1" stroke="var(--color-blue-500)" stroke-width="2" stroke-linecap="round"/></svg></div></div>
-          <div class="wsh-sort-option-item" data-group="point" data-value="포인트 높은순" onclick="selectBottomSheetSort('포인트 높은순')" style="display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-14) 0; cursor: pointer; width: 100%;"><div class="wsh-sort-option-text" style="color: var(--color-gray-500); font-size: var(--font-size-body); font-family: var(--font); font-weight: var(--font-weight-bold); word-wrap: break-word">포인트 높은순</div><div class="wsh-sort-check-icon" style="width: 26px; height: 20px; display: none; align-items: center; justify-content: center;"><svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 4.07692L5.52516 9.96766C5.92544 10.4887 6.71092 10.4887 7.11121 9.96766L14 1" stroke="var(--color-blue-500)" stroke-width="2" stroke-linecap="round"/></svg></div></div>
-          <div class="wsh-sort-option-item" data-group="point" data-value="가나다순" onclick="selectBottomSheetSort('가나다순')" style="display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-14) 0; cursor: pointer; width: 100%;"><div class="wsh-sort-option-text" style="color: var(--color-gray-500); font-size: var(--font-size-body); font-family: var(--font); font-weight: var(--font-weight-bold); word-wrap: break-word">가나다순</div><div class="wsh-sort-check-icon" style="width: 26px; height: 20px; display: none; align-items: center; justify-content: center;"><svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 4.07692L5.52516 9.96766C5.92544 10.4887 6.71092 10.4887 7.11121 9.96766L14 1" stroke="var(--color-blue-500)" stroke-width="2" stroke-linecap="round"/></svg></div></div>
-        </div>
-      </div>
-    </div>
-</body>
-</html>
+</bo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
