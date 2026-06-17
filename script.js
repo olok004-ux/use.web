@@ -6121,79 +6121,97 @@ let _wshEditMode = false;
 let _wshCouponEditMode = false;
 
 function wshToggleEditMode() {
-  _wshEditMode = !_wshEditMode;
-  const grid = document.getElementById('wshBrandGrid');
-  const btn  = document.getElementById('wshEditBtn');
-  if (_wshEditMode) {
-    grid.classList.add('wsh-edit-mode');
-    btn.textContent = '완료';
-    btn.style.color = 'var(--primary)';
-    btn.style.fontWeight = '800';
-  } else {
-    // 완료: 삭제 표시된 셀 제거
-    grid.querySelectorAll('.wsh-brand-cell.wsh-mark-delete').forEach(el => {
-      el.style.transition = 'opacity 0.18s, transform 0.18s';
-      el.style.opacity = '0';
-      el.style.transform = 'scale(0.4)';
-      setTimeout(() => el.remove(), 180);
-    });
-    grid.classList.remove('wsh-edit-mode');
-    btn.textContent = '편집 | 삭제';
-    btn.style.color = 'var(--gray-700)';
-    btn.style.fontWeight = '700';
+  openWshEditSheet();
+}
+
+function openWshEditSheet() {
+  wshRenderEditSheet();
+  document.getElementById('wshEditOverlay').classList.add('open');
+  document.getElementById('wshEditSheet').classList.add('open');
+}
+
+function closeWshEditSheet() {
+  document.getElementById('wshEditOverlay').classList.remove('open');
+  document.getElementById('wshEditSheet').classList.remove('open');
+}
+
+function toggleWshFavorite(brandId, e) {
+  if (e) e.stopPropagation();
+  const cell = document.querySelector(`#wshBrandGrid .wsh-brand-cell[onclick*="'${brandId}'"]`);
+  if (cell) {
+    cell.style.transition = 'opacity 0.18s, transform 0.18s';
+    cell.style.opacity = '0';
+    cell.style.transform = 'scale(0.4)';
+    setTimeout(() => {
+      cell.remove();
+      wshRenderEditSheet();
+      // 또한 쿠폰 목록 탭도 리렌더링하여 연동
+      if (document.getElementById('wshCouponSection').style.display !== 'none') {
+        wshRenderCouponList();
+      }
+    }, 180);
   }
 }
 
-function wshMarkDelete(btn, e) {
-  e.stopPropagation();
-  const cell = btn.closest('.wsh-brand-cell');
-  cell.classList.toggle('wsh-mark-delete');
-}
-
-function wshEnsureCouponDeleteButtons() {
-  document.querySelectorAll('#wshCpnList .wsh-cpn-card').forEach(function(card) {
-    if (card.querySelector('.wsh-cpn-del-btn')) return;
-    const brand = (card.querySelector('.wsh-cpn-brand-lbl')?.textContent || '쿠폰').trim();
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'wsh-cpn-del-btn';
-    btn.setAttribute('aria-label', brand + ' 쿠폰 삭제');
-    btn.textContent = '−';
-    btn.onclick = function(e) { wshMarkCouponDelete(this, e); };
-    card.prepend(btn);
+function wshRenderEditSheet() {
+  const listEl = document.getElementById('wshEditSheetList');
+  if (!listEl) return;
+  
+  const favoritedBrandIds = [];
+  document.querySelectorAll('#wshBrandGrid .wsh-brand-cell').forEach(cell => {
+    const onclick = cell.getAttribute('onclick') || '';
+    const m = onclick.match(/wshOpenBrand\('([^']+)'\)/);
+    if (m && m[1]) {
+      favoritedBrandIds.push(m[1]);
+    }
   });
-}
-
-function wshToggleCouponEditMode() {
-  const list = document.getElementById('wshCpnList');
-  const btn = document.getElementById('wshCpnEditBtn');
-  if (!list || !btn) return;
-  _wshCouponEditMode = !_wshCouponEditMode;
-  if (_wshCouponEditMode) {
-    wshEnsureCouponDeleteButtons();
-    list.classList.add('wsh-edit-mode');
-    btn.textContent = '완료';
-    btn.style.color = 'var(--primary)';
-    btn.style.fontWeight = '800';
-  } else {
-    list.querySelectorAll('.wsh-cpn-card.wsh-mark-delete').forEach(function(el) {
-      el.style.transition = 'opacity 0.18s, transform 0.18s';
-      el.style.opacity = '0';
-      el.style.transform = 'scale(0.4)';
-      setTimeout(function() { el.remove(); }, 180);
+  
+  let html = '';
+  favoritedBrandIds.forEach(brandId => {
+    const b = WSH_BRANDS[brandId];
+    if (!b || !b.coupons) return;
+    
+    b.coupons.forEach(c => {
+      const isUrgent = c.urgent || c.dday === 'D-DAY' || b.id === 'baemin';
+      const isD1 = b.id === 'gs25';
+      const cardClass = isUrgent ? 'urgent' : (isD1 ? 'd-1' : '');
+      const badgeText = isUrgent ? 'D-DAY' : (isD1 ? 'D-1' : '');
+      const brandBgColor = b.bg || '#00704A';
+      const brandInitial = b.icon || b.name.charAt(0);
+      
+      const heartSvg = `<svg viewBox="0 0 24 24" fill="var(--color-red-400)" stroke="var(--color-red-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
+      
+      html += `
+        <div class="wsh-cpn-card ${cardClass}" data-brand-id="${b.id}">
+          <div class="wsh-cpn-logo-section">
+            <div class="wsh-cpn-logo-container">
+              <div class="wsh-cpn-logo-circle" style="background:${brandBgColor}">
+                <span>${brandInitial}</span>
+              </div>
+              <div class="wsh-cpn-badge">온라인</div>
+            </div>
+          </div>
+          <div class="wsh-cpn-details-section">
+            <div class="wsh-cpn-top-row">
+              <span class="wsh-cpn-brand-lbl">${b.name}</span>
+              <button class="wsh-cpn-heart-btn" onclick="toggleWshFavorite('${b.id}', event)" aria-label="즐겨찾기 해제">
+                ${heartSvg}
+              </button>
+            </div>
+            <p class="wsh-cpn-title">${c.title}</p>
+            <p class="wsh-cpn-cond">${c.cond}</p>
+            <p class="wsh-cpn-date">${c.exp ? c.exp + ' 까지' : ''}</p>
+          </div>
+          ${badgeText ? `<div class="wsh-cpn-dday-badge">${badgeText}</div>` : ''}
+        </div>
+      `;
     });
-    list.classList.remove('wsh-edit-mode');
-    btn.textContent = '편집 | 삭제';
-    btn.style.color = 'var(--gray-700)';
-    btn.style.fontWeight = '700';
+  });
+  
+  if (!html) {
+    html = '<div style="text-align:center;padding:var(--spacing-32);color:var(--color-gray-400);font-family:var(--font)">즐겨찾기된 항목이 없습니다.</div>';
   }
-}
-
-function wshMarkCouponDelete(btn, e) {
-  e.stopPropagation();
-  const card = btn.closest('.wsh-cpn-card');
-  if (!card) return;
-  card.classList.toggle('wsh-mark-delete');
+  listEl.innerHTML = html;
 }
 
 function wshOpenBrand(id) {
@@ -6248,24 +6266,39 @@ function wshShowBrandGrid() {
 }
 function wshCpnCardItem(b, c) {
   const dateStr = (c.start && c.exp) ? c.start + ' ~ ' + c.exp : (c.exp ? c.exp + ' 까지' : '');
-  return `<div class="wsh-cpn-card" data-action="go-detail" data-id="${b.id}">
-    <button type="button" class="wsh-cpn-del-btn" onclick="wshMarkCouponDelete(this,event)" aria-label="${b.name} 쿠폰 삭제">−</button>
-    <div class="wsh-cpn-card-header">
-      <span class="wsh-cpn-brand-lbl">${b.name}</span>
-      <span class="wsh-cpn-heart">&#10084;</span>
-    </div>
-    <div class="wsh-cpn-body">
-      <div class="wsh-cpn-logo-wrap">
-        <div class="wsh-cpn-logo-circle"></div>
-        <div class="wsh-cpn-badge">온라인</div>
+  const isUrgent = c.urgent || c.dday === 'D-DAY' || b.id === 'baemin';
+  const isD1 = b.id === 'gs25';
+  const cardClass = isUrgent ? 'urgent' : (isD1 ? 'd-1' : '');
+  const badgeText = isUrgent ? 'D-DAY' : (isD1 ? 'D-1' : '');
+  const brandBgColor = b.bg || '#00704A';
+  const brandInitial = b.icon || b.name.charAt(0);
+  
+  const heartSvg = `<svg viewBox="0 0 24 24" fill="var(--color-red-400)" stroke="var(--color-red-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
+  
+  return `
+    <div class="wsh-cpn-card ${cardClass}" data-action="go-detail" data-id="${b.id}">
+      <div class="wsh-cpn-logo-section">
+        <div class="wsh-cpn-logo-container">
+          <div class="wsh-cpn-logo-circle" style="background:${brandBgColor}">
+            <span>${brandInitial}</span>
+          </div>
+          <div class="wsh-cpn-badge">온라인</div>
+        </div>
       </div>
-      <div class="wsh-cpn-info">
+      <div class="wsh-cpn-details-section">
+        <div class="wsh-cpn-top-row">
+          <span class="wsh-cpn-brand-lbl">${b.name}</span>
+          <button class="wsh-cpn-heart-btn" onclick="toggleWshFavorite('${b.id}', event)" aria-label="즐겨찾기 해제">
+            ${heartSvg}
+          </button>
+        </div>
         <p class="wsh-cpn-title">${c.title}</p>
         <p class="wsh-cpn-cond">${c.cond}</p>
         <p class="wsh-cpn-date">${dateStr}</p>
       </div>
+      ${badgeText ? `<div class="wsh-cpn-dday-badge">${badgeText}</div>` : ''}
     </div>
-  </div>`;
+  `;
 }
 
 function wshRenderCouponList() {
