@@ -1,9 +1,9 @@
-<html lang="ko"><head>
+﻿<html lang="ko"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>USE — 쿠폰 자동추천 서비스</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<link rel="stylesheet" href="style.css?v=2">
+<link rel="stylesheet" href="style.css?v=35">
 </head>
 <body>
 
@@ -1007,7 +1007,7 @@
     </div><!-- /.su-content -->
 
     <!-- 하단 고정 버튼 -->
-    <div style="padding:32px 24px;background:#ffffff;">
+    <div class="su-complete-btn-wrap" style="padding:32px 24px;background:#FFFFFF;">
       <button class="terms-next-btn" id="suCompleteBtn" style="background:#98a2b3;cursor:not-allowed;" onclick="suComplete()">완료</button>
     </div>
 
@@ -1131,7 +1131,7 @@
       </h1>
       <!-- 일러스트 -->
       <div style="width:100%;display:flex;justify-content:center;">
-        <img src="https://www.figma.com/api/mcp/asset/9a1c4aeb-90e4-4a47-a61c-4e9ea9e9da20" alt="서비스 연동 일러스트" style="width:220px;height:auto;object-fit:contain;">
+        <img src="연동svg.svg" alt="서비스 연동 일러스트" style="width:220px;height:auto;object-fit:contain;">
       </div>
     </div>
     <!-- 하단 버튼 -->
@@ -1154,7 +1154,7 @@
       <!-- 스텝퍼: 3단계 모두 파란색 -->
       <div class="ci-stepper" style="width:100%;max-width:360px;">
         <div class="ci-step">
-          <div class="ci-step-circle">1</div>
+          <div class="ci-step-circle loading">1</div>
           <span class="ci-step-label">쿠폰 집계</span>
         </div>
         <div class="ci-step-line"></div>
@@ -1352,16 +1352,15 @@
           <button class="wiz-next-btn" onclick="wizGo(2)">다음</button>
         </div>
       </div>
-
       <!-- STEP 2: 브랜드 -->
-      <div class="wiz-step" id="wiz-step2">
+<div class="wiz-step on" id="wiz-step2">
         <div class="wiz-fixed-head">
         <div class="wiz-count">2/4</div>
         <div class="wiz-bar"><div class="wiz-bar-fill" style="width:50%"></div></div>
         <div class="wiz-title">원하는 브랜드를<br>선택해 주세요.</div>
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
           <div style="flex:1;border:1px solid #dce3ec;border-radius:24px;display:flex;align-items:center;padding:10px 16px;gap:8px;">
-            <svg viewBox="0 0 24 24" fill="none" style="width:18px;height:18px;flex-shrink:0;"><circle cx="11" cy="11" r="7" stroke="#98a2b3" stroke-width="2"/><path d="m20 20-3.8-3.8" stroke="#98a2b3" stroke-width="2" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" style="width:18px;height:18px;flex-shrink:0;"><circle cx="11" cy="11" r="7" stroke="#98a2b3" stroke-width="2"></circle><path d="m20 20-3.8-3.8" stroke="#98a2b3" stroke-width="2" stroke-linecap="round"></path></svg>
             <input type="text" placeholder="브랜드를 입력해 주세요" style="border:none;outline:none;font-size:.9rem;color:#1d2939;background:transparent;width:100%;font-family:'SUIT',sans-serif;">
           </div>
           <button class="wiz-sel-all-btn">전체선택</button>
@@ -1373,7 +1372,7 @@
           <p style="font-size:.85rem;font-weight:700;color:#000;margin:0 0 10px;">요즘 많이 찾아보는 브랜드에요 :)</p>
           <div class="wiz-featured-scroll">
             <div class="wiz-brand wiz-brand-featured" onclick="toggleBrand(this)">
-              <div class="wiz-brand-card"><div class="wiz-brand-logo"><img src="BHC logo.svg" alt="BHC" onerror="this.style.display='none';this.parentNode.innerHTML='<b style=font-size:11px>BHC</b>'"></div></div>
+              <div class="wiz-brand-card"><div class="wiz-brand-logo"><b style="font-size:11px">BHC</b></div></div>
               <span class="wiz-brand-name">BHC</span>
             </div>
             <div class="wiz-brand wiz-brand-featured" onclick="toggleBrand(this)">
@@ -1381,7 +1380,7 @@
               <span class="wiz-brand-name">올리브영</span>
             </div>
             <div class="wiz-brand wiz-brand-featured" onclick="toggleBrand(this)">
-              <div class="wiz-brand-card"><div class="wiz-brand-logo"><img src="UNIQLO.svg" alt="유니클로" onerror="this.style.display='none';this.parentNode.innerHTML='<b style=color:#e40521>UNIQLO</b>'"></div></div>
+              <div class="wiz-brand-card"><div class="wiz-brand-logo"><b style="color:#e40521">UNIQLO</b></div></div>
               <span class="wiz-brand-name">유니클로</span>
             </div>
           </div>
@@ -1392,7 +1391,7 @@
           <p style="font-size:.85rem;font-weight:700;color:#071b44;margin:0 0 10px;">마트</p>
           <div class="wiz-brand-scroll">
             <div class="wiz-brand" onclick="toggleBrand(this)">
-              <div class="wiz-brand-card"><div class="wiz-brand-logo"><img src="신세계.svg" alt="이마트" onerror="this.style.display='none';this.parentNode.innerHTML='<b style=color:#e31837>emart</b>'"></div></div>
+              <div class="wiz-brand-card"><div class="wiz-brand-logo"><b style="color:#e31837">emart</b></div></div>
               <span class="wiz-brand-name">이마트</span>
             </div>
             <div class="wiz-brand" onclick="toggleBrand(this)">
@@ -1407,15 +1406,15 @@
           <p style="font-size:.85rem;font-weight:700;color:#071b44;margin:0 0 10px;">푸드</p>
           <div class="wiz-brand-scroll">
             <div class="wiz-brand" onclick="toggleBrand(this)">
-              <div class="wiz-brand-card"><div class="wiz-brand-logo"><img src="도미노피자 logo.svg" alt="도미노피자" onerror="this.style.display='none';this.parentNode.innerHTML='🍕'"></div></div>
+              <div class="wiz-brand-card"><div class="wiz-brand-logo">🍕</div></div>
               <span class="wiz-brand-name">도미노피자</span>
             </div>
             <div class="wiz-brand" onclick="toggleBrand(this)">
-              <div class="wiz-brand-card"><div class="wiz-brand-logo" style="background:#e50012;"><img src="BBQ logo.svg" alt="BBQ" onerror="this.style.display='none';this.parentNode.innerHTML='<b style=color:white>BBQ</b>'"></div></div>
+              <div class="wiz-brand-card"><div class="wiz-brand-logo" style="background:#e50012;"><b style="color:white">BBQ</b></div></div>
               <span class="wiz-brand-name">BBQ</span>
             </div>
             <div class="wiz-brand" onclick="toggleBrand(this)">
-              <div class="wiz-brand-card"><div class="wiz-brand-logo"><img src="BHC logo.svg" alt="BHC" onerror="this.style.display='none';this.parentNode.innerHTML='<b>BHC</b>'"></div></div>
+              <div class="wiz-brand-card"><div class="wiz-brand-logo"><b>BHC</b></div></div>
               <span class="wiz-brand-name">BHC</span>
             </div>
           </div>
@@ -1426,15 +1425,15 @@
           <p style="font-size:.85rem;font-weight:700;color:#071b44;margin:0 0 10px;">패션</p>
           <div class="wiz-brand-scroll">
             <div class="wiz-brand" onclick="toggleBrand(this)">
-              <div class="wiz-brand-card"><div class="wiz-brand-logo"><img src="무신사.svg" alt="무신사" onerror="this.style.display='none';this.parentNode.innerHTML='<b>무신사</b>'"></div></div>
+              <div class="wiz-brand-card"><div class="wiz-brand-logo"><b>무신사</b></div></div>
               <span class="wiz-brand-name">무신사</span>
             </div>
             <div class="wiz-brand" onclick="toggleBrand(this)">
-              <div class="wiz-brand-card"><div class="wiz-brand-logo" style="background:#ed1d24;"><img src="UNIQLO.svg" alt="유니클로" onerror="this.style.display='none';this.parentNode.innerHTML='<b style=color:white>UNIQLO</b>'"></div></div>
+              <div class="wiz-brand-card"><div class="wiz-brand-logo" style="background:#ed1d24;"><b style="color:white">UNIQLO</b></div></div>
               <span class="wiz-brand-name">유니클로</span>
             </div>
             <div class="wiz-brand" onclick="toggleBrand(this)">
-              <div class="wiz-brand-card"><div class="wiz-brand-logo"><img src="Zara.svg" alt="자라" onerror="this.style.display='none';this.parentNode.innerHTML='<b>ZARA</b>'"></div></div>
+              <div class="wiz-brand-card"><div class="wiz-brand-logo"><b>ZARA</b></div></div>
               <span class="wiz-brand-name">자라</span>
             </div>
           </div>
@@ -1456,8 +1455,7 @@
           <button class="wiz-next-btn" onclick="wizGo(3)">다음</button>
         </div>
       </div>
-
-      <!-- STEP 3: 할인율 -->
+<!-- STEP 3: 할인율 -->
       <div class="wiz-step" id="wiz-step3">
         <div class="wiz-count">3/4</div>
         <div class="wiz-bar"><div class="wiz-bar-fill" style="width:75%"></div></div>
@@ -4837,254 +4835,98 @@
             <button class="ncs-next-btn" onclick="ncsNext(2)">다음</button>
           </div>
         </div>
-
-        <!-- STEP 2: 브랜드 -->
-        <div class="ncs-step" id="ncs-step2">
-          <div class="ncs-step-progress">
+        <!-- STEP 2: 브랜드 (notiWizard style) -->
+        <div class="ncs-step ncs-step2-wiz" id="ncs-step2">
+          <div class="ncs-wiz-fixed-head">
             <div class="ncs-step-count">2/4</div>
-            <div class="ncs-step-track" aria-hidden="true"><div class="ncs-step-fill half"></div></div>
-          </div>
-          <div class="ncs-title">원하는 브랜드를<br><strong>선택해 주세요.</strong></div>
-          <!-- 검색 + 전체선택 한 행 (Figma 607:12992) -->
-          <div class="ncs-brand-search-row">
-            <label class="ncs-brand-search" aria-label="브랜드 검색">
-              <input type="text" placeholder="브랜드 검색" oninput="ncsFilterBrands(this.value)">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"></circle><path d="m20 20-3.8-3.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
-            </label>
-            <button class="ncs-sel-all-btn" id="ncsBrandAllBtn" onclick="ncsBrandToggleAll(this)">전체선택</button>
-          </div>
-          <!-- 3열 원형 브랜드 그리드 (Figma 607:13001) -->
-          <div class="ncs-brand-grid">
-            <div class="ncs-brand-item sel" data-val="nike" onclick="ncsToggleBrand(this)">
-              <div class="ncs-brand-circle">
-                <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                  <path d="M5 23 C11 13 22 11 36 15 L24 23 C17 19 11 21 5 23z" fill="currentColor"/>
-                </svg>
-              </div>
-              <span class="ncs-brand-label">나이키</span>
-            </div>
-            <div class="ncs-brand-item" data-val="adidas" onclick="ncsToggleBrand(this)">
-              <div class="ncs-brand-circle">
-                <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                  <path d="M11 30 L20 10 L29 30 Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round" fill="none"/>
-                  <line x1="11" y1="30" x2="29" y2="30" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <span class="ncs-brand-label">아디다스</span>
-            </div>
-            <div class="ncs-brand-item" data-val="zara" onclick="ncsToggleBrand(this)">
-              <div class="ncs-brand-circle">
-                <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                  <path d="M10 13h20L10 27h20" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <span class="ncs-brand-label">자라</span>
-            </div>
-            <div class="ncs-brand-item" data-val="apple" onclick="ncsToggleBrand(this)">
-              <div class="ncs-brand-circle">
-                <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                  <path d="M26 14c-2 0-4 1.5-5 1.5S18 14 16 14c-3 0-6 2.5-6 7.5 0 6 4 14 7 14 1.5 0 2.5-1 4-1s2.5 1 4 1c3 0 7-8 7-14 0-5-3-7.5-6-7.5z" fill="currentColor"/>
-                  <path d="M24 9c1-1.5 1-3.5 0-5-1.5 0-4 1-5 3-1 1.5-1 3.5 0 5 1.5 0 4-1 5-3z" fill="currentColor"/>
-                </svg>
-              </div>
-              <span class="ncs-brand-label">애플</span>
-            </div>
-            <div class="ncs-brand-item" data-val="samsung" onclick="ncsToggleBrand(this)">
-              <div class="ncs-brand-circle">
-                <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                  <rect x="10" y="10" width="20" height="20" rx="6" stroke="currentColor" stroke-width="2.5"/>
-                  <path d="M16 20h8M20 16v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <span class="ncs-brand-label">삼성전자</span>
-            </div>
-            <div class="ncs-brand-item" data-val="coupang" onclick="ncsToggleBrand(this)">
-              <div class="ncs-brand-circle">
-                <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                  <path d="M20 8 L22 14 L28 14 L23 18 L25 24 L20 20 L15 24 L17 18 L12 14 L18 14 Z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/>
-                  <path d="M14 26 Q20 31 26 26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <span class="ncs-brand-label">쿠팡</span>
-            </div>
-            <div class="ncs-brand-item" data-val="emart" onclick="ncsToggleBrand(this)">
-              <div class="ncs-brand-circle">
-                <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                  <path d="M10 18h20M10 22h12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                  <rect x="10" y="11" width="20" height="18" rx="3" stroke="currentColor" stroke-width="2.5"/>
-                </svg>
-              </div>
-              <span class="ncs-brand-label">이마트</span>
-            </div>
-            <div class="ncs-brand-item" data-val="oliveyoung" onclick="ncsToggleBrand(this)">
-              <div class="ncs-brand-circle">
-                <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                  <path d="M20 30 C20 30 10 24 10 16 a10 10 0 0 1 20 0 C30 24 20 30 20 30z" stroke="currentColor" stroke-width="2.5" fill="none"/>
-                  <path d="M20 16 v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M20 20 c2-3 6-4 8-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <span class="ncs-brand-label">올리브영</span>
-            </div>
-            <div class="ncs-brand-item" data-val="starbucks" onclick="ncsToggleBrand(this)">
-              <div class="ncs-brand-circle">
-                <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                  <circle cx="20" cy="20" r="12" stroke="currentColor" stroke-width="2.5"/>
-                  <path d="M15 16 Q20 22 25 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M14 24 h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M20 10 v20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-                </svg>
-              </div>
-              <span class="ncs-brand-label">스타벅스</span>
-            </div>
-            <div class="ncs-brand-item" data-val="cgv" onclick="ncsToggleBrand(this)">
-              <div class="ncs-brand-circle">
-                <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                  <rect x="8" y="12" width="24" height="16" rx="3" stroke="currentColor" stroke-width="2.5"/>
-                  <circle cx="20" cy="20" r="5" stroke="currentColor" stroke-width="2"/>
-                  <line x1="8" y1="16" x2="32" y2="16" stroke="currentColor" stroke-width="1.5"/>
-                </svg>
-              </div>
-              <span class="ncs-brand-label">CGV</span>
-            </div>
-            <div class="ncs-brand-item" data-val="musinsa" onclick="ncsToggleBrand(this)">
-              <div class="ncs-brand-circle">
-                <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                  <path d="M12 10 Q12 8 20 8 Q28 8 28 10 L30 14 Q32 16 32 20 L32 30 L8 30 L8 20 Q8 16 10 14 Z" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
-                  <path d="M15 30 L15 24 Q15 22 20 22 Q25 22 25 24 L25 30" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <span class="ncs-brand-label">무신사</span>
-            </div>
-            <div class="ncs-brand-item" data-val="ohou" onclick="ncsToggleBrand(this)">
-              <div class="ncs-brand-circle">
-                <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
-                  <path d="M20 10 L32 20 H28 V30 H22 V24 H18 V30 H12 V20 H8 Z" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <span class="ncs-brand-label">오늘의집</span>
+            <div class="ncs-step-track" aria-hidden="true"><div class="ncs-step-fill half" style="width:50%"></div></div>
+            <div class="ncs-title">원하는 브랜드를<br>선택해 주세요.</div>
+            <div class="ncs-brand-search-row ncs-wiz-brand-search-row">
+              <label class="ncs-brand-search ncs-wiz-brand-search" aria-label="브랜드 검색">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"></circle><path d="m20 20-3.8-3.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+                <input type="text" placeholder="브랜드를 입력해 주세요" oninput="ncsFilterBrands(this.value)">
+              </label>
+              <button class="ncs-sel-all-btn" id="ncsBrandAllBtn" onclick="ncsBrandToggleAll(this); return false;">전체선택</button>
             </div>
           </div>
-          <div class="ncs-step-actions">
-            <button class="ncs-prev-btn" onclick="ncsBack()">이전</button>
-            <button class="ncs-next-btn" onclick="ncsNext(3)">다음</button>
+          <div class="ncs-wiz-scroll-body ncs-brand-sections ncs-brand-grid">
+            <section class="ncs-brand-section ncs-brand-featured-section">
+              <p class="ncs-brand-section-title">요즘 많이 찾아보는 브랜드에요 :)</p>
+              <div class="ncs-brand-scroll ncs-featured-scroll">
+                <div class="ncs-brand-item ncs-brand-featured sel" data-val="bhc" onclick="ncsToggleBrand(this)"><div class="ncs-brand-card"><div class="ncs-brand-circle"><b>BHC</b></div></div><span class="ncs-brand-label">BHC</span></div>
+                <div class="ncs-brand-item ncs-brand-featured" data-val="oliveyoung" onclick="ncsToggleBrand(this)"><div class="ncs-brand-card"><div class="ncs-brand-circle"><span style="font-size:9px;font-weight:700;color:#2d8a4e">올리브영</span></div></div><span class="ncs-brand-label">올리브영</span></div>
+                <div class="ncs-brand-item ncs-brand-featured" data-val="uniqlo" onclick="ncsToggleBrand(this)"><div class="ncs-brand-card"><div class="ncs-brand-circle"><b style="color:#e40521">UNIQLO</b></div></div><span class="ncs-brand-label">유니클로</span></div>
+              </div>
+            </section>
+            <section class="ncs-brand-section">
+              <hr>
+              <p class="ncs-brand-section-title">마트</p>
+              <div class="ncs-brand-scroll">
+                <div class="ncs-brand-item" data-val="emart" onclick="ncsToggleBrand(this)"><div class="ncs-brand-card"><div class="ncs-brand-circle"><b style="color:#e31837">emart</b></div></div><span class="ncs-brand-label">이마트</span></div>
+                <div class="ncs-brand-item" data-val="homeplus" onclick="ncsToggleBrand(this)"><div class="ncs-brand-card"><div class="ncs-brand-circle"><span style="font-size:9px;font-weight:700">홈플러스</span></div></div><span class="ncs-brand-label">홈플러스</span></div>
+              </div>
+            </section>
+            <section class="ncs-brand-section">
+              <hr>
+              <p class="ncs-brand-section-title">푸드</p>
+              <div class="ncs-brand-scroll">
+                <div class="ncs-brand-item" data-val="domino" onclick="ncsToggleBrand(this)"><div class="ncs-brand-card"><div class="ncs-brand-circle">피자</div></div><span class="ncs-brand-label">도미노피자</span></div>
+                <div class="ncs-brand-item" data-val="bbq" onclick="ncsToggleBrand(this)"><div class="ncs-brand-card"><div class="ncs-brand-circle" style="background:#e50012"><b style="color:white">BBQ</b></div></div><span class="ncs-brand-label">BBQ</span></div>
+                <div class="ncs-brand-item" data-val="bhc" onclick="ncsToggleBrand(this)"><div class="ncs-brand-card"><div class="ncs-brand-circle"><b>BHC</b></div></div><span class="ncs-brand-label">BHC</span></div>
+              </div>
+            </section>
+            <section class="ncs-brand-section">
+              <hr>
+              <p class="ncs-brand-section-title">패션</p>
+              <div class="ncs-brand-scroll">
+                <div class="ncs-brand-item" data-val="musinsa" onclick="ncsToggleBrand(this)"><div class="ncs-brand-card"><div class="ncs-brand-circle"><b>무신사</b></div></div><span class="ncs-brand-label">무신사</span></div>
+                <div class="ncs-brand-item" data-val="uniqlo" onclick="ncsToggleBrand(this)"><div class="ncs-brand-card"><div class="ncs-brand-circle" style="background:#ed1d24"><b style="color:white">UNIQLO</b></div></div><span class="ncs-brand-label">유니클로</span></div>
+                <div class="ncs-brand-item" data-val="zara" onclick="ncsToggleBrand(this)"><div class="ncs-brand-card"><div class="ncs-brand-circle"><b>ZARA</b></div></div><span class="ncs-brand-label">자라</span></div>
+              </div>
+            </section>
+            <section class="ncs-brand-section">
+              <hr>
+              <p class="ncs-brand-section-title">뷰티</p>
+              <div class="ncs-brand-scroll">
+                <div class="ncs-brand-item" data-val="oliveyoung" onclick="ncsToggleBrand(this)"><div class="ncs-brand-card"><div class="ncs-brand-circle"><span style="font-size:9px;font-weight:700;color:#2d8a4e">올리브영</span></div></div><span class="ncs-brand-label">올리브영</span></div>
+              </div>
+            </section>
+          </div>
+          <div class="ncs-wiz-actions wiz-actions">
+            <button class="wiz-prev-btn" onclick="ncsBack(); return false;">이전</button>
+            <button class="wiz-next-btn" onclick="ncsNext(3); return false;">다음</button>
           </div>
         </div>
-
-        <!-- STEP 3: 할인율 설정 (Figma 607:13334) -->
-        <div class="ncs-step" id="ncs-step3">
-          <div class="ncs-step-progress">
-            <div class="ncs-step-count">3/4</div>
-            <div class="ncs-step-track" aria-hidden="true"><div class="ncs-step-fill three-quarter"></div></div>
+<!-- STEP 3: 할인율 설정 (notiWizard style) -->
+        <div class="ncs-step ncs-step3-wiz" id="ncs-step3">
+          <div class="wiz-count">3/4</div>
+          <div class="wiz-bar"><div class="wiz-bar-fill" style="width:75%"></div></div>
+          <div class="wiz-title">알림 받기 원하는<br>할인율 설정해 주세요.</div>
+          <div class="wiz-slider-wrap">
+            <div class="wiz-slider-display"><span class="wiz-slider-val" id="ncsSliderVal">70</span><span class="wiz-slider-pct">%</span></div>
+            <p class="wiz-slider-caption">이상 혜택부터 알림을 받을래요!</p>
+            <input type="range" min="0" max="100" step="10" value="70" style="height:100px;" oninput="document.getElementById('ncsSliderVal').textContent=this.value">
           </div>
-          <div class="ncs-title">알림 받기 원하는<br>할인율 설정해 주세요.</div>
-          <div class="ncs-dial-wrap">
-            <svg id="ncsDial" viewBox="-10 -10 260 260" width="292" height="292" style="cursor:pointer;touch-action:none">
-              <!-- 배경 트랙 (270° horseshoe) -->
-              <circle class="dial-track" cx="120" cy="120" r="90" fill="none" stroke-width="18" stroke-dasharray="566 0" stroke-dashoffset="0" stroke-linecap="round"></circle>
-              <!-- 활성 아크: 초기 70% -->
-              <circle class="dial-arc" id="ncsArc" cx="120" cy="120" r="90" fill="none" stroke-width="18" stroke-dasharray="296.8 566" stroke-dashoffset="-212.1" stroke-linecap="round"></circle>
-              <!-- 핸들 -->
-              <circle class="dial-handle" id="ncsHandle" cx="192.8" cy="67.1" r="14" stroke-width="2" style="filter:drop-shadow(0 2px 6px rgba(0,0,0,.18))"></circle>
-              <!-- 퍼센트 텍스트 -->
-              <text class="dial-label" x="120" y="92" text-anchor="middle">할인율 설정</text>
-              <text class="dial-value" id="ncsValTxt" x="120" y="132" text-anchor="middle">70</text>
-              <text class="dial-unit" x="164" y="132">%</text>
-              <text class="dial-caption" x="120" y="162" text-anchor="middle">이상 할인 시 알림</text>
-            </svg>
-          </div>
-          <div class="ncs-rate-card">
-            <div class="ncs-rate-icon">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 12l-8 8-9-9V4h7l10 8z" stroke="currentColor"></path><circle cx="7.5" cy="7.5" r="1.5" fill="currentColor" stroke="none"></circle></svg>
-            </div>
-            <div class="ncs-rate-copy">
-              <div class="ncs-rate-title"><span id="ncsRateCardVal">70</span>% 이상 할인 쿠폰만</div>
-              <div class="ncs-rate-desc">알림으로 전달돼요.</div>
-            </div>
-          </div>
-          <div class="ncs-frequency-card">
-            <div class="ncs-frequency-left">
-              <div class="ncs-frequency-icon">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M13.73 21a2 2 0 0 1-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-              </div>
-              <div>
-                <div class="ncs-frequency-label">예상 알림 빈도</div>
-                <div class="ncs-frequency-value">하루 평균 2 ~ 3개</div>
-              </div>
-            </div>
-            <div class="ncs-frequency-chevron" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-            </div>
-          </div>
-          <div class="ncs-step-actions">
-            <button class="ncs-prev-btn" onclick="ncsBack()">이전</button>
-            <button class="ncs-next-btn" onclick="ncsNext(4)">다음</button>
-          </div>
+          <div class="wiz-actions"><button class="wiz-prev-btn" onclick="ncsBack(); return false;">이전</button><button class="wiz-next-btn" onclick="ncsNext(4); return false;">다음</button></div>
         </div>
-
-        <!-- STEP 4: 알림 채널 (Figma 189:7133) -->
-        <div class="ncs-step" id="ncs-step4">
-          <div class="ncs-step-progress">
-            <div class="ncs-step-count">4/4</div>
-            <div class="ncs-step-track" aria-hidden="true"><div class="ncs-step-fill full"></div></div>
+        <!-- STEP 4: 알림 채널 (notiWizard style) -->
+        <div class="ncs-step ncs-step4-wiz" id="ncs-step4">
+          <div class="wiz-head"><p class="wiz-count">4/4</p><div class="wiz-bar"><div class="wiz-bar-fill" style="width:100%"></div></div></div>
+          <div class="wiz-title">원하는 알림 설정을<br>선택해 주세요.</div>
+          <div class="wiz-channel-list">
+            <div class="wiz-divider"></div>
+            <div class="wiz-channel-row"><div class="wiz-channel-info"><div class="wiz-channel-icon kakao"><svg width="40" height="40" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 10C14.95 10 7.6 15.59 7.6 22.4c0 4.34 2.8 8.14 7.06 10.44L13.5 36l4.36-2.3c.69.09 1.4.14 2.14.14 9.05 0 16.4-5.59 16.4-12.4S33.05 10 24 10z" fill="#FBE300"/><path d="M17 22c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm7 0c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm7 0c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2z" fill="#3A1D00"/></svg></div><div class="wiz-channel-text"><span class="wiz-channel-name">카카오톡 알림</span><span class="wiz-channel-desc">카카오톡으로 알림을 받아요.</span></div></div><label class="wiz-toggle" aria-label="카카오톡 알림 on/off"><input type="checkbox" checked><span class="wiz-toggle-track"><span class="wiz-toggle-thumb"></span></span></label></div>
+            <div class="wiz-divider"></div>
+            <div class="wiz-channel-row"><div class="wiz-channel-info"><div class="wiz-channel-icon sms"><svg width="44" height="44" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="6" y="12" width="36" height="26" rx="4" fill="#126DFB"/><path d="M10 22h18M10 28h12" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><rect x="28" y="20" width="12" height="12" rx="2" fill="#E7F0FF"/><path d="M30 24h8M30 28h5" stroke="#126DFB" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="wiz-channel-text"><span class="wiz-channel-name">문자 알림</span><span class="wiz-channel-desc">SMS 문자로 알림을 받아요.</span></div></div><label class="wiz-toggle" aria-label="문자 알림 on/off"><input type="checkbox"><span class="wiz-toggle-track"><span class="wiz-toggle-thumb"></span></span></label></div>
+            <div class="wiz-divider"></div>
+            <div class="wiz-channel-row"><div class="wiz-channel-info"><div class="wiz-channel-icon gps"><svg width="44" height="44" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 6C16.27 6 10 12.27 10 20c0 10.5 14 28 14 28s14-17.5 14-28c0-7.73-6.27-14-14-14z" fill="#126DFB"/><circle cx="24" cy="20" r="5" fill="#fff"/></svg></div><div class="wiz-channel-text"><span class="wiz-channel-name">GPS 기반 알림</span><span class="wiz-channel-desc">위치 기반 맞춤 혜택을 받아요.</span></div></div><label class="wiz-toggle" aria-label="GPS 기반 알림 on/off"><input type="checkbox" checked><span class="wiz-toggle-track"><span class="wiz-toggle-thumb"></span></span></label></div>
+            <div class="wiz-divider"></div>
           </div>
-          <div class="ncs-title">원하는 알림 설정을<br>선택해 주세요.</div>
-          <!-- 채널 카드 -->
-          <div class="ncs-channel-card">
-            <!-- 카카오톡 알림 -->
-            <div class="ncs-channel-row">
-              <div class="ncs-channel-info">
-                <div class="ncs-channel-icon"></div>
-                <div class="ncs-channel-text">
-                  <span class="ncs-channel-name">카카오톡 알림</span>
-                  <span class="ncs-channel-desc">카카오톡으로 알림을 받아요.</span>
-                </div>
-              </div>
-              <label class="toggle-wrap" aria-label="카카오톡 알림 on/off">
-                <input type="checkbox" checked>
-                <div class="toggle-track"><div class="toggle-thumb"></div></div>
-              </label>
-            </div>
-            <hr class="ncs-channel-divider">
-            <!-- 문자 알림 -->
-            <div class="ncs-channel-row">
-              <div class="ncs-channel-info">
-                <div class="ncs-channel-icon"></div>
-                <div class="ncs-channel-text">
-                  <span class="ncs-channel-name">문자 알림</span>
-                  <span class="ncs-channel-desc">SMS 문자로 알림을 받아요.</span>
-                </div>
-              </div>
-              <label class="toggle-wrap" aria-label="문자 알림 on/off">
-                <input type="checkbox">
-                <div class="toggle-track"><div class="toggle-thumb"></div></div>
-              </label>
-            </div>
-            <hr class="ncs-channel-divider">
-            <!-- GPS 기반 알림 -->
-            <div class="ncs-channel-row">
-              <div class="ncs-channel-info">
-                <div class="ncs-channel-icon"></div>
-                <div class="ncs-channel-text">
-                  <span class="ncs-channel-name">GPS 기반 알림</span>
-                  <span class="ncs-channel-desc">위치 기반 맞춤 혜택을 받아요.</span>
-                </div>
-              </div>
-              <label class="toggle-wrap" aria-label="GPS 기반 알림 on/off">
-                <input type="checkbox" checked>
-                <div class="toggle-track"><div class="toggle-thumb"></div></div>
-              </label>
-            </div>
-          </div>
-          <!-- 안내 문구 -->
-          <p class="ncs-channel-note">설정한 내용은 언제든 변경할 수 있어요.<br>필요한 알림만 편리하게 받아보세요.</p>
-          <!-- 완료 버튼 -->
-          <button class="ncs-next-btn" onclick="ncsFinish()">완료</button>
+          <p class="wiz-channel-note">설정한 내용은 언제든 변경할 수 있어요.<br>필요한 알림만 편리하게 받아보세요.</p>
+          <div class="wiz-actions"><button class="wiz-next-btn" onclick="ncsFinish(); return false;">완료</button></div>
         </div>
-
       </div>
 
-      <!-- ══ NOTI PAGE: 알림 전체 화면 ══ -->
       <div id="p-noti-page" class="app-page" style="display: none;">
         <!-- 헤더 -->
         <div class="np-header">
@@ -5324,11 +5166,8 @@
     </div>
     <div class="nsp-body">
       <p class="nsp-title" id="nspTitle">원하는 할인율에 알맞은<br>혜택을 제공해 드려요!</p>
-      <!-- 벨 아이콘 (Figma 607:12950 — Icon Stroke) -->
-      <svg width="108" height="108" viewBox="0 0 108 108" fill="none" aria-hidden="true">
-        <path d="M54 14C51 14 48 17 48 20V26C35 29 24 41 24 55V76L14 90V94H94V90L84 76V55C84 41 73 29 60 26V20C60 17 57 14 54 14Z" stroke="var(--primary)" stroke-width="4.5" stroke-linejoin="round"/>
-        <path d="M44 94C44 100 48.5 105 54 105C59.5 105 64 100 64 94" stroke="var(--primary)" stroke-width="4.5" stroke-linecap="round"/>
-      </svg>
+      <!-- 알림 아이콘 -->
+      <img class="nsp-bell" src="알림SVG.svg" width="108" height="108" alt="" aria-hidden="true">
       <p class="nsp-sub">알림 설정을 하고<br>원하는 혜택 알림을 받아보세요</p>
     </div>
     <div class="nsp-actions">
@@ -5686,7 +5525,7 @@
 </div><!-- /homeSearchSheet -->
 
 
-<script src="script.js?v=2"></script>
+<script src="script.js?v=3"></script>
 <div class="toast" id="toast"></div>
 
 
@@ -5808,4 +5647,15 @@
 
 
 
-</bo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+</bo
+
+
+
+
+
+
+
+
+
+
+

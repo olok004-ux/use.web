@@ -1,4 +1,4 @@
-/* ============================================================ STATE ============================================================ */
+﻿/* ============================================================ STATE ============================================================ */
 const S = { cur:'splash', hist:[], appPage:'home', appHist:[], carIdx:0, connectMethod:'phone', connectFrom:'easy', authTimer:null, carTimer:null, searchKw:'', connectSvc:'', connectSvcName:'', _signupTimer:null, isConnected:!!localStorage.getItem('useHasVisited') };
 
 const downloaded = new Set(['baemin','starbucks']);
@@ -1638,18 +1638,6 @@ function ncsAutoFinish() {
 }
 /* ══ 나만의 알림 설정 위자드 ══ */
 let _ncsStep = 1;
-function ncsGoStep(n) {
-  _ncsStep = n;
-  // 스텝 표시
-  document.querySelectorAll('.ncs-step').forEach((el,i) => {
-    el.classList.toggle('on', i+1 === n);
-  });
-  // 도트 업데이트
-  document.querySelectorAll('#ncsDots .ncs-dot').forEach((d,i) => {
-    d.classList.toggle('on', i+1 === n);
-  });
-}
-function ncsNext(n) { ncsGoStep(n); }
 
 function switchHistTab(btn) {
   btn.closest('.hist-tabs').querySelectorAll('.hist-tab').forEach(t => t.classList.remove('on'));
@@ -3156,14 +3144,29 @@ function _npTicketCard(c, dnum) {
   </div>`;
 }
 
+function toggleNpH2Heart(id, btn) {
+  const cpn = USE_COUPONS.find(c => c.id === id);
+  if (!cpn) return;
+  cpn.fav = !cpn.fav;
+  const svg = btn && btn.querySelector('svg');
+  if (svg) {
+    const activeColor = 'var(--color-red-400)';
+    svg.setAttribute('fill', cpn.fav ? activeColor : 'none');
+    svg.setAttribute('stroke', cpn.fav ? activeColor : 'var(--color-gray-300)');
+  }
+  if (document.getElementById('wshCpnList')) renderWishlist();
+}
+
 function _npH2Card(c) {
   const chLabel = c.channel || '온라인';
   const logoStyle = `background:${cpnBgColor(c.brand)};color:white`;
-  const heartSvg = `<svg width="16" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-300)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
+  const heartFill = c.fav ? 'var(--color-red-400)' : 'none';
+  const heartStroke = c.fav ? 'var(--color-red-400)' : 'var(--color-gray-300)';
+  const heartSvg = `<svg width="16" height="17" viewBox="0 0 24 24" fill="${heartFill}" stroke="${heartStroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
   return `<div class="np-h2-card" data-action="go-detail" data-id="${c.id}" onclick="ACT['go-detail']&&ACT['go-detail']({target:this})">
     <div class="np-h2-head">
       <span class="np-h2-brand">${c.brand}</span>
-      <button class="np-h2-heart" onclick="event.stopPropagation()">${heartSvg}</button>
+      <button class="np-h2-heart" onclick="event.stopPropagation();toggleNpH2Heart('${c.id}',this)">${heartSvg}</button>
     </div>
     <div class="np-h2-body">
       <div class="np-h2-logo-wrap">
@@ -3281,6 +3284,100 @@ function openDetFromHome(id) {
   if (ACT['go-detail']) ACT['go-detail']({ target: { dataset: { id } } });
 }
 
+/* ── 혜택 차트 기간별 데이터 ── */
+const MF_CHART_DATA = {
+  '1일': {
+    bars: [
+      { label: '1,200',  height: 40,  tipLabel: '오늘 0시',  tipVal: '1,200p | 0개' },
+      { label: '0',      height: 4,   tipLabel: '오늘 4시',  tipVal: '0p | 0개' },
+      { label: '3,500',  height: 65,  tipLabel: '오늘 8시',  tipVal: '3,500p | 1개' },
+      { label: '8,200',  height: 100, tipLabel: '오늘 12시', tipVal: '8,200p | 2개' },
+      { label: '5,400',  height: 72,  tipLabel: '오늘 16시', tipVal: '5,400p | 1개' },
+      { label: '0',      height: 4,   tipLabel: '오늘 20시', tipVal: '0p | 0개' },
+    ],
+    activeIndex: 3,
+    months: ['0시', '4시', '8시', '12시', '16시', '20시'],
+    statPoint: '18,300p',
+    statCoupon: '4개',
+  },
+  '1주일': {
+    bars: [
+      { label: '5,200',  height: 45,  tipLabel: '이번주 월', tipVal: '5,200p | 1개' },
+      { label: '2,100',  height: 18,  tipLabel: '이번주 화', tipVal: '2,100p | 0개' },
+      { label: '11,500', height: 100, tipLabel: '이번주 수', tipVal: '11,500p | 3개' },
+      { label: '7,800',  height: 68,  tipLabel: '이번주 목', tipVal: '7,800p | 2개' },
+      { label: '3,200',  height: 28,  tipLabel: '이번주 금', tipVal: '3,200p | 1개' },
+      { label: '0',      height: 4,   tipLabel: '이번주 토', tipVal: '0p | 0개' },
+    ],
+    activeIndex: 2,
+    months: ['월', '화', '수', '목', '금', '토'],
+    statPoint: '29,800p',
+    statCoupon: '7개',
+  },
+  '1달': {
+    bars: [
+      { label: '12,400', height: 52,  tipLabel: '6월 1주차', tipVal: '12,400p | 2개' },
+      { label: '8,700',  height: 37,  tipLabel: '6월 2주차', tipVal: '8,700p | 1개' },
+      { label: '23,800', height: 100, tipLabel: '6월 3주차', tipVal: '23,800p | 4개' },
+      { label: '15,600', height: 65,  tipLabel: '6월 4주차', tipVal: '15,600p | 3개' },
+      { label: '6,200',  height: 26,  tipLabel: '6월 5주차', tipVal: '6,200p | 1개' },
+      { label: '0',      height: 4,   tipLabel: '6월 6주차', tipVal: '0p | 0개' },
+    ],
+    activeIndex: 2,
+    months: ['1주', '2주', '3주', '4주', '5주', '6주'],
+    statPoint: '66,700p',
+    statCoupon: '11개',
+  },
+  '최근 6개월': {
+    bars: [
+      { label: '18,500', height: 66,  tipLabel: '2026. 2월', tipVal: '18,500p | 2개' },
+      { label: '12,100', height: 25,  tipLabel: '2026. 3월', tipVal: '12,100p | 1개' },
+      { label: '41,800', height: 100, tipLabel: '2026. 4월', tipVal: '41,800p | 5개' },
+      { label: '30,200', height: 54,  tipLabel: '2026. 5월', tipVal: '30,200p | 2개' },
+      { label: '35,600', height: 76,  tipLabel: '2026. 6월', tipVal: '35,600p | 3개' },
+      { label: '28,900', height: 76,  tipLabel: '2026. 7월', tipVal: '28,900p | 3개' },
+    ],
+    activeIndex: 4,
+    months: ['2월', '3월', '4월', '5월', '6월', '7월'],
+    statPoint: '35,600p',
+    statCoupon: '3개',
+  },
+};
+
+function mfRenderChart(period) {
+  const data = MF_CHART_DATA[period];
+  if (!data) return;
+
+  // 1. 바 차트 업데이트
+  const cols = document.querySelectorAll('#mfChartArea .mf-bar-col');
+  cols.forEach((col, i) => {
+    const bar = col.querySelector('.mf-bar');
+    const lbl = col.querySelector('.mf-bar-label');
+    const d = data.bars[i];
+    if (!d || !bar || !lbl) return;
+    bar.style.height = d.height + '%';
+    bar.classList.toggle('active', i === data.activeIndex);
+    lbl.textContent = d.label;
+    lbl.classList.toggle('mf-bar-label-active', i === data.activeIndex);
+    col.dataset.tipLabel = d.tipLabel;
+    col.dataset.tipVal   = d.tipVal;
+  });
+
+  // 2. x축 월 레이블 업데이트
+  const monthSpans = document.querySelectorAll('#p-mypage .mf-month-row span');
+  monthSpans.forEach((span, i) => {
+    if (data.months[i] !== undefined) span.textContent = data.months[i];
+  });
+
+  // 3. 하단 통계값 업데이트
+  const statVals = document.querySelectorAll('#p-mypage .mf-month-stat-value');
+  if (statVals[0]) statVals[0].textContent = data.statPoint;
+  if (statVals[1]) statVals[1].textContent = data.statCoupon;
+
+  // 4. 툴팁을 활성 바 위치로 갱신 (initMfChart 재트리거)
+  document.dispatchEvent(new CustomEvent('appPageShown', { detail: 'p-mypage' }));
+}
+
 /* ── 기간 드롭다운 ── */
 function mfTogglePeriod() {
   const btn = document.getElementById('mfPeriodBtn');
@@ -3307,6 +3404,8 @@ function mfSelectPeriod(label, el) {
   document.getElementById('mfPeriodDropdown').classList.remove('open');
   document.getElementById('mfPeriodBtn').classList.remove('open');
   document.getElementById('mfPeriodBtn').setAttribute('aria-expanded', 'false');
+  // 차트 데이터 갱신
+  mfRenderChart(label);
 }
 // 외부 클릭 시 닫기
 document.addEventListener('click', function(e) {
@@ -3339,14 +3438,20 @@ document.addEventListener('click', function(e) {
       col.querySelector('.mf-bar')?.classList.add('active');
       col.querySelector('.mf-bar-label')?.classList.add('mf-bar-label-active');
 
-      const areaRect = area.getBoundingClientRect();
-      const colRect = col.getBoundingClientRect();
-      let leftPx = colRect.left - areaRect.left + colRect.width / 2;
-      leftPx = Math.max(48, Math.min(leftPx, area.offsetWidth - 48));
-      tip.style.left = leftPx + 'px';
+      if (area.offsetWidth === 0) {
+        // 페이지 미렌더링 상태: 인덱스 기반 퍼센트 위치 fallback
+        tip.style.left = ((index + 0.5) / cols.length * 100) + '%';
+      } else {
+        const areaRect = area.getBoundingClientRect();
+        const colRect  = col.getBoundingClientRect();
+        let leftPx = colRect.left - areaRect.left + colRect.width / 2;
+        leftPx = Math.max(24, Math.min(leftPx, area.offsetWidth - 24));
+        tip.style.left = leftPx + 'px';
+      }
+      tip.style.transform = 'translateX(-50%)';
 
-      if (lbl) lbl.textContent = monthLabels[index]?.textContent || `2026. ${index + 2}`;
-      if (val) val.textContent = `${col.querySelector('.mf-bar-label')?.textContent || ''}p l ${index === 3 ? '2?' : '1?'}`;
+      if (lbl) lbl.textContent = col.dataset.tipLabel || monthLabels[index]?.textContent || `2026. ${index + 2}월`;
+      if (val) val.textContent = col.dataset.tipVal || `${col.querySelector('.mf-bar-label')?.textContent || ''}p`;
     }
 
     const initIndex = [...cols].findIndex(col => col.querySelector('.mf-bar.active'));
@@ -3361,7 +3466,7 @@ document.addEventListener('click', function(e) {
 
   document.addEventListener('DOMContentLoaded', initMfChart);
   document.addEventListener('appPageShown', function(e) {
-    if (e.detail === 'p-mypage') setTimeout(initMfChart, 80);
+    if (e.detail === 'p-mypage') setTimeout(initMfChart, 200);
   });
 })();
 
@@ -6776,3 +6881,18 @@ function syncCatSelectAll() {
   if (!btn || !cats.length) return;
   btn.classList.toggle('sel', Array.from(cats).every(c => c.classList.contains('sel')));
 }
+
+// FINAL FIX: robust custom notification setup step navigation
+function ncsGoStep(n) {
+  _ncsStep = n;
+  const root = document.getElementById('p-noti-custom-setup') || document;
+  root.querySelectorAll('.ncs-step').forEach(el => {
+    const active = el.id === 'ncs-step' + n;
+    el.classList.toggle('on', active);
+    el.style.display = active ? 'flex' : 'none';
+  });
+  document.querySelectorAll('#ncsDots .ncs-dot').forEach((d, i) => {
+    d.classList.toggle('on', i + 1 === n);
+  });
+}
+function ncsNext(n) { ncsGoStep(n); }
