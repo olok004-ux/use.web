@@ -3324,47 +3324,41 @@ document.addEventListener('click', function(e) {
   function initMfChart() {
     const area = document.getElementById('mfChartArea');
     if (!area) return;
-    const dots = area.querySelectorAll('.mf-dot');
+    const cols = area.querySelectorAll('.mf-bar-col');
     const tip  = document.getElementById('mfChartTip');
     const lbl  = document.getElementById('mfTipLabel');
     const val  = document.getElementById('mfTipVal');
-    if (!dots.length || !tip) return;
+    const monthLabels = document.querySelectorAll('#p-mypage .mf-month-row span');
+    if (!cols.length || !tip) return;
 
-    function activate(dot) {
-      // 모든 dot 초기화
-      dots.forEach(d => {
-        d.removeAttribute('data-active');
-        d.setAttribute('r', d._baseR || '4');
+    function activate(col, index) {
+      cols.forEach(c => {
+        c.querySelector('.mf-bar')?.classList.remove('active');
+        c.querySelector('.mf-bar-label')?.classList.remove('mf-bar-label-active');
       });
-      // 선택 dot 확대
-      if (!dot._baseR) dot._baseR = dot.getAttribute('r');
-      dot.setAttribute('data-active', 'true');
-      dot.setAttribute('r', '7');
+      col.querySelector('.mf-bar')?.classList.add('active');
+      col.querySelector('.mf-bar-label')?.classList.add('mf-bar-label-active');
 
-      // tooltip 위치 (SVG viewBox 0~346 → 실제 컨테이너 너비 비율)
-      const pct = parseFloat(dot.dataset.pct) / 100;
-      const areaW = area.offsetWidth;
-      let leftPx = pct * areaW;
-      // 화면 밖 clamp
-      leftPx = Math.max(40, Math.min(leftPx, areaW - 40));
+      const areaRect = area.getBoundingClientRect();
+      const colRect = col.getBoundingClientRect();
+      let leftPx = colRect.left - areaRect.left + colRect.width / 2;
+      leftPx = Math.max(48, Math.min(leftPx, area.offsetWidth - 48));
       tip.style.left = leftPx + 'px';
 
-      // tooltip 내용
-      lbl.textContent = dot.dataset.label;
-      val.textContent = dot.dataset.val;
+      if (lbl) lbl.textContent = monthLabels[index]?.textContent || `2026. ${index + 2}`;
+      if (val) val.textContent = `${col.querySelector('.mf-bar-label')?.textContent || ''}p l ${index === 3 ? '2?' : '1?'}`;
     }
 
-    // 초기 활성 dot
-    const initDot = area.querySelector('.mf-dot[data-active="true"]');
-    if (initDot) activate(initDot);
+    const initIndex = [...cols].findIndex(col => col.querySelector('.mf-bar.active'));
+    const safeIndex = Math.max(0, initIndex);
+    activate(cols[safeIndex], safeIndex);
 
-    dots.forEach(dot => {
-      dot.addEventListener('click', () => activate(dot));
-      dot.addEventListener('touchstart', e => { e.preventDefault(); activate(dot); }, { passive: false });
+    cols.forEach((col, index) => {
+      col.addEventListener('click', () => activate(col, index));
+      col.addEventListener('touchstart', e => { e.preventDefault(); activate(col, index); }, { passive: false });
     });
   }
 
-  // DOM 준비 후 실행 + mypage 진입 시에도 재초기화
   document.addEventListener('DOMContentLoaded', initMfChart);
   document.addEventListener('appPageShown', function(e) {
     if (e.detail === 'p-mypage') setTimeout(initMfChart, 80);
@@ -4875,8 +4869,8 @@ const ACT = {
   'save-noti':           ()=>showToast('설정이 안전하게 변경되었습니다'),
   'noti-master':         (e)=>setNotiMasterCard(e.target.closest('[data-val]').dataset.val),
   'save-info':           ()=>showToast('설정이 안전하게 변경되었습니다'),
-  'nav-connect':         ()=>{ showAppPage('connect-svc-select'); updateSidebar(''); },
-  'nav-connect-svc':     ()=>{ showAppPage('connect-svc-select'); updateSidebar(''); },
+  'nav-connect':         ()=>{ showAppPage('connect'); updateSidebar(''); },
+  'nav-connect-svc':     ()=>{ showAppPage('connect'); updateSidebar(''); },
   'nav-noti-settings':   ()=>{ showAppPage('noti-custom-setup'); updateSidebar(''); },
   'toggle-connect-svc': (e)=>{
     const toggle = e.target.closest('[data-action="toggle-connect-svc"]');
@@ -5099,6 +5093,7 @@ function toggleNotiMaster() {
   const lblOff = document.getElementById('notiLblOff');
   const settings = document.getElementById('notiSettings');
   const offMsg   = document.getElementById('notiOffMsg');
+  if (!btn) return;
   const isOn = btn.classList.toggle('on');
   if (lblOn)  lblOn.classList.toggle('active', isOn);
   if (lblOff) lblOff.classList.toggle('active', !isOn);
@@ -5768,7 +5763,7 @@ function showMypageSub(id) {
   document.querySelectorAll('[data-action="mypage-tab"]').forEach(t => {
     t.classList.toggle('on', t.dataset.tab === id);
   });
-  if (id === 'noti') setTimeout(() => selectNotiCat('mart'), 50);
+  if (id === 'noti') setTimeout(() => selectNotiCat('all'), 50);
 }
 function closeMypageSub() {
   document.querySelectorAll('.mps').forEach(el => {

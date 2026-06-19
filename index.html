@@ -3490,7 +3490,7 @@
         </div>
 
         <!-- ── MYPAGE ── -->
-        <div id="p-mypage" class="app-page fade-in" style="display: none;">
+                <div id="p-mypage" class="app-page fade-in" style="display: none;">
         <div class="mypage-figma-main">
           <div class="mf-frame">
             <!-- 상단 고정바 (Figma 797-10005) -->
@@ -3522,7 +3522,7 @@
                   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path><path d="M13.73 21a2 2 0 0 1-3.46 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                   <span class="mf-quick-label">알림 설정</span>
                 </button>
-                <button class="mf-quick-item" type="button" onclick="showMypageSub('connect')">
+                <button class="mf-quick-item" type="button" onclick="showAppPage('connect')">
                   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                   <span class="mf-quick-label">서비스 연동</span>
                 </button>
@@ -3550,28 +3550,56 @@
                 </div>
               </div>
               <div class="mf-chart-area" id="mfChartArea">
-                <svg class="mf-chart-svg" viewBox="0 0 346 150" preserveAspectRatio="none" aria-hidden="true">
-                  <defs><linearGradient id="mfChartFill" x1="0" y1="32" x2="0" y2="150" gradientUnits="userSpaceOnUse"><stop stop-color="var(--primary)" stop-opacity=".28"></stop><stop offset="1" stop-color="var(--surface)" stop-opacity="0"></stop></linearGradient></defs>
-                  <path d="M0 70 L58 98 L115 52 L173 84 L231 68 L289 77 L346 35 L346 150 L0 150 Z" fill="url(#mfChartFill)"></path>
-                  <path d="M0 70 L58 98 L115 52 L173 84 L231 68 L289 77 L346 35" fill="none" stroke="var(--primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <g fill="var(--primary)">
-                    <circle class="mf-dot" cx="0"   cy="70"  r="4" data-label="2026. 1" data-val="18,500p l 1개" data-pct="0"></circle>
-                    <circle class="mf-dot" cx="58"  cy="98"  r="4" data-label="2026. 2" data-val="12,100p l 1개" data-pct="16.8"></circle>
-                    <circle class="mf-dot" cx="115" cy="52"  r="5" data-label="2026. 3" data-val="41,800p l 4개" data-pct="33.2" data-active="true"></circle>
-                    <circle class="mf-dot" cx="173" cy="84"  r="4" data-label="2026. 4" data-val="30,200p l 2개" data-pct="50"></circle>
-                    <circle class="mf-dot" cx="231" cy="68"  r="4" data-label="2026. 5" data-val="35,600p l 3개" data-pct="66.8"></circle>
-                    <circle class="mf-dot" cx="289" cy="77"  r="4" data-label="2026. 6" data-val="28,900p l 2개" data-pct="83.5"></circle>
-                    <circle class="mf-dot" cx="346" cy="35"  r="4" data-label="2026. 7" data-val="52,400p l 5개" data-pct="100"></circle>
-                  </g>
-                </svg>
-                <div class="mf-chart-tip" id="mfChartTip"><span id="mfTipLabel">2026. 3</span><strong id="mfTipVal">41,800p l 4개</strong></div>
+                <div class="mf-chart-tip" id="mfChartTip"><span id="mfTipLabel">2026. 5</span><strong id="mfTipVal">30,200p l 2개</strong></div>
+                <div class="mf-bar-chart">
+                  <div class="mf-bar-col">
+                    <span class="mf-bar-label">18,500</span>
+                    <div class="mf-bar" style="height:66%"></div>
+                  </div>
+                  <div class="mf-bar-col">
+                    <span class="mf-bar-label">12,100</span>
+                    <div class="mf-bar" style="height:25%"></div>
+                  </div>
+                  <div class="mf-bar-col">
+                    <span class="mf-bar-label">41,800</span>
+                    <div class="mf-bar" style="height:100%"></div>
+                  </div>
+                  <div class="mf-bar-col">
+                    <span class="mf-bar-label mf-bar-label-active">30,200</span>
+                    <div class="mf-bar active" style="height:54%"></div>
+                  </div>
+                  <div class="mf-bar-col">
+                    <span class="mf-bar-label">35,600</span>
+                    <div class="mf-bar" style="height:76%"></div>
+                  </div>
+                  <div class="mf-bar-col">
+                    <span class="mf-bar-label">28,900</span>
+                    <div class="mf-bar" style="height:76%"></div>
+                  </div>
+                </div>
               </div>
-              <div class="mf-month-row"><span>2월</span><span>3월</span><span>4월</span><span>5월</span><span>6월</span></div>
+              <div class="mf-month-row"><span>2월</span><span>3월</span><span>4월</span><span>5월</span><span>6월</span><span>7월</span></div>
               <div class="mf-card-divider"></div>
               <div class="mf-month-stats">
-                <div class="mf-month-stat"><span class="mf-month-stat-label">이번달 사용 포인트</span><strong class="mf-month-stat-value primary">109,000p</strong></div>
+                <div class="mf-month-stat">
+                  <div class="mf-stat-icon">
+                    <img src="https://www.figma.com/api/mcp/asset/76c87064-4f58-46e9-8ee3-8ea79ada7e8a" width="11" height="16" alt="" aria-hidden="true" style="display:block;opacity:0.92;object-fit:cover;">
+                  </div>
+                  <div class="mf-stat-text">
+                    <span class="mf-month-stat-label">이번달 사용 포인트</span>
+                    <strong class="mf-month-stat-value primary">30,200p</strong>
+                  </div>
+                </div>
                 <div class="mf-month-divider"></div>
-                <div class="mf-month-stat"><span class="mf-month-stat-label">이번달 사용 쿠폰</span><strong class="mf-month-stat-value">8개</strong></div>
+                <div class="mf-month-stat">
+                  <div class="mf-stat-icon mf-stat-icon-sq">
+                    <img src="https://www.figma.com/api/mcp/asset/1a0a0bdd-c58c-4a4f-9d06-fc942cfab939" width="11" height="16" alt="" aria-hidden="true" style="display:block;opacity:0.92;object-fit:cover;">
+                  </div>
+                  <div class="mf-stat-text">
+                    <span class="mf-month-stat-label">이번달 사용 쿠폰</span>
+                    <strong class="mf-month-stat-value">2개</strong>
+                  </div>
+                </div>
               </div>
               <div style="padding: 0 var(--spacing-10);">
                 <button class="mf-history-btn" type="button" onclick="showMypageSub('history')">이용내역 보기</button>
@@ -3580,105 +3608,6 @@
           </div>
         </div>
         <!-- 내 정보 카드 -->
-        <div class="mpi-card">
-          <div class="mpi-card-header">
-            <span class="mpi-card-title">내 정보</span>
-            <button class="mpi-gear-btn" onclick="showMypageSub('info')" aria-label="설정">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"></path></svg>
-            </button>
-          </div>
-          <!-- 프로필 배너 -->
-          <div class="mpi-banner">
-            <div style="position:relative;width:56px;height:56px;flex-shrink:0">
-              <div style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:var(--font-size-headline-sm);font-weight:var(--font-weight-bold)">미</div>
-              <button onclick="showMypageSub('profile')" style="position:absolute;bottom:0;right:0;width:18px;height:18px;border-radius:50%;background:white;border:2px solid var(--primary);color:var(--primary);font-size:var(--font-size-caption);cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;padding:0">✎</button>
-            </div>
-            <div style="flex:1">
-              <div style="font-size:var(--font-size-body);font-weight:var(--font-weight-bold);margin-bottom:3px">안녕하세요, 김미경 님!</div>
-              <div style="font-size:var(--font-size-caption);opacity:.75">010-****-5678 · 가입일 2025.01.15</div>
-            </div>
-            <button class="mpi-cs-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0118 0v6"></path><path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"></path></svg>
-              <span>고객센터</span>
-            </button>
-          </div>
-          <!-- 포인트 / 쿠폰 통계 -->
-          <div class="mpi-stats">
-            <div class="mpi-stat-item">
-              <span class="mpi-stat-label">마이 포인트</span>
-              <span class="mpi-stat-val primary">12,500 P</span>
-            </div>
-            <div class="mpi-stat-divider"></div>
-            <div class="mpi-stat-item" onclick="ACT['nav-wallet']?.()" style="cursor:pointer">
-              <span class="mpi-stat-label">보유 쿠폰</span>
-              <span class="mpi-stat-val">47 장</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- ══ 퀵액션 그리드 ══ -->
-        <div class="mypage-quick-grid" id="mypageQuickGrid">
-          <div class="mypage-quick-item" onclick="showMypageSub('noti')">
-            <div class="mypage-quick-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 01-3.46 0"></path></svg>
-            </div>
-            <div class="mypage-quick-label">알림 설정</div>
-          </div>
-          <div class="mypage-quick-item" onclick="showMypageSub('connect')">
-            <div class="mypage-quick-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"></path></svg>
-            </div>
-            <div class="mypage-quick-label">서비스 연동</div>
-          </div>
-          <div class="mypage-quick-item" onclick="showMypageSub('info')">
-            <div class="mypage-quick-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-            </div>
-            <div class="mypage-quick-label">기본 정보</div>
-          </div>
-        </div>
-
-        <!-- 포인트 사용 통계 -->
-        <div class="mpi-section">
-          <div class="mpi-section-title">포인트 사용 통계</div>
-          <div class="mpi-chart-card">
-            <div class="mpi-chart-period">최근 6개월</div>
-            <div class="mpi-chart">
-              <div class="mpi-bar-wrap"><div class="mpi-bar" style="height:62%"></div><span class="mpi-bar-label">11월</span></div>
-              <div class="mpi-bar-wrap"><div class="mpi-bar" style="height:78%"></div><span class="mpi-bar-label">12월</span></div>
-              <div class="mpi-bar-wrap"><div class="mpi-bar" style="height:44%"></div><span class="mpi-bar-label">1월</span></div>
-              <div class="mpi-bar-wrap"><div class="mpi-bar" style="height:58%"></div><span class="mpi-bar-label">2월</span></div>
-              <div class="mpi-bar-wrap"><div class="mpi-bar" style="height:70%"></div><span class="mpi-bar-label">3월</span></div>
-              <div class="mpi-bar-wrap"><div class="mpi-bar active" style="height:100%"></div><span class="mpi-bar-label active">4월</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 통계 카드 2개 -->
-        <div class="mpi-stat-cards">
-          <div class="mpi-stat-card">
-            <div class="mpi-stat-card-pct">15%</div>
-            <div class="mpi-stat-card-desc">쿠폰으로 아낀 비율</div>
-            <div class="mpi-stat-card-diff up">↗ 지난 달 +3%</div>
-          </div>
-          <div class="mpi-stat-card">
-            <div class="mpi-stat-card-pct">15%</div>
-            <div class="mpi-stat-card-desc">이번 달 못 쓰고 만료된 쿠폰</div>
-            <div class="mpi-stat-card-diff down">↘ 지난 달 -1%</div>
-          </div>
-        </div>
-
-        <!-- 쿠폰 이용 내역 -->
-        <div class="mpi-history-row" onclick="showMypageSub('history')">
-          <div class="mpi-history-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-          </div>
-          <span class="mpi-history-label">쿠폰 이용 내역</span>
-          <svg class="mpi-history-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-        </div>
-
-
-
         <div id="mypage-sub">
 
 
@@ -3692,12 +3621,10 @@
                   <span class="mf-tb-title">알림설정</span>
                   <span class="mf-tb-spacer"></span>
                 </div>
-
-                <div class="noti-off-msg" id="notiOffMsg" style="display:none">알림이 꺼져 있습니다.</div>
-
                 <div id="notiSettings" class="noti-settings">
+
+                  <!-- ① 자동 알림 섹션 -->
                   <div id="ns-auto">
-                    <!-- 자동 알림 헤더 + 마스터 토글 (Figma 743:24314) -->
                     <div class="na-auto-header" id="naAutoHeader">
                       <div class="na-auto-copy">
                         <div class="na-auto-title">자동 알림</div>
@@ -3708,11 +3635,10 @@
                         <div class="toggle-track"><div class="toggle-thumb"></div></div>
                       </label>
                     </div>
-                    <!-- 자동 알림 ON 상태: 채널 rows (Figma 743:24319) -->
                     <div id="ns-auto-channels">
                       <div class="na-toggle-row">
                         <div class="na-toggle-left">
-                          <svg class="na-toggle-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 4c-4.4 0-8 2.9-8 6.5 0 1.9.9 3.6 2.4 4.8L12 18l2.4-1.5c.8.2 1.7.3 2.6.3 4.4 0 8-2.9 8-6.5S22.4 4 18 4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path><circle cx="8" cy="14" r="5" stroke="currentColor" stroke-width="1.7"></circle></svg>
+                          <svg class="na-toggle-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13.1048 4.05097C12.7734 4.01733 12.4357 4 12.0931 4C7.62341 4 4 6.94965 4 10.5882C4 14.2268 7.62341 17.1765 12.0931 17.1765C12.7918 17.1765 13.4697 17.1044 14.1164 16.9689L17.1513 20V15.7647C18.5138 14.8434 19.6087 13.459 20 12M20 7.5C20 8.88071 18.8807 10 17.5 10C16.1193 10 15 8.88071 15 7.5C15 6.11929 16.1193 5 17.5 5C18.8807 5 20 6.11929 20 7.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                           <span class="na-toggle-lbl">카카오톡 알림</span>
                         </div>
                         <label class="toggle-dot"><input type="checkbox" checked=""><span class="toggle-dot-indicator"></span></label>
@@ -3734,19 +3660,21 @@
                     </div>
                   </div>
 
-                  <div id="ns-custom" style="display:none">
-                    <!-- 나만의 알림 카드 (Figma 743:24363) -->
-                    <div class="noti-custom-card">
-                      <div class="noti-custom-card-head">
-                        <div class="na-auto-copy">
-                          <div class="na-auto-title">나만의 알림</div>
-                          <div class="na-auto-desc">원하시는 브랜드의 알림을 설정할 수 있어요</div>
-                        </div>
-                        <label class="toggle-wrap" aria-label="나만의 알림 on/off">
-                          <input type="checkbox" checked>
-                          <div class="toggle-track"><div class="toggle-thumb"></div></div>
-                        </label>
+                  <!-- ② 나만의 알림 섹션 -->
+                  <div id="ns-custom">
+                    <!-- 나만의 알림 헤더 (카드 밖) -->
+                    <div class="na-auto-header" id="naCustomHeader">
+                      <div class="na-auto-copy">
+                        <div class="na-auto-title">나만의 알림</div>
+                        <div class="na-auto-desc">원하는 혜택만 선택해<br>필요한 알림만 받아보세요</div>
                       </div>
+                      <label class="toggle-wrap" aria-label="나만의 알림 on/off">
+                        <input type="checkbox" id="naCustomToggle">
+                        <div class="toggle-track"><div class="toggle-thumb"></div></div>
+                      </label>
+                    </div>
+                    <!-- 브랜드 카드 (헤더 없음, OFF시 overlay) -->
+                    <div class="noti-custom-card" id="naCustomCard">
                       <div class="noti-cat-row" id="notiCatRow">
                         <div class="noti-cat-chip sel" data-cat="all" onclick="selectNotiCat('all')">전체</div>
                         <div class="noti-cat-chip" data-cat="delivery" onclick="selectNotiCat('delivery')">배달</div>
@@ -3760,162 +3688,77 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"></circle><path d="m20 20-3.8-3.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
                       </div>
                       <div class="noti-brand-row" id="notiBrandRow">
-                        <div class="noti-brand-chip" data-label="이마트" onclick="toggleNotiBrand(this,'이마트')"><span>emart</span></div>
-                        <div class="noti-brand-chip" data-label="올리브영" onclick="toggleNotiBrand(this,'올리브영')"><span>OLIVE<br>YOUNG</span></div>
-                        <div class="noti-brand-chip" data-label="스타벅스" onclick="toggleNotiBrand(this,'스타벅스')"><span>STAR<br>BUCKS</span></div>
-                        <div class="noti-brand-chip" data-label="배달의민족" onclick="toggleNotiBrand(this,'배달의민족')"><span>배달의민족</span></div>
-                        <div class="noti-brand-chip" data-label="쿠팡" onclick="toggleNotiBrand(this,'쿠팡')"><span>coupang</span></div>
-                        <div class="noti-brand-chip" data-label="요기요" onclick="toggleNotiBrand(this,'요기요')"><span>요기요</span></div>
-                        <div class="noti-brand-chip" data-label="GS25" onclick="toggleNotiBrand(this,'GS25')"><span>GS25</span></div>
-                        <div class="noti-brand-chip add" data-label="브랜드 추가"><span>+</span></div>
+                        <div class="noti-brand-chip sel" data-label="이마트" onclick="toggleNotiBrand(this,'이마트')">
+                          <div class="nbc-logo"><img src="로고/5 이마트.svg" alt="이마트"></div>
+                          <span class="nbc-label">이마트</span>
+                        </div>
+                        <div class="noti-brand-chip" data-label="CU" onclick="toggleNotiBrand(this,'CU')">
+                          <div class="nbc-logo"><img src="로고/CU logo.svg" alt="CU"></div>
+                          <span class="nbc-label">CU</span>
+                        </div>
+                        <div class="noti-brand-chip" data-label="GS25" onclick="toggleNotiBrand(this,'GS25')">
+                          <div class="nbc-logo"><img src="로고/GS25 logo.svg" alt="GS25"></div>
+                          <span class="nbc-label">GS25</span>
+                        </div>
+                        <div class="noti-brand-chip" data-label="BBQ" onclick="toggleNotiBrand(this,'BBQ')">
+                          <div class="nbc-logo"><img src="로고/BBQ logo.svg" alt="BBQ"></div>
+                          <span class="nbc-label">BBQ</span>
+                        </div>
+                        <div class="noti-brand-chip" data-label="BHC" onclick="toggleNotiBrand(this,'BHC')">
+                          <div class="nbc-logo"><img src="로고/BHC logo.svg" alt="BHC"></div>
+                          <span class="nbc-label">BHC</span>
+                        </div>
+                        <div class="noti-brand-chip" data-label="배달의민족" onclick="toggleNotiBrand(this,'배달의민족')">
+                          <div class="nbc-logo"><img src="로고/배민.svg" alt="배달의민족"></div>
+                          <span class="nbc-label">배달의 민족</span>
+                        </div>
+                        <div class="noti-brand-chip" data-label="스타벅스" onclick="toggleNotiBrand(this,'스타벅스')">
+                          <div class="nbc-logo"><img src="로고/스벅.svg" alt="스타벅스"></div>
+                          <span class="nbc-label">스타벅스</span>
+                        </div>
+                        <div class="noti-brand-chip" data-label="무신사" onclick="toggleNotiBrand(this,'무신사')">
+                          <div class="nbc-logo"><img src="로고/무신사.svg" alt="무신사"></div>
+                          <span class="nbc-label">무신사</span>
+                        </div>
+                        <div class="noti-brand-chip" data-label="ZARA" onclick="toggleNotiBrand(this,'ZARA')">
+                          <div class="nbc-logo"><img src="로고/Zara.svg" alt="ZARA"></div>
+                          <span class="nbc-label">ZARA</span>
+                        </div>
                       </div>
                     </div>
-                    <!-- 채널 rows (Figma 743:24358) -->
-                    <div class="na-toggle-row">
-                      <div class="na-toggle-left">
-                        <svg class="na-toggle-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 4c-4.4 0-8 2.9-8 6.5 0 1.9.9 3.6 2.4 4.8L12 18l2.4-1.5c.8.2 1.7.3 2.6.3 4.4 0 8-2.9 8-6.5S22.4 4 18 4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path><circle cx="8" cy="14" r="5" stroke="currentColor" stroke-width="1.7"></circle></svg>
-                        <span class="na-toggle-lbl">카카오톡 알림</span>
+                    <!-- 채널 rows (나만의 알림 ON일 때 표시) -->
+                    <div id="ns-custom-channels">
+                      <div class="na-toggle-row">
+                        <div class="na-toggle-left">
+                          <svg class="na-toggle-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13.1048 4.05097C12.7734 4.01733 12.4357 4 12.0931 4C7.62341 4 4 6.94965 4 10.5882C4 14.2268 7.62341 17.1765 12.0931 17.1765C12.7918 17.1765 13.4697 17.1044 14.1164 16.9689L17.1513 20V15.7647C18.5138 14.8434 19.6087 13.459 20 12M20 7.5C20 8.88071 18.8807 10 17.5 10C16.1193 10 15 8.88071 15 7.5C15 6.11929 16.1193 5 17.5 5C18.8807 5 20 6.11929 20 7.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                          <span class="na-toggle-lbl">카카오톡 알림</span>
+                        </div>
+                        <label class="toggle-dot"><input type="checkbox" checked=""><span class="toggle-dot-indicator"></span></label>
                       </div>
-                      <label class="toggle-dot"><input type="checkbox" checked=""><span class="toggle-dot-indicator"></span></label>
-                    </div>
-                    <div class="na-toggle-row">
-                      <div class="na-toggle-left">
-                        <svg class="na-toggle-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path></svg>
-                        <span class="na-toggle-lbl">문자 알림</span>
+                      <div class="na-toggle-row">
+                        <div class="na-toggle-left">
+                          <svg class="na-toggle-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path></svg>
+                          <span class="na-toggle-lbl">문자 알림</span>
+                        </div>
+                        <label class="toggle-dot"><input type="checkbox"><span class="toggle-dot-indicator"></span></label>
                       </div>
-                      <label class="toggle-dot"><input type="checkbox"><span class="toggle-dot-indicator"></span></label>
-                    </div>
-                    <div class="na-toggle-row">
-                      <div class="na-toggle-left">
-                        <svg class="na-toggle-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"></circle><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.7"></circle><path d="M12 4v2M12 18v2M4 12h2M18 12h2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path></svg>
-                        <span class="na-toggle-lbl">GPS 설정</span>
+                      <div class="na-toggle-row">
+                        <div class="na-toggle-left">
+                          <svg class="na-toggle-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"></circle><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.7"></circle><path d="M12 4v2M12 18v2M4 12h2M18 12h2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path></svg>
+                          <span class="na-toggle-lbl">GPS 설정</span>
+                        </div>
+                        <label class="toggle-dot"><input type="checkbox" checked=""><span class="toggle-dot-indicator"></span></label>
                       </div>
-                      <label class="toggle-dot"><input type="checkbox" checked=""><span class="toggle-dot-indicator"></span></label>
                     </div>
                     <div id="notiBrandMethods" class="noti-brand-method-panel" style="display:none"></div>
                   </div>
+
                 </div>
-                <button class="noti-toggle-switch on" id="notiMasterToggle" onclick="toggleNotiMaster()" aria-label="알림 토글" style="display:none"><div class="noti-toggle-knob"></div></button>
-                <span class="noti-toggle-label" id="notiLblOff" style="display:none">OFF</span>
-                <span class="noti-toggle-label active" id="notiLblOn" style="display:none">ON</span>
                 <div class="noti-floating-save">
-                  <button class="btn-save" data-action="save-noti">저장하기</button>
+                  <button class="btn-save" type="button" data-action="save-noti">저장하기</button>
                 </div>
               </div>
-              <div class="mps-card noti-legacy-card">
-
-                <!-- 헤더: 알림 설정 제목 + 마스터 토글 -->
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
-                  <div class="mps-title" style="margin-bottom:0">알림 설정</div>
-                  <div class="noti-toggle-wrap">
-                    <span class="noti-toggle-label" id="notiLblOff">OFF</span>
-                    <button class="noti-toggle-switch on" id="notiMasterToggle" onclick="toggleNotiMaster()" aria-label="알림 토글">
-                      <div class="noti-toggle-knob"></div>
-                    </button>
-                    <span class="noti-toggle-label active" id="notiLblOn">ON</span>
-                  </div>
-                </div>
-
-                <div class="noti-off-msg" id="notiOffMsg" style="display:none">알림이 꺼져 있습니다.</div>
-
-                <div id="notiSettings" class="noti-settings">
-
-                  <!-- ① 탭 토글 -->
-
-                  <!-- ② 자동알림 탭 -->
-                  <div id="ns-auto">
-
-                    <div class="na-toggle-row">
-                      <div class="na-toggle-left">
-                        <div class="na-toggle-icon" style="background:#fff3e0">🏪</div>
-                        <div>
-                          <div class="na-toggle-lbl">마트·대형마트</div>
-                          <div class="na-toggle-sub">이마트, 롯데마트, 홈플러스 쿠폰</div>
-                        </div>
-                      </div>
-                      <label class="toggle-wrap"><input type="checkbox" checked=""><div class="toggle-track"><div class="toggle-thumb"></div></div></label>
-                    </div>
-
-                    <div class="na-toggle-row">
-                      <div class="na-toggle-left">
-                        <div class="na-toggle-icon" style="background:#e8f5e9">🏬</div>
-                        <div>
-                          <div class="na-toggle-lbl">편의점</div>
-                          <div class="na-toggle-sub">GS25, CU, 세븐일레븐 행사 알림</div>
-                        </div>
-                      </div>
-                      <label class="toggle-wrap"><input type="checkbox" checked=""><div class="toggle-track"><div class="toggle-thumb"></div></div></label>
-                    </div>
-
-                    <div class="na-toggle-row">
-                      <div class="na-toggle-left">
-                        <div class="na-toggle-icon" style="background:#fce4ec">🍔</div>
-                        <div>
-                          <div class="na-toggle-lbl">배달·음식</div>
-                          <div class="na-toggle-sub">배달의민족, 요기요 할인쿠폰</div>
-                        </div>
-                      </div>
-                      <label class="toggle-wrap"><input type="checkbox"><div class="toggle-track"><div class="toggle-thumb"></div></div></label>
-                    </div>
-
-                    <div class="na-toggle-row">
-                      <div class="na-toggle-left">
-                        <div class="na-toggle-icon" style="background:#e3f2fd">☕</div>
-                        <div>
-                          <div class="na-toggle-lbl">카페·음료</div>
-                          <div class="na-toggle-sub">스타벅스, 투썸플레이스 등</div>
-                        </div>
-                      </div>
-                      <label class="toggle-wrap"><input type="checkbox" checked=""><div class="toggle-track"><div class="toggle-thumb"></div></div></label>
-                    </div>
-
-                    <div class="na-toggle-row" style="margin-top:6px;border-color:var(--primary);border-width:2px">
-                      <div class="na-toggle-left">
-                        <div class="na-toggle-icon" style="background:var(--primary-lt)">📍</div>
-                        <div>
-                          <div class="na-toggle-lbl" style="color:var(--primary)">GPS 위치 알림</div>
-                          <div class="na-toggle-sub">근처 매장 쿠폰 즉시 알림</div>
-                        </div>
-                      </div>
-                      <label class="toggle-wrap"><input type="checkbox"><div class="toggle-track"><div class="toggle-thumb"></div></div></label>
-                    </div>
-
-                  </div><!-- /ns-auto -->
-
-                  <!-- ③ 나만의 알림 탭 -->
-                  <div id="ns-custom" style="display:none">
-
-                    <div class="nm-section-lbl">카테고리 선택</div>
-                    <div class="noti-cat-row" id="notiCatRow">
-                      <div class="noti-cat-chip sel" data-cat="mart" onclick="selectNotiCat('mart')">마트·편의점</div>
-                      <div class="noti-cat-chip" data-cat="delivery" onclick="selectNotiCat('delivery')">배달·음식</div>
-                      <div class="noti-cat-chip" data-cat="fashion" onclick="selectNotiCat('fashion')">패션·뷰티</div>
-                      <div class="noti-cat-chip" data-cat="culture" onclick="selectNotiCat('culture')">문화·영화</div>
-                      <div class="noti-cat-chip" data-cat="fnb" onclick="selectNotiCat('fnb')">F&amp;B</div>
-                      <div class="noti-cat-chip" data-cat="travel" onclick="selectNotiCat('travel')">여행</div>
-                      <div class="noti-cat-chip" data-cat="etc" onclick="selectNotiCat('etc')">기타</div>
-                    </div>
-
-                    <div class="nm-section-lbl">브랜드 선택 <span style="font-size:var(--font-size-caption);font-weight:var(--font-weight-medium);color:var(--gray-400)">— 할인율을 설정하세요</span></div>
-                    <div class="noti-brand-row" id="notiBrandRow"></div>
-
-                    <div style="font-size:var(--font-size-body);font-weight:var(--font-weight-bold);color:var(--gray-900);margin-bottom:8px;display:none" id="notiBrandMethodsLabel">알림방식</div>
-                    <div id="notiBrandMethods" class="noti-brand-method-panel" style="display:none"></div>
-
-                    <div style="display:flex;flex-direction:column;gap:10px;margin-top:20px;padding-top:20px;border-top:1.5px solid var(--gray-200)">
-                      <div class="toggle-row" style="border:1.5px solid var(--gray-200);border-radius:10px;padding:14px 16px;margin:0">
-                        <div><div class="toggle-lbl">카테고리 추천 알림</div><div class="toggle-sub">관심 카테고리 기반 추가 추천</div></div>
-                        <label class="toggle-wrap"><input type="checkbox" checked=""><div class="toggle-track"><div class="toggle-thumb"></div></div></label>
-                      </div>
-                    </div>
-
-                    <button class="btn-save" style="margin-top:20px" data-action="save-noti">저장하기</button>
-
-                  </div><!-- /ns-custom -->
-
-                </div><!-- /notiSettings -->
-              </div><!-- /mps-card -->
-            </div><!-- /#mps-noti -->
+              </div><!-- /#mps-noti -->
 
             <!-- 서브페이지 B: 기본 정보 관리 (Figma 823:20915) -->
             <div id="mps-info" class="mps">
@@ -3941,9 +3784,18 @@
                   <div class="info-field-group">
                     <span class="info-field-lbl">생년월일</span>
                     <div class="info-dob-row">
-                      <input class="info-field-box" type="number" placeholder="년" min="1900" max="2099" inputmode="numeric">
-                      <input class="info-field-box" type="number" placeholder="월" min="1" max="12" inputmode="numeric">
-                      <input class="info-field-box" type="number" placeholder="일" min="1" max="31" inputmode="numeric">
+                      <div class="info-dob-unit info-field-box">
+                        <input type="number" inputmode="numeric" min="1900" max="2099" placeholder="">
+                        <span class="info-dob-suffix">년</span>
+                      </div>
+                      <div class="info-dob-unit info-field-box">
+                        <input type="number" inputmode="numeric" min="1" max="12" placeholder="">
+                        <span class="info-dob-suffix">월</span>
+                      </div>
+                      <div class="info-dob-unit info-field-box">
+                        <input type="number" inputmode="numeric" min="1" max="31" placeholder="">
+                        <span class="info-dob-suffix">일</span>
+                      </div>
                     </div>
                   </div>
                   <!-- 휴대폰 번호 -->
@@ -3958,14 +3810,21 @@
                       <input class="info-field-box info-email-id" type="text" placeholder="이메일" autocomplete="email">
                       <span class="info-at-symbol">@</span>
                       <div class="info-field-box info-email-domain">
-                        <span>선택</span>
-                        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                        <select id="infoEmailDomain" aria-label="이메일 도메인 선택">
+                          <option value="">선택</option>
+                          <option value="gmail.com">gmail.com</option>
+                          <option value="naver.com">naver.com</option>
+                          <option value="kakao.com">kakao.com</option>
+                          <option value="daum.net">daum.net</option>
+                          <option value="nate.com">nate.com</option>
+                          <option value="direct">직접입력</option>
+                        </select>
                       </div>
                     </div>
                   </div>
                 </div>
                 <!-- 완료 버튼 -->
-                <button class="info-complete-btn" type="button" data-action="go-login">완료하기</button>
+                <button class="info-complete-btn" type="button" onclick="alert('개인정보 수정이 완료되었습니다.')">완료하기</button>
               </div>
             </div>
 
