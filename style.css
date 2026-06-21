@@ -33949,6 +33949,10 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
   flex-shrink: 0;
 }
 
+#wshPtList.wsh-edit-mode .wsh-pt-divider {
+  display: none;
+}
+
 /* ============================================================
    PATCH: WISHLIST COUPON CARD (Figma 1150-46431 / 1150-46432)
    작성자: Antigravity
