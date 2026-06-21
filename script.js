@@ -6186,6 +6186,7 @@ function closeWshSortSheet() {
 }
 
 document.addEventListener('click', function handleWishlistCouponDetail(e) {
+  if (_wshCouponEditMode) return;
   const card = e.target.closest('#p-wishlist .wsh-cpn-card[data-action="go-detail"]');
   if (!card || e.target.closest('button, .wsh-cpn-heart, .wsh-cpn-del-btn')) return;
   const id = card.dataset.id;
@@ -6241,8 +6242,36 @@ function wshSetBrandEditMode(enabled) {
   if (footerMsg) footerMsg.style.display = _wshEditMode ? 'block' : 'none';
 }
 
+function wshSetCouponEditMode(enabled) {
+  _wshCouponEditMode = enabled;
+  const page = document.getElementById('p-wishlist');
+  const list = document.getElementById('wshCpnList');
+  const btn = document.getElementById('wshCpnEditBtn');
+  const title = document.getElementById('wshHeaderTitle');
+  const back = document.querySelector('#p-wishlist .use-top-nav-back');
+  const footerMsg = document.getElementById('wshEditFooterMsg');
+  if (page) page.classList.toggle('wsh-editing', _wshCouponEditMode);
+  if (list) list.classList.toggle('wsh-edit-mode', _wshCouponEditMode);
+  if (btn) {
+    btn.textContent = _wshCouponEditMode ? '편집 ㅣ 삭제' : '편집 | 삭제';
+    btn.style.fontWeight = '700';
+  }
+  if (title) title.textContent = _wshCouponEditMode ? '즐겨찾기 편집' : '즐겨찾기';
+  if (back) back.style.visibility = _wshCouponEditMode ? 'hidden' : '';
+  if (footerMsg) footerMsg.style.display = _wshCouponEditMode ? 'block' : 'none';
+}
+
 function wshToggleEditMode() {
-  wshSetBrandEditMode(!_wshEditMode);
+  const isBrand = document.getElementById('wshBrandSection').style.display !== 'none';
+  if (isBrand) {
+    wshSetBrandEditMode(!_wshEditMode);
+  } else {
+    wshSetCouponEditMode(!_wshCouponEditMode);
+  }
+}
+
+function wshToggleCouponEditMode() {
+  wshSetCouponEditMode(!_wshCouponEditMode);
 }
 
 function toggleWshFavorite(brandId, e) {
@@ -6254,12 +6283,17 @@ function toggleWshFavorite(brandId, e) {
     cell.style.transform = 'scale(0.4)';
     setTimeout(() => {
       cell.remove();
-      // 또한 쿠폰 목록 탭도 리렌더링하여 연동
-      if (document.getElementById('wshCouponSection').style.display !== 'none') {
-        wshRenderCouponList();
-      }
     }, 180);
   }
+  const couponCards = document.querySelectorAll(`#wshCpnList .wsh-cpn-card[data-id="${brandId}"]`);
+  couponCards.forEach(card => {
+    card.style.transition = 'opacity 0.18s, transform 0.18s';
+    card.style.opacity = '0';
+    card.style.transform = 'scale(0.4)';
+    setTimeout(() => {
+      card.remove();
+    }, 180);
+  });
 }
 
 function wshOpenBrand(id) {
@@ -6373,8 +6407,8 @@ function wshShowTab(tab) {
   const chipBar = document.getElementById('wshChipBar');
   if (!isBrand && chipBar) chipBar.style.display = 'flex';
   if (!isBrand && _wshEditMode) wshSetBrandEditMode(false);
+  if (!isCoupon && _wshCouponEditMode) wshSetCouponEditMode(false);
   if (isBrand) {
-    if (_wshCouponEditMode) wshToggleCouponEditMode();
     wshShowBrandGrid();
   } else if (isCoupon) {
     wshRenderCouponList();
