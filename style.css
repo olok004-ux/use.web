@@ -33754,6 +33754,8 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 
 #p-wishlist.wsh-editing #wshScrollArea {
   background: transparent !important;
+  position: relative;
+  z-index: 2003;
 }
 
 #wshBrandGrid.wsh-edit-mode {
