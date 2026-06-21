@@ -3741,7 +3741,7 @@ function updateBrandNotiSummary() {
   }
 }
 
-/* ============================================================ NOTI SETTINGS — 카테고리·브랜드 선택 ============================================================ */
+/* ============================================================ MYPAGE NOTIFICATION SETTINGS 0608 — 데이터·액션 ============================================================ */
 const NOTI_BRANDS = {
   mart:     [
     {label:'이마트'},    {label:'GS25'},    {label:'CU'},
@@ -3767,32 +3767,46 @@ const NOTI_BRANDS = {
   ]
 };
 const notiSelBrands = new Set();
+const NOTI_LOGO_SRC = {
+  '이마트': '로고/5 이마트.svg',
+  'CU': '로고/CU logo.svg',
+  'GS25': '로고/GS25 logo.svg',
+  'BBQ': '로고/BBQ logo.svg',
+  'BHC': '로고/BHC logo.svg',
+  '배달의민족': '로고/배민.svg',
+  '스타벅스': '로고/스벅.svg',
+  '무신사': '로고/무신사.svg',
+  'ZARA': '로고/Zara.svg'
+};
 const NOTI_BRAND_VIEW = {
+  all: [
+    {label:'이마트'}, {label:'CU'}, {label:'GS25'}, {label:'BBQ'}, {label:'BHC'},
+    {label:'배달의민족'}, {label:'스타벅스'}, {label:'무신사'}, {label:'ZARA'}
+  ],
   mart: [
-    {label:'이마트', logo:'emart'}, {label:'올리브영', logo:'OLIVE<br>YOUNG'}, {label:'스타벅스', logo:'STAR<br>BUCKS'},
-    {label:'배달의민족', logo:'배달의민족'}, {label:'쿠팡', logo:'coupang'}, {label:'요기요', logo:'요기요'},
-    {label:'GS25', logo:'GS25'}, {label:'브랜드 추가', logo:'+', add:true}
+    {label:'이마트'}, {label:'GS25'}, {label:'CU'}, {label:'브랜드 추가', logo:'+', add:true}
   ],
   delivery: [
-    {label:'배달의민족', logo:'배달의민족'}, {label:'쿠팡이츠', logo:'coupang'}, {label:'요기요', logo:'요기요'}, {label:'브랜드 추가', logo:'+', add:true}
+    {label:'배달의민족'}, {label:'BHC'}, {label:'BBQ'}, {label:'브랜드 추가', logo:'+', add:true}
   ],
-  fashion: [
-    {label:'올리브영', logo:'OLIVE<br>YOUNG'}, {label:'무신사', logo:'MUSINSA'}, {label:'H&M', logo:'H&M'}, {label:'브랜드 추가', logo:'+', add:true}
+  beauty: [
+    {label:'올리브영', logo:'OLIVE<br>YOUNG'}, {label:'무신사'}, {label:'브랜드 추가', logo:'+', add:true}
   ],
-  culture: [
-    {label:'이마트', logo:'emart'}, {label:'롯데마트', logo:'LOTTE'}, {label:'홈플러스', logo:'HOME<br>PLUS'}, {label:'브랜드 추가', logo:'+', add:true}
+  cafe: [
+    {label:'스타벅스'}, {label:'투썸플레이스', logo:'A<br>TWOSOME'}, {label:'브랜드 추가', logo:'+', add:true}
   ],
-  fnb: [
-    {label:'스타벅스', logo:'STAR<br>BUCKS'}, {label:'맥도날드', logo:'McD'}, {label:'투썸플레이스', logo:'A<br>TWOSOME'}, {label:'브랜드 추가', logo:'+', add:true}
-  ],
-  travel: [
-    {label:'야놀자', logo:'yanolja'}, {label:'여기어때', logo:'여기<br>어때'}, {label:'브랜드 추가', logo:'+', add:true}
-  ],
-  etc: [
+  cvs: [
     {label:'GS25', logo:'GS25'}, {label:'CU', logo:'CU'}, {label:'세븐일레븐', logo:'7<br>ELEVEN'}, {label:'브랜드 추가', logo:'+', add:true}
   ]
 };
 const notiBrandMethods = {}; // label → '앱 알림' | '문자(SMS)' | '앱 + 문자'
+
+function renderNotiBrandChipLogo(b) {
+  if (b.add) return '<div class="nbc-logo nbc-add"><span>+</span></div>';
+  const src = NOTI_LOGO_SRC[b.label];
+  if (src) return `<div class="nbc-logo"><img src="${src}" alt="${b.label}"></div>`;
+  return `<div class="nbc-logo nbc-text"><span>${b.logo || b.label.slice(0, 2)}</span></div>`;
+}
 
 function selectNotiCat(cat) {
   document.querySelectorAll('.noti-cat-chip').forEach(c => c.classList.toggle('sel', c.dataset.cat === cat));
@@ -3801,8 +3815,19 @@ function selectNotiCat(cat) {
   const brands = NOTI_BRAND_VIEW[cat] || NOTI_BRANDS[cat] || [];
   row.innerHTML = brands.map(b => `
     <div class="noti-brand-chip${b.add ? ' add' : ''}${notiSelBrands.has(b.label) ? ' sel' : ''}" data-label="${b.label}" onclick="${b.add ? '' : `toggleNotiBrand(this,'${b.label.replace(/'/g,"\\'")}')`}">
-      <span>${b.logo || b.label}</span>
+      ${renderNotiBrandChipLogo(b)}
+      <span class="nbc-label">${b.label}</span>
     </div>`).join('');
+  applyNotiBrandSearchFilter();
+}
+
+function applyNotiBrandSearchFilter() {
+  const input = document.getElementById('notiBrandSearchInput');
+  const query = (input && input.value ? input.value : '').trim().toLowerCase();
+  document.querySelectorAll('#mps-noti #notiBrandRow .noti-brand-chip').forEach(chip => {
+    const label = (chip.dataset.label || chip.textContent || '').toLowerCase();
+    chip.style.display = !query || label.includes(query) ? '' : 'none';
+  });
 }
 
 function toggleNotiBrand(el, label) {
@@ -4992,7 +5017,6 @@ const ACT = {
   'nav-mypage-profile':  ()=>{ showAppPage('mypage'); updateSidebar('mypage'); setTimeout(()=>showMypageSub('profile'),50); },
   'mypage-tab':          (e)=>{ const tab=e.target.closest('[data-tab]'); if(!tab)return; const t=tab.dataset.tab; document.querySelectorAll('[data-action="mypage-tab"]').forEach(el=>el.classList.remove('on')); tab.classList.add('on'); showMypageSub(t); },
   'save-noti':           ()=>showToast('설정이 안전하게 변경되었습니다'),
-  'noti-master':         (e)=>setNotiMasterCard(e.target.closest('[data-val]').dataset.val),
   'save-info':           ()=>showToast('설정이 안전하게 변경되었습니다'),
   'nav-connect':         ()=>{ showAppPage('connect'); updateSidebar(''); },
   'nav-connect-svc':     ()=>{ showAppPage('connect'); updateSidebar(''); },
@@ -5212,19 +5236,6 @@ USE_POINTS.forEach((p, i) => {
   };
 });
 
-function toggleNotiMaster() {
-  const btn = document.getElementById('notiMasterToggle');
-  const lblOn  = document.getElementById('notiLblOn');
-  const lblOff = document.getElementById('notiLblOff');
-  const settings = document.getElementById('notiSettings');
-  const offMsg   = document.getElementById('notiOffMsg');
-  if (!btn) return;
-  const isOn = btn.classList.toggle('on');
-  if (lblOn)  lblOn.classList.toggle('active', isOn);
-  if (lblOff) lblOff.classList.toggle('active', !isOn);
-  if (settings) settings.style.display = isOn ? '' : 'none';
-  if (offMsg)   offMsg.style.display   = isOn ? 'none' : 'block';
-}
 function initRepBrcSelect() {
   const sel = document.getElementById('repBrcSelect');
   if (sel && sel.options.length === 0) {
@@ -5829,22 +5840,6 @@ function updateConnectForm() {
   document.querySelectorAll('[data-action="select-manual-method"]').forEach(el => {
     el.classList.toggle('sel', el.dataset.method === m);
   });
-}
-
-function setNotiMasterCard(val) {
-  // 카드 선택 상태 업데이트
-  document.querySelectorAll('.noti-master-card').forEach(c => {
-    c.classList.toggle('sel', c.dataset.val === val);
-  });
-  const settings = document.getElementById('notiSettings');
-  const offMsg   = document.getElementById('notiOffMsg');
-  if (val === 'yes') {
-    if (settings) settings.classList.remove('hidden');
-    if (offMsg)   offMsg.style.display = 'none';
-  } else {
-    if (settings) settings.classList.add('hidden');
-    if (offMsg)   offMsg.style.display = 'block';
-  }
 }
 
 function updateDiscRateRow(checkbox) {

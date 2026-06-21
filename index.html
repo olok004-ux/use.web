@@ -3681,8 +3681,8 @@
                         <div class="noti-cat-chip" data-cat="cvs" onclick="selectNotiCat('cvs')">편의점</div>
                       </div>
                       <div class="noti-search-line">
-                        <input type="text" placeholder="브랜드를 검색해주세요">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"></circle><path d="m20 20-3.8-3.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+                        <input type="text" id="notiBrandSearchInput" placeholder="브랜드를 검색해주세요" oninput="applyNotiBrandSearchFilter()" onkeydown="if(event.key === 'Enter') { event.preventDefault(); applyNotiBrandSearchFilter(); }">
+                        <svg id="notiBrandSearchIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" onclick="applyNotiBrandSearchFilter()"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"></circle><path d="m20 20-3.8-3.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
                       </div>
                       <div class="noti-brand-row" id="notiBrandRow">
                         <div class="noti-brand-chip sel" data-label="이마트" onclick="toggleNotiBrand(this,'이마트')">
@@ -3757,50 +3757,47 @@
               </div>
               </div><!-- /#mps-noti -->
 
-            <!-- 서브페이지 B: 기본 정보 관리 (Figma 823:20915) -->
+            <!-- 서브페이지 B: 기본 정보 관리 (Figma 623:3033) -->
             <div id="mps-info" class="mps">
-              <div class="mps-card">
-                <!-- 헤더 -->
-                <div class="mf-titlebar">
-                  <button class="mf-tb-back" type="button" onclick="closeMypageSub()" aria-label="뒤로가기">
+              <div class="mps-card info-figma-card">
+                <div class="info-header">
+                  <button class="info-back-btn" type="button" onclick="closeMypageSub()" aria-label="뒤로가기">
                     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                   </button>
-                  <span class="mf-tb-title">기본 정보 관리</span>
-                  <span class="mf-tb-spacer"></span>
+                  <span class="info-header-title">기본 정보 관리</span>
                 </div>
-                <!-- 서브 헤드라인 -->
-                <div class="info-headline">기본 정보를<br>입력해주세요</div>
-                <!-- 입력 폼 -->
-                <div class="info-fields">
-                  <!-- 이름 -->
+
+                <p class="info-guide">등록된 회원 정보를 확인하고 수정할 수 있습니다.</p>
+
+                <div class="info-fields" aria-label="기본 정보 입력">
                   <div class="info-field-group">
                     <label class="info-field-lbl" for="infoName">이름</label>
                     <input id="infoName" class="info-field-box" type="text" placeholder="이름">
                   </div>
-                  <!-- 생년월일 -->
+
                   <div class="info-field-group">
                     <span class="info-field-lbl">생년월일</span>
                     <div class="info-dob-row">
                       <div class="info-dob-unit info-field-box">
-                        <input type="number" inputmode="numeric" min="1900" max="2099" placeholder="">
+                        <input type="number" inputmode="numeric" min="1900" max="2099" aria-label="출생 연도">
                         <span class="info-dob-suffix">년</span>
                       </div>
                       <div class="info-dob-unit info-field-box">
-                        <input type="number" inputmode="numeric" min="1" max="12" placeholder="">
+                        <input type="number" inputmode="numeric" min="1" max="12" aria-label="출생 월">
                         <span class="info-dob-suffix">월</span>
                       </div>
                       <div class="info-dob-unit info-field-box">
-                        <input type="number" inputmode="numeric" min="1" max="31" placeholder="">
+                        <input type="number" inputmode="numeric" min="1" max="31" aria-label="출생 일">
                         <span class="info-dob-suffix">일</span>
                       </div>
                     </div>
                   </div>
-                  <!-- 휴대폰 번호 -->
+
                   <div class="info-field-group">
                     <label class="info-field-lbl" for="infoPhone">휴대폰 번호</label>
                     <input id="infoPhone" class="info-field-box" type="tel" placeholder="01012341234" inputmode="numeric">
                   </div>
-                  <!-- 이메일 -->
+
                   <div class="info-field-group">
                     <span class="info-field-lbl">이메일</span>
                     <div class="info-email-row">
@@ -3820,7 +3817,7 @@
                     </div>
                   </div>
                 </div>
-                <!-- 완료 버튼 -->
+
                 <button class="info-complete-btn" type="button" onclick="alert('개인정보 수정이 완료되었습니다.')">완료하기</button>
               </div>
             </div>
