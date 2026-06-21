@@ -34640,10 +34640,19 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
   border-radius: var(--radius-lg) !important;
   box-shadow: var(--shadow-s) !important;
   color: var(--color-navy-title) !important;
+  min-height: calc(var(--spacing-80) + var(--spacing-80) + var(--spacing-32) + var(--spacing-8)) !important;
   overflow: hidden;
   position: relative;
 }
 
+#p-mypage .mf-profile-card .mf-profile-top {
+  align-items: flex-start !important;
+}
+
+#p-mypage .mf-profile-card .mf-user-copy {
+  margin-left: calc(var(--spacing-2) * -1) !important;
+  margin-top: var(--spacing-16) !important;
+}
 
 #p-mypage .mf-profile-card .mf-name {
   color: var(--color-navy-title) !important;
@@ -34659,6 +34668,12 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 
 #p-mypage .mf-profile-card .mf-reward {
   color: var(--color-navy-title) !important;
+}
+
+#p-mypage .mf-profile-card .mf-rewards {
+  margin-bottom: calc((var(--spacing-24) + var(--spacing-4)) * -1) !important;
+  margin-right: calc(var(--spacing-8) * -1) !important;
+  width: calc(var(--spacing-80) + var(--spacing-32) + var(--spacing-24) + var(--spacing-2)) !important;
 }
 
 #p-mypage .mf-profile-card .mf-reward-value {
@@ -34680,6 +34695,8 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 }
 
 #p-mypage .mf-profile-card .mf-quick-item {
+  padding-bottom: var(--spacing-16) !important;
+  padding-top: var(--spacing-16) !important;
   transition:
     background 0.2s ease,
     border-radius 0.2s ease,
@@ -34723,6 +34740,11 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 #p-mypage .mf-profile-card .mf-quick-item:hover::after,
 #p-mypage .mf-profile-card .mf-quick-item.active::after {
   opacity: 0 !important;
+}
+
+#p-mypage .mf-benefit-card {
+  padding-bottom: var(--spacing-32) !important;
+  padding-top: var(--spacing-32) !important;
 }
 
 #p-mypage .mf-bar-chart {
