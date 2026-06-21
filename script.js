@@ -6031,7 +6031,7 @@ function wshPtCard(p) {
     ? `<div class="wsh-pt-dday">D-${p.dnum}</div>`
     : '';
   return `
-    <div class="wsh-pt-card" data-id="${p.id}" role="button" tabindex="0" onclick="showPointsDetail('${detailId}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPointsDetail('${detailId}')}">
+    <div class="wsh-pt-card" data-id="${p.id}" role="button" tabindex="0" onclick="if(_wshPointEditMode)return; showPointsDetail('${detailId}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();if(!_wshPointEditMode)showPointsDetail('${detailId}')}">
       <div class="wsh-pt-card-inner ${p.urgent ? 'urgent' : 'normal'}">
         <div class="wsh-pt-card-content">
           <div class="wsh-pt-logo">${logoHtml}</div>
@@ -6251,18 +6251,21 @@ function wshSetCouponEditMode(enabled) {
 function wshSetPointEditMode(enabled) {
   _wshPointEditMode = enabled;
   const page = document.getElementById('p-wishlist');
-  if (page) page.classList.toggle('wsh-editing', _wshPointEditMode);
+  const list = document.getElementById('wshPtList');
   const btn = document.getElementById('wshPtEditBtn');
+  const title = document.getElementById('wshHeaderTitle');
+  const back = document.querySelector('#p-wishlist .use-top-nav-back');
+  const footerMsg = document.getElementById('wshEditFooterMsg');
+  if (page) page.classList.toggle('wsh-editing', _wshPointEditMode);
+  if (list) list.classList.toggle('wsh-edit-mode', _wshPointEditMode);
   if (btn) {
     btn.textContent = _wshPointEditMode ? '편집 ㅣ 삭제' : '편집 ㅣ 삭제';
-    btn.style.color = _wshPointEditMode ? 'var(--color-gray-700)' : 'var(--color-gray-500)';
     btn.style.fontWeight = '700';
+    btn.style.color = _wshPointEditMode ? 'var(--color-gray-700)' : 'var(--color-gray-500)';
   }
-  const overlay = document.getElementById('wshEditOverlay');
-  if (overlay) {
-    overlay.style.display = _wshPointEditMode ? 'flex' : 'none';
-    if (_wshPointEditMode) wshRenderEditOverlay();
-  }
+  if (title) title.textContent = _wshPointEditMode ? '즐겨찾기 편집' : '즐겨찾기';
+  if (back) back.style.visibility = _wshPointEditMode ? 'hidden' : '';
+  if (footerMsg) footerMsg.style.display = _wshPointEditMode ? 'block' : 'none';
 }
 
 function wshRenderEditOverlay() {
