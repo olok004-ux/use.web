@@ -5628,6 +5628,7 @@ function renderPointDetailRecommendations(pt) {
 }
 
 function showPointsDetail(id) {
+  if (typeof _wshPointEditMode !== 'undefined' && _wshPointEditMode) return;
   const pt = (typeof USE_POINTS !== 'undefined' ? USE_POINTS : []).find(p => p.id === id);
   if (!pt) return;
 
@@ -6030,14 +6031,16 @@ function wshPtCard(p) {
     ? `<div class="wsh-pt-dday">D-${p.dnum}</div>`
     : '';
   return `
-    <div class="wsh-pt-card" role="button" tabindex="0" onclick="showPointsDetail('${detailId}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPointsDetail('${detailId}')}">
+    <div class="wsh-pt-card" data-id="${p.id}" role="button" tabindex="0" onclick="showPointsDetail('${detailId}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPointsDetail('${detailId}')}">
       <div class="wsh-pt-card-inner ${p.urgent ? 'urgent' : 'normal'}">
         <div class="wsh-pt-card-content">
           <div class="wsh-pt-logo">${logoHtml}</div>
           <div class="wsh-pt-info">
             <div class="wsh-pt-info-head">
               <span class="wsh-pt-brand">${p.name}</span>
-              <span class="wsh-pt-heart">${heartSvg}</span>
+              <button class="wsh-pt-heart-btn" onclick="toggleWshFavorite('${p.id}', event)" style="background:none;border:none;padding:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;z-index:10;" aria-label="즐겨찾기 해제">
+                ${heartSvg}
+              </button>
             </div>
             <p class="wsh-pt-amount">${p.amount}</p>
             <p class="wsh-pt-expiry">만료기한 ${p.exp}</p>
@@ -6221,9 +6224,12 @@ function wshCpnCard(b, c) {
 }
 let _wshEditMode = false;
 let _wshCouponEditMode = false;
+let _wshPointEditMode = false;
 
 function wshSetBrandEditMode(enabled) {
   _wshEditMode = enabled;
+  const page = document.getElementById('p-wishlist');
+  if (page) page.classList.toggle('wsh-editing', _wshEditMode);
   const overlay = document.getElementById('wshEditOverlay');
   if (overlay) {
     overlay.style.display = _wshEditMode ? 'flex' : 'none';
@@ -6233,6 +6239,8 @@ function wshSetBrandEditMode(enabled) {
 
 function wshSetCouponEditMode(enabled) {
   _wshCouponEditMode = enabled;
+  const page = document.getElementById('p-wishlist');
+  if (page) page.classList.toggle('wsh-editing', _wshCouponEditMode);
   const overlay = document.getElementById('wshEditOverlay');
   if (overlay) {
     overlay.style.display = _wshCouponEditMode ? 'flex' : 'none';
@@ -6240,10 +6248,28 @@ function wshSetCouponEditMode(enabled) {
   }
 }
 
+function wshSetPointEditMode(enabled) {
+  _wshPointEditMode = enabled;
+  const page = document.getElementById('p-wishlist');
+  if (page) page.classList.toggle('wsh-editing', _wshPointEditMode);
+  const btn = document.getElementById('wshPtEditBtn');
+  if (btn) {
+    btn.textContent = _wshPointEditMode ? '편집 ㅣ 삭제' : '편집 ㅣ 삭제';
+    btn.style.color = _wshPointEditMode ? 'var(--color-gray-700)' : 'var(--color-gray-500)';
+    btn.style.fontWeight = '700';
+  }
+  const overlay = document.getElementById('wshEditOverlay');
+  if (overlay) {
+    overlay.style.display = _wshPointEditMode ? 'flex' : 'none';
+    if (_wshPointEditMode) wshRenderEditOverlay();
+  }
+}
+
 function wshRenderEditOverlay() {
   const listContainer = document.getElementById('wshEditOverlayList');
   if (!listContainer) return;
   const isBrand = document.getElementById('wshBrandSection').style.display !== 'none';
+  const isCoupon = document.getElementById('wshCouponSection').style.display !== 'none';
   
   if (isBrand) {
     listContainer.className = 'wsh-edit-brand-grid';
@@ -6269,7 +6295,7 @@ function wshRenderEditOverlay() {
         <span class="wsh-brand-lbl">${b.name}</span>
       </div>
     `).join('');
-  } else {
+  } else if (isCoupon) {
     listContainer.className = 'wsh-edit-coupon-list';
     const activeBrandIds = new Set();
     document.querySelectorAll('#wshBrandGrid .wsh-brand-cell').forEach(cell => {
@@ -6285,20 +6311,32 @@ function wshRenderEditOverlay() {
       }
     });
     listContainer.innerHTML = wshSortCouponEntries(entries).map(({ b, c }) => wshCpnCardItem(b, c)).join('');
+  } else {
+    // points
+    listContainer.className = 'wsh-edit-coupon-list';
+    const sorted = wshSortPoints(WSH_POINTS);
+    listContainer.innerHTML = sorted.map(p => wshPtCard(p)).join('');
   }
 }
 
 function wshToggleEditMode() {
   const isBrand = document.getElementById('wshBrandSection').style.display !== 'none';
+  const isCoupon = document.getElementById('wshCouponSection').style.display !== 'none';
   if (isBrand) {
     wshSetBrandEditMode(!_wshEditMode);
-  } else {
+  } else if (isCoupon) {
     wshSetCouponEditMode(!_wshCouponEditMode);
+  } else {
+    wshSetPointEditMode(!_wshPointEditMode);
   }
 }
 
 function wshToggleCouponEditMode() {
   wshSetCouponEditMode(!_wshCouponEditMode);
+}
+
+function wshTogglePointEditMode() {
+  wshSetPointEditMode(!_wshPointEditMode);
 }
 
 function toggleWshFavorite(brandId, e) {
@@ -6311,6 +6349,14 @@ function toggleWshFavorite(brandId, e) {
   // 2. 메인 쿠폰 리스트에서 삭제
   const mainCouponCards = document.querySelectorAll(`#wshCpnList .wsh-cpn-card[data-id="${brandId}"]`);
   mainCouponCards.forEach(card => card.remove());
+
+  // 메인 포인트 리스트에서 삭제
+  const mainPointCards = document.querySelectorAll(`#wshPtList .wsh-pt-card[data-id="${brandId}"]`);
+  mainPointCards.forEach(card => {
+    card.remove();
+    const next = card.nextElementSibling;
+    if (next && next.classList.contains('wsh-pt-divider')) next.remove();
+  });
   
   // 3. 편집 오버레이 브랜드 그리드에서 삭제 애니메이션
   const overlayCells = document.querySelectorAll(`#wshEditOverlayList .wsh-brand-cell button[onclick*="'${brandId}'"]`);
@@ -6331,6 +6377,19 @@ function toggleWshFavorite(brandId, e) {
     card.style.opacity = '0';
     card.style.transform = 'scale(0.4)';
     setTimeout(() => card.remove(), 180);
+  });
+
+  // 편집 오버레이 포인트 리스트에서 삭제 애니메이션
+  const overlayPointCards = document.querySelectorAll(`#wshEditOverlayList .wsh-pt-card[data-id="${brandId}"]`);
+  overlayPointCards.forEach(card => {
+    card.style.transition = 'opacity 0.18s, transform 0.18s';
+    card.style.opacity = '0';
+    card.style.transform = 'scale(0.4)';
+    setTimeout(() => {
+      card.remove();
+      const next = card.nextElementSibling;
+      if (next && next.classList.contains('wsh-pt-divider')) next.remove();
+    }, 180);
   });
 }
 
@@ -6446,6 +6505,7 @@ function wshShowTab(tab) {
   if (!isBrand && chipBar) chipBar.style.display = 'flex';
   if (!isBrand && _wshEditMode) wshSetBrandEditMode(false);
   if (!isCoupon && _wshCouponEditMode) wshSetCouponEditMode(false);
+  if (!isPoints && _wshPointEditMode) wshSetPointEditMode(false);
   if (isBrand) {
     wshShowBrandGrid();
   } else if (isCoupon) {
