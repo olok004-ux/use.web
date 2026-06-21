@@ -1,4 +1,4 @@
-﻿/* ============================================================ STATE ============================================================ */
+/* ============================================================ STATE ============================================================ */
 const S = { cur:'splash', hist:[], appPage:'home', appHist:[], carIdx:0, connectMethod:'phone', connectFrom:'easy', authTimer:null, carTimer:null, searchKw:'', connectSvc:'', connectSvcName:'', _signupTimer:null, isConnected:!!localStorage.getItem('useHasVisited') };
 
 const downloaded = new Set(['baemin','starbucks']);
@@ -6228,6 +6228,7 @@ function wshSetBrandEditMode(enabled) {
   const btn = document.getElementById('wshEditBtn');
   const title = document.getElementById('wshHeaderTitle');
   const back = document.querySelector('#p-wishlist .use-top-nav-back');
+  const footerMsg = document.getElementById('wshEditFooterMsg');
   if (page) page.classList.toggle('wsh-editing', _wshEditMode);
   if (grid) grid.classList.toggle('wsh-edit-mode', _wshEditMode);
   if (btn) {
@@ -6237,6 +6238,7 @@ function wshSetBrandEditMode(enabled) {
   }
   if (title) title.textContent = _wshEditMode ? '즐겨찾기 편집' : '즐겨찾기';
   if (back) back.style.visibility = _wshEditMode ? 'hidden' : '';
+  if (footerMsg) footerMsg.style.display = _wshEditMode ? 'block' : 'none';
 }
 
 function wshToggleEditMode() {
@@ -6261,7 +6263,7 @@ function toggleWshFavorite(brandId, e) {
 }
 
 function wshOpenBrand(id) {
-  if (_wshEditMode) wshSetBrandEditMode(false);
+  if (_wshEditMode) return;
   const b = WSH_BRANDS[id]; if (!b) return;
   // 헤더 타이틀을 브랜드명으로
   const titleEl = document.getElementById('wshHeaderTitle');

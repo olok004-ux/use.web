@@ -1,4 +1,4 @@
-﻿<html lang="ko"><head>
+<html lang="ko"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>USE — 쿠폰 자동추천 서비스</title>
@@ -3064,7 +3064,7 @@
               <div id="wshBrandGrid"
                 style="display:grid;grid-template-columns:repeat(3,1fr);column-gap:var(--spacing-12);row-gap:var(--spacing-14);padding:0 var(--spacing-16) var(--spacing-32)">
                 <div onclick="wshOpenBrand('starbucks')" class="wsh-brand-cell">
-                  <button class="wsh-brand-heart" onclick="event.stopPropagation()" aria-label="스타벅스 찜">
+                  <button class="wsh-brand-heart" onclick="toggleWshFavorite('starbucks', event)" aria-label="스타벅스 찜">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-red-400)"
                       stroke="var(--color-red-400)" stroke-width="2">
                       <path
@@ -3075,7 +3075,7 @@
                   <span class="wsh-brand-lbl">스타벅스</span>
                 </div>
                 <div onclick="wshOpenBrand('emart')" class="wsh-brand-cell">
-                  <button class="wsh-brand-heart" onclick="event.stopPropagation()" aria-label="이마트 찜">
+                  <button class="wsh-brand-heart" onclick="toggleWshFavorite('emart', event)" aria-label="이마트 찜">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-red-400)"
                       stroke="var(--color-red-400)" stroke-width="2">
                       <path
@@ -3086,7 +3086,7 @@
                   <span class="wsh-brand-lbl">이마트</span>
                 </div>
                 <div onclick="wshOpenBrand('lottemart')" class="wsh-brand-cell">
-                  <button class="wsh-brand-heart" onclick="event.stopPropagation()" aria-label="롯데마트 찜">
+                  <button class="wsh-brand-heart" onclick="toggleWshFavorite('lottemart', event)" aria-label="롯데마트 찜">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-red-400)"
                       stroke="var(--color-red-400)" stroke-width="2">
                       <path
@@ -3097,7 +3097,7 @@
                   <span class="wsh-brand-lbl">롯데마트</span>
                 </div>
                 <div onclick="wshOpenBrand('baemin')" class="wsh-brand-cell">
-                  <button class="wsh-brand-heart" onclick="event.stopPropagation()" aria-label="배달의민족 찜">
+                  <button class="wsh-brand-heart" onclick="toggleWshFavorite('baemin', event)" aria-label="배달의민족 찜">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-red-400)"
                       stroke="var(--color-red-400)" stroke-width="2">
                       <path
@@ -3108,7 +3108,7 @@
                   <span class="wsh-brand-lbl">배달의민족</span>
                 </div>
                 <div onclick="wshOpenBrand('gs25')" class="wsh-brand-cell">
-                  <button class="wsh-brand-heart" onclick="event.stopPropagation()" aria-label="GS25 찜">
+                  <button class="wsh-brand-heart" onclick="toggleWshFavorite('gs25', event)" aria-label="GS25 찜">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-red-400)"
                       stroke="var(--color-red-400)" stroke-width="2">
                       <path
@@ -3119,7 +3119,7 @@
                   <span class="wsh-brand-lbl">GS25</span>
                 </div>
                 <div onclick="wshOpenBrand('oliveyoung')" class="wsh-brand-cell">
-                  <button class="wsh-brand-heart" onclick="event.stopPropagation()" aria-label="올리브영 찜">
+                  <button class="wsh-brand-heart" onclick="toggleWshFavorite('oliveyoung', event)" aria-label="올리브영 찜">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-red-400)"
                       stroke="var(--color-red-400)" stroke-width="2">
                       <path
@@ -3129,6 +3129,9 @@
                   <div class="wsh-brand-circle" style="color:var(--color-gray-600)"><span>올</span></div>
                   <span class="wsh-brand-lbl">올리브영</span>
                 </div>
+              </div>
+              <div id="wshEditFooterMsg" class="wsh-edit-footer-msg" style="display: none;">
+                불필요한 즐겨찾기 항목을 삭제하여 정리해보세요.
               </div>
 
               <!-- 브랜드 상세 (hidden) — Figma 11:1379 / 11:1336 -->

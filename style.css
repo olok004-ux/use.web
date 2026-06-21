@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    SUIT FONT
    ============================================================ */
 @import url('https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css');
@@ -33681,13 +33681,12 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 }
 
 #p-wishlist.wsh-editing::before {
-  background: var(--color-primary);
+  background: rgba(18, 18, 18, 0.6);
   content: "";
-  inset: var(--spacing-24) var(--spacing-20) var(--spacing-24);
-  opacity: 0.6;
-  pointer-events: none;
+  inset: 0;
   position: absolute;
   z-index: 20;
+  pointer-events: auto;
 }
 
 .wsh-edit-close-btn {
@@ -33709,6 +33708,7 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 
 #p-wishlist.wsh-editing .wsh-edit-close-btn {
   display: flex;
+  color: white !important;
 }
 
 #p-wishlist.wsh-editing .use-top-nav-back {
@@ -33716,9 +33716,6 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 }
 
 #p-wishlist.wsh-editing .use-top-nav,
-#p-wishlist.wsh-editing .wsh-tab-bar,
-#p-wishlist.wsh-editing #wshChipBar,
-#p-wishlist.wsh-editing #wshGridBar,
 #p-wishlist.wsh-editing #wshBrandGrid {
   position: relative;
   z-index: 21;
@@ -33726,7 +33723,7 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 
 #p-wishlist.wsh-editing .use-top-nav {
   background: transparent !important;
-  color: var(--color-on-primary) !important;
+  color: white !important;
 }
 
 #p-wishlist.wsh-editing .use-top-nav-spacer {
@@ -33735,10 +33732,13 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
   justify-content: flex-end;
 }
 
-#p-wishlist.wsh-editing .use-top-nav-title,
+#p-wishlist.wsh-editing .use-top-nav-title {
+  color: white !important;
+}
+
 #p-wishlist.wsh-editing .wsh-tab,
 #p-wishlist.wsh-editing #wshEditBtn {
-  color: var(--color-gray-700) !important;
+  color: var(--color-gray-500) !important;
 }
 
 #p-wishlist.wsh-editing .wsh-tab-bar,
@@ -33767,7 +33767,18 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 }
 
 #wshBrandGrid.wsh-edit-mode .wsh-brand-lbl {
-  color: var(--color-gray-700);
+  color: white !important;
+}
+
+.wsh-edit-footer-msg {
+  color: white;
+  font-family: var(--font);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  padding: var(--spacing-16) 0 var(--spacing-32);
+  position: relative;
+  z-index: 21;
 }
 
 /* ===== 즐겨찾기 포인트 탭 ===== */
