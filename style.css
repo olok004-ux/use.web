@@ -12896,6 +12896,11 @@ body:has(#p-connect-svc-select[style*="display:block"]) .main-content {
   background: var(--surface);
 }
 
+#p-noti-alert.nmap-list-open {
+  transform: none !important;
+  animation: none !important;
+}
+
 .nearby-map-full {
   position: relative;
   flex: 1;

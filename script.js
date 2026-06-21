@@ -981,7 +981,7 @@ function openNearbyListSheet() {
       const title = store.couponTitle || store.title || store.benefitTitle || store.key || '';
       const storeName = store.name || store.storeName || store.key || '';
       return `
-        <div class="nmap-list-item">
+        <div class="nmap-list-item" onclick="openNearbySheetFromList('${store.key}')" style="cursor:pointer">
           <div class="nmap-list-logo">${logoHtml}</div>
           <div class="nmap-list-info">
             <p class="nmap-list-store">${storeName}</p>
@@ -998,6 +998,9 @@ function openNearbyListSheet() {
     }).join('');
   }
 
+  const alertPage = document.getElementById('p-noti-alert');
+  if (alertPage) alertPage.classList.add('nmap-list-open');
+
   document.getElementById('nmapListOverlay').classList.add('open');
   document.getElementById('nmapListSheet').classList.add('open');
 }
@@ -1007,6 +1010,20 @@ function closeNearbyListSheet() {
   const sheet   = document.getElementById('nmapListSheet');
   if (overlay) overlay.classList.remove('open');
   if (sheet)   sheet.classList.remove('open');
+
+  const alertPage = document.getElementById('p-noti-alert');
+  if (alertPage) alertPage.classList.remove('nmap-list-open');
+}
+
+function openNearbySheetFromList(storeKey) {
+  closeNearbyListSheet();
+  const data = storeMarkers[storeKey];
+  if (data) {
+    if (nearbyMap && data.marker) {
+      nearbyMap.setView(data.marker.getLatLng(), 17);
+    }
+    openNearbySheet(data.store);
+  }
 }
 
 function toggleNearbyListView() {
