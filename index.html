@@ -3484,6 +3484,24 @@
             </div><!-- /wshPointSection -->
 
           </div><!-- /스크롤 -->
+
+          <!-- ===== 즐겨찾기 편집 모드 전용 전체 화면 컨테이너 ===== -->
+          <div id="wshEditOverlay" class="wsh-edit-overlay-container" style="display: none;">
+            <!-- 헤더 -->
+            <div class="use-top-nav wsh-edit-overlay-header">
+              <span class="use-top-nav-title">즐겨찾기 편집</span>
+              <div class="use-top-nav-spacer">
+                <button class="wsh-edit-close-btn" type="button" onclick="wshToggleEditMode()" aria-label="편집 닫기">×</button>
+              </div>
+            </div>
+            <!-- 스크롤 영역 -->
+            <div class="wsh-edit-overlay-scroll">
+              <div id="wshEditOverlayList"></div>
+              <div class="wsh-edit-footer-msg">
+                불필요한 즐겨찾기 항목을 삭제하여 정리해보세요.
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- ── MYPAGE ── -->

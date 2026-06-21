@@ -6224,41 +6224,68 @@ let _wshCouponEditMode = false;
 
 function wshSetBrandEditMode(enabled) {
   _wshEditMode = enabled;
-  const page = document.getElementById('p-wishlist');
-  const grid = document.getElementById('wshBrandGrid');
-  const btn = document.getElementById('wshEditBtn');
-  const title = document.getElementById('wshHeaderTitle');
-  const back = document.querySelector('#p-wishlist .use-top-nav-back');
-  const footerMsg = document.getElementById('wshEditFooterMsg');
-  if (page) page.classList.toggle('wsh-editing', _wshEditMode);
-  if (grid) grid.classList.toggle('wsh-edit-mode', _wshEditMode);
-  if (btn) {
-    btn.textContent = '편집 ㅣ 삭제';
-    btn.style.color = _wshEditMode ? 'var(--color-gray-700)' : 'var(--color-gray-500)';
-    btn.style.fontWeight = '700';
+  const overlay = document.getElementById('wshEditOverlay');
+  if (overlay) {
+    overlay.style.display = _wshEditMode ? 'flex' : 'none';
+    if (_wshEditMode) wshRenderEditOverlay();
   }
-  if (title) title.textContent = _wshEditMode ? '즐겨찾기 편집' : '즐겨찾기';
-  if (back) back.style.visibility = _wshEditMode ? 'hidden' : '';
-  if (footerMsg) footerMsg.style.display = _wshEditMode ? 'block' : 'none';
 }
 
 function wshSetCouponEditMode(enabled) {
   _wshCouponEditMode = enabled;
-  const page = document.getElementById('p-wishlist');
-  const list = document.getElementById('wshCpnList');
-  const btn = document.getElementById('wshCpnEditBtn');
-  const title = document.getElementById('wshHeaderTitle');
-  const back = document.querySelector('#p-wishlist .use-top-nav-back');
-  const footerMsg = document.getElementById('wshEditFooterMsg');
-  if (page) page.classList.toggle('wsh-editing', _wshCouponEditMode);
-  if (list) list.classList.toggle('wsh-edit-mode', _wshCouponEditMode);
-  if (btn) {
-    btn.textContent = _wshCouponEditMode ? '편집 ㅣ 삭제' : '편집 | 삭제';
-    btn.style.fontWeight = '700';
+  const overlay = document.getElementById('wshEditOverlay');
+  if (overlay) {
+    overlay.style.display = _wshCouponEditMode ? 'flex' : 'none';
+    if (_wshCouponEditMode) wshRenderEditOverlay();
   }
-  if (title) title.textContent = _wshCouponEditMode ? '즐겨찾기 편집' : '즐겨찾기';
-  if (back) back.style.visibility = _wshCouponEditMode ? 'hidden' : '';
-  if (footerMsg) footerMsg.style.display = _wshCouponEditMode ? 'block' : 'none';
+}
+
+function wshRenderEditOverlay() {
+  const listContainer = document.getElementById('wshEditOverlayList');
+  if (!listContainer) return;
+  const isBrand = document.getElementById('wshBrandSection').style.display !== 'none';
+  
+  if (isBrand) {
+    listContainer.className = 'wsh-edit-brand-grid';
+    const activeBrands = [];
+    document.querySelectorAll('#wshBrandGrid .wsh-brand-cell').forEach(cell => {
+      const onclickAttr = cell.getAttribute('onclick') || '';
+      const brandIdMatch = onclickAttr.match(/wshOpenBrand\('([^']+)'\)/);
+      if (brandIdMatch) {
+        const brandId = brandIdMatch[1];
+        const b = WSH_BRANDS[brandId];
+        if (b) activeBrands.push(b);
+      }
+    });
+    
+    listContainer.innerHTML = activeBrands.map(b => `
+      <div class="wsh-brand-cell wsh-edit-brand-cell">
+        <button class="wsh-brand-heart" onclick="toggleWshFavorite('${b.id}', event)" aria-label="${b.name} 찜">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-red-400)" stroke="var(--color-red-400)" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+        </button>
+        <div class="wsh-brand-circle" style="color:var(--color-gray-600)"><span>${b.icon}</span></div>
+        <span class="wsh-brand-lbl">${b.name}</span>
+      </div>
+    `).join('');
+  } else {
+    listContainer.className = 'wsh-edit-coupon-list';
+    const activeBrandIds = new Set();
+    document.querySelectorAll('#wshBrandGrid .wsh-brand-cell').forEach(cell => {
+      const onclickAttr = cell.getAttribute('onclick') || '';
+      const brandIdMatch = onclickAttr.match(/wshOpenBrand\('([^']+)'\)/);
+      if (brandIdMatch) activeBrandIds.add(brandIdMatch[1]);
+    });
+
+    const entries = [];
+    Object.values(WSH_BRANDS).forEach(b => {
+      if (activeBrandIds.has(b.id)) {
+        b.coupons.forEach(c => entries.push({ b, c }));
+      }
+    });
+    listContainer.innerHTML = wshSortCouponEntries(entries).map(({ b, c }) => wshCpnCardItem(b, c)).join('');
+  }
 }
 
 function wshToggleEditMode() {
@@ -6276,23 +6303,34 @@ function wshToggleCouponEditMode() {
 
 function toggleWshFavorite(brandId, e) {
   if (e) e.stopPropagation();
-  const cell = document.querySelector(`#wshBrandGrid .wsh-brand-cell[onclick*="'${brandId}'"]`);
-  if (cell) {
-    cell.style.transition = 'opacity 0.18s, transform 0.18s';
-    cell.style.opacity = '0';
-    cell.style.transform = 'scale(0.4)';
-    setTimeout(() => {
-      cell.remove();
-    }, 180);
-  }
-  const couponCards = document.querySelectorAll(`#wshCpnList .wsh-cpn-card[data-id="${brandId}"]`);
-  couponCards.forEach(card => {
+  
+  // 1. 메인 브랜드 그리드에서 삭제
+  const mainCell = document.querySelector(`#wshBrandGrid .wsh-brand-cell[onclick*="'${brandId}'"]`);
+  if (mainCell) mainCell.remove();
+  
+  // 2. 메인 쿠폰 리스트에서 삭제
+  const mainCouponCards = document.querySelectorAll(`#wshCpnList .wsh-cpn-card[data-id="${brandId}"]`);
+  mainCouponCards.forEach(card => card.remove());
+  
+  // 3. 편집 오버레이 브랜드 그리드에서 삭제 애니메이션
+  const overlayCells = document.querySelectorAll(`#wshEditOverlayList .wsh-brand-cell button[onclick*="'${brandId}'"]`);
+  overlayCells.forEach(btn => {
+    const cell = btn.closest('.wsh-brand-cell');
+    if (cell) {
+      cell.style.transition = 'opacity 0.18s, transform 0.18s';
+      cell.style.opacity = '0';
+      cell.style.transform = 'scale(0.4)';
+      setTimeout(() => cell.remove(), 180);
+    }
+  });
+  
+  // 4. 편집 오버레이 쿠폰 리스트에서 삭제 애니메이션
+  const overlayCouponCards = document.querySelectorAll(`#wshEditOverlayList .wsh-cpn-card[data-id="${brandId}"]`);
+  overlayCouponCards.forEach(card => {
     card.style.transition = 'opacity 0.18s, transform 0.18s';
     card.style.opacity = '0';
     card.style.transform = 'scale(0.4)';
-    setTimeout(() => {
-      card.remove();
-    }, 180);
+    setTimeout(() => card.remove(), 180);
   });
 }
 
