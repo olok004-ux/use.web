@@ -7008,3 +7008,166 @@ function ncsGoStep(n) {
   });
 }
 function ncsNext(n) { ncsGoStep(n); }
+
+/* ── 이용내역 세그먼트 탭 / 조회 기간 필터링 ── */
+function filterAndRenderHist(groups, tab) {
+  var list = document.querySelector('#mps-history .hist-list');
+  if (!list) return;
+  var filtered = groups.map(function(g) {
+    var items = tab === '전체' ? g.items : g.items.filter(function(it) {
+      return it.type === (tab === '쿠폰' ? 'coupon' : 'point');
+    });
+    return { date: g.date, items: items };
+  }).filter(function(g) { return g.items.length > 0; });
+  if (!filtered.length) {
+    list.innerHTML = '<div style="text-align:center;padding:40px 0;color:var(--color-gray-400);font-size:var(--font-size-body)">해당 기간의 이용내역이 없습니다</div>';
+    return;
+  }
+  list.innerHTML = filtered.map(function(g) {
+    return '<div class="hist-group">' +
+      '<div class="hist-date">' + g.date + '</div>' +
+      '<div class="hist-items">' +
+      g.items.map(function(it) {
+        return '<div class="hist-item">' +
+          '<div class="hist-item-left">' +
+            '<span class="hist-brand">' + it.brand + '</span>' +
+            '<span class="hist-time">' + it.time + '</span>' +
+          '</div>' +
+          '<div class="hist-item-right">' +
+            '<span class="hist-coupon">' + it.coupon + '</span>' +
+            '<span class="hist-discount">' + it.discount + '</span>' +
+          '</div>' +
+        '</div>';
+      }).join('') +
+      '</div></div>';
+  }).join('');
+}
+
+function switchHistTab(btn) {
+  btn.closest('.hist-tabs').querySelectorAll('.hist-tab').forEach(t => t.classList.remove('on'));
+  btn.classList.add('on');
+  const histPage = btn.closest('.hist-page');
+  const activePill = histPage ? histPage.querySelector('.hist-pill.sel') : null;
+  if (activePill) switchHistPeriod(activePill);
+}
+
+function switchHistPeriod(btn) {
+  btn.closest('.hist-period-pills').querySelectorAll('.hist-pill').forEach(p => p.classList.remove('sel'));
+  btn.classList.add('sel');
+
+  const HIST_DATA = {
+    '1주일': [
+      {
+        date: '2026.06.05',
+        items: [
+          { brand: '스타벅스',   time: '10:15', coupon: '아메리카노 1+1',  discount: '+6,000원 할인', type: 'coupon' },
+          { brand: 'CU',        time: '08:40', coupon: '500원 할인',      discount: '+500원 할인',   type: 'coupon' },
+          { brand: '네이버페이', time: '08:42', coupon: '포인트 적립',     discount: '+50P',          type: 'point'  },
+        ]
+      },
+      {
+        date: '2026.06.02',
+        items: [
+          { brand: '올리브영',   time: '17:30', coupon: '15%할인쿠폰',    discount: '+3,200원 할인', type: 'coupon' },
+          { brand: 'L포인트',   time: '17:32', coupon: '포인트 적립',     discount: '+120P',         type: 'point'  },
+        ]
+      },
+    ],
+    '1개월': [
+      {
+        date: '2026.06.05',
+        items: [
+          { brand: '스타벅스',   time: '10:15', coupon: '아메리카노 1+1',  discount: '+6,000원 할인', type: 'coupon' },
+          { brand: 'CU',        time: '08:40', coupon: '500원 할인',      discount: '+500원 할인',   type: 'coupon' },
+          { brand: '네이버페이', time: '08:42', coupon: '포인트 적립',     discount: '+50P',          type: 'point'  },
+        ]
+      },
+      {
+        date: '2026.05.08',
+        items: [
+          { brand: '이마트',     time: '16:20', coupon: '10%할인쿠폰',    discount: '+1,500원 할인', type: 'coupon' },
+          { brand: '스타벅스',   time: '14:05', coupon: '아메리카노 1+1',  discount: '+6,000원 할인', type: 'coupon' },
+          { brand: '올리브영',   time: '11:30', coupon: '15%할인쿠폰',    discount: '+3,200원 할인', type: 'coupon' },
+          { brand: 'OK캐쉬백',  time: '16:22', coupon: '포인트 적립',     discount: '+200P',         type: 'point'  },
+        ]
+      },
+      {
+        date: '2026.05.06',
+        items: [
+          { brand: '쿠팡',       time: '20:15', coupon: '5,000원 할인',   discount: '+5,000원 할인', type: 'coupon' },
+          { brand: '이마트',     time: '13:40', coupon: '10%할인쿠폰',    discount: '+2,800원 할인', type: 'coupon' },
+          { brand: 'L포인트',   time: '13:42', coupon: '포인트 사용',     discount: '-500P',         type: 'point'  },
+        ]
+      },
+      {
+        date: '2026.05.03',
+        items: [
+          { brand: 'GS25',       time: '09:22', coupon: '500원 할인',     discount: '+500원 할인',   type: 'coupon' },
+          { brand: '배달의민족', time: '18:55', coupon: '15%할인쿠폰',    discount: '+4,500원 할인', type: 'coupon' },
+          { brand: '해피포인트', time: '09:24', coupon: '포인트 적립',     discount: '+80P',          type: 'point'  },
+        ]
+      },
+    ],
+    '3개월': [
+      {
+        date: '2026.06.05',
+        items: [
+          { brand: '스타벅스',   time: '10:15', coupon: '아메리카노 1+1',  discount: '+6,000원 할인', type: 'coupon' },
+          { brand: 'CU',        time: '08:40', coupon: '500원 할인',      discount: '+500원 할인',   type: 'coupon' },
+          { brand: '네이버페이', time: '08:42', coupon: '포인트 적립',     discount: '+50P',          type: 'point'  },
+        ]
+      },
+      {
+        date: '2026.05.08',
+        items: [
+          { brand: '이마트',     time: '16:20', coupon: '10%할인쿠폰',    discount: '+1,500원 할인', type: 'coupon' },
+          { brand: '스타벅스',   time: '14:05', coupon: '아메리카노 1+1',  discount: '+6,000원 할인', type: 'coupon' },
+          { brand: '올리브영',   time: '11:30', coupon: '15%할인쿠폰',    discount: '+3,200원 할인', type: 'coupon' },
+          { brand: 'OK캐쉬백',  time: '16:22', coupon: '포인트 적립',     discount: '+200P',         type: 'point'  },
+        ]
+      },
+      {
+        date: '2026.05.03',
+        items: [
+          { brand: 'GS25',       time: '09:22', coupon: '500원 할인',     discount: '+500원 할인',   type: 'coupon' },
+          { brand: '배달의민족', time: '18:55', coupon: '15%할인쿠폰',    discount: '+4,500원 할인', type: 'coupon' },
+          { brand: '해피포인트', time: '09:24', coupon: '포인트 적립',     discount: '+80P',          type: 'point'  },
+        ]
+      },
+      {
+        date: '2026.04.22',
+        items: [
+          { brand: '쿠팡',       time: '21:05', coupon: '3,000원 할인',   discount: '+3,000원 할인', type: 'coupon' },
+          { brand: '이마트',     time: '15:10', coupon: '10%할인쿠폰',    discount: '+2,200원 할인', type: 'coupon' },
+          { brand: 'CGV',        time: '12:00', coupon: '영화 2+1',       discount: '+12,000원 할인', type: 'coupon'},
+          { brand: 'L포인트',   time: '15:12', coupon: '포인트 사용',     discount: '-1,000P',       type: 'point'  },
+        ]
+      },
+      {
+        date: '2026.04.10',
+        items: [
+          { brand: '올리브영',   time: '14:20', coupon: '20%할인쿠폰',    discount: '+4,800원 할인', type: 'coupon' },
+          { brand: 'GS25',       time: '07:55', coupon: '500원 할인',     discount: '+500원 할인',   type: 'coupon' },
+          { brand: '해피포인트', time: '14:22', coupon: '포인트 적립',     discount: '+300P',         type: 'point'  },
+        ]
+      },
+      {
+        date: '2026.03.28',
+        items: [
+          { brand: '배달의민족', time: '19:30', coupon: '10%할인쿠폰',    discount: '+3,700원 할인', type: 'coupon' },
+          { brand: '스타벅스',   time: '11:00', coupon: '아메리카노 1+1',  discount: '+6,000원 할인', type: 'coupon' },
+          { brand: '쿠팡',       time: '09:45', coupon: '5,000원 할인',   discount: '+5,000원 할인', type: 'coupon' },
+          { brand: 'OK캐쉬백',  time: '09:47', coupon: '포인트 적립',     discount: '+450P',         type: 'point'  },
+        ]
+      },
+    ],
+  };
+
+  const label = btn.textContent.trim();
+  const groups = HIST_DATA[label];
+  if (!groups) return;
+
+  const histPage = btn.closest('.hist-page');
+  const activeTab = histPage && histPage.querySelector('.hist-tab.on');
+  filterAndRenderHist(groups, activeTab ? activeTab.textContent.trim() : '전체');
+}
