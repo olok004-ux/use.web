@@ -7055,6 +7055,21 @@ function switchHistPeriod(btn) {
   btn.closest('.hist-period-pills').querySelectorAll('.hist-pill').forEach(p => p.classList.remove('sel'));
   btn.classList.add('sel');
 
+  const picker = document.getElementById('histDatePicker');
+  const label = btn.textContent.trim();
+
+  if (label === '설정') {
+    if (picker) picker.style.display = '';
+    if (picker && !picker._patched) {
+      formatDateInput(document.getElementById('hdpStart'));
+      formatDateInput(document.getElementById('hdpEnd'));
+      picker._patched = true;
+    }
+    return;
+  } else {
+    if (picker) picker.style.display = 'none';
+  }
+
   const HIST_DATA = {
     '1주일': [
       {
@@ -7163,7 +7178,6 @@ function switchHistPeriod(btn) {
     ],
   };
 
-  const label = btn.textContent.trim();
   const groups = HIST_DATA[label];
   if (!groups) return;
 
@@ -7171,3 +7185,131 @@ function switchHistPeriod(btn) {
   const activeTab = histPage && histPage.querySelector('.hist-tab.on');
   filterAndRenderHist(groups, activeTab ? activeTab.textContent.trim() : '전체');
 }
+
+/* YYYY.MM.DD → Date */
+function parseHistDate(s) {
+  if (!s) return null;
+  var p = s.replace(/\./g, '-');
+  var d = new Date(p);
+  return isNaN(d.getTime()) ? null : d;
+}
+
+/* YYYY.MM.DD 자동 포맷 */
+function formatDateInput(input) {
+  if (!input) return;
+  input.addEventListener('input', function() {
+    var v = this.value.replace(/[^0-9]/g, '');
+    if (v.length > 4) v = v.slice(0,4) + '.' + v.slice(4);
+    if (v.length > 7) v = v.slice(0,7) + '.' + v.slice(7);
+    if (v.length > 10) v = v.slice(0,10);
+    this.value = v;
+  });
+}
+
+const HIST_BRAND_POOL = [
+  { brand: '스타벅스',   coupon: '아메리카노 1+1',      discount: '+6,000원 할인',  type: 'coupon' },
+  { brand: 'CU',         coupon: '500원 할인쿠폰',       discount: '+500원 할인',    type: 'coupon' },
+  { brand: '올리브영',   coupon: '15% 할인쿠폰',         discount: '+3,200원 할인',  type: 'coupon' },
+  { brand: '이마트',     coupon: '10% 할인쿠폰',         discount: '+1,800원 할인',  type: 'coupon' },
+  { brand: '배달의민족', coupon: '배달비 무료쿠폰',       discount: '+3,000원 할인',  type: 'coupon' },
+  { brand: '쿠팡',       coupon: '5,000원 할인',         discount: '+5,000원 할인',  type: 'coupon' },
+  { brand: 'GS25',       coupon: '500원 할인',           discount: '+500원 할인',    type: 'coupon' },
+  { brand: 'CGV',        coupon: '영화 1+1',             discount: '+12,000원 할인', type: 'coupon' },
+  { brand: '네이버페이', coupon: '포인트 적립',         discount: '+50P',          type: 'point' },
+  { brand: 'L포인트',   coupon: '포인트 사용',         discount: '-500P',          type: 'point' },
+  { brand: 'OK캐쉬백',  coupon: '포인트 적립',         discount: '+200P',          type: 'point' },
+  { brand: '해피포인트', coupon: '포인트 적립',         discount: '+80P',           type: 'point' }
+];
+const HIST_TIMES = ['08:15','09:30','10:05','11:20','12:40','13:55','14:10','15:30','16:45','17:20','18:05','19:30','20:15'];
+
+function seededRand(seed) {
+  var x = Math.sin(seed + 1) * 10000;
+  return x - Math.floor(x);
+}
+
+function generateHistForRange(startDate, endDate) {
+  var groups = [];
+  var cur = new Date(startDate);
+  cur.setHours(0,0,0,0);
+  var end = new Date(endDate);
+  end.setHours(23,59,59,999);
+  var dayCount = Math.round((end - cur) / 86400000) + 1;
+
+  var showDays = Math.min(8, Math.max(1, Math.floor(dayCount * 0.45)));
+  var allDays = [];
+  for (var i = 0; i < dayCount; i++) {
+    var d = new Date(cur);
+    d.setDate(d.getDate() + i);
+    allDays.push(d);
+  }
+
+  var seed = startDate.getTime() + endDate.getTime();
+  var selectedIdxSet = new Set();
+  while (selectedIdxSet.size < showDays && selectedIdxSet.size < allDays.length) {
+    var idx = Math.floor(seededRand(seed + selectedIdxSet.size * 37) * allDays.length);
+    selectedIdxSet.add(idx);
+  }
+  var selectedIdxs = Array.from(selectedIdxSet).sort(function(a,b){ return b-a; });
+
+  selectedIdxs.forEach(function(dayIdx) {
+    var day = allDays[dayIdx];
+    var yy = day.getFullYear();
+    var mm = String(day.getMonth()+1).padStart(2,'0');
+    var dd = String(day.getDate()).padStart(2,'0');
+    var dateStr = yy + '.' + mm + '.' + dd;
+
+    var daySeed = day.getTime();
+    var itemCount = Math.floor(seededRand(daySeed) * 3) + 1;
+    var items = [];
+    for (var j = 0; j < itemCount; j++) {
+      var bIdx = Math.floor(seededRand(daySeed + j * 17) * HIST_BRAND_POOL.length);
+      var tIdx = Math.floor(seededRand(daySeed + j * 53) * HIST_TIMES.length);
+      var b = HIST_BRAND_POOL[bIdx];
+      items.push({ brand: b.brand, time: HIST_TIMES[tIdx], coupon: b.coupon, discount: b.discount, type: b.type });
+    }
+    items.sort(function(a,b){ return b.time.localeCompare(a.time); });
+    groups.push({ date: dateStr, items: items });
+  });
+
+  return groups;
+}
+
+window.applyHistDateFilter = function() {
+  var startInput = document.getElementById('hdpStart');
+  var endInput   = document.getElementById('hdpEnd');
+  var startWrap  = document.getElementById('hdpStartWrap');
+  var endWrap    = document.getElementById('hdpEndWrap');
+  var startMsg   = document.getElementById('hdpStartMsg');
+  var endMsg     = document.getElementById('hdpEndMsg');
+  if (!startInput) return;
+
+  var startVal = startInput.value.trim();
+  var endVal   = endInput.value.trim();
+  var startDate = parseHistDate(startVal);
+  var endDate   = parseHistDate(endVal);
+  var valid = true;
+
+  startWrap.classList.remove('error'); startMsg.textContent = '';
+  endWrap.classList.remove('error');   endMsg.textContent   = '';
+
+  if (!startVal || !startDate) {
+    startWrap.classList.add('error');
+    startMsg.textContent = '올바른 날짜를 입력해 주세요 (YYYY.MM.DD)';
+    valid = false;
+  }
+  if (!endVal || !endDate) {
+    endWrap.classList.add('error');
+    endMsg.textContent = '올바른 날짜를 입력해 주세요 (YYYY.MM.DD)';
+    valid = false;
+  }
+  if (valid && startDate > endDate) {
+    endWrap.classList.add('error');
+    endMsg.textContent = '종료일은 시작일 이후여야 합니다';
+    valid = false;
+  }
+  if (!valid) return;
+
+  var groups = generateHistForRange(startDate, endDate);
+  const activeTab = document.querySelector('#mps-history .hist-tab.on');
+  filterAndRenderHist(groups, activeTab ? activeTab.textContent.trim() : '전체');
+};

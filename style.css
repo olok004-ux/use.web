@@ -34723,6 +34723,125 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
   color: #000000 !important;
 }
 
+#s-signup-id .su-content::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+/* ============================================================
+   PATCH: 이용내역 날짜 피커 CSS
+   작성자: Claude
+   날짜: 0607
+   ============================================================ */
+
+#p-mypage .hist-date-picker {
+  background: var(--color-gray-50);
+  border-radius: var(--radius-lg);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  margin-bottom: var(--spacing-16);
+  padding: var(--spacing-16);
+  width: 100%;
+}
+
+#p-mypage .hdp-row {
+  align-items: flex-start;
+  display: flex;
+  gap: var(--spacing-8);
+}
+
+#p-mypage .hdp-field {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  min-width: 0;
+}
+
+#p-mypage .hdp-sep {
+  align-self: center;
+  color: var(--color-gray-400);
+  flex-shrink: 0;
+  font-size: var(--font-size-body);
+  margin-top: var(--spacing-20);
+  padding: 0 var(--spacing-4);
+}
+
+#p-mypage .hdp-label {
+  color: var(--color-gray-700);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-semi-bold);
+  line-height: 1;
+}
+
+#p-mypage .hdp-input-wrap {
+  align-items: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  box-sizing: border-box;
+  display: flex;
+  gap: var(--spacing-8);
+  padding: var(--spacing-12);
+  transition: border-color .15s;
+  width: 100%;
+}
+
+#p-mypage .hdp-input-wrap:focus-within {
+  border-color: var(--color-blue-500);
+}
+
+#p-mypage .hdp-input-wrap.error {
+  border-color: var(--color-error, #E53935);
+}
+
+#p-mypage .hdp-input {
+  background: none;
+  border: none;
+  color: var(--color-gray-900);
+  flex: 1;
+  font-family: var(--font);
+  font-size: var(--font-size-body);
+  min-width: 0;
+  outline: none;
+  padding: 0;
+}
+
+#p-mypage .hdp-input::placeholder {
+  color: var(--color-gray-300);
+}
+
+#p-mypage .hdp-icon {
+  color: var(--color-gray-400);
+  flex-shrink: 0;
+}
+
+#p-mypage .hdp-msg {
+  color: var(--color-error, #E53935);
+  font-size: var(--font-size-caption);
+  line-height: 1.3;
+  min-height: 16px;
+}
+
+#p-mypage .hdp-apply {
+  background: var(--color-blue-500);
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--color-on-primary);
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-extra-bold);
+  height: 48px;
+  width: 100%;
+}
+
+#p-mypage .hist-period-pills {
+  justify-content: center !important;
+  overflow-x: visible !important;
+}
+
 #p-noti-custom-setup #ncs-step2 .ncs-brand-scroll {
   display: flex !important;
   flex-wrap: nowrap !important;
