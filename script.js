@@ -6229,23 +6229,40 @@ let _wshPointEditMode = false;
 function wshSetBrandEditMode(enabled) {
   _wshEditMode = enabled;
   const page = document.getElementById('p-wishlist');
+  const grid = document.getElementById('wshBrandGrid');
+  const btn = document.getElementById('wshEditBtn');
+  const title = document.getElementById('wshHeaderTitle');
+  const back = document.querySelector('#p-wishlist .use-top-nav-back');
+  const footerMsg = document.getElementById('wshEditFooterMsg');
   if (page) page.classList.toggle('wsh-editing', _wshEditMode);
-  const overlay = document.getElementById('wshEditOverlay');
-  if (overlay) {
-    overlay.style.display = _wshEditMode ? 'flex' : 'none';
-    if (_wshEditMode) wshRenderEditOverlay();
+  if (grid) grid.classList.toggle('wsh-edit-mode', _wshEditMode);
+  if (btn) {
+    btn.textContent = '편집 ㅣ 삭제';
+    btn.style.color = _wshEditMode ? 'var(--color-gray-700)' : 'var(--color-gray-500)';
+    btn.style.fontWeight = '700';
   }
+  if (title) title.textContent = _wshEditMode ? '즐겨찾기 편집' : '즐겨찾기';
+  if (back) back.style.visibility = _wshEditMode ? 'hidden' : '';
+  if (footerMsg) footerMsg.style.display = _wshEditMode ? 'block' : 'none';
 }
 
 function wshSetCouponEditMode(enabled) {
   _wshCouponEditMode = enabled;
   const page = document.getElementById('p-wishlist');
+  const list = document.getElementById('wshCpnList');
+  const btn = document.getElementById('wshCpnEditBtn');
+  const title = document.getElementById('wshHeaderTitle');
+  const back = document.querySelector('#p-wishlist .use-top-nav-back');
+  const footerMsg = document.getElementById('wshEditFooterMsg');
   if (page) page.classList.toggle('wsh-editing', _wshCouponEditMode);
-  const overlay = document.getElementById('wshEditOverlay');
-  if (overlay) {
-    overlay.style.display = _wshCouponEditMode ? 'flex' : 'none';
-    if (_wshCouponEditMode) wshRenderEditOverlay();
+  if (list) list.classList.toggle('wsh-edit-mode', _wshCouponEditMode);
+  if (btn) {
+    btn.textContent = _wshCouponEditMode ? '편집 ㅣ 삭제' : '편집 | 삭제';
+    btn.style.fontWeight = '700';
   }
+  if (title) title.textContent = _wshCouponEditMode ? '즐겨찾기 편집' : '즐겨찾기';
+  if (back) back.style.visibility = _wshCouponEditMode ? 'hidden' : '';
+  if (footerMsg) footerMsg.style.display = _wshCouponEditMode ? 'block' : 'none';
 }
 
 function wshSetPointEditMode(enabled) {
