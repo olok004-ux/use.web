@@ -546,8 +546,10 @@ function updateSidebar(id) {
   if (sbMap[id]!==undefined && sbItems[sbMap[id]]) sbItems[sbMap[id]].classList.add('on');
   document.querySelectorAll('.tab-bar-item').forEach(t=>t.classList.remove('on'));
   const tabMap={home:'home','noti-alert':'noti-alert','points-hub':'points-hub',wishlist:'wishlist',mypage:'mypage'};
-  const tabEl=document.querySelector('.tab-bar-item[data-tab="'+(tabMap[id]||'')+'"]');
-  if(tabEl)tabEl.classList.add('on');
+  const targetTab = tabMap[id] || '';
+  if (targetTab) {
+    document.querySelectorAll('.tab-bar-item[data-tab="' + targetTab + '"]').forEach(t => t.classList.add('on'));
+  }
 }
 
 /* ── 홈 세그먼트 pill 위치 이동 ── */

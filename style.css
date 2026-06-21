@@ -16607,7 +16607,8 @@ body:has(#mps-connect.mps-open) #mpsBackBar {
     padding: var(--spacing-8) 0 calc(var(--spacing-16) + env(safe-area-inset-bottom, 0px));
     background: var(--color-surface);
     border-top: 0;
-    box-shadow: none;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -8px 24px rgba(12, 12, 13, 0.08);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -16639,6 +16640,20 @@ body:has(#mps-connect.mps-open) #mpsBackBar {
   .tab-bar-item.on,
   .tab-bar-item:hover {
     color: var(--color-primary);
+  }
+
+  .tab-bar-item .ico-fill {
+    display: none !important;
+  }
+  .tab-bar-item .ico-outline {
+    display: block !important;
+  }
+  .tab-bar-item.on .ico-fill {
+    display: block !important;
+    fill: var(--color-primary);
+  }
+  .tab-bar-item.on .ico-outline {
+    display: none !important;
   }
 
   .tab-icon {
