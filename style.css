@@ -33680,6 +33680,8 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 
 #p-wishlist.wsh-editing {
   position: relative;
+  transform: none !important;
+  animation: none !important;
 }
 
 #p-wishlist.wsh-editing::before {
