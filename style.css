@@ -32726,7 +32726,7 @@ body:has(#p-noti-brand[style*="display: flex"]) .main-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: var(--spacing-6);
   min-width: 0;
 }
@@ -32741,7 +32741,7 @@ body:has(#p-noti-brand[style*="display: flex"]) .main-content {
   text-overflow: ellipsis;
   width: 100%;
   margin: 0;
-  text-align: right;
+  text-align: left;
 }
 
 #p-noti-page .np-h2-cond {
@@ -32754,7 +32754,7 @@ body:has(#p-noti-brand[style*="display: flex"]) .main-content {
   text-overflow: ellipsis;
   width: 100%;
   margin: 0;
-  text-align: right;
+  text-align: left;
 }
 
 #p-noti-page .np-h2-date {
@@ -32767,7 +32767,7 @@ body:has(#p-noti-brand[style*="display: flex"]) .main-content {
   text-overflow: ellipsis;
   width: 100%;
   margin: 0;
-  text-align: right;
+  text-align: left;
 }
 
 /* ============================================================
@@ -32999,7 +32999,7 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
    ============================================================ */
 
 #p-noti-brand.noti-brand-detail .nb-scroll {
-  padding: var(--spacing-24) var(--spacing-20) var(--spacing-32) !important;
+  padding: var(--spacing-24) var(--spacing-20) calc(var(--spacing-80) + var(--spacing-32) + env(safe-area-inset-bottom, 0px)) !important;
   background: white !important;
   display: flex !important;
   flex-direction: column !important;
@@ -33078,14 +33078,14 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
   position: relative !important;
   height: 128px !important;
   padding: var(--spacing-16) !important;
-  background: white !important;
-  border-radius: var(--radius-xl) !important;
-  box-shadow: 0px 3px 13px -3px rgba(18, 18, 18, 0.20) !important;
+  background: var(--color-on-primary) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-m) !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: flex-start !important;
   align-items: flex-start !important;
-  gap: var(--spacing-10) !important;
+  gap: var(--spacing-8) !important;
   box-sizing: border-box !important;
   width: 100% !important;
   border: none !important;
@@ -33156,9 +33156,12 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 }
 
 #p-noti-brand.noti-brand-detail .nb-card-brand {
-  color: var(--color-gray-900) !important;
+  color: var(--color-gray-700) !important;
+  font-family: var(--font) !important;
   font-size: var(--font-size-caption) !important;
   font-weight: var(--font-weight-medium) !important;
+  line-height: normal !important;
+  white-space: nowrap !important;
 }
 
 #p-noti-brand.noti-brand-detail .nb-card-fav {
@@ -33180,7 +33183,7 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
   height: 72px !important;
   display: flex !important;
   flex-direction: row !important;
-  justify-content: flex-start !important;
+  justify-content: center !important;
   align-items: center !important;
   gap: var(--spacing-16) !important;
   padding: 0 !important;
@@ -33189,40 +33192,50 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 }
 
 #p-noti-brand.noti-brand-detail .nb-card-logo-wrap {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  gap: var(--spacing-8) !important;
+  display: grid !important;
+  grid-template-columns: max-content !important;
+  grid-template-rows: max-content !important;
+  place-items: start !important;
   flex-shrink: 0 !important;
   position: static !important;
 }
 
 #p-noti-brand.noti-brand-detail .nb-card-img {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
   width: 64px !important;
   height: 64px !important;
   border-radius: 50% !important;
+  margin-top: var(--spacing-8) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  font-size: var(--font-size-label) !important;
-  font-weight: var(--font-weight-bold) !important;
-  color: white !important;
+  font-family: var(--font) !important;
+  font-size: var(--font-size-headline-md) !important;
+  font-weight: var(--font-weight-heavy) !important;
+  color: var(--color-on-primary) !important;
   flex-shrink: 0 !important;
 }
 
 #p-noti-brand.noti-brand-detail .nb-ch-badge {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
   background: var(--color-blue-200) !important;
   color: var(--color-gray-700) !important;
-  padding: var(--spacing-4) var(--spacing-8) !important;
-  border-radius: var(--radius-full) !important;
+  font-family: var(--font) !important;
   font-size: var(--font-size-caption) !important;
   font-weight: var(--font-weight-semi-bold) !important;
+  line-height: 1 !important;
+  padding: var(--spacing-4) var(--spacing-10) !important;
+  border-radius: var(--radius-full) !important;
   white-space: nowrap;
   position: static !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  margin: 0 !important;
+  margin-left: var(--spacing-32) !important;
+  margin-top: 0 !important;
+  z-index: 1 !important;
 }
 
 /* 카드 우측 정렬된 텍스트 정보 */
@@ -33231,33 +33244,37 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
-  align-items: flex-end !important;
+  align-items: flex-start !important;
   gap: var(--spacing-8) !important;
   min-width: 0 !important;
-  text-align: right !important;
+  text-align: left !important;
 }
 
 #p-noti-brand.noti-brand-detail .nb-card-title {
-  color: var(--color-gray-900) !important;
+  color: var(--color-gray-700) !important;
+  font-family: var(--font) !important;
   font-size: var(--font-size-body) !important;
   font-weight: var(--font-weight-bold) !important;
+  line-height: normal !important;
   white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   width: 100% !important;
-  text-align: right !important;
+  text-align: left !important;
 }
 
 #p-noti-brand.noti-brand-detail .nb-card-cond,
 #p-noti-brand.noti-brand-detail .nb-card-date {
-  color: var(--color-gray-600) !important;
+  color: var(--color-gray-700) !important;
+  font-family: var(--font) !important;
   font-size: var(--font-size-caption) !important;
   font-weight: var(--font-weight-medium) !important;
+  line-height: normal !important;
   white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   width: 100% !important;
-  text-align: right !important;
+  text-align: left !important;
   margin: 0 !important;
 }
 
@@ -33659,68 +33676,98 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
   }
 }
 
-#wshBrandGrid.wsh-edit-mode {
-  background: rgba(16, 65, 167, 0.84);
-  border-radius: 0;
+#p-wishlist.wsh-editing {
+  position: relative;
 }
 
-.wsh-edit-mode .wsh-brand-lbl {
-  color: white;
-}
-
-.wsh-del-btn {
-  display: none;
+#p-wishlist.wsh-editing::before {
+  background: var(--color-primary);
+  content: "";
+  inset: var(--spacing-24) var(--spacing-20) var(--spacing-24);
+  opacity: 0.6;
+  pointer-events: none;
   position: absolute;
-  top: 8px;
-  left: 8px;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--red-400);
-  color: white;
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-heavy);
-  border: 2.5px solid white;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  line-height: 0.9;
-  box-shadow: 0 1px 5px rgba(18, 18, 18, 0.35);
-  padding: 0;
-  transition: transform 0.12s;
-  font-family: var(--font);
+  z-index: 20;
 }
 
-.wsh-edit-mode .wsh-del-btn {
+.wsh-edit-close-btn {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: var(--color-gray-700);
+  cursor: pointer;
+  display: none;
+  font-family: var(--font);
+  font-size: var(--font-size-headline-md);
+  font-weight: var(--font-weight-medium);
+  height: var(--spacing-32);
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+  width: var(--spacing-32);
+}
+
+#p-wishlist.wsh-editing .wsh-edit-close-btn {
   display: flex;
 }
 
-.wsh-del-btn:active {
-  transform: scale(0.82);
+#p-wishlist.wsh-editing .use-top-nav-back {
+  pointer-events: none;
 }
 
-.wsh-brand-cell.wsh-mark-delete .wsh-brand-circle {
-  background: var(--gray-300) !important;
-  box-shadow: none;
-  opacity: 0.55;
+#p-wishlist.wsh-editing .use-top-nav,
+#p-wishlist.wsh-editing .wsh-tab-bar,
+#p-wishlist.wsh-editing #wshChipBar,
+#p-wishlist.wsh-editing #wshGridBar,
+#p-wishlist.wsh-editing #wshBrandGrid {
+  position: relative;
+  z-index: 21;
 }
 
-.wsh-brand-cell.wsh-mark-delete {
-  animation: wshWiggle 0.46s ease-in-out infinite;
+#p-wishlist.wsh-editing .use-top-nav {
+  background: transparent !important;
+  color: var(--color-on-primary) !important;
 }
 
-.wsh-brand-cell.wsh-mark-delete .wsh-brand-lbl {
-  opacity: 0.45;
+#p-wishlist.wsh-editing .use-top-nav-spacer {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.wsh-brand-cell.wsh-mark-delete .wsh-del-btn {
-  background: var(--gray-500);
-  transform: rotate(45deg);
+#p-wishlist.wsh-editing .use-top-nav-title,
+#p-wishlist.wsh-editing .wsh-tab,
+#p-wishlist.wsh-editing #wshEditBtn {
+  color: var(--color-gray-700) !important;
 }
 
-.wsh-brand-cell.wsh-mark-delete .wsh-del-btn:active {
-  transform: rotate(45deg) scale(0.82);
+#p-wishlist.wsh-editing .wsh-tab-bar,
+#p-wishlist.wsh-editing #wshChipBar,
+#p-wishlist.wsh-editing #wshGridBar {
+  background: transparent !important;
+}
+
+#p-wishlist.wsh-editing #wshScrollArea {
+  background: transparent !important;
+}
+
+#wshBrandGrid.wsh-edit-mode {
+  background: transparent;
+  border-radius: 0;
+  max-width: calc(var(--spacing-260) + var(--spacing-80) + var(--spacing-20) + var(--spacing-2));
+  margin: 0 auto;
+}
+
+#wshBrandGrid.wsh-edit-mode .wsh-brand-cell {
+  background: transparent;
+}
+
+#wshBrandGrid.wsh-edit-mode .wsh-brand-heart {
+  display: flex;
+}
+
+#wshBrandGrid.wsh-edit-mode .wsh-brand-lbl {
+  color: var(--color-gray-700);
 }
 
 /* ===== 즐겨찾기 포인트 탭 ===== */
@@ -34514,105 +34561,6 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 #wshSortOverlay.ph-sort-sheet-overlay.open,
 #wshSortSheet.ph-sort-dd-panel.open {
   z-index: 2600 !important;
-}
-
-/* ============================================================
-   즐겨찾기 편집 바텀시트 모달 스타일 (Figma 623:2189)
-   ============================================================ */
-.wsh-edit-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(29, 41, 57, 0.6);
-  z-index: 1999;
-  display: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.wsh-edit-overlay.open {
-  display: block;
-  opacity: 1;
-}
-
-.wsh-edit-sheet {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%) translateY(100%);
-  width: 100%;
-  max-width: 402px;
-  height: 75%;
-  background: var(--color-gray-50);
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-  z-index: 2000;
-  box-shadow: var(--shadow-l);
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease;
-  box-sizing: border-box;
-}
-
-.wsh-edit-sheet.open {
-  transform: translateX(-50%) translateY(0);
-}
-
-.wsh-edit-sheet-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-16) var(--spacing-20);
-  border-bottom: 1px solid var(--color-gray-100);
-  background: white;
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-}
-
-.wsh-edit-sheet-title {
-  font-family: var(--font);
-  font-size: var(--font-size-headline-sm);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-gray-700);
-  letter-spacing: 0.2px;
-}
-
-.wsh-edit-sheet-close {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--color-gray-500);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-}
-
-.wsh-edit-sheet-close svg {
-  width: 24px;
-  height: 24px;
-}
-
-.wsh-edit-sheet-body {
-  flex: 1;
-  overflow-y: auto;
-  padding: var(--spacing-16) var(--spacing-20);
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-12);
-  scrollbar-width: none;
-}
-
-.wsh-edit-sheet-body::-webkit-scrollbar {
-  display: none;
-}
-
-.wsh-edit-sheet-footer {
-  padding: var(--spacing-16) var(--spacing-20) var(--spacing-32);
-  text-align: center;
-  font-family: var(--font);
-  font-size: var(--font-size-caption);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-gray-400);
-  background: var(--color-gray-50);
-  border-top: 1px solid var(--color-gray-100);
 }
 
 /* Mypage imported-screen refinements: keep the transferred 0607 layout scoped. */

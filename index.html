@@ -3011,7 +3011,9 @@
                   stroke-linejoin="round"></path>
               </svg></button>
             <span id="wshHeaderTitle" class="use-top-nav-title">즐겨찾기</span>
-            <div class="use-top-nav-spacer"></div>
+            <div class="use-top-nav-spacer">
+              <button id="wshEditCloseBtn" class="wsh-edit-close-btn" type="button" onclick="wshToggleEditMode()" aria-label="편집 닫기">×</button>
+            </div>
           </div>
 
           <!-- 탭 (세그먼트 컨트롤) — Figma 세그먼트 바ver3 -->
@@ -3069,7 +3071,6 @@
                         d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                     </svg>
                   </button>
-                  <button class="wsh-del-btn" onclick="wshMarkDelete(this,event)" aria-label="스타벅스 삭제">−</button>
                   <div class="wsh-brand-circle" style="color:var(--color-gray-600)"><span>스</span></div>
                   <span class="wsh-brand-lbl">스타벅스</span>
                 </div>
@@ -3081,7 +3082,6 @@
                         d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                     </svg>
                   </button>
-                  <button class="wsh-del-btn" onclick="wshMarkDelete(this,event)" aria-label="이마트 삭제">−</button>
                   <div class="wsh-brand-circle" style="color:var(--color-gray-600)"><span>이</span></div>
                   <span class="wsh-brand-lbl">이마트</span>
                 </div>
@@ -3093,7 +3093,6 @@
                         d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                     </svg>
                   </button>
-                  <button class="wsh-del-btn" onclick="wshMarkDelete(this,event)" aria-label="롯데마트 삭제">−</button>
                   <div class="wsh-brand-circle" style="color:var(--color-gray-600)"><span>롯</span></div>
                   <span class="wsh-brand-lbl">롯데마트</span>
                 </div>
@@ -3105,7 +3104,6 @@
                         d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                     </svg>
                   </button>
-                  <button class="wsh-del-btn" onclick="wshMarkDelete(this,event)" aria-label="배달의민족 삭제">−</button>
                   <div class="wsh-brand-circle" style="color:var(--color-gray-600)"><span>배</span></div>
                   <span class="wsh-brand-lbl">배달의민족</span>
                 </div>
@@ -3117,7 +3115,6 @@
                         d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                     </svg>
                   </button>
-                  <button class="wsh-del-btn" onclick="wshMarkDelete(this,event)" aria-label="GS25 삭제">−</button>
                   <div class="wsh-brand-circle" style="color:var(--color-gray-600)"><span>G</span></div>
                   <span class="wsh-brand-lbl">GS25</span>
                 </div>
@@ -3129,7 +3126,6 @@
                         d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                     </svg>
                   </button>
-                  <button class="wsh-del-btn" onclick="wshMarkDelete(this,event)" aria-label="올리브영 삭제">−</button>
                   <div class="wsh-brand-circle" style="color:var(--color-gray-600)"><span>올</span></div>
                   <span class="wsh-brand-lbl">올리브영</span>
                 </div>
@@ -5528,26 +5524,6 @@
 <script src="script.js?v=3"></script>
 <div class="toast" id="toast"></div>
 
-
-<!-- ── 즐겨찾기 편집 바텀시트 ── -->
-<div class="wsh-edit-overlay" id="wshEditOverlay" onclick="closeWshEditSheet()" aria-hidden="true"></div>
-<div class="wsh-edit-sheet" id="wshEditSheet" role="dialog" aria-modal="true" aria-label="즐겨찾기 편집">
-  <div class="wsh-edit-sheet-header">
-    <span class="wsh-edit-sheet-title">즐겨찾기 편집</span>
-    <button class="wsh-edit-sheet-close" onclick="closeWshEditSheet()" aria-label="닫기">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-      </svg>
-    </button>
-  </div>
-  <div class="wsh-edit-sheet-body" id="wshEditSheetList">
-    <!-- script.js에서 동적 렌더링 -->
-  </div>
-  <div class="wsh-edit-sheet-footer">
-    불필요한 즐겨찾기 항목을 삭제하여 정리해보세요.
-  </div>
-</div>
 <!-- ── 바코드 확대 모달 ── -->
 <div id="brcZoomModal" onclick="if(event.target===this)closeBrcZoom()">
   <div class="brc-zoom-box">

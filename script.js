@@ -6221,19 +6221,26 @@ function wshCpnCard(b, c) {
 let _wshEditMode = false;
 let _wshCouponEditMode = false;
 
+function wshSetBrandEditMode(enabled) {
+  _wshEditMode = enabled;
+  const page = document.getElementById('p-wishlist');
+  const grid = document.getElementById('wshBrandGrid');
+  const btn = document.getElementById('wshEditBtn');
+  const title = document.getElementById('wshHeaderTitle');
+  const back = document.querySelector('#p-wishlist .use-top-nav-back');
+  if (page) page.classList.toggle('wsh-editing', _wshEditMode);
+  if (grid) grid.classList.toggle('wsh-edit-mode', _wshEditMode);
+  if (btn) {
+    btn.textContent = '편집 ㅣ 삭제';
+    btn.style.color = _wshEditMode ? 'var(--color-gray-700)' : 'var(--color-gray-500)';
+    btn.style.fontWeight = '700';
+  }
+  if (title) title.textContent = _wshEditMode ? '즐겨찾기 편집' : '즐겨찾기';
+  if (back) back.style.visibility = _wshEditMode ? 'hidden' : '';
+}
+
 function wshToggleEditMode() {
-  openWshEditSheet();
-}
-
-function openWshEditSheet() {
-  wshRenderEditSheet();
-  document.getElementById('wshEditOverlay').classList.add('open');
-  document.getElementById('wshEditSheet').classList.add('open');
-}
-
-function closeWshEditSheet() {
-  document.getElementById('wshEditOverlay').classList.remove('open');
-  document.getElementById('wshEditSheet').classList.remove('open');
+  wshSetBrandEditMode(!_wshEditMode);
 }
 
 function toggleWshFavorite(brandId, e) {
@@ -6245,7 +6252,6 @@ function toggleWshFavorite(brandId, e) {
     cell.style.transform = 'scale(0.4)';
     setTimeout(() => {
       cell.remove();
-      wshRenderEditSheet();
       // 또한 쿠폰 목록 탭도 리렌더링하여 연동
       if (document.getElementById('wshCouponSection').style.display !== 'none') {
         wshRenderCouponList();
@@ -6254,68 +6260,8 @@ function toggleWshFavorite(brandId, e) {
   }
 }
 
-function wshRenderEditSheet() {
-  const listEl = document.getElementById('wshEditSheetList');
-  if (!listEl) return;
-  
-  const favoritedBrandIds = [];
-  document.querySelectorAll('#wshBrandGrid .wsh-brand-cell').forEach(cell => {
-    const onclick = cell.getAttribute('onclick') || '';
-    const m = onclick.match(/wshOpenBrand\('([^']+)'\)/);
-    if (m && m[1]) {
-      favoritedBrandIds.push(m[1]);
-    }
-  });
-  
-  let html = '';
-  favoritedBrandIds.forEach(brandId => {
-    const b = WSH_BRANDS[brandId];
-    if (!b || !b.coupons) return;
-    
-    b.coupons.forEach(c => {
-      const isUrgent = c.urgent || c.dday === 'D-DAY' || b.id === 'baemin';
-      const isD1 = b.id === 'gs25';
-      const cardClass = isUrgent ? 'urgent' : (isD1 ? 'd-1' : '');
-      const badgeText = isUrgent ? 'D-DAY' : (isD1 ? 'D-1' : '');
-      const brandBgColor = b.bg || '#00704A';
-      const brandInitial = b.icon || b.name.charAt(0);
-      
-      const heartSvg = `<svg viewBox="0 0 24 24" fill="var(--color-red-400)" stroke="var(--color-red-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
-      
-      html += `
-        <div class="wsh-cpn-card ${cardClass}" data-brand-id="${b.id}">
-          <div class="wsh-cpn-logo-section">
-            <div class="wsh-cpn-logo-container">
-              <div class="wsh-cpn-logo-circle" style="background:${brandBgColor}">
-                <span>${brandInitial}</span>
-              </div>
-              <div class="wsh-cpn-badge">온라인</div>
-            </div>
-          </div>
-          <div class="wsh-cpn-details-section">
-            <div class="wsh-cpn-top-row">
-              <span class="wsh-cpn-brand-lbl">${b.name}</span>
-              <button class="wsh-cpn-heart-btn" onclick="toggleWshFavorite('${b.id}', event)" aria-label="즐겨찾기 해제">
-                ${heartSvg}
-              </button>
-            </div>
-            <p class="wsh-cpn-title">${c.title}</p>
-            <p class="wsh-cpn-cond">${c.cond}</p>
-            <p class="wsh-cpn-date">${c.exp ? c.exp + ' 까지' : ''}</p>
-          </div>
-          ${badgeText ? `<div class="wsh-cpn-dday-badge">${badgeText}</div>` : ''}
-        </div>
-      `;
-    });
-  });
-  
-  if (!html) {
-    html = '<div style="text-align:center;padding:var(--spacing-32);color:var(--color-gray-400);font-family:var(--font)">즐겨찾기된 항목이 없습니다.</div>';
-  }
-  listEl.innerHTML = html;
-}
-
 function wshOpenBrand(id) {
+  if (_wshEditMode) wshSetBrandEditMode(false);
   const b = WSH_BRANDS[id]; if (!b) return;
   // 헤더 타이틀을 브랜드명으로
   const titleEl = document.getElementById('wshHeaderTitle');
@@ -6351,10 +6297,7 @@ function wshShowBrandGrid() {
   document.getElementById('wshBrandDetail').style.display = 'none';
   // 편집 모드 강제 종료
   if (_wshEditMode) {
-    _wshEditMode = false;
-    document.getElementById('wshBrandGrid').classList.remove('wsh-edit-mode');
-    const btn = document.getElementById('wshEditBtn');
-    if (btn) { btn.textContent = '편집 | 삭제'; btn.style.color = 'var(--gray-700)'; btn.style.fontWeight = '700'; }
+    wshSetBrandEditMode(false);
   }
   // 헤더 타이틀 복원
   const titleEl = document.getElementById('wshHeaderTitle');
@@ -6427,6 +6370,7 @@ function wshShowTab(tab) {
   // 칩바: 쿠폰/포인트 탭은 항상 표시, 브랜드는 wshShowBrandGrid/wshOpenBrand가 관리
   const chipBar = document.getElementById('wshChipBar');
   if (!isBrand && chipBar) chipBar.style.display = 'flex';
+  if (!isBrand && _wshEditMode) wshSetBrandEditMode(false);
   if (isBrand) {
     if (_wshCouponEditMode) wshToggleCouponEditMode();
     wshShowBrandGrid();
