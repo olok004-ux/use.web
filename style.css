@@ -16629,7 +16629,7 @@ body:has(#mps-connect.mps-open) #mpsBackBar {
     font-size: var(--font-size-body);
     font-weight: var(--font-weight-semi-bold);
     line-height: 1.25;
-    color: var(--gray-900);
+    color: var(--color-gray-400);
     cursor: pointer;
     transition: color .18s;
     position: relative;
@@ -16642,6 +16642,11 @@ body:has(#mps-connect.mps-open) #mpsBackBar {
     color: var(--color-primary);
   }
 
+  /* Default state (inactive): Grey color */
+  .tab-bar-item {
+    color: var(--color-gray-400);
+  }
+
   .tab-bar-item .ico-fill {
     display: none !important;
   }
@@ -16650,7 +16655,6 @@ body:has(#mps-connect.mps-open) #mpsBackBar {
   }
   .tab-bar-item.on .ico-fill {
     display: block !important;
-    fill: var(--color-primary);
   }
   .tab-bar-item.on .ico-outline {
     display: none !important;
@@ -16662,6 +16666,24 @@ body:has(#mps-connect.mps-open) #mpsBackBar {
     display: block;
     transition: none;
     flex-shrink: 0;
+  }
+
+  .tab-icon path,
+  .tab-icon g,
+  .tab-icon circle,
+  .tab-icon polygon,
+  .tab-icon rect {
+    stroke: currentColor;
+    transition: stroke 0.18s, fill 0.18s;
+  }
+
+  .tab-bar-item .ico-fill path,
+  .tab-bar-item .ico-fill g,
+  .tab-bar-item .ico-fill circle,
+  .tab-bar-item .ico-fill polygon,
+  .tab-bar-item .ico-fill rect {
+    fill: currentColor;
+    stroke: none;
   }
 
   .tab-bar-item.on .tab-icon {
