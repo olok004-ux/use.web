@@ -2780,21 +2780,22 @@ function renderHomeList() {
       onclick="ACT['go-detail']&&ACT['go-detail']({target:this})"
       style="display:${i<3?'flex':'none'};flex-direction:column">
       <div class="hm-h4-head">
-        <span class="hm-badge-unused">${cpnDday(c.expiry)}</span>
+        <span class="hm-h4-brand">${c.brand}</span>
         <button class="hm-h4-fav" onclick="event.stopPropagation();toggleCpnFav('${c.id}',this)">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="${c.fav?'currentColor':'none'}" stroke="${c.fav?'var(--color-red-400)':'currentColor'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:${c.fav?'var(--color-red-400)':'currentColor'}"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </button>
       </div>
       <div class="hm-h4-body">
-        <div class="hm-h4-img" style="background:${cpnBgColor(c.brand)};color:white;display:flex;align-items:center;justify-content:center;border-radius:50%;width:48px;height:48px;font-weight:700">${cpnInitial(c.brand)}</div>
+        <div class="hm-h4-logo-wrap">
+          <div class="hm-h4-img" style="background:${cpnBgColor(c.brand)};color:white;display:flex;align-items:center;justify-content:center;border-radius:50%;font-weight:700">${cpnInitial(c.brand)}</div>
+          <span class="hm-h4-channel">${cpnChannelBadge(c.channel)}</span>
+        </div>
         <div class="hm-h4-info">
-          <div class="hm-h4-brand">${c.brand}</div>
           <div class="hm-h4-title">${c.name}</div>
+          <div class="hm-h4-cond">${c.cond === '없음' ? '조건 없음' : c.cond}</div>
           <div class="hm-h4-date">${c.expiry} 까지</div>
         </div>
       </div>
-      <hr class="hm-h4-sep">
-      <button class="hm-h4-save" onclick="event.stopPropagation()">사용하기</button>
     </div>`).join('') + `<div id="hmNoResult" style="display:none;padding:40px 0;text-align:center;color:var(--gray-400)"><div style="font-size:var(--font-size-body);font-weight:var(--font-weight-bold)">검색 결과가 없습니다</div></div>`;
   if (moreBtn) moreBtn.style.display = cpns.length > 3 ? '' : 'none';
 }
@@ -3092,22 +3093,22 @@ function renderWishlist() {
     return;
   }
   list.innerHTML = faved.map(c => `
-    <div class="wsh-cpn-card" data-action="go-detail" data-id="${c.id}" onclick="ACT['go-detail']&&ACT['go-detail']({target:this})">
-      <div class="wsh-cpn-card-header">
-        <span class="wsh-cpn-brand-lbl">${c.brand}</span>
-        <span class="wsh-cpn-heart" onclick="event.stopPropagation();toggleCpnFav('${c.id}',this)">
+    <div class="ph-cpn-card normal wsh-cpn-card" data-action="go-detail" data-id="${c.id}" onclick="ACT['go-detail']&&ACT['go-detail']({target:this})">
+      <div class="ph-cpn-head wsh-cpn-card-header">
+        <span class="ph-cpn-brand wsh-cpn-brand-lbl">${c.brand}</span>
+        <button class="ph-cpn-fav on wsh-cpn-heart" type="button" onclick="event.stopPropagation();toggleCpnFav('${c.id}',this)" aria-label="찜하기">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="var(--color-red-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-red-400)"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </span>
+        </button>
       </div>
-      <div class="wsh-cpn-body">
-        <div class="wsh-cpn-logo-wrap">
-          <div class="wsh-cpn-logo-circle" style="background:${cpnBgColor(c.brand)};color:white;display:flex;align-items:center;justify-content:center;font-weight:700">${cpnInitial(c.brand)}</div>
-          <div class="wsh-cpn-badge">${cpnChannelBadge(c.channel)}</div>
+      <div class="ph-cpn-body wsh-cpn-body">
+        <div class="ph-cpn-logo-wrap wsh-cpn-logo-wrap">
+          <div class="ph-cpn-logo wsh-cpn-logo-circle" style="background:${cpnBgColor(c.brand)};color:white;display:flex;align-items:center;justify-content:center;font-weight:700">${cpnInitial(c.brand)}</div>
+          <div class="ph-ch-badge wsh-cpn-badge">${cpnChannelBadge(c.channel)}</div>
         </div>
-        <div class="wsh-cpn-info">
-          <div class="wsh-cpn-title">${c.name}</div>
-          <div class="wsh-cpn-cond">${c.cond === '없음' ? '조건 없음' : c.cond}</div>
-          <div class="wsh-cpn-exp">${c.expiry} 까지 &nbsp;<span style="color:var(--color-blue-500);font-weight:700">${cpnDday(c.expiry)}</span></div>
+        <div class="ph-cpn-info wsh-cpn-info">
+          <div class="ph-cpn-title wsh-cpn-title">${c.name}</div>
+          <div class="ph-cpn-cond wsh-cpn-cond">${c.cond === '없음' ? '조건 없음' : c.cond}</div>
+          <div class="ph-cpn-date wsh-cpn-date">${c.expiry.replace(/-/g, '.')}까지</div>
         </div>
       </div>
     </div>`).join('');
@@ -6199,20 +6200,20 @@ function wshCpnCard(b, c) {
   const initial = cpnInitial(b.name);
   const bgColor = cpnBgColor(b.name);
 
-  return `<div class="wsh-cpn-card" data-action="go-detail" data-id="${b.id}">
-    <div class="wsh-cpn-card-header">
-      <span class="wsh-cpn-brand-lbl">${b.name}</span>
-      <span class="wsh-cpn-heart">${heartSvg}</span>
+  return `<div class="ph-cpn-card normal wsh-cpn-card" data-action="go-detail" data-id="${b.id}">
+    <div class="ph-cpn-head wsh-cpn-card-header">
+      <span class="ph-cpn-brand wsh-cpn-brand-lbl">${b.name}</span>
+      <span class="ph-cpn-fav on wsh-cpn-heart">${heartSvg}</span>
     </div>
-    <div class="wsh-cpn-body">
-      <div class="wsh-cpn-logo-wrap">
-        <div class="wsh-cpn-logo-circle" style="background:${bgColor}; display:flex; align-items:center; justify-content:center; font-size:var(--font-size-headline-sm); font-weight:var(--font-weight-heavy); color:white">${initial}</div>
-        <span class="wsh-cpn-badge">${channelLabel}</span>
+    <div class="ph-cpn-body wsh-cpn-body">
+      <div class="ph-cpn-logo-wrap wsh-cpn-logo-wrap">
+        <div class="ph-cpn-logo wsh-cpn-logo-circle" style="background:${bgColor}; display:flex; align-items:center; justify-content:center; font-size:var(--font-size-headline-sm); font-weight:var(--font-weight-heavy); color:white">${initial}</div>
+        <span class="ph-ch-badge wsh-cpn-badge">${channelLabel}</span>
       </div>
-      <div class="wsh-cpn-info">
-        <p class="wsh-cpn-title">${c.title}</p>
-        <p class="wsh-cpn-cond">${c.cond}</p>
-        <p class="wsh-cpn-date">${dateLabel}</p>
+      <div class="ph-cpn-info wsh-cpn-info">
+        <p class="ph-cpn-title wsh-cpn-title">${c.title}</p>
+        <p class="ph-cpn-cond wsh-cpn-cond">${c.cond}</p>
+        <p class="ph-cpn-date wsh-cpn-date">${dateLabel}</p>
       </div>
     </div>
   </div>`;
@@ -6376,27 +6377,26 @@ function wshCpnCardItem(b, c) {
   const heartSvg = `<svg viewBox="0 0 24 24" fill="var(--color-red-400)" stroke="var(--color-red-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
   
   return `
-    <div class="wsh-cpn-card ${cardClass}" data-action="go-detail" data-id="${b.id}">
-      <div class="wsh-cpn-logo-section">
-        <div class="wsh-cpn-logo-container">
-          <div class="wsh-cpn-logo-circle" style="background:${brandBgColor}">
-            <span>${brandInitial}</span>
-          </div>
-          <div class="wsh-cpn-badge">온라인</div>
-        </div>
-      </div>
-      <div class="wsh-cpn-details-section">
-        <div class="wsh-cpn-top-row">
-          <span class="wsh-cpn-brand-lbl">${b.name}</span>
-          <button class="wsh-cpn-heart-btn" onclick="toggleWshFavorite('${b.id}', event)" aria-label="즐겨찾기 해제">
+    <div class="ph-cpn-card normal wsh-cpn-card ${cardClass}" data-action="go-detail" data-id="${b.id}">
+      <div class="ph-cpn-head wsh-cpn-card-header">
+          <span class="ph-cpn-brand wsh-cpn-brand-lbl">${b.name}</span>
+          <button class="ph-cpn-fav on wsh-cpn-heart-btn" onclick="toggleWshFavorite('${b.id}', event)" aria-label="즐겨찾기 해제">
             ${heartSvg}
           </button>
-        </div>
-        <p class="wsh-cpn-title">${c.title}</p>
-        <p class="wsh-cpn-cond">${c.cond}</p>
-        <p class="wsh-cpn-date">${dateStr}</p>
       </div>
-      ${badgeText ? `<div class="wsh-cpn-dday-badge">${badgeText}</div>` : ''}
+      <div class="ph-cpn-body wsh-cpn-body">
+        <div class="ph-cpn-logo-wrap wsh-cpn-logo-wrap">
+          <div class="ph-cpn-logo wsh-cpn-logo-circle" style="background:${brandBgColor}">
+            <span>${brandInitial}</span>
+          </div>
+          <div class="ph-ch-badge wsh-cpn-badge">온라인</div>
+        </div>
+        <div class="ph-cpn-info wsh-cpn-info">
+          <p class="ph-cpn-title wsh-cpn-title">${c.title}</p>
+          <p class="ph-cpn-cond wsh-cpn-cond">${c.cond}</p>
+          <p class="ph-cpn-date wsh-cpn-date">${dateStr}</p>
+        </div>
+      </div>
     </div>
   `;
 }
