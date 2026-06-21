@@ -7028,14 +7028,33 @@ function filterAndRenderHist(groups, tab) {
       '<div class="hist-date">' + g.date + '</div>' +
       '<div class="hist-items">' +
       g.items.map(function(it) {
+        // 포인트 적립/사용과 쿠폰 구분에 따른 출력 형태 변경
+        var displayValue = it.coupon;
+        var displayLabel = it.discount;
+        var customClass = '';
+
+        if (it.type === 'point') {
+          // 큰 텍스트 영역: 숫자 (예: +50P, -500P)
+          displayValue = it.discount;
+          // 작은 텍스트 영역: '포인트 적립' / '포인트 사용'
+          displayLabel = it.coupon;
+
+          // 사용한 숫자는 붉은색, 적립한 숫자는 파란색
+          if (displayValue.indexOf('-') === 0) {
+            customClass = ' color-used';
+          } else {
+            customClass = ' color-saved';
+          }
+        }
+
         return '<div class="hist-item">' +
           '<div class="hist-item-left">' +
             '<span class="hist-brand">' + it.brand + '</span>' +
             '<span class="hist-time">' + it.time + '</span>' +
           '</div>' +
           '<div class="hist-item-right">' +
-            '<span class="hist-coupon">' + it.coupon + '</span>' +
-            '<span class="hist-discount">' + it.discount + '</span>' +
+            '<span class="hist-coupon' + customClass + '">' + displayValue + '</span>' +
+            '<span class="hist-discount">' + displayLabel + '</span>' +
           '</div>' +
         '</div>';
       }).join('') +

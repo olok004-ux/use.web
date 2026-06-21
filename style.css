@@ -320,6 +320,23 @@ body {
   font-family: var(--font);
 }
 
+.hist-discount {
+  color: var(--color-primary);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-semi-bold);
+  line-height: 1;
+}
+.hist-coupon.color-saved {
+  color: var(--color-blue-500) !important;
+}
+.hist-coupon.color-used {
+  color: var(--color-error, #E53935) !important;
+}
+
+#p-mypage #mps-history.mps-open {
+  background: white !important;
+}
+
 .nb-scroll {
   flex: 1;
   overflow-y: auto;
