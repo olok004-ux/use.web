@@ -1973,7 +1973,7 @@
             <div class="hm2-section">
               <div class="hm2-section-head">
                 <span class="hm2-section-title">이번 주 만료 예정 쿠폰</span>
-                <div class="hm2-section-more-wrap" onclick="go('expire-soon')" style="cursor:pointer;">
+                <div class="hm2-section-more-wrap" onclick="openDeadlineNotiPage()" style="cursor:pointer;">
                   <span class="hm2-section-more">전체보기</span>
                   <svg width="5" height="10" viewBox="0 0 5 10" fill="none" style="transform:rotate(180deg)"><path d="M4.5 9L0.5 5L4.5 1" stroke="#475467" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </div>
@@ -3135,7 +3135,7 @@
               </div>
 
               <!-- 브랜드 상세 (hidden) — Figma 11:1379 / 11:1336 -->
-              <div id="wshBrandDetail" style="display: none; background: var(--color-gray-50); width: 100%; border-radius: var(--radius-xl); overflow: hidden; box-sizing: border-box;">
+              <div id="wshBrandDetail" style="display: none; background: var(--color-on-primary); width: 100%; border-radius: var(--radius-xl); overflow: hidden; box-sizing: border-box;">
 
                 <!-- 브랜드 히어로 -->
                 <div
@@ -3158,14 +3158,24 @@
 
                   <!-- 2. 바코드부분 (hasPoint 브랜드만 표시) -->
                   <div id="wshDetailPointSection"
+                    onclick="toggleWshPointCard(event)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){toggleWshPointCard(event)}"
+                    role="button"
+                    tabindex="0"
+                    aria-expanded="false"
                     style="display: none; flex-direction: column; align-items: center; background: white; border-radius: var(--radius-xl); padding: var(--spacing-20); box-shadow: var(--shadow-s); order: 2; margin-top: calc(-1 * var(--spacing-8));">
-                    <div
+                    <div class="wsh-point-expanded-head" aria-hidden="true">
+                      <span id="wshDetailPointBrand" class="wsh-point-brand-name"></span>
+                      <strong id="wshDetailPointAmount" class="wsh-point-amount"></strong>
+                    </div>
+                    <div class="wsh-point-barcode"
                       style="width: 100%; max-width: 240px; height: 60px; border-radius: var(--radius-sm); overflow: hidden; background: repeating-linear-gradient(90deg, var(--color-gray-700) 0px, var(--color-gray-700) 2px, white 2px, white 5px, var(--color-gray-700) 5px, var(--color-gray-700) 6px, white 6px, white 9px);">
                     </div>
                     <p
                       style="font-size: var(--font-size-caption); color: var(--color-gray-300); font-family: var(--font); letter-spacing: 0.5px; font-weight: var(--font-weight-medium); margin: var(--spacing-8) 0 0 0;">
                       1234 567 890102214 312 43</p>
-                    <div
+                    <p class="wsh-point-scan-copy">바코드를 스캔해주세요</p>
+                    <div class="wsh-point-chevron"
                       style="display: flex; justify-content: center; width: 100%; margin-top: var(--spacing-10); cursor: pointer;">
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-300)" stroke-width="2.5"
                         stroke-linecap="round" stroke-linejoin="round">
@@ -4621,7 +4631,7 @@
             </div>
           </main>
           <div class="connect-flow-bottom">
-            <button class="connect-flow-primary" type="button" data-action="nav-wallet">쿠폰함 바로가기</button>
+            <button class="connect-flow-primary" type="button" data-action="nav-benefits-coupons">쿠폰함 바로가기</button>
             <button class="connect-flow-primary connect-flow-outline" type="button" data-action="nav-home">홈화면 바로가기</button>
           </div>
         </div>

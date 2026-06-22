@@ -7242,6 +7242,7 @@ input[type=range].disc-range::-moz-range-thumb {
 #p-mypage #mps-info.mps-open .info-figma-card {
   align-items: center !important;
   background: var(--color-on-primary) !important;
+  border: 0 !important;
   box-sizing: border-box !important;
   display: flex !important;
   flex-direction: column !important;
@@ -7351,7 +7352,16 @@ input[type=range].disc-range::-moz-range-thumb {
   width: 100%;
 }
 
-#mps-info input.info-field-box,
+#mps-info input.info-field-box {
+  background: var(--color-on-primary);
+  border: calc(var(--spacing-2) / 2) solid var(--color-gray-300);
+  border-radius: var(--radius-md);
+  color: var(--navy);
+  font: inherit;
+  min-width: 0;
+  outline: none;
+}
+
 #mps-info .info-dob-unit input {
   background: transparent;
   border: 0;
@@ -10474,12 +10484,12 @@ body:has(#p-connect-svc-select[style*="display:block"]) .main-content {
 
 .tab-bar-item:hover {
   background: transparent;
-  color: var(--color-primary);
+  color: var(--color-blue-500);
 }
 
 .tab-bar-item.active,
 .tab-bar-item.on {
-  color: var(--color-primary);
+  color: var(--color-blue-500);
   background: transparent;
 }
 
@@ -16315,7 +16325,7 @@ body:has(#mps-noti.mps-open) #mpsBackBar {
 
   .tab-bar-item.on,
   .tab-bar-item:hover {
-    color: var(--color-primary);
+    color: var(--color-blue-500);
   }
 
   /* Default state (inactive): Grey color */
@@ -24435,7 +24445,7 @@ body:has(#mps-noti.mps-open) #mpsBackBar {
   background: white;
   color: var(--color-primary-variant);
   font-family: var(--font);
-  font-size: var(--font-size-headline-sm);
+  font-size: var(--font-size-body);
   font-weight: var(--font-weight-bold);
   border: none;
   cursor: pointer;
@@ -32742,6 +32752,79 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 #wshDetailCouponSection[style*="display: none"]+#wshDetailCouponTitle,
 #wshDetailCouponSection[style*="display:none"]+#wshDetailCouponTitle {
   display: none !important;
+}
+
+#p-wishlist #wshBrandDetail,
+#p-wishlist #wshBrandDetail > div:nth-of-type(2) {
+  background: var(--color-on-primary) !important;
+}
+
+#p-wishlist #wshDetailPointSection {
+  cursor: pointer !important;
+  transition: border-color .18s ease, box-shadow .18s ease, padding .18s ease;
+}
+
+#p-wishlist #wshDetailPointSection:focus-visible {
+  outline: var(--spacing-2) solid var(--color-blue-500);
+  outline-offset: var(--spacing-2);
+}
+
+#p-wishlist #wshDetailPointSection .wsh-point-expanded-head,
+#p-wishlist #wshDetailPointSection .wsh-point-scan-copy {
+  display: none;
+}
+
+#p-wishlist #wshDetailPointSection.is-expanded {
+  border: calc(var(--spacing-2) / 2) solid var(--color-gray-100) !important;
+  box-shadow: var(--shadow-m) !important;
+  gap: var(--spacing-16) !important;
+  padding: var(--spacing-32) var(--spacing-20) var(--spacing-4) !important;
+}
+
+#p-wishlist #wshDetailPointSection.is-expanded .wsh-point-expanded-head {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  width: 100%;
+}
+
+#p-wishlist #wshDetailPointSection.is-expanded .wsh-point-brand-name {
+  color: var(--color-gray-700);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+}
+
+#p-wishlist #wshDetailPointSection.is-expanded .wsh-point-amount {
+  color: var(--color-blue-500);
+  font-size: var(--font-size-headline-lg);
+  font-weight: var(--font-weight-heavy);
+  line-height: 1;
+}
+
+#p-wishlist #wshDetailPointSection.is-expanded .wsh-point-barcode {
+  height: calc(var(--spacing-80) + var(--spacing-4)) !important;
+  max-width: calc(var(--spacing-260) + var(--spacing-2)) !important;
+}
+
+#p-wishlist #wshDetailPointSection.is-expanded .wsh-point-scan-copy {
+  color: var(--color-gray-300);
+  display: block;
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  margin: 0;
+}
+
+#p-wishlist #wshDetailPointSection.is-expanded .wsh-point-chevron {
+  border-top: calc(var(--spacing-2) / 2) solid var(--color-gray-100);
+  margin-top: var(--spacing-4) !important;
+  padding-top: var(--spacing-4);
+}
+
+#p-wishlist #wshDetailPointSection.is-expanded .wsh-point-chevron svg {
+  transform: rotate(180deg);
 }
 
 /* ============================================================

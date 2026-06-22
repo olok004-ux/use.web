@@ -1579,6 +1579,15 @@ function switchNotiTab(tab) {
   document.getElementById('npTabDeadline').classList.toggle('on', tab === 'deadline');
 }
 
+function openDeadlineNotiPage() {
+  showAppPage('noti-page');
+  updateSidebar('noti-page');
+  setTimeout(() => {
+    switchNotiTab('deadline');
+    renderNotifications();
+  }, 30);
+}
+
 /* ── 정렬 바텀시트 ── */
 function togglePhSort(btnId, ddId, overlayId) {
   const dd = document.getElementById(ddId);
@@ -6229,6 +6238,18 @@ document.addEventListener('click', function handleWishlistCouponDetail(e) {
   if (id && ACT['go-detail']) ACT['go-detail']({ target: card, currentTarget: card });
 });
 
+function toggleWshPointCard(e) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  const section = document.getElementById('wshDetailPointSection');
+  if (!section || section.style.display === 'none') return;
+  const expanded = !section.classList.contains('is-expanded');
+  section.classList.toggle('is-expanded', expanded);
+  section.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+}
+
 function wshCpnCard(b, c) {
   const dateLabel = c.exp ? c.exp + ' 까지' : '';
   const channelLabel = c.ch || '온라인';
@@ -6462,7 +6483,13 @@ function wshOpenBrand(id) {
   const ptSection = document.getElementById('wshDetailPointSection');
   if (ptSection) {
     ptSection.style.display = b.hasPoint ? 'flex' : 'none';
+    ptSection.classList.remove('is-expanded');
+    ptSection.setAttribute('aria-expanded', 'false');
   }
+  const ptBrand = document.getElementById('wshDetailPointBrand');
+  if (ptBrand) ptBrand.textContent = b.name;
+  const ptAmount = document.getElementById('wshDetailPointAmount');
+  if (ptAmount) ptAmount.textContent = b.point || '';
   // 쿠폰 섹션 표시
   const cpnSection = document.getElementById('wshDetailCouponSection');
   if (cpnSection) {
