@@ -15658,8 +15658,7 @@ body:has(#p-connect-svc-select[style*="display:block"]) .main-content {
 /* 자체 헤더가 있는 mps 패널 — mps-back-bar 숨김 */
 body:has(#mps-history.mps-open) #mpsBackBar,
 body:has(#mps-info.mps-open) #mpsBackBar,
-body:has(#mps-noti.mps-open) #mpsBackBar,
-body:has(#mps-connect.mps-open) #mpsBackBar {
+body:has(#mps-noti.mps-open) #mpsBackBar {
   display: none !important;
 }
 
@@ -24707,8 +24706,7 @@ body:has(#mps-connect.mps-open) #mpsBackBar {
 .use-top-nav,
 .page-nav,
 .mf-titlebar,
-.connect-select-titlebar,
-#mps-connect .connect-titlebar {
+.connect-select-titlebar {
   align-items: center !important;
   background: var(--surface) !important;
   border: 0 !important;
@@ -24727,8 +24725,7 @@ body:has(#mps-connect.mps-open) #mpsBackBar {
 .pnav-back,
 .mf-back,
 .mf-tb-back,
-.connect-select-back,
-#mps-connect .connect-back {
+.connect-select-back {
   align-items: center !important;
   background: none !important;
   border: 0 !important;
@@ -24757,8 +24754,7 @@ body:has(#mps-connect.mps-open) #mpsBackBar {
 .pnav-back:hover,
 .mf-back:hover,
 .mf-tb-back:hover,
-.connect-select-back:hover,
-#mps-connect .connect-back:hover {
+.connect-select-back:hover {
   background: transparent !important;
   color: var(--gray-900) !important;
 }
@@ -24776,8 +24772,7 @@ body:has(#mps-connect.mps-open) #mpsBackBar {
 .np-back svg,
 .hss-back-btn svg,
 .btn-outline[data-action="go-back"] svg,
-button[onclick="closeImageSearch()"] svg,
-#mps-connect .connect-back svg {
+button[onclick="closeImageSearch()"] svg {
   height: var(--font-size-headline-sm) !important;
   width: var(--font-size-headline-sm) !important;
   display: block !important;
@@ -24799,8 +24794,7 @@ button[onclick="closeImageSearch()"] svg,
 .mf-page-title,
 .mf-tb-title,
 .connect-select-title,
-.connect-flow-title,
-#mps-connect .connect-title {
+.connect-flow-title {
   color: var(--gray-900) !important;
   flex: 1 1 auto !important;
   font-family: var(--font) !important;
@@ -24823,8 +24817,7 @@ button[onclick="closeImageSearch()"] svg,
 .mf-tb-spacer,
 .np-header>span:last-child,
 .page-nav::after,
-.connect-select-titlebar::after,
-#mps-connect .connect-titlebar::after {
+.connect-select-titlebar::after {
   content: "" !important;
   display: block !important;
   flex: 0 0 30px !important;
@@ -31366,7 +31359,6 @@ body:has(#p-noti-brand[style*="display: flex"]) .main-content {
 .page-nav,
 .mf-titlebar,
 .connect-select-titlebar,
-#mps-connect .connect-titlebar,
 .nb-titlebar {
   align-items: center !important;
   background: var(--surface) !important;
@@ -31387,7 +31379,6 @@ body:has(#p-noti-brand[style*="display: flex"]) .main-content {
 .mf-back,
 .mf-tb-back,
 .connect-select-back,
-#mps-connect .connect-back,
 .nb-back {
   align-items: center !important;
   background: none !important;
@@ -31417,8 +31408,7 @@ body:has(#p-noti-brand[style*="display: flex"]) .main-content {
 .pnav-back:hover,
 .mf-back:hover,
 .mf-tb-back:hover,
-.connect-select-back:hover,
-#mps-connect .connect-back:hover {
+.connect-select-back:hover {
   background: transparent !important;
   color: var(--gray-900) !important;
 }
@@ -31437,7 +31427,6 @@ body:has(#p-noti-brand[style*="display: flex"]) .main-content {
 .hss-back-btn svg,
 .btn-outline[data-action="go-back"] svg,
 button[onclick="closeImageSearch()"] svg,
-#mps-connect .connect-back svg,
 .nb-back svg {
   height: var(--font-size-headline-sm) !important;
   width: var(--font-size-headline-sm) !important;
@@ -31460,8 +31449,7 @@ button[onclick="closeImageSearch()"] svg,
 .mf-page-title,
 .mf-tb-title,
 .connect-select-title,
-.connect-flow-title,
-#mps-connect .connect-title {
+.connect-flow-title {
   color: var(--gray-900) !important;
   flex: 1 1 auto !important;
   font-family: var(--font) !important;
@@ -31485,7 +31473,6 @@ button[onclick="closeImageSearch()"] svg,
 .np-header>span:last-child,
 .page-nav::after,
 .connect-select-titlebar::after,
-#mps-connect .connect-titlebar::after,
 .nb-titlebar-spacer {
   content: "" !important;
   display: block !important;
@@ -33083,68 +33070,117 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 }
 
 #p-wishlist .wsh-pt-card {
-  position: relative !important;
+  background: var(--color-gray-50);
+  border: 2px solid var(--color-blue-200);
+  border-radius: var(--radius-xl);
+  box-sizing: border-box;
+  box-shadow: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-16);
+  height: calc(var(--spacing-80) + var(--spacing-32) + var(--spacing-16)) !important;
+  overflow: hidden;
+  padding: var(--spacing-16);
+  position: relative;
   width: 100% !important;
-  min-height: 132px !important;
-  cursor: pointer !important;
-  -webkit-tap-highlight-color: transparent !important;
+  margin: 0 auto;
 }
 
-#p-wishlist .wsh-pt-card-inner {
-  position: relative !important;
-  width: 100% !important;
-  min-height: 120px !important;
-  border-radius: var(--radius-xl) !important;
-  overflow: visible !important;
+#p-wishlist .wsh-pt-card.urgent {
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  padding: 0;
+  height: calc(var(--spacing-80) + var(--spacing-32) + var(--spacing-16)) !important;
 }
 
-#p-wishlist .wsh-pt-card-content {
-  display: grid !important;
-  grid-template-columns: 86px minmax(0, 1fr) !important;
-  align-items: center !important;
-  gap: var(--spacing-18) !important;
-  width: 100% !important;
-  min-height: 104px !important;
+#p-wishlist .wsh-pt-card.urgent .pts-lc-logo {
+  background: white !important;
+  color: var(--color-gray-700);
 }
 
-#p-wishlist .wsh-pt-logo {
-  position: relative !important;
-  width: 68px !important;
-  height: 68px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+#p-wishlist .wsh-pt-card .pts-lc-logo {
+  width: calc(var(--spacing-32) + var(--spacing-32));
+  height: calc(var(--spacing-32) + var(--spacing-32));
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-headline-sm);
+  font-weight: var(--font-weight-extra-bold);
+  color: white;
+  overflow: hidden;
+  border: 2px solid var(--surface);
 }
 
-#p-wishlist .wsh-pt-info {
-  min-width: 0 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: flex-start !important;
-  justify-content: center !important;
-  gap: var(--spacing-6) !important;
+#p-wishlist .wsh-pt-card .pts-lc-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
-#p-wishlist .wsh-pt-info-head {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  width: 100% !important;
-  gap: var(--spacing-12) !important;
+#p-wishlist .wsh-pt-card .pts-lc-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  justify-content: center;
 }
 
-#p-wishlist .wsh-pt-brand,
-#p-wishlist .wsh-pt-amount,
-#p-wishlist .wsh-pt-expiry {
-  margin: 0 !important;
-  text-align: left !important;
+#p-wishlist .wsh-pt-card .pts-lc-name-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
 }
 
-#p-wishlist .wsh-pt-heart {
-  flex: 0 0 auto !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+#p-wishlist .wsh-pt-card .pts-lc-brand-sm {
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-bold);
+  color: black;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#p-wishlist .wsh-pt-card .pts-lc-bal {
+  font-size: var(--font-size-headline-lg);
+  font-weight: var(--font-weight-heavy);
+  color: black;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+#p-wishlist .wsh-pt-card .pts-lc-desc {
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
+  color: black;
+  line-height: 1;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#p-wishlist .wsh-pt-card .pts-lc-heart {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  justify-content: center;
+  color: var(--color-gray-300);
+  height: calc(var(--spacing-16) + var(--spacing-2));
+  width: var(--spacing-16);
 }
 
 #p-wishlist .wsh-sort-wrap .nmap-sort-menu {
@@ -34742,6 +34778,501 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 
 #s-signup-id .su-content::-webkit-scrollbar {
   width: 0 !important;
+}
+
+/* ============================================================
+   SERVICE CONNECT FINAL - 0608 FLOW
+   Scope: method select, linked service management, service select,
+   confirm, and loading pages only.
+   ============================================================ */
+#p-connect,
+#p-connect-svc-select,
+#p-connect-svc-confirm,
+#p-connect-manual-loading {
+  background: var(--surface) !important;
+  height: 100dvh !important;
+  inset: 0 !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  padding: 0 !important;
+  position: fixed !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+body:has(#p-connect[style*="display: block"]) .app-header,
+body:has(#p-connect[style*="display:block"]) .app-header,
+body:has(#p-connect-svc-select[style*="display: block"]) .app-header,
+body:has(#p-connect-svc-select[style*="display:block"]) .app-header,
+body:has(#p-connect-svc-confirm[style*="display: block"]) .app-header,
+body:has(#p-connect-svc-confirm[style*="display:block"]) .app-header,
+body:has(#p-connect-manual-loading[style*="display: block"]) .app-header,
+body:has(#p-connect-manual-loading[style*="display:block"]) .app-header,
+body:has(#p-connect[style*="display: block"]) #bottomTabBar,
+body:has(#p-connect[style*="display:block"]) #bottomTabBar,
+body:has(#p-connect-svc-select[style*="display: block"]) #bottomTabBar,
+body:has(#p-connect-svc-select[style*="display:block"]) #bottomTabBar,
+body:has(#p-connect-svc-confirm[style*="display: block"]) #bottomTabBar,
+body:has(#p-connect-svc-confirm[style*="display:block"]) #bottomTabBar,
+body:has(#p-connect-manual-loading[style*="display: block"]) #bottomTabBar,
+body:has(#p-connect-manual-loading[style*="display:block"]) #bottomTabBar {
+  display: none !important;
+}
+
+#p-connect .connect-body,
+#p-connect-svc-select .connect-body,
+#p-connect-svc-confirm .connect-body,
+#p-connect-manual-loading .cml-body {
+  box-sizing: border-box !important;
+  margin: 0 auto !important;
+  max-width: 375px !important;
+  min-height: 100dvh !important;
+  width: 100% !important;
+}
+
+#p-connect .connect-method-body,
+#p-connect-svc-select .connect-body,
+#p-connect-svc-confirm .csvc-body {
+  padding: calc(env(safe-area-inset-top, 0px) + var(--spacing-24)) var(--spacing-20) calc(var(--spacing-32) + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+#p-connect .connect-method-head,
+#p-connect-svc-select .connect-select-head {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: var(--spacing-24) !important;
+  margin: 0 !important;
+}
+
+#p-connect .connect-method-titlebar,
+#p-connect-svc-select .connect-select-titlebar,
+#p-connect-svc-confirm .csvc-header {
+  align-items: center !important;
+  background: transparent !important;
+  display: grid !important;
+  grid-template-columns: var(--spacing-32) 1fr var(--spacing-32) !important;
+  min-height: 63px !important;
+  padding: 0 !important;
+  position: static !important;
+  width: 100% !important;
+}
+
+#p-connect .connect-method-back,
+#p-connect-svc-select .connect-select-back,
+#p-connect-svc-confirm .csvc-back {
+  align-items: center !important;
+  background: transparent !important;
+  border: 0 !important;
+  color: var(--gray-900) !important;
+  display: inline-flex !important;
+  height: var(--spacing-32) !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  position: static !important;
+  width: var(--spacing-32) !important;
+}
+
+#p-connect .connect-method-back svg,
+#p-connect-svc-select .connect-select-back svg,
+#p-connect-svc-confirm .csvc-back svg {
+  height: var(--spacing-24) !important;
+  width: var(--spacing-24) !important;
+}
+
+#p-connect .connect-method-title,
+#p-connect-svc-select .connect-select-title,
+#p-connect-svc-confirm .csvc-title {
+  color: var(--gray-900) !important;
+  font-size: var(--font-size-headline-sm) !important;
+  font-weight: var(--font-weight-extra-bold) !important;
+  letter-spacing: 0 !important;
+  line-height: 1.25 !important;
+  text-align: center !important;
+}
+
+#p-connect .connect-method-sub,
+#p-connect-svc-select .connect-select-sub,
+#p-connect-svc-confirm .csvc-subtitle {
+  color: var(--gray-500) !important;
+  font-size: var(--font-size-body) !important;
+  font-weight: var(--font-weight-semi-bold) !important;
+  line-height: 1.5 !important;
+  margin: 0 0 var(--spacing-32) !important;
+  text-align: center !important;
+}
+
+#p-connect .connect-type-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: var(--spacing-12) !important;
+  margin: 0 !important;
+}
+
+#p-connect .connect-type-card {
+  align-items: center !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--color-gray-100) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-s) !important;
+  color: var(--gray-900) !important;
+  display: grid !important;
+  gap: var(--spacing-12) !important;
+  grid-template-columns: var(--spacing-32) 1fr var(--spacing-24) !important;
+  min-height: 92px !important;
+  padding: var(--spacing-20) !important;
+  text-align: left !important;
+  width: 100% !important;
+}
+
+#p-connect .connect-type-card.sel {
+  border-color: var(--color-blue-300) !important;
+  background: color-mix(in srgb, var(--color-blue-50) 70%, var(--surface)) !important;
+}
+
+#p-connect .connect-type-icon {
+  color: var(--color-blue-500) !important;
+  display: inline-flex !important;
+  height: var(--spacing-32) !important;
+  width: var(--spacing-32) !important;
+}
+
+#p-connect .connect-type-label {
+  color: var(--gray-900) !important;
+  display: block !important;
+  font-size: var(--font-size-body) !important;
+  font-weight: var(--font-weight-bold) !important;
+  line-height: 1.4 !important;
+}
+
+#p-connect .connect-type-desc {
+  color: var(--gray-500) !important;
+  display: block !important;
+  font-size: var(--font-size-caption) !important;
+  font-weight: var(--font-weight-medium) !important;
+  line-height: 1.5 !important;
+  margin-top: var(--spacing-4) !important;
+}
+
+#p-connect .connect-type-radio {
+  align-items: center !important;
+  border: 2px solid var(--color-gray-200) !important;
+  border-radius: var(--radius-full) !important;
+  display: inline-flex !important;
+  height: var(--spacing-24) !important;
+  justify-content: center !important;
+  width: var(--spacing-24) !important;
+}
+
+#p-connect .connect-type-card.sel .connect-type-radio {
+  border-color: var(--color-blue-500) !important;
+}
+
+#p-connect .connect-type-card.sel .connect-type-radio::after {
+  background: var(--color-blue-500) !important;
+  border-radius: var(--radius-full) !important;
+  content: "" !important;
+  display: block !important;
+  height: var(--spacing-10) !important;
+  width: var(--spacing-10) !important;
+}
+
+#p-connect .connect-method-next {
+  background: var(--color-blue-500) !important;
+  border: 0 !important;
+  border-radius: var(--radius-md) !important;
+  bottom: calc(var(--spacing-24) + env(safe-area-inset-bottom, 0px)) !important;
+  color: var(--color-on-primary) !important;
+  font-size: var(--font-size-body) !important;
+  font-weight: var(--font-weight-bold) !important;
+  height: 60px !important;
+  left: 50% !important;
+  max-width: 335px !important;
+  position: fixed !important;
+  transform: translateX(-50%) !important;
+  width: calc(100% - var(--spacing-40, 40px)) !important;
+  z-index: 30 !important;
+}
+
+#p-connect-svc-select .svc-sel-section {
+  margin: 0 0 var(--spacing-24) !important;
+}
+
+#p-connect-svc-select .svc-sel-cat-lbl {
+  border-bottom: 1px solid var(--color-gray-100) !important;
+  color: var(--gray-500) !important;
+  font-size: var(--font-size-caption) !important;
+  font-weight: var(--font-weight-bold) !important;
+  margin: 0 0 var(--spacing-12) !important;
+  padding-bottom: var(--spacing-8) !important;
+}
+
+#p-connect-svc-select .svc-sel-grid {
+  display: grid !important;
+  gap: var(--spacing-16) !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+#p-connect-svc-select .svc-sel-card {
+  align-items: flex-start !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--color-gray-100) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-s) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: var(--spacing-10) !important;
+  min-height: 120px !important;
+  padding: var(--spacing-16) !important;
+  position: relative !important;
+}
+
+#p-connect-svc-select .svc-sel-card.connected,
+#p-connect-svc-select .svc-sel-card.sel {
+  border-color: var(--color-blue-200) !important;
+  background: color-mix(in srgb, var(--color-blue-50) 65%, var(--surface)) !important;
+}
+
+#p-connect-svc-select .svc-sel-card::after {
+  display: none !important;
+}
+
+#p-connect-svc-select .svc-card-check {
+  align-items: center !important;
+  border: 1px solid var(--color-gray-200) !important;
+  border-radius: var(--radius-full) !important;
+  display: inline-flex !important;
+  height: var(--spacing-16) !important;
+  justify-content: center !important;
+  position: absolute !important;
+  right: var(--spacing-12) !important;
+  top: var(--spacing-12) !important;
+  width: var(--spacing-16) !important;
+}
+
+#p-connect-svc-select .svc-sel-card.sel .svc-card-check {
+  background: var(--color-blue-500) !important;
+  border-color: var(--color-blue-500) !important;
+}
+
+#p-connect-svc-select .svc-sel-card.sel .svc-card-check::after {
+  background: var(--color-on-primary) !important;
+  border-radius: var(--radius-full) !important;
+  content: "" !important;
+  display: block !important;
+  height: var(--spacing-6) !important;
+  width: var(--spacing-6) !important;
+}
+
+#p-connect-svc-select .svc-card-symbol,
+#p-connect-svc-select .svc-sel-card-icon {
+  align-items: center !important;
+  background: var(--color-blue-50) !important;
+  border-radius: var(--radius-md) !important;
+  display: inline-flex !important;
+  flex: 0 0 44px !important;
+  height: 44px !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  width: 44px !important;
+}
+
+#p-connect-svc-select .svc-card-symbol img {
+  max-height: var(--spacing-32) !important;
+  max-width: var(--spacing-32) !important;
+}
+
+#p-connect-svc-select .svc-card-name,
+#p-connect-svc-select .svc-sel-card-name {
+  color: var(--gray-900) !important;
+  font-size: var(--font-size-label) !important;
+  font-weight: var(--font-weight-bold) !important;
+  line-height: 1.35 !important;
+}
+
+#p-connect-svc-select .svc-card-desc,
+#p-connect-svc-select .svc-sel-card-desc {
+  color: var(--gray-500) !important;
+  font-size: var(--font-size-caption) !important;
+  font-weight: var(--font-weight-medium) !important;
+  line-height: 1.35 !important;
+}
+
+#p-connect-svc-select .svc-sel-card-badge {
+  color: var(--color-blue-500) !important;
+  font-size: var(--font-size-caption) !important;
+  font-weight: var(--font-weight-bold) !important;
+}
+
+#p-connect-svc-select .connect-consent {
+  background: transparent !important;
+  border: 0 !important;
+  margin: var(--spacing-24) 0 var(--spacing-16) !important;
+  padding: 0 !important;
+}
+
+#p-connect-svc-select .ccf-row {
+  align-items: center !important;
+  color: var(--gray-500) !important;
+  display: grid !important;
+  font-size: var(--font-size-caption) !important;
+  font-weight: var(--font-weight-medium) !important;
+  gap: var(--spacing-10) !important;
+  grid-template-columns: 1fr var(--spacing-20) !important;
+  min-height: 28px !important;
+}
+
+#p-connect-svc-select .ccf-circle {
+  border: 2px solid var(--color-blue-500) !important;
+  border-radius: var(--radius-full) !important;
+  display: inline-flex !important;
+  height: var(--spacing-20) !important;
+  width: var(--spacing-20) !important;
+}
+
+#p-connect-svc-select .ccf-circle.active {
+  background: var(--color-blue-500) !important;
+}
+
+#p-connect-svc-select #svcNextBtn {
+  background: var(--color-blue-500) !important;
+  border: 0 !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--color-on-primary) !important;
+  display: block !important;
+  font-size: var(--font-size-body) !important;
+  font-weight: var(--font-weight-bold) !important;
+  height: 60px !important;
+  margin-top: var(--spacing-16) !important;
+  position: static !important;
+  width: 100% !important;
+}
+
+#p-connect-svc-confirm .csvc-body {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: var(--spacing-20) !important;
+}
+
+#p-connect-svc-confirm .csvc-card-list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: var(--spacing-16) !important;
+}
+
+#p-connect-svc-confirm .csvc-svc-card {
+  align-items: center !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--color-gray-100) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-s) !important;
+  display: grid !important;
+  gap: var(--spacing-16) !important;
+  grid-template-columns: 56px 1fr !important;
+  min-height: 104px !important;
+  padding: var(--spacing-16) !important;
+}
+
+#p-connect-svc-confirm .csvc-logo-wrap {
+  align-items: center !important;
+  background: var(--color-blue-50) !important;
+  border-radius: var(--radius-full) !important;
+  display: inline-flex !important;
+  height: 56px !important;
+  justify-content: center !important;
+  width: 56px !important;
+}
+
+#p-connect-svc-confirm .csvc-logo-img {
+  max-height: var(--spacing-32) !important;
+  max-width: var(--spacing-40, 40px) !important;
+}
+
+#p-connect-svc-confirm .csvc-card-name {
+  color: var(--gray-900) !important;
+  font-size: var(--font-size-headline-sm) !important;
+  font-weight: var(--font-weight-bold) !important;
+  line-height: 1.35 !important;
+}
+
+#p-connect-svc-confirm .csvc-divider {
+  border: 0 !important;
+  border-top: 1px solid var(--color-gray-100) !important;
+  margin: var(--spacing-12) 0 !important;
+}
+
+#p-connect-svc-confirm .csvc-unlink {
+  color: var(--gray-500) !important;
+  font-size: var(--font-size-caption) !important;
+  font-weight: var(--font-weight-medium) !important;
+}
+
+#p-connect-svc-confirm .csvc-privacy-card {
+  align-items: center !important;
+  background: color-mix(in srgb, var(--color-blue-50) 70%, var(--surface)) !important;
+  border: 1px solid var(--color-blue-100) !important;
+  border-radius: var(--radius-lg) !important;
+  display: flex !important;
+  gap: var(--spacing-12) !important;
+  padding: var(--spacing-16) !important;
+}
+
+#p-connect-svc-confirm .csvc-add-btn {
+  background: var(--color-blue-500) !important;
+  border: 0 !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--color-on-primary) !important;
+  font-size: var(--font-size-body) !important;
+  font-weight: var(--font-weight-bold) !important;
+  height: 60px !important;
+  margin-top: auto !important;
+  width: 100% !important;
+}
+
+#p-connect-manual-loading .cml-body {
+  align-items: center !important;
+  background: var(--surface) !important;
+  display: flex !important;
+  justify-content: center !important;
+  padding: var(--spacing-32) var(--spacing-20) !important;
+  text-align: center !important;
+}
+
+#p-connect-manual-loading .cml-center {
+  align-items: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: var(--spacing-32) !important;
+  width: 100% !important;
+}
+
+#p-connect-manual-loading .cml-title {
+  color: var(--color-blue-500) !important;
+  font-size: var(--font-size-headline-sm) !important;
+  font-weight: var(--font-weight-extra-bold) !important;
+  line-height: 1.45 !important;
+}
+
+#p-connect-manual-loading .cml-loader {
+  animation: cmlSpin 1s linear infinite !important;
+  background: conic-gradient(var(--color-blue-500), var(--color-blue-100), var(--color-blue-500)) !important;
+  border-radius: var(--radius-full) !important;
+  height: 96px !important;
+  margin: var(--spacing-32) auto 0 !important;
+  -webkit-mask: radial-gradient(circle, transparent 48%, var(--gray-900) 50%) !important;
+  mask: radial-gradient(circle, transparent 48%, var(--gray-900) 50%) !important;
+  width: 96px !important;
+}
+
+#p-connect-manual-loading .cml-sub {
+  color: var(--gray-500) !important;
+  font-size: var(--font-size-caption) !important;
+  font-weight: var(--font-weight-medium) !important;
+  line-height: 1.6 !important;
+}
+
+@keyframes cmlSpin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ============================================================
