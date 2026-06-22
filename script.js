@@ -793,24 +793,100 @@ function renderMapPinLabel(store) {
   return '<span class="map-benefit-label-title">' + getMapPinBenefitLabel(store) + '</span>';
 }
 const BRAND_LOGO = {
+  '나이키':     '로고/나이키.svg',
   '스타벅스':   '로고/starbucks.svg',
+  '스벅':       '로고/스벅.svg',
+  '투썸플레이스': '로고/투썸.svg',
+  '이디야커피': '로고/이디야.svg',
+  '이디야':     '로고/이디야.svg',
+  '메가커피':   '로고/메가커피.svg',
+  '공차':       '로고/공차.svg',
+  '이마트':     '로고/이마트.svg',
+  '홈플러스':   '로고/홈플러스.svg',
+  '신세계':     '로고/신세계.svg',
   'GS25':       '로고/GS25 logo.svg',
   'CU':         '로고/CU logo.svg',
-  '올리브영':   '로고/사경디_로고_올리브영.svg',
+  '다이소':     '로고/다이소.svg',
+  '올리브영':   '로고/올리브영.svg',
   '배달의민족': '로고/사경디_로고_배달의민족.svg',
+  '배민':       '로고/배민.svg',
   '요기요':     '로고/사경디_로고_요기요-01.svg',
-  '메가커피':   '로고/메가커피.svg',
+  '쿠팡이츠':   '로고/쿠팡이츠.svg',
   '파리바게뜨': '로고/Paris_Baguette.svg',
   '무신사':     '로고/무신사.svg',
   'BBQ':        '로고/BBQ logo.svg',
   'BHC':        '로고/BHC logo.svg',
   '도미노피자': '로고/도미노피자 logo.svg',
   '유니클로':   '로고/UNIQLO.svg',
+  'UNIQLO':     '로고/UNIQLO.svg',
   '자라':       '로고/Zara.svg',
+  'ZARA':       '로고/Zara.svg',
+  'CGV':        '로고/cgv.svg',
+  '롯데시네마': '로고/롯데시네마.svg',
+  '메가박스':   '로고/메가박스.svg',
+  '교보문고':   '로고/교보문고.svg',
+  '예스24':     '로고/예스24.svg',
+  'YES24':      '로고/예스24.svg',
+  '알라딘':     '로고/알라딘.svg',
+  '해피포인트': '로고/해피포인트.svg',
+  '배민포인트': '로고/배민.svg',
+  'CJ ONE':     '로고/CJ.svg',
+  '네이버페이': '로고/네이버포인트.svg',
+  '네이버페이 포인트': '로고/네이버포인트.svg',
+  '엘포인트':   '로고/L포인트.svg',
+  'L.POINT':    '로고/L포인트.svg',
+  'GS&POINT':   '로고/GS&POINT.svg',
+  'H포인트':    '로고/H포인트.svg',
 };
 
+const BRAND_LOGO_ID = {
+  nike: '로고/나이키.svg',
+  starbucks: '로고/starbucks.svg',
+  twosome: '로고/투썸.svg',
+  ediya: '로고/이디야.svg',
+  megacoffee: '로고/메가커피.svg',
+  gongcha: '로고/공차.svg',
+  emart: '로고/이마트.svg',
+  homeplus: '로고/홈플러스.svg',
+  gs25: '로고/GS25 logo.svg',
+  cu: '로고/CU logo.svg',
+  daiso: '로고/다이소.svg',
+  oliveyoung: '로고/올리브영.svg',
+  baemin: '로고/배민.svg',
+  yogiyo: '로고/요기요.svg',
+  coupangeats: '로고/쿠팡이츠.svg',
+  musinsa: '로고/무신사.svg',
+  bbq: '로고/BBQ logo.svg',
+  bhc: '로고/BHC logo.svg',
+  domino: '로고/도미노피자 logo.svg',
+  uniqlo: '로고/UNIQLO.svg',
+  zara: '로고/Zara.svg',
+  cgv: '로고/cgv.svg',
+  lottecinema: '로고/롯데시네마.svg',
+  megabox: '로고/메가박스.svg',
+  kyobo: '로고/교보문고.svg',
+  yes24: '로고/예스24.svg',
+  aladin: '로고/알라딘.svg',
+  happypoint: '로고/해피포인트.svg',
+  cjone: '로고/CJ.svg',
+  naverpay: '로고/네이버포인트.svg',
+  lpoint: '로고/L포인트.svg',
+};
+
+function getBrandLogo(value) {
+  if (!value) return '';
+  const key = String(value).trim();
+  return BRAND_LOGO[key] || BRAND_LOGO_ID[key] || '';
+}
+
+function brandLogoImg(value, alt, size) {
+  const src = getBrandLogo(value);
+  if (!src) return '';
+  return `<img src="${src}" alt="${alt || value}" style="width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;display:block">`;
+}
+
 function renderPointMapPin(state, store) {
-  const logoSrc = store && BRAND_LOGO[store.key];
+  const logoSrc = store && getBrandLogo(store.key);
   const figmaLogoSrc = 'https://www.figma.com/api/mcp/asset/50fd025e-0ee8-4402-9d14-880b6cc79338';
   const innerContent = logoSrc
     ? '<img src="' + logoSrc + '" alt="' + (store ? store.key : '포인트') + '">'
@@ -823,7 +899,7 @@ function renderPointMapPin(state, store) {
   );
 }
 function renderCouponMapPin(state, store) {
-  const logoSrc = store && BRAND_LOGO[store.key];
+  const logoSrc = store && getBrandLogo(store.key);
   const logoContent = logoSrc
     ? '<img src="' + logoSrc + '" alt="' + (store ? store.key : '쿠폰') + '">'
     : '<span class="map-point-figma-letter">C</span>';
@@ -1444,6 +1520,10 @@ const BRAND_COUPONS = {
 };
 
 function renderNotiBrandLogo(brandKey, logoText) {
+  const imgSrc = getBrandLogo(brandKey) || getBrandLogo(logoText);
+  if (imgSrc) {
+    return `<img src="${imgSrc}" alt="${logoText || brandKey}" class="brand-logo-img">`;
+  }
   const logoMap = {
     emart: '<span class="np-brand-mark">e</span><span class="np-brand-submark">마트</span>',
     lottemart: '<span class="np-brand-mark">롯</span><span class="np-brand-submark">마트</span>',
@@ -2421,7 +2501,7 @@ function _renderHssKeywordResults(keyword) {
   empty.style.display = 'none';
   const heartSvg = `<svg width="19" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
   resultList.innerHTML = `<p class="hss-result-heading">검색 결과</p>` + filtered.map(r => {
-    const logo = HSS_BRAND_LOGO[r.brand] || '';
+    const logo = getBrandLogo(r.brand) || HSS_BRAND_LOGO[r.brand] || '';
     const logoHtml = logo
       ? `<img src="${logo}" alt="${r.brand}">`
       : `<span class="hss-result-logo-fallback">${r.brand.charAt(0)}</span>`;
@@ -2479,15 +2559,18 @@ const HSS_CAT_SVG = {
 
 /* 카테고리별 브랜드 로고 경로 */
 const HSS_BRAND_LOGO = {
-  '이마트': '로고/emart.svg', '홈플러스': '로고/homeplus.svg',
-  '롯데마트': '로고/lottemart.svg', '쿠팡': '로고/coupang.svg',
-  'GS25': '로고/gs25.svg', '맥도날드': '로고/mcdonalds.svg',
-  '스타벅스': '로고/starbucks.svg', '투썸플레이스': '로고/twosome.svg',
-  '배달의민족': '로고/baemin.svg', '요기요': '로고/yogiyo.svg',
-  '올리브영': '로고/oliveyoung.svg', '무신사': '로고/musinsa.svg',
-  '야놀자': '로고/yanolja.svg', '여기어때': '로고/yeogi.svg',
-  'CGV': '로고/cgv.svg', '메가박스': '로고/megabox.svg',
-  '롯데시네마': '로고/lottecinema.svg',
+  '나이키': getBrandLogo('나이키'),
+  '이마트': getBrandLogo('이마트'), '홈플러스': getBrandLogo('홈플러스'),
+  '신세계': getBrandLogo('신세계'),
+  'GS25': getBrandLogo('GS25'), 'CU': getBrandLogo('CU'),
+  '스타벅스': getBrandLogo('스타벅스'), '투썸플레이스': getBrandLogo('투썸플레이스'),
+  '이디야': getBrandLogo('이디야'), '공차': getBrandLogo('공차'), '메가커피': getBrandLogo('메가커피'),
+  '배달의민족': getBrandLogo('배민'), '요기요': getBrandLogo('요기요'), '쿠팡이츠': getBrandLogo('쿠팡이츠'),
+  '올리브영': getBrandLogo('올리브영'), '무신사': getBrandLogo('무신사'), '유니클로': getBrandLogo('유니클로'), '자라': getBrandLogo('자라'),
+  '여기어때': '로고/사경디_로고_여기어때.svg', '아고다': '로고/아고다.svg',
+  'CGV': getBrandLogo('CGV'), '메가박스': getBrandLogo('메가박스'),
+  '롯데시네마': getBrandLogo('롯데시네마'), '교보문고': getBrandLogo('교보문고'),
+  '예스24': getBrandLogo('예스24'), '알라딘': getBrandLogo('알라딘'),
 };
 
 function _renderHssResultChips(brands, activeBrand) {
@@ -2937,7 +3020,7 @@ function renderPhCpnList(filterCat) {
     const badgeClass = dnum === 0 ? 'filled' : 'outlined';
     const channelLabel = cpnChannelBadge(c.channel);
     const dateLabel = c.expiry.replace(/-/g, '.') + '까지';
-    const logoSrc = BRAND_LOGO[c.brand] || HSS_BRAND_LOGO[c.brand] || '';
+    const logoSrc = getBrandLogo(c.brand) || HSS_BRAND_LOGO[c.brand] || '';
     const logoHtml = logoSrc
       ? `<img src="${logoSrc}" alt="${c.brand}">`
       : cpnInitial(c.brand);
@@ -3139,7 +3222,7 @@ function renderWishlist() {
       </div>
       <div class="ph-cpn-body wsh-cpn-body">
         <div class="ph-cpn-logo-wrap wsh-cpn-logo-wrap">
-          <div class="ph-cpn-logo wsh-cpn-logo-circle" style="background:${cpnBgColor(c.brand)};color:white;display:flex;align-items:center;justify-content:center;font-weight:700">${cpnInitial(c.brand)}</div>
+          <div class="ph-cpn-logo wsh-cpn-logo-circle" style="background:${getBrandLogo(c.brand) ? 'var(--surface)' : cpnBgColor(c.brand)};color:white;display:flex;align-items:center;justify-content:center;font-weight:700">${getBrandLogo(c.brand) ? brandLogoImg(c.brand, c.brand) : cpnInitial(c.brand)}</div>
           <div class="ph-ch-badge wsh-cpn-badge">${cpnChannelBadge(c.channel)}</div>
         </div>
         <div class="ph-cpn-info wsh-cpn-info">
@@ -4258,20 +4341,22 @@ const BRAND_LOGO_MAP = {
 
 function injectBrandLogos() {
   const LOGO = {
-    baemin:     '로고/사경디_로고_배달의민족.svg',
-    oliveyoung: '로고/사경디_로고_올리브영.svg',
-    starbucks:  '로고/starbucks.svg',
-    gs25:       '로고/GS25 logo.svg',
-    cu:         '로고/CU logo.svg',
-    yogiyo:     '로고/사경디_로고_요기요-01.svg',
-    zara:       '로고/Zara.svg',
-    uniqlo:     '로고/UNIQLO.svg',
-    megacoffee: '로고/메가커피.svg',
+    baemin:     getBrandLogo('baemin'),
+    oliveyoung: getBrandLogo('oliveyoung'),
+    starbucks:  getBrandLogo('starbucks'),
+    gs25:       getBrandLogo('gs25'),
+    cu:         getBrandLogo('cu'),
+    yogiyo:     getBrandLogo('yogiyo'),
+    emart:      getBrandLogo('emart'),
+    homeplus:   getBrandLogo('homeplus'),
+    zara:       getBrandLogo('zara'),
+    uniqlo:     getBrandLogo('uniqlo'),
+    megacoffee: getBrandLogo('megacoffee'),
     parisbaguette: '로고/Paris_Baguette.svg',
-    musinsa:    '로고/무신사.svg',
-    bbq:        '로고/BBQ logo.svg',
-    bhc:        '로고/BHC logo.svg',
-    domino:     '로고/도미노피자 logo.svg',
+    musinsa:    getBrandLogo('musinsa'),
+    bbq:        getBrandLogo('bbq'),
+    bhc:        getBrandLogo('bhc'),
+    domino:     getBrandLogo('domino'),
   };
 
   function getLogoSrc(id) { return LOGO[id] || null; }
@@ -4945,7 +5030,7 @@ const ACT = {
     if (nearbyList) {
       nearbyList.innerHTML = stores.map(store => `
         <div class="det-store-card">
-          <div class="det-store-img" style="background:${bg};color:var(--color-on-primary);display:flex;align-items:center;justify-content:center;font-weight:var(--font-weight-bold);font-size:var(--font-size-body)">${icon}</div>
+          <div class="det-store-img" style="background:${getBrandLogo(store.key || cpn.brand) ? 'var(--surface)' : bg};color:var(--color-on-primary);display:flex;align-items:center;justify-content:center;font-weight:var(--font-weight-bold);font-size:var(--font-size-body);overflow:hidden">${getBrandLogo(store.key || cpn.brand) ? brandLogoImg(store.key || cpn.brand, store.key || cpn.brand) : icon}</div>
           <div class="det-store-info">
             <div class="det-store-name">${store.name}</div>
             <div class="det-store-addr">${store.addr}</div>
@@ -5627,8 +5712,9 @@ function renderCouponDetailRecommendations(cpn) {
         </div>`;
       }
       const item = rec.item;
+      const recLogo = getBrandLogo(item.brand);
       return `<div class="det-rec-item" onclick="ACT['go-detail']&&ACT['go-detail']({target:{dataset:{id:'${item.id}'}}})" style="cursor:pointer">
-        <div class="det-rec-img" style="display:flex;align-items:center;justify-content:center;background:${cpnBgColor(item.brand)};color:var(--color-surface);font-weight:var(--font-weight-bold)">${useHtmlText(cpnInitial(item.brand))}</div>
+        <div class="det-rec-img" style="display:flex;align-items:center;justify-content:center;background:${recLogo ? 'var(--color-surface)' : cpnBgColor(item.brand)};color:var(--color-surface);font-weight:var(--font-weight-bold);overflow:hidden">${recLogo ? brandLogoImg(item.brand, item.brand) : useHtmlText(cpnInitial(item.brand))}</div>
         <div class="det-rec-text">
           <div class="det-rec-title">${useHtmlText(item.brand)} ${useHtmlText(useCouponBenefitText(item))}</div>
           <div class="det-rec-sub">${useHtmlText(item.name)} · ${useHtmlText(cpnDday(item.expiry))}</div>
@@ -6011,11 +6097,11 @@ document.addEventListener('click', () => {
 
 /* ── 즐겨찾기 브랜드/쿠폰 탭 ── */
 const WSH_POINTS = [
-  { id:'happypoint', name:'해피포인트',        amount:'4,150p',  exp:'2026-06-30', dnum:30,  urgent:true,  logo:'로고/happypoint.svg' },
-  { id:'baemin',     name:'배민포인트',         amount:'3,000p',  exp:'2026-07-31', dnum:60,  urgent:true,  logo:'로고/baemin.svg' },
-  { id:'cjone',      name:'CJ ONE 포인트',     amount:'3,200p',  exp:'2026-09-30', dnum:127, urgent:false, logo:'' },
-  { id:'naverpay',   name:'네이버페이 포인트',  amount:'12,500p', exp:'2026-12-31', dnum:214, urgent:false, logo:'' },
-  { id:'lpoint',     name:'엘포인트 (L.POINT)',amount:'5,400p',  exp:'2027-05-15', dnum:350, urgent:false, logo:'' },
+  { id:'happypoint', name:'해피포인트',        amount:'4,150p',  exp:'2026-06-30', dnum:30,  urgent:true,  logo:getBrandLogo('해피포인트') },
+  { id:'baemin',     name:'배민포인트',         amount:'3,000p',  exp:'2026-07-31', dnum:60,  urgent:true,  logo:getBrandLogo('배민포인트') },
+  { id:'cjone',      name:'CJ ONE 포인트',     amount:'3,200p',  exp:'2026-09-30', dnum:127, urgent:false, logo:getBrandLogo('CJ ONE') },
+  { id:'naverpay',   name:'네이버페이 포인트',  amount:'12,500p', exp:'2026-12-31', dnum:214, urgent:false, logo:getBrandLogo('네이버페이 포인트') },
+  { id:'lpoint',     name:'엘포인트 (L.POINT)',amount:'5,400p',  exp:'2027-05-15', dnum:350, urgent:false, logo:getBrandLogo('엘포인트') },
 ];
 
 const WSH_SORT_STATE = {
@@ -6070,8 +6156,9 @@ function wshPtCard(p) {
     lpoint: 'PT-002'
   }[p.id] || p.id;
   const heartSvg = `<svg width="16" height="17" viewBox="0 0 24 24" fill="var(--color-red-400)" stroke="var(--color-red-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
+  const fallbackInitial = (p.name || '').trim().charAt(0);
   const logoHtml = p.logo
-    ? `<img src="${p.logo}" alt="" class="pts-card-svg-img">`
+    ? `<img src="${p.logo}" alt="" class="pts-card-svg-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="pts-logo-fallback">${fallbackInitial}</span>`
     : `<span style="font-size:var(--font-size-headline-sm);font-weight:var(--font-weight-heavy);color:var(--color-gray-400);font-family:var(--font)">${p.name.charAt(0)}</span>`;
   const ddayBadge = p.urgent
     ? `<div class="pts-lc-dday-badge">D-${p.dnum}</div>`
@@ -6265,7 +6352,7 @@ function wshCpnCard(b, c) {
     </div>
     <div class="ph-cpn-body wsh-cpn-body">
       <div class="ph-cpn-logo-wrap wsh-cpn-logo-wrap">
-        <div class="ph-cpn-logo wsh-cpn-logo-circle" style="background:${bgColor}; display:flex; align-items:center; justify-content:center; font-size:var(--font-size-headline-sm); font-weight:var(--font-weight-heavy); color:white">${initial}</div>
+        <div class="ph-cpn-logo wsh-cpn-logo-circle" style="background:${getBrandLogo(b.name) || getBrandLogo(b.id) ? 'var(--surface)' : bgColor}; display:flex; align-items:center; justify-content:center; font-size:var(--font-size-headline-sm); font-weight:var(--font-weight-heavy); color:white;overflow:hidden">${getBrandLogo(b.name) || getBrandLogo(b.id) ? brandLogoImg(getBrandLogo(b.name) ? b.name : b.id, b.name) : initial}</div>
         <span class="ph-ch-badge wsh-cpn-badge">${channelLabel}</span>
       </div>
       <div class="ph-cpn-info wsh-cpn-info">
@@ -6542,8 +6629,8 @@ function wshCpnCardItem(b, c) {
       </div>
       <div class="ph-cpn-body wsh-cpn-body">
         <div class="ph-cpn-logo-wrap wsh-cpn-logo-wrap">
-          <div class="ph-cpn-logo wsh-cpn-logo-circle" style="background:${brandBgColor}">
-            <span>${brandInitial}</span>
+          <div class="ph-cpn-logo wsh-cpn-logo-circle" style="background:${getBrandLogo(b.name) || getBrandLogo(b.id) ? 'var(--surface)' : brandBgColor};overflow:hidden">
+            ${getBrandLogo(b.name) || getBrandLogo(b.id) ? brandLogoImg(getBrandLogo(b.name) ? b.name : b.id, b.name) : `<span>${brandInitial}</span>`}
           </div>
           <div class="ph-ch-badge wsh-cpn-badge">온라인</div>
         </div>

@@ -11629,6 +11629,18 @@ body:has(#p-connect-svc-select[style*="display:block"]) .main-content {
   width: calc(var(--spacing-32) - var(--spacing-4));
 }
 
+.cat-icon-img,
+.hss-cat-ico .cat-icon-img,
+.ncs-cat-circle .cat-icon-img,
+#notiWizard .wiz-cat-circle .cat-icon-img {
+  display: block;
+  height: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
 .hss-cat-txt {
   font-size: var(--font-size-caption);
   font-weight: var(--font-weight-bold);
@@ -33153,8 +33165,8 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 }
 
 #p-wishlist .wsh-pt-card {
-  background: var(--color-gray-50);
-  border: 2px solid var(--color-blue-200);
+  background: var(--color-on-primary);
+  border: var(--spacing-2) solid var(--color-blue-200);
   border-radius: var(--radius-xl);
   box-sizing: border-box;
   box-shadow: none;
@@ -33163,7 +33175,7 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
   flex-direction: row;
   align-items: center;
   gap: var(--spacing-16);
-  height: calc(var(--spacing-80) + var(--spacing-32) + var(--spacing-16)) !important;
+  min-height: calc(var(--spacing-80) + var(--spacing-32) + var(--spacing-16)) !important;
   overflow: hidden;
   padding: var(--spacing-16);
   position: relative;
@@ -33172,16 +33184,35 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 }
 
 #p-wishlist .wsh-pt-card.urgent {
-  background: transparent;
-  border: none;
+  background: var(--color-blue-50);
+  border: var(--spacing-2) solid var(--color-blue-500);
   border-radius: var(--radius-xl);
   overflow: hidden;
-  padding: 0;
-  height: calc(var(--spacing-80) + var(--spacing-32) + var(--spacing-16)) !important;
+  padding: var(--spacing-16);
+  min-height: calc(var(--spacing-80) + var(--spacing-32) + var(--spacing-16)) !important;
+}
+
+#p-wishlist .wsh-pt-card .pts-lc-dday-badge {
+  align-items: center;
+  background: var(--color-red-500);
+  border: var(--spacing-2) solid var(--color-red-500);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) var(--radius-lg);
+  color: var(--color-on-primary);
+  display: flex;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-heavy);
+  justify-content: center;
+  left: 0;
+  line-height: 1;
+  min-width: calc(var(--spacing-32) + var(--spacing-32) + var(--spacing-8));
+  padding: var(--spacing-8);
+  position: absolute;
+  top: 0;
+  z-index: 2;
 }
 
 #p-wishlist .wsh-pt-card.urgent .pts-lc-logo {
-  background: white !important;
+  background: var(--color-on-primary) !important;
   color: var(--color-gray-700);
 }
 
@@ -33194,10 +33225,10 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
   align-items: center;
   justify-content: center;
   font-size: var(--font-size-headline-sm);
-  font-weight: var(--font-weight-extra-bold);
-  color: white;
+  font-weight: var(--font-weight-heavy);
+  color: var(--color-gray-400);
   overflow: hidden;
-  border: 2px solid var(--surface);
+  border: var(--spacing-2) solid var(--color-on-primary);
 }
 
 #p-wishlist .wsh-pt-card .pts-lc-logo img {
@@ -33205,6 +33236,17 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
   height: 100%;
   object-fit: contain;
   display: block;
+}
+
+#p-wishlist .wsh-pt-card .pts-logo-fallback {
+  align-items: center;
+  color: var(--color-gray-400);
+  display: none;
+  font-size: var(--font-size-headline-sm);
+  font-weight: var(--font-weight-heavy);
+  height: 100%;
+  justify-content: center;
+  width: 100%;
 }
 
 #p-wishlist .wsh-pt-card .pts-lc-info {
@@ -33226,7 +33268,7 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 #p-wishlist .wsh-pt-card .pts-lc-brand-sm {
   font-size: var(--font-size-caption);
   font-weight: var(--font-weight-bold);
-  color: black;
+  color: var(--color-gray-700);
   line-height: 1;
   white-space: nowrap;
   overflow: hidden;
@@ -33234,9 +33276,9 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 }
 
 #p-wishlist .wsh-pt-card .pts-lc-bal {
-  font-size: var(--font-size-headline-lg);
-  font-weight: var(--font-weight-heavy);
-  color: black;
+  font-size: var(--font-size-headline-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-700);
   letter-spacing: 0;
   line-height: 1;
 }
@@ -33244,7 +33286,7 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 #p-wishlist .wsh-pt-card .pts-lc-desc {
   font-size: var(--font-size-caption);
   font-weight: var(--font-weight-medium);
-  color: black;
+  color: var(--color-gray-700);
   line-height: 1;
   margin: 0;
   white-space: nowrap;
@@ -33264,6 +33306,20 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
   color: var(--color-gray-300);
   height: calc(var(--spacing-16) + var(--spacing-2));
   width: var(--spacing-16);
+}
+
+#p-wishlist #wshCpnEditBtn,
+#p-wishlist #wshPtEditBtn {
+  background: none !important;
+  border: none !important;
+  color: var(--color-gray-700) !important;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: var(--font-size-body) !important;
+  font-weight: var(--font-weight-bold) !important;
+  line-height: 1;
+  min-height: calc(var(--spacing-16) + var(--spacing-8));
+  padding: 0 !important;
 }
 
 #p-wishlist .wsh-sort-wrap .nmap-sort-menu {
