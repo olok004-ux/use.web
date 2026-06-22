@@ -33201,6 +33201,8 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
   color: var(--color-navy-title) !important;
   min-height: calc(var(--spacing-80) + var(--spacing-80) + var(--spacing-32) + var(--spacing-8)) !important;
   overflow: hidden;
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
   position: relative;
 }
 
@@ -34821,7 +34823,10 @@ body:has(#p-connect-manual-loading[style*="display:block"]) #bottomTabBar {
 #p-connect .connect-body,
 #p-connect-svc-select .connect-body,
 #p-connect-svc-confirm .connect-body,
+#p-connect-manual .connect-flow-body,
+#p-connect-success .connect-flow-body,
 #p-connect-manual-loading .cml-body {
+  background: var(--bg) !important;
   box-sizing: border-box !important;
   margin: 0 auto !important;
   max-width: 375px !important;
@@ -34845,48 +34850,85 @@ body:has(#p-connect-manual-loading[style*="display:block"]) #bottomTabBar {
 
 #p-connect .connect-method-titlebar,
 #p-connect-svc-select .connect-select-titlebar,
-#p-connect-svc-confirm .csvc-header {
+#p-connect-svc-confirm .csvc-header,
+#p-connect-manual .connect-flow-titlebar,
+#p-connect-manual-form .connect-flow-titlebar,
+#p-connect-success .connect-flow-titlebar {
   align-items: center !important;
   background: transparent !important;
   display: grid !important;
-  grid-template-columns: var(--spacing-32) 1fr var(--spacing-32) !important;
-  min-height: 63px !important;
-  padding: 0 !important;
+  grid-template-columns: 30px 1fr 30px !important;
+  height: auto !important;
+  margin: 0 !important;
+  max-width: none !important;
+  min-height: auto !important;
+  padding: calc(env(safe-area-inset-top, 0px) + var(--spacing-32)) 0 var(--spacing-16) !important;
   position: static !important;
   width: 100% !important;
 }
 
 #p-connect .connect-method-back,
 #p-connect-svc-select .connect-select-back,
-#p-connect-svc-confirm .csvc-back {
+#p-connect-svc-confirm .csvc-back,
+#p-connect-manual .connect-flow-back,
+#p-connect-manual-form .connect-flow-back {
   align-items: center !important;
   background: transparent !important;
   border: 0 !important;
-  color: var(--gray-900) !important;
+  color: var(--color-gray-700) !important;
   display: inline-flex !important;
-  height: var(--spacing-32) !important;
+  grid-column: 1 !important;
+  height: 30px !important;
   justify-content: center !important;
+  justify-self: start !important;
+  left: auto !important;
   padding: 0 !important;
   position: static !important;
-  width: var(--spacing-32) !important;
+  top: auto !important;
+  width: 30px !important;
+  z-index: auto !important;
 }
 
 #p-connect .connect-method-back svg,
 #p-connect-svc-select .connect-select-back svg,
-#p-connect-svc-confirm .csvc-back svg {
+#p-connect-svc-confirm .csvc-back svg,
+#p-connect-manual .connect-flow-back svg,
+#p-connect-manual-form .connect-flow-back svg {
   height: var(--spacing-24) !important;
   width: var(--spacing-24) !important;
 }
 
 #p-connect .connect-method-title,
 #p-connect-svc-select .connect-select-title,
-#p-connect-svc-confirm .csvc-title {
-  color: var(--gray-900) !important;
+#p-connect-svc-confirm .csvc-title,
+#p-connect-manual .connect-flow-title,
+#p-connect-manual-form .connect-flow-title,
+#p-connect-success .connect-flow-title {
+  color: var(--color-gray-700) !important;
   font-size: var(--font-size-headline-sm) !important;
   font-weight: var(--font-weight-extra-bold) !important;
+  grid-column: 2 !important;
+  justify-self: center !important;
+  left: auto !important;
   letter-spacing: 0 !important;
-  line-height: 1.25 !important;
+  line-height: 1 !important;
+  position: static !important;
   text-align: center !important;
+  transform: none !important;
+  white-space: nowrap !important;
+}
+
+#p-connect .connect-method-titlebar::after,
+#p-connect-svc-confirm .csvc-header::after,
+#p-connect-manual .connect-flow-titlebar::after,
+#p-connect-manual-form .connect-flow-titlebar::after,
+#p-connect-success .connect-flow-titlebar::before,
+#p-connect-success .connect-flow-titlebar::after,
+#p-connect-svc-select .connect-select-spacer {
+  content: "" !important;
+  display: block !important;
+  height: 30px !important;
+  width: 30px !important;
 }
 
 #p-connect .connect-method-sub,
@@ -35201,8 +35243,19 @@ body:has(#p-connect-manual-loading[style*="display:block"]) #bottomTabBar {
 
 #p-connect-svc-confirm .csvc-unlink {
   color: var(--gray-500) !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
   font-size: var(--font-size-caption) !important;
   font-weight: var(--font-weight-medium) !important;
+}
+
+#p-connect-svc-confirm .csvc-unlink[aria-disabled="true"] {
+  color: var(--color-gray-300) !important;
+  cursor: default !important;
+}
+
+#p-connect-svc-confirm .csvc-svc-card-disabled {
+  opacity: .55 !important;
 }
 
 #p-connect-svc-confirm .csvc-privacy-card {
@@ -35215,6 +35268,22 @@ body:has(#p-connect-manual-loading[style*="display:block"]) #bottomTabBar {
   padding: var(--spacing-16) !important;
 }
 
+#p-connect-svc-confirm .csvc-privacy-title {
+  color: var(--gray-900) !important;
+  font-size: var(--font-size-body) !important;
+  font-weight: var(--font-weight-bold) !important;
+  line-height: 1.35 !important;
+  margin: 0 !important;
+}
+
+#p-connect-svc-confirm .csvc-privacy-desc {
+  color: var(--gray-700) !important;
+  font-size: var(--font-size-caption) !important;
+  font-weight: var(--font-weight-regular) !important;
+  line-height: 1.45 !important;
+  margin: var(--spacing-4) 0 0 !important;
+}
+
 #p-connect-svc-confirm .csvc-add-btn {
   background: var(--color-blue-500) !important;
   border: 0 !important;
@@ -35225,6 +35294,16 @@ body:has(#p-connect-manual-loading[style*="display:block"]) #bottomTabBar {
   height: 60px !important;
   margin-top: auto !important;
   width: 100% !important;
+}
+
+#p-connect-success .connect-success-title {
+  font-size: var(--font-size-display-sm) !important;
+  line-height: 1.2 !important;
+}
+
+#p-connect-success .connect-success-sub {
+  font-size: var(--font-size-label) !important;
+  line-height: 1.45 !important;
 }
 
 #p-connect-manual-loading .cml-body {

@@ -4296,7 +4296,7 @@
               </span>
               <span class="connect-type-radio" aria-hidden="true"></span>
             </button>
-            <button class="connect-type-card" type="button" data-action="select-connect-method" data-next="nav-connect-linked">
+            <button class="connect-type-card" type="button" data-action="select-connect-method" data-next="nav-connect-manual">
               <span class="connect-type-icon type-manual" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
               </span>
@@ -4351,7 +4351,7 @@
               <div class="csvc-card-content">
                 <span class="csvc-card-name">KT 멤버십</span>
                 <hr class="csvc-divider">
-                <span class="csvc-unlink">연동 해제하기</span>
+                <span class="csvc-unlink" role="button" tabindex="0" data-action="unlink-confirm-svc">연동 해제하기</span>
               </div>
             </div>
 
@@ -4363,7 +4363,7 @@
               <div class="csvc-card-content">
                 <span class="csvc-card-name">SKT 멤버십</span>
                 <hr class="csvc-divider">
-                <span class="csvc-unlink">연동 해제하기</span>
+                <span class="csvc-unlink" role="button" tabindex="0" data-action="unlink-confirm-svc">연동 해제하기</span>
               </div>
             </div>
 
@@ -4375,7 +4375,7 @@
               <div class="csvc-card-content">
                 <span class="csvc-card-name">LG U+ 멤버십</span>
                 <hr class="csvc-divider">
-                <span class="csvc-unlink">연동 해제하기</span>
+                <span class="csvc-unlink" role="button" tabindex="0" data-action="unlink-confirm-svc">연동 해제하기</span>
               </div>
             </div>
 
@@ -4461,18 +4461,8 @@
               </span>
             </button>
           </div>
-          <!-- 인라인 입력 폼 (카드 선택 시 노출) -->
-          <div class="cmanual-form-section">
-            <div class="cmanual-fields cmanual-account">
-              <input class="connect-form-field" type="text" placeholder="아이디 입력">
-              <input class="connect-form-field" type="password" placeholder="비밀번호 입력">
-            </div>
-            <div class="cmanual-fields cmanual-membership">
-              <input class="connect-form-field" type="tel" inputmode="numeric" placeholder="멤버십 번호 14자리 입력" maxlength="14">
-            </div>
-          </div>
           <div class="connect-flow-bottom cmanual-bottom">
-            <button class="connect-flow-primary" type="button" data-action="nav-connect-success">인증하기</button>
+            <button class="connect-flow-primary" type="button" data-action="nav-connect-manual-form">인증하기</button>
           </div>
         </div>
       </div>
@@ -4628,14 +4618,10 @@
                 <div><div class="connect-result-name">이마트</div><div class="connect-result-meta">쿠폰 12개 · 포인트 8,000원</div></div>
                 <span class="connect-result-badge">완료</span>
               </div>
-              <div class="connect-result-card">
-                <div><div class="connect-result-name">이마트</div><div class="connect-result-meta">쿠폰 12개 · 포인트 8,000원</div></div>
-                <span class="connect-result-badge">완료</span>
-              </div>
             </div>
           </main>
           <div class="connect-flow-bottom">
-            <button class="connect-flow-primary" type="button" data-action="nav-wallet" onclick="showAppPage('p-home')">쿠폰함 바로가기</button>
+            <button class="connect-flow-primary" type="button" data-action="nav-wallet">쿠폰함 바로가기</button>
             <button class="connect-flow-primary connect-flow-outline" type="button" data-action="nav-home">홈화면 바로가기</button>
           </div>
         </div>

@@ -5033,6 +5033,17 @@ const ACT = {
   'nav-to-svc-select':   ()=>{ showAppPage('connect-svc-select'); updateSidebar(''); },
   'nav-back-svc-confirm':()=>{ showAppPage('connect'); updateSidebar(''); },
   'nav-noti-settings':   ()=>{ showAppPage('noti-custom-setup'); updateSidebar(''); },
+  'unlink-confirm-svc': (e)=>{
+    const btn = e.target.closest('[data-action="unlink-confirm-svc"]');
+    if (!btn || btn.dataset.disabled === '1') return;
+    const card = btn.closest('.csvc-svc-card');
+    if (!card) return;
+    btn.dataset.disabled = '1';
+    btn.textContent = '연동 해제됨';
+    btn.setAttribute('aria-disabled', 'true');
+    card.classList.add('csvc-svc-card-disabled');
+    showToast('서비스 연동이 비활성화되었습니다');
+  },
   'toggle-connect-svc': (e)=>{
     const toggle = e.target.closest('[data-action="toggle-connect-svc"]');
     if (!toggle || toggle.dataset.busy === '1') return;
