@@ -34921,6 +34921,39 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
   width: 0 !important;
 }
 
+/* FINAL FIX: scoped logo rendering for injected brand assets */
+#nbBrandCircle img.brand-logo-img {
+  border-radius: 0 !important;
+  height: 18% !important;
+  margin: auto !important;
+  max-height: var(--spacing-32) !important;
+  max-width: var(--spacing-32) !important;
+  object-fit: contain !important;
+  width: 18% !important;
+}
+
+#p-noti-custom-setup .ncs-brand-circle img.brand-logo-img,
+#p-noti-custom-setup .ncs-cat-circle img.cat-icon-img,
+#hssCatSection .hss-cat-ico img.cat-icon-img {
+  display: block !important;
+  height: 72% !important;
+  margin: auto !important;
+  object-fit: contain !important;
+  width: 72% !important;
+}
+
+.hm-h4-img img.brand-logo-img,
+.np-h2-logo img.brand-logo-img,
+.pts-lc-logo img.brand-logo-img,
+.nbs-logo img.brand-logo-img,
+#detBrandIcon img.brand-logo-img,
+#repBrcLogo img.brand-logo-img {
+  display: block !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  width: 100% !important;
+}
+
 /* ============================================================
    SERVICE CONNECT FINAL - 0608 FLOW
    Scope: method select, linked service management, service select,

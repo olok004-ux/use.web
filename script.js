@@ -829,14 +829,22 @@ const BRAND_LOGO = {
   'YES24':      '로고/예스24.svg',
   '알라딘':     '로고/알라딘.svg',
   '해피포인트': '로고/해피포인트.svg',
+  'SPC그룹':    '로고/해피포인트.svg',
   '배민포인트': '로고/배민.svg',
+  '우아한형제들': '로고/배민.svg',
   'CJ ONE':     '로고/CJ.svg',
   '네이버페이': '로고/네이버포인트.svg',
   '네이버페이 포인트': '로고/네이버포인트.svg',
   '엘포인트':   '로고/L포인트.svg',
+  '롯데멤버스': '로고/L포인트.svg',
   'L.POINT':    '로고/L포인트.svg',
   'GS&POINT':   '로고/GS&POINT.svg',
+  'GS앤포인트': '로고/GS&POINT.svg',
+  'GS리테일':   '로고/GS&POINT.svg',
   'H포인트':    '로고/H포인트.svg',
+  'H.Point':    '로고/H포인트.svg',
+  '현대백화점': '로고/H포인트.svg',
+  '할리스':     '로고/할리스.png',
 };
 
 const BRAND_LOGO_ID = {
@@ -868,9 +876,11 @@ const BRAND_LOGO_ID = {
   yes24: '로고/예스24.svg',
   aladin: '로고/알라딘.svg',
   happypoint: '로고/해피포인트.svg',
+  hollys: '로고/할리스.png',
   cjone: '로고/CJ.svg',
   naverpay: '로고/네이버포인트.svg',
   lpoint: '로고/L포인트.svg',
+  hpoint: '로고/H포인트.svg',
 };
 
 function getBrandLogo(value) {
@@ -1257,6 +1267,8 @@ function nbsUseButton(s) {
 function renderNbsPointCard(s) {
   const couponTitle = (s.couponTitle || s.disc || '').replace(/^\[[^\]]+\]\s*/, '');
   const expiryDate = (s.date?.replace(/ ~ .*/, '') || '2026.05.31').replaceAll('-', '.');
+  const logoSrc = s.logoImg || getBrandLogo(s.key) || getBrandLogo(s.name);
+  const logoHtml = logoSrc ? `<img src="${logoSrc}" alt="${s.name || s.key}">` : `${s.logo}`;
   return `
     <div class="nearby-sheet-handle" id="nbsHandle"></div>
     <div class="nbs-scroll" id="nbsScroll">
@@ -1265,7 +1277,7 @@ function renderNbsPointCard(s) {
         ${nbsHeartButton(s)}
       </div>
       <div class="nbs-info-row">
-        <div class="nbs-logo" style="background:${s.color||'var(--color-primary)'}">${s.logo}</div>
+        <div class="nbs-logo${logoSrc ? ' nbs-logo-img' : ''}" style="background:${logoSrc ? 'var(--color-surface)' : (s.color||'var(--color-primary)')}">${logoHtml}</div>
         <div class="nbs-info-col">
           <p class="nbs-store-name">${s.name}</p>
           <p class="nbs-coupon-title">${couponTitle}</p>
@@ -2907,7 +2919,7 @@ function renderHomeList() {
       </div>
       <div class="hm-h4-body">
         <div class="hm-h4-logo-wrap">
-          <div class="hm-h4-img" style="background:${cpnBgColor(c.brand)};color:white;display:flex;align-items:center;justify-content:center;border-radius:50%;font-weight:700">${cpnInitial(c.brand)}</div>
+          <div class="hm-h4-img" style="background:${getBrandLogo(c.brand) ? 'var(--color-surface)' : cpnBgColor(c.brand)};color:white;display:flex;align-items:center;justify-content:center;border-radius:50%;font-weight:700;overflow:hidden">${getBrandLogo(c.brand) ? brandLogoImg(c.brand, c.brand) : cpnInitial(c.brand)}</div>
           <span class="hm-h4-channel">${cpnChannelBadge(c.channel)}</span>
         </div>
         <div class="hm-h4-info">
@@ -3175,7 +3187,7 @@ function renderPhPtsList() {
       'GS&POINT': '로고/GS&POINT.svg',
       'GS25': '로고/GS25 logo.svg',
     };
-    const logoFile = PTS_LOGO_MAP[p.issuer] || PTS_LOGO_MAP[p.name] || '';
+    const logoFile = getBrandLogo(p.name) || getBrandLogo(p.issuer) || PTS_LOGO_MAP[p.issuer] || PTS_LOGO_MAP[p.name] || '';
     const logoInner = logoFile
       ? `<img src="${logoFile}" alt="${p.issuer}">`
       : p.issuer.charAt(0);
@@ -3189,7 +3201,7 @@ function renderPhPtsList() {
 
     return `${divider}
     <div class="pts-list-card" data-cat="${pointCat}" onclick="showPointsDetail('${p.id}')">
-      <div class="pts-lc-logo" style="background:${logoBg}">${logoInner}</div>
+      <div class="pts-lc-logo" style="background:${logoFile ? 'var(--color-surface)' : logoBg};overflow:hidden">${logoInner}</div>
       <div class="pts-lc-info">
         <div class="pts-lc-name-row">
           <span class="pts-lc-brand-sm">${p.name}</span>
@@ -3239,7 +3251,8 @@ function _npTicketCard(c, dnum) {
   const ddayLabel = dnum <= 0 ? 'D-DAY' : 'D-' + dnum;
   const badgeClass = dnum <= 0 ? 'filled' : 'outlined';
   const chLabel = c.channel || '온라인';
-  const logoStyle = `background:${cpnBgColor(c.brand)};color:white`;
+  const logoSrc = getBrandLogo(c.brand);
+  const logoStyle = `background:${logoSrc ? 'var(--color-surface)' : cpnBgColor(c.brand)};color:white;overflow:hidden`;
   const heartSvg = `<svg width="16" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-300)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
   return `<div class="np-ticket-card" data-action="go-detail" data-id="${c.id}" onclick="ACT['go-detail']&&ACT['go-detail']({target:this})">
     <div class="np-ticket-inner">
@@ -3250,7 +3263,7 @@ function _npTicketCard(c, dnum) {
         </div>
         <div class="np-ticket-body">
           <div class="np-ticket-logo-wrap">
-            <div class="np-ticket-logo" style="${logoStyle}">${cpnInitial(c.brand)}</div>
+            <div class="np-ticket-logo" style="${logoStyle}">${logoSrc ? brandLogoImg(c.brand, c.brand) : cpnInitial(c.brand)}</div>
             <span class="np-ticket-ch-badge">${chLabel}</span>
           </div>
           <div class="np-ticket-info">
@@ -3280,7 +3293,8 @@ function toggleNpH2Heart(id, btn) {
 
 function _npH2Card(c) {
   const chLabel = c.channel || '온라인';
-  const logoStyle = `background:${cpnBgColor(c.brand)};color:white`;
+  const logoSrc = getBrandLogo(c.brand);
+  const logoStyle = `background:${logoSrc ? 'var(--color-surface)' : cpnBgColor(c.brand)};color:white;overflow:hidden`;
   const heartFill = c.fav ? 'var(--color-red-400)' : 'none';
   const heartStroke = c.fav ? 'var(--color-red-400)' : 'var(--color-gray-300)';
   const heartSvg = `<svg width="16" height="17" viewBox="0 0 24 24" fill="${heartFill}" stroke="${heartStroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
@@ -3291,7 +3305,7 @@ function _npH2Card(c) {
     </div>
     <div class="np-h2-body">
       <div class="np-h2-logo-wrap">
-        <div class="np-h2-logo" style="${logoStyle}">${cpnInitial(c.brand)}</div>
+        <div class="np-h2-logo" style="${logoStyle}">${logoSrc ? brandLogoImg(c.brand, c.brand) : cpnInitial(c.brand)}</div>
         <span class="np-h2-ch-badge">${chLabel}</span>
       </div>
       <div class="np-h2-info">
@@ -4357,12 +4371,24 @@ function injectBrandLogos() {
     bbq:        getBrandLogo('bbq'),
     bhc:        getBrandLogo('bhc'),
     domino:     getBrandLogo('domino'),
+    gongcha:    getBrandLogo('gongcha'),
+    happypoint: getBrandLogo('happypoint'),
+    hpoint:     getBrandLogo('hpoint'),
+    hollys:     getBrandLogo('hollys'),
+    naverpay:   getBrandLogo('naverpay'),
+    lottemart:  getBrandLogo('lottemart'),
   };
 
-  function getLogoSrc(id) { return LOGO[id] || null; }
+  function getLogoSrc(id) {
+    if (LOGO[id]) return LOGO[id];
+    const point = (typeof POINTS_DATA !== 'undefined' && Array.isArray(POINTS_DATA)) ? POINTS_DATA.find(p => p.id === id) : null;
+    return point ? (getBrandLogo(point.name) || getBrandLogo(point.issuer)) : null;
+  }
 
   function setImg(el, src, bg) {
-    if (!el || el.querySelector('img.brand-logo-img')) return;
+    if (!el || !src) return;
+    const existing = el.querySelector('img.brand-logo-img');
+    if (existing && existing.getAttribute('src') === src) return;
     el.innerHTML = '';
     if (bg) el.style.background = 'white';
     const img = document.createElement('img');
@@ -4377,7 +4403,7 @@ function injectBrandLogos() {
     let node = el;
     for (let i = 0; i < 8; i++) {
       if (!node) break;
-      const id = node.dataset && (node.dataset.id || node.dataset.brand);
+      const id = node.dataset && (node.dataset.id || node.dataset.brand || node.dataset.val);
       if (id) return id;
       node = node.parentElement;
     }
@@ -4393,7 +4419,7 @@ function injectBrandLogos() {
 
   // ── pts-lc-logo ─────────────────────────────────────────────
   document.querySelectorAll('.pts-list-card').forEach(card => {
-    const id = card.getAttribute('onclick') && card.getAttribute('onclick').match(/showPointsDetail\('(\w+)'\)/)?.[1]
+    const id = card.getAttribute('onclick') && card.getAttribute('onclick').match(/showPointsDetail\('([\w-]+)'\)/)?.[1]
              || brandFromEl(card);
     const src = getLogoSrc(id);
     const logo = card.querySelector('.pts-lc-logo');
@@ -4429,10 +4455,18 @@ function injectBrandLogos() {
   // ── np-brand-circle ─────────────────────────────────────────
   document.querySelectorAll('.np-brand-circle').forEach(el => {
     const classes = [...el.classList];
-    const ids = ['baemin','oliveyoung','starbucks','gs25','cu','yogiyo','emart','lottemart','homeplus'];
+    const ids = ['baemin','oliveyoung','starbucks','gs25','cu','yogiyo','emart','lottemart','homeplus','hollys'];
     const id = classes.find(c => ids.includes(c)) || brandFromEl(el);
     const src = getLogoSrc(id);
     if (src) setImg(el, src, true);
+  });
+
+  // ── ncs-brand-circle ────────────────────────────────────────
+  document.querySelectorAll('.ncs-brand-item').forEach(item => {
+    const id = item.dataset.val || brandFromEl(item);
+    const src = getLogoSrc(id);
+    const circle = item.querySelector('.ncs-brand-circle');
+    if (src && circle) setImg(circle, src, true);
   });
 
   // ── noti-brand-chip ─────────────────────────────────────────
@@ -4461,7 +4495,7 @@ function injectBrandLogos() {
   // ── connect-service-logo ────────────────────────────────────
   document.querySelectorAll('.connect-service-logo').forEach(el => {
     const classes = [...el.classList];
-    const ids = ['baemin','oliveyoung','starbucks','gs25','cu','yogiyo','emart','coupang'];
+    const ids = ['baemin','oliveyoung','starbucks','gs25','cu','yogiyo','emart','coupang','happypoint','hpoint','naverpay'];
     const id = classes.find(c => ids.includes(c)) || brandFromEl(el);
     const src = getLogoSrc(id);
     if (src) { el.textContent = ''; setImg(el, src, true); }
@@ -4989,7 +5023,13 @@ const ACT = {
 
     // 브랜드 아이콘
     const iconEl = document.getElementById('detBrandIcon');
-    if (iconEl) { iconEl.textContent = icon; iconEl.style.background = bg; iconEl.style.color = 'white'; }
+    if (iconEl) {
+      const logoSrc = getBrandLogo(cpn.brand);
+      iconEl.innerHTML = logoSrc ? brandLogoImg(cpn.brand, cpn.brand) : icon;
+      iconEl.style.background = logoSrc ? 'var(--color-surface)' : bg;
+      iconEl.style.color = 'white';
+      iconEl.style.overflow = 'hidden';
+    }
 
     const setTxt = (i,v) => { const el=document.getElementById(i); if(el) el.textContent=v; };
     setTxt('detBrandName', cpn.brand);
@@ -5432,9 +5472,11 @@ function switchRepBarcodeCard(key) {
   // 브랜드 로고 원 업데이트 (색상 + 이니셜)
   if (logoEl) {
     const pt = (typeof USE_POINTS !== 'undefined' ? USE_POINTS : []).find(p => p.id === key);
-    const issuer = pt ? pt.issuer : d.label;
-    logoEl.style.background = cpnBgColor(issuer) || 'var(--color-primary)';
-    logoEl.textContent = issuer.charAt(0);
+    const issuer = pt ? (pt.name || pt.issuer) : d.label;
+    const logoSrc = getBrandLogo(issuer) || getBrandLogo(pt && pt.issuer) || getBrandLogo(key);
+    logoEl.innerHTML = logoSrc ? `<img src="${logoSrc}" alt="${issuer}">` : issuer.charAt(0);
+    logoEl.style.background = logoSrc ? 'var(--color-surface)' : (cpnBgColor(issuer) || 'var(--color-primary)');
+    logoEl.style.overflow = 'hidden';
   }
   // 드롭다운 라벨은 "브랜드 변경" 고정 — 업데이트 불필요
   // select 동기화
