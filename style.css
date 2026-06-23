@@ -5857,6 +5857,10 @@ input[type=range].disc-range::-moz-range-thumb {
   width: 100% !important;
 }
 
+#p-points-service .pdet-header-btn:last-child {
+  margin-right: var(--spacing-8) !important;
+}
+
 #p-points-service .pdet-header-btn {
   align-items: center !important;
   background: transparent !important;
@@ -33184,8 +33188,8 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 }
 
 #p-wishlist .wsh-pt-card.urgent {
-  background: var(--color-blue-50);
-  border: var(--spacing-2) solid var(--color-blue-500);
+  background: var(--color-on-primary);
+  border: var(--spacing-2) solid var(--color-blue-200);
   border-radius: var(--radius-xl);
   overflow: hidden;
   padding: var(--spacing-16);
@@ -33193,22 +33197,7 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 }
 
 #p-wishlist .wsh-pt-card .pts-lc-dday-badge {
-  align-items: center;
-  background: var(--color-red-500);
-  border: var(--spacing-2) solid var(--color-red-500);
-  border-radius: 0 var(--radius-lg) var(--radius-lg) var(--radius-lg);
-  color: var(--color-on-primary);
-  display: flex;
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-heavy);
-  justify-content: center;
-  left: 0;
-  line-height: 1;
-  min-width: calc(var(--spacing-32) + var(--spacing-32) + var(--spacing-8));
-  padding: var(--spacing-8);
-  position: absolute;
-  top: 0;
-  z-index: 2;
+  display: none;
 }
 
 #p-wishlist .wsh-pt-card.urgent .pts-lc-logo {
@@ -33308,6 +33297,11 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
   width: var(--spacing-16);
 }
 
+#p-wishlist #wshGridBar {
+  padding: var(--spacing-16) var(--spacing-16) !important;
+}
+
+#p-wishlist #wshEditBtn,
 #p-wishlist #wshCpnEditBtn,
 #p-wishlist #wshPtEditBtn {
   background: none !important;
@@ -33320,6 +33314,10 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
   line-height: 1;
   min-height: calc(var(--spacing-16) + var(--spacing-8));
   padding: 0 !important;
+}
+
+#p-home #hmSortBtn {
+  border-color: var(--color-blue-200) !important;
 }
 
 #p-wishlist .wsh-sort-wrap .nmap-sort-menu {
@@ -34924,17 +34922,18 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
 /* FINAL FIX: scoped logo rendering for injected brand assets */
 #nbBrandCircle img.brand-logo-img {
   border-radius: 0 !important;
-  height: 18% !important;
+  height: var(--spacing-80) !important;
   margin: auto !important;
-  max-height: var(--spacing-32) !important;
-  max-width: var(--spacing-32) !important;
+  max-height: var(--spacing-80) !important;
+  max-width: var(--spacing-80) !important;
   object-fit: contain !important;
-  width: 18% !important;
+  width: var(--spacing-80) !important;
 }
 
 #p-noti-custom-setup .ncs-brand-circle img.brand-logo-img,
 #p-noti-custom-setup .ncs-cat-circle img.cat-icon-img,
-#hssCatSection .hss-cat-ico img.cat-icon-img {
+#hssCatSection .hss-cat-ico img.cat-icon-img,
+#hssSelectedCatWrap .hss-cat-ico img.cat-icon-img {
   display: block !important;
   height: 72% !important;
   margin: auto !important;
@@ -34952,6 +34951,15 @@ body:has(#p-noti-brand[style*="display:flex"]) .app-body {
   height: 100% !important;
   object-fit: contain !important;
   width: 100% !important;
+}
+
+#p-noti-brand.noti-brand-detail .nb-brand-circle img.brand-logo-img {
+  border-radius: 0 !important;
+  height: var(--spacing-80) !important;
+  max-height: var(--spacing-80) !important;
+  max-width: var(--spacing-80) !important;
+  object-fit: contain !important;
+  width: var(--spacing-80) !important;
 }
 
 /* ============================================================
@@ -35068,6 +35076,14 @@ body:has(#p-connect-manual-loading[style*="display:block"]) #bottomTabBar {
 #p-connect-manual-form .connect-flow-back svg {
   height: var(--spacing-24) !important;
   width: var(--spacing-24) !important;
+}
+
+#p-points-service .pdet-coupon-top {
+  align-items: center !important;
+  display: flex !important;
+  gap: var(--spacing-8) !important;
+  justify-content: flex-end !important;
+  width: 100% !important;
 }
 
 #p-connect .connect-method-title,
@@ -36610,4 +36626,85 @@ body:has(#p-connect-manual-loading[style*="display:block"]) #bottomTabBar {
 }
 #s-signup-id .su-content::-webkit-scrollbar {
   width: 0 !important;
+}
+/* DETAIL / LOGO FINAL REFINEMENTS - eof override */
+#p-detail .det-header-spacer,
+#p-points-service .pdet-header-spacer {
+  display: block !important;
+  flex: 0 0 var(--spacing-24) !important;
+  height: var(--spacing-24) !important;
+  width: var(--spacing-24) !important;
+}
+
+#p-detail .det-header-icons[hidden],
+#p-points-service .pdet-header .pdet-header-btn[onclick="openPdetShare()"] {
+  display: none !important;
+}
+
+#p-detail .det-coupon-header,
+#p-points-service .pdet-coupon-top {
+  align-items: center !important;
+  display: flex !important;
+  gap: var(--spacing-8) !important;
+  justify-content: flex-start !important;
+  width: 100% !important;
+}
+
+#p-detail .det-card-link-btn,
+#p-points-service .pdet-card-link-btn {
+  align-items: center !important;
+  background: transparent !important;
+  border: 0 !important;
+  color: var(--color-gray-700) !important;
+  cursor: pointer !important;
+  display: flex !important;
+  height: var(--spacing-24) !important;
+  justify-content: center !important;
+  margin-left: auto !important;
+  padding: 0 !important;
+  width: var(--spacing-24) !important;
+}
+
+#p-detail .det-card-link-btn + .det-icon-btn,
+#p-points-service .pdet-card-link-btn + .pdet-heart-btn {
+  margin-left: var(--spacing-8) !important;
+}
+
+#p-points-hub #ph-cpn .ph-ticket-carousel {
+  overflow: visible !important;
+  scroll-snap-type: none !important;
+}
+
+#p-points-hub #ph-cpn .ph-ticket-carousel .ph-cpn-card.normal {
+  flex-shrink: 0 !important;
+  width: 100% !important;
+}
+
+#wshDetailCircle {
+  align-items: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+}
+
+#wshDetailCircle img.brand-logo-img,
+.nb-card-img.np-brand-logo img.brand-logo-img {
+  border-radius: 0 !important;
+  display: block !important;
+  height: var(--spacing-80) !important;
+  max-height: var(--spacing-80) !important;
+  max-width: var(--spacing-80) !important;
+  object-fit: contain !important;
+  width: var(--spacing-80) !important;
+}
+
+#repBrcLogo img,
+#repBrcLogo img.brand-logo-img {
+  border-radius: 0 !important;
+  display: block !important;
+  height: var(--spacing-72) !important;
+  max-height: var(--spacing-72) !important;
+  max-width: var(--spacing-72) !important;
+  object-fit: contain !important;
+  width: var(--spacing-72) !important;
 }

@@ -2204,7 +2204,8 @@
           <button class="det-back-btn" data-action="go-back" aria-label="뒤로가기">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
-          <div class="det-header-icons">
+          <span class="det-header-spacer" aria-hidden="true"></span>
+          <div class="det-header-icons" hidden>
             <button class="det-icon-btn" aria-label="외부 링크" onclick="openDetShare()">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </button>
@@ -2225,6 +2226,9 @@
             <!-- 쿠폰 카드 헤더: D-Day 뱃지(좌) + 찜 아이콘(우) -->
             <div class="det-coupon-header">
               <span class="det-dday-pill urgent" id="detDday">D-Day</span>
+              <button class="det-card-link-btn" type="button" aria-label="external link" onclick="openDetShare()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </button>
               <button class="det-icon-btn" aria-label="찜" onclick="showAppPage('p-wishlist')">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
               </button>
@@ -2907,6 +2911,9 @@
             <!-- D-Day + 하트 -->
             <div class="pdet-coupon-top">
               <span class="pdet-dday-badge" id="ptsDet_dday">D-Day</span>
+              <button class="pdet-card-link-btn" type="button" aria-label="external link" onclick="openPdetShare()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </button>
               <button class="pdet-heart-btn" id="ptsDet_heart" aria-label="찜"
                 onclick="this.classList.toggle('on')">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

@@ -886,7 +886,39 @@ const BRAND_LOGO_ID = {
 function getBrandLogo(value) {
   if (!value) return '';
   const key = String(value).trim();
-  return BRAND_LOGO[key] || BRAND_LOGO_ID[key] || '';
+  const compactKey = key.replace(/\s+/g, '').toLowerCase();
+  const alias = {
+    '이마트': 'emart',
+    'emart': 'emart',
+    '스타벅스': 'starbucks',
+    'starbucks': 'starbucks',
+    '스벅': 'starbucks',
+    'gs25': 'gs25',
+    'gs': 'gs25',
+    '배달의민족': 'baemin',
+    '배민': 'baemin',
+    'cu': 'cu',
+    '올리브영': 'oliveyoung',
+    '롯데마트': 'lottemart',
+    '홈플러스': 'homeplus',
+    '할리스': 'hollys',
+    '해피포인트': 'happypoint',
+    'cjone': 'cjone',
+    'cjone포인트': 'cjone',
+    '네이버페이': 'naverpay',
+    '네이버페이포인트': 'naverpay',
+    'h포인트': 'hpoint',
+    'l포인트': 'lpoint'
+  };
+  const direct = BRAND_LOGO[key] || BRAND_LOGO_ID[key] || BRAND_LOGO[alias[compactKey]] || BRAND_LOGO_ID[alias[compactKey]];
+  if (direct) return direct;
+  if (key.includes('스타벅스')) return BRAND_LOGO_ID.starbucks || BRAND_LOGO['스타벅스'] || '';
+  if (key.includes('GS25') || compactKey.includes('gs25')) return BRAND_LOGO_ID.gs25 || BRAND_LOGO['GS25'] || '';
+  if (key.includes('할리스')) return BRAND_LOGO_ID.hollys || BRAND_LOGO['할리스'] || '';
+  if (key.includes('해피포인트')) return BRAND_LOGO_ID.happypoint || BRAND_LOGO['해피포인트'] || '';
+  if (key.includes('네이버')) return BRAND_LOGO_ID.naverpay || BRAND_LOGO['네이버포인트'] || '';
+  if (key.includes('CJ')) return BRAND_LOGO_ID.cjone || BRAND_LOGO['CJ ONE 포인트'] || '';
+  return '';
 }
 
 function brandLogoImg(value, alt, size) {
@@ -896,7 +928,7 @@ function brandLogoImg(value, alt, size) {
 }
 
 function renderPointMapPin(state, store) {
-  const logoSrc = store && getBrandLogo(store.key);
+  const logoSrc = store && (store.logoImg || getBrandLogo(store.key) || getBrandLogo(store.name) || getBrandLogo(store.title) || (store.logo === 'S' ? getBrandLogo('starbucks') : '') || (store.logo === 'G' ? getBrandLogo('gs25') : ''));
   const figmaLogoSrc = 'https://www.figma.com/api/mcp/asset/50fd025e-0ee8-4402-9d14-880b6cc79338';
   const innerContent = logoSrc
     ? '<img src="' + logoSrc + '" alt="' + (store ? store.key : '포인트') + '">'
@@ -909,7 +941,7 @@ function renderPointMapPin(state, store) {
   );
 }
 function renderCouponMapPin(state, store) {
-  const logoSrc = store && getBrandLogo(store.key);
+  const logoSrc = store && (getBrandLogo(store.key) || getBrandLogo(store.name) || getBrandLogo(store.title));
   const logoContent = logoSrc
     ? '<img src="' + logoSrc + '" alt="' + (store ? store.key : '쿠폰') + '">'
     : '<span class="map-point-figma-letter">C</span>';
@@ -1267,7 +1299,7 @@ function nbsUseButton(s) {
 function renderNbsPointCard(s) {
   const couponTitle = (s.couponTitle || s.disc || '').replace(/^\[[^\]]+\]\s*/, '');
   const expiryDate = (s.date?.replace(/ ~ .*/, '') || '2026.05.31').replaceAll('-', '.');
-  const logoSrc = s.logoImg || getBrandLogo(s.key) || getBrandLogo(s.name);
+  const logoSrc = s.logoImg || getBrandLogo(s.key) || getBrandLogo(s.name) || (s.logo === 'S' ? getBrandLogo('starbucks') : '') || (s.logo === 'G' ? getBrandLogo('gs25') : '');
   const logoHtml = logoSrc ? `<img src="${logoSrc}" alt="${s.name || s.key}">` : `${s.logo}`;
   return `
     <div class="nearby-sheet-handle" id="nbsHandle"></div>
@@ -1320,8 +1352,9 @@ function renderNbsCouponCard(s) {
   // "D-7" → "7일 내 소멸 예정" 변환
   const ddayNum  = dday.replace('D-', '');
   const expiryLabel = ddayNum && !isNaN(ddayNum) ? `${ddayNum}일 내 소멸 예정` : '소멸 예정';
-  const logoHtml = s.logoImg
-    ? `<img src="${s.logoImg}" alt="${s.key}">`
+  const logoSrc = s.logoImg || getBrandLogo(s.key) || getBrandLogo(s.name) || (s.logo === 'S' ? getBrandLogo('starbucks') : '') || (s.logo === 'G' ? getBrandLogo('gs25') : '');
+  const logoHtml = logoSrc
+    ? `<img src="${logoSrc}" alt="${s.name || s.key}">`
     : `${s.logo}`;
 
   return `
@@ -1339,7 +1372,7 @@ function renderNbsCouponCard(s) {
 
       <!-- 2. 로고 + 정보 컬럼 -->
       <div class="nbs-pt-main-row">
-        <div class="nbs-logo${s.logoImg ? ' nbs-logo-img' : ''}" style="background:${s.logoImg ? 'transparent' : (s.color||'var(--color-primary)')}">${logoHtml}</div>
+        <div class="nbs-logo${logoSrc ? ' nbs-logo-img' : ''}" style="background:${logoSrc ? 'transparent' : (s.color||'var(--color-primary)')}">${logoHtml}</div>
         <div class="nbs-pt-info-col">
           <p class="nbs-pt-store-name">${s.name}</p>
           <div class="nbs-pt-data-row">
@@ -2585,6 +2618,12 @@ const HSS_BRAND_LOGO = {
   '예스24': getBrandLogo('예스24'), '알라딘': getBrandLogo('알라딘'),
 };
 
+function getHssCategoryIcon(keyword) {
+  const fileName = keyword === '패션' ? '쇼핑' : keyword;
+  const available = ['마트', '편의점', '카페', '배달', '푸드', '쇼핑', '뷰티', '문화', '여행'];
+  return available.includes(fileName) ? `로고/카테고리 이미지/${fileName}.svg` : '';
+}
+
 function _renderHssResultChips(brands, activeBrand) {
   const wrap = document.getElementById('hssResultChips');
   if (!wrap) return;
@@ -2666,9 +2705,12 @@ function searchByCategory(keyword) {
   // 선택된 카테고리 단독 표시
   const wrap = document.getElementById('hssSelectedCatWrap');
   if (wrap) {
-    const svg = HSS_CAT_SVG[keyword] || '';
+    const iconSrc = getHssCategoryIcon(keyword);
+    const iconHtml = iconSrc
+      ? `<img src="${iconSrc}" alt="${keyword}" class="cat-icon-img">`
+      : (HSS_CAT_SVG[keyword] || '');
     wrap.innerHTML = `<button class="hss-cat-item selected" style="pointer-events:none">
-      <div class="hss-cat-ico">${svg}</div>
+      <div class="hss-cat-ico">${iconHtml}</div>
       <span class="hss-cat-txt">${keyword}</span>
     </button>`;
   }
@@ -3027,7 +3069,7 @@ function renderPhCpnList(filterCat) {
 
   function renderCard(c) {
     const dnum = cpnDdayNum(c.expiry);
-    const urgent = dnum >= 0 && dnum <= 7;
+    const urgent = false && dnum >= 0 && dnum <= 7;
     const ddayText = dnum === 0 ? 'D-DAY' : dnum < 0 ? '만료' : 'D-' + dnum;
     const badgeClass = dnum === 0 ? 'filled' : 'outlined';
     const channelLabel = cpnChannelBadge(c.channel);
@@ -6607,7 +6649,12 @@ function wshOpenBrand(id) {
   if (chipBar) chipBar.style.display = 'none';
   // 히어로 원형 업데이트
   const circle = document.getElementById('wshDetailCircle');
-  if (circle) { circle.style.color = b.bg; circle.textContent = b.icon; }
+  if (circle) {
+    const logoKey = getBrandLogo(b.name) ? b.name : (getBrandLogo(id) ? id : '');
+    circle.style.color = b.bg;
+    circle.style.background = logoKey ? 'var(--surface)' : '';
+    circle.innerHTML = logoKey ? brandLogoImg(logoKey, b.name) : b.icon;
+  }
   // 포인트 섹션 표시 여부
   const ptSection = document.getElementById('wshDetailPointSection');
   if (ptSection) {
